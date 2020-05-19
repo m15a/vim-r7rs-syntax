@@ -1,16 +1,15 @@
 BUILD := _build
 
-.PHONY: clean
+syntax/gauche.vim: $(BUILD)/macro.vim
+	./builder/syntax.sh $^ > $@
+
+$(BUILD)/macro.vim: $(BUILD)/atdef.txt
+	./builder/syntax_macro.sh $< > $@
 
 $(BUILD)/atdef.txt:
-ifndef GAUCHE_DOC
-	$(error Please set GAUCHE_DOC to gauche doc path (*.texi are there))
-endif
 	mkdir -p $(BUILD)
-	fd . -e texi $(GAUCHE_DOC) -x grep '^@def' '{}' \
-		| sort \
-		| uniq \
-		> $(BUILD)/atdef.txt
+	./builder/atdef.sh > $@
 
+.PHONY: clean
 clean:
 	rm -rf _build
