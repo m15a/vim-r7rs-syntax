@@ -6,8 +6,6 @@
 - `@deffnx`
 - `@defivar`
 - `@defivarx`
-- `@defspec`
-- `@defspecx`
 - `@deftp`
 - `@deftpx`
 - `@deftypefn`
@@ -27,6 +25,8 @@
 
 - `@defmac`
 - `@defmacx`
+- `@defspec`
+- `@defspecx`
 
 ## No need
 
