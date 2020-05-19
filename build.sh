@@ -56,9 +56,7 @@ build_syntax() {
 \" Last Change: $(date +"%Y-%m-%d")
 \" Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 \" URL: https://github.com/mnacamura/vim-gauche-syntax
-\" Notes: This is supplemental syntax, to be loaded after the core Scheme
-\" syntax file (syntax/scheme.vim). Enable it by setting b:is_gauche=1
-\" and filetype=scheme.
+\" Notes: To enable this plugin, set filetype=scheme and (b|g):is_gauche=1.
 
 if !exists('b:did_scheme_syntax')
   finish
