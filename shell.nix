@@ -1,31 +1,21 @@
 with import <nixpkgs> {};
 
 let
-  gauche_src = stdenvNoCC.mkDerivation {
-    name = "${gauche.name}-src";
+  gauche_doc = runCommand "${gauche.name}-doc" {
     inherit (gauche) src;
-    phases = [ "unpackPhase" "installPhase" ];
-    installPhase = ''
-      mkdir -p $out
-      cp -R * $out/
-    '';
-  };
-  vim_runtime = stdenvNoCC.mkDerivation {
-    name = "${vim.name}-runtime";
-    inherit (vim) src;
-    phases = [ "unpackPhase" "installPhase" ];
-    installPhase = ''
-      mkdir -p $out
-      cp -R runtime/* $out/
-    '';
-  };
+  } ''
+    tar xf "$src"
+    mkdir -p "$out"
+    cp -r */doc/*.texi "$out"/
+  '';
 in
 
 mkShell {
-  buildInputs = [ gauche ];
+  buildInputs = [ coreutils fd gnugrep ];
 
-  GAUCHE_SRC = gauche_src;
-  VIM_RUNTIME = vim_runtime;
+  GAUCHE_DOC = gauche_doc;
+
+  VIM_RUNTIME = "${vim.src}/runtime";
 
   shellHook = ''
   '';
