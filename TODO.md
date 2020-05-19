@@ -1,5 +1,9 @@
 # TODO
 
+- Add ftplugin
+    - Add words like `let-args` to `lispwords`
+- Build vim syntax file from texinfo commands below
+
 ## Todo
 
 - `@deffn`
@@ -20,7 +24,7 @@
 - `@defvarx`
 - `@defvr`
 - `@defvrx`
-- 
+
 ## Done
 
 - `@defmac`
