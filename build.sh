@@ -13,14 +13,14 @@ show_usage() {
 }
 
 check_gauche_doc() {
-    if [ -z "$GAUCHE_DOC" ]; then
+    if [ -z "${GAUCHE_DOC+defined}" ]; then
         echo "Please set GAUCHE_DOC to gauche doc path (*.texi are there)" >&2
         exit 1
     fi
 }
 
 check_vim_runtime() {
-    if [ -z "$VIM_RUNTIME" ]; then
+    if [ -z "${VIM_RUNTIME+defined}" ]; then
         echo "Please set VIM_RUNTIME to vim runtime path" >&2
         exit 1
     fi
