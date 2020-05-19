@@ -1,14 +1,14 @@
 BUILD := _build
 
 syntax/gauche.vim: $(BUILD)/macro.vim
-	./builder/syntax.sh $^ > $@
+	./build.sh syntax $^ > $@
 
-$(BUILD)/macro.vim: $(BUILD)/atdef.txt
-	./builder/syntax_macro.sh $< > $@
+$(BUILD)/macro.vim: $(BUILD)/data.txt
+	./build.sh macro $< > $@
 
-$(BUILD)/atdef.txt:
+$(BUILD)/data.txt:
 	mkdir -p $(BUILD)
-	./builder/atdef.sh > $@
+	./build.sh data > $@
 
 .PHONY: clean
 clean:
