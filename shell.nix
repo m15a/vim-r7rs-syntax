@@ -11,7 +11,7 @@ let
 in
 
 mkShell {
-  buildInputs = [ fd ];
+  buildInputs = [ fd shellcheck ];
 
   GAUCHE_DOC = gauche_doc;
 
