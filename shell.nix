@@ -11,7 +11,7 @@ let
 in
 
 mkShell {
-  buildInputs = [ coreutils fd gnugrep ];
+  buildInputs = [ fd ];
 
   GAUCHE_DOC = gauche_doc;
 
