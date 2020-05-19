@@ -22,6 +22,7 @@ syn keyword schemeSyntax assume
 syn keyword schemeSyntax assume-type
 syn keyword schemeSyntax autoload
 syn keyword schemeSyntax begin0
+syn keyword schemeSyntax case-lambda
 syn keyword schemeSyntax cgen-with-cpp-condition
 syn keyword schemeSyntax chibi-test
 syn keyword schemeSyntax cond-expand
@@ -38,7 +39,9 @@ syn keyword schemeSyntax define-dict-interface
 syn keyword schemeSyntax define-generic
 syn keyword schemeSyntax define-library
 syn keyword schemeSyntax define-method
+syn keyword schemeSyntax define-record-type
 syn keyword schemeSyntax define-stream
+syn keyword schemeSyntax define-values
 syn keyword schemeSyntax do-ec
 syn keyword schemeSyntax do-generator
 syn keyword schemeSyntax dotimes
@@ -53,6 +56,7 @@ syn keyword schemeSyntax get-keyword*
 syn keyword schemeSyntax get-optional
 syn keyword schemeSyntax glet*
 syn keyword schemeSyntax glet1
+syn keyword schemeSyntax guard
 syn keyword schemeSyntax if-let1
 syn keyword schemeSyntax if3
 syn keyword schemeSyntax if=?
@@ -60,11 +64,14 @@ syn keyword schemeSyntax inc!
 syn keyword schemeSyntax ip-protocol
 syn keyword schemeSyntax lcons
 syn keyword schemeSyntax lcons*
+syn keyword schemeSyntax let
+syn keyword schemeSyntax let*-values
 syn keyword schemeSyntax let-args
 syn keyword schemeSyntax let-keywords
 syn keyword schemeSyntax let-keywords*
 syn keyword schemeSyntax let-optionals*
 syn keyword schemeSyntax let-string-start+end
+syn keyword schemeSyntax let-values
 syn keyword schemeSyntax let/cc
 syn keyword schemeSyntax let1
 syn keyword schemeSyntax list-ec
@@ -77,6 +84,7 @@ syn keyword schemeSyntax match-let
 syn keyword schemeSyntax match-let1
 syn keyword schemeSyntax message-type
 syn keyword schemeSyntax min-ec
+syn keyword schemeSyntax parameterize
 syn keyword schemeSyntax parse-options
 syn keyword schemeSyntax pop!
 syn keyword schemeSyntax push!
@@ -129,6 +137,7 @@ syn keyword schemeSyntax dec!
 syn keyword schemeSyntax define-cise-expr
 syn keyword schemeSyntax define-cise-macro
 syn keyword schemeSyntax define-cise-toplevel
+syn keyword schemeSyntax define-values
 syn keyword schemeSyntax dolist
 syn keyword schemeSyntax every?-ec
 syn keyword schemeSyntax fold3-ec
@@ -139,6 +148,7 @@ syn keyword schemeSyntax if<?
 syn keyword schemeSyntax if>=?
 syn keyword schemeSyntax if>?
 syn keyword schemeSyntax last-ec
+syn keyword schemeSyntax let
 syn keyword schemeSyntax let-keywords
 syn keyword schemeSyntax let-keywords*
 syn keyword schemeSyntax let-optionals*
@@ -152,7 +162,6 @@ syn keyword schemeSyntax rec
 syn keyword schemeSyntax string-append-ec
 syn keyword schemeSyntax syntax-errorf
 syn keyword schemeSyntax until
-syn keyword schemeSyntax while
 syn keyword schemeSyntax while
 syn keyword schemeSyntax xml-token-head
 
