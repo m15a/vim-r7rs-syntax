@@ -2,7 +2,7 @@
 
 author='Mitsuhiro Nakamura'
 email='m.nacamura@gmail.com'
-homepage='https://github.com/mnacamura/vim-gauche-syntax'
+homepage='https://github.com/mnacamura/vim-gauche'
 
 readonly author email homepage
 
