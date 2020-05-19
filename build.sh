@@ -44,6 +44,7 @@ build_macro() {
         exit 1
     fi
 
+    local mac
     awk '/^@defmac/ { print $2 }' "$1" | uniq | while read -r mac; do
         if [ "$mac" = '^c' ]; then
             # ^c where c is one of [_a-z] is a macro in gauche
@@ -64,6 +65,7 @@ build_special() {
         exit 1
     fi
 
+    local spec
     awk '/^@defspec/ { print $2 }' "$1" | uniq | while read -r spec; do
         if ! grep "syn keyword schemeSyntaxSyntax $spec " \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
@@ -92,6 +94,7 @@ if !exists('b:did_scheme_syntax')
 endif
 "
 
+    local file
     for file in "$@"; do
         echo
         cat "$file"
