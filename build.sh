@@ -24,7 +24,7 @@ build_data() {
     check_gauche_doc
 
     set +o pipefail
-    fd . -e texi "$GAUCHE_DOC" -x grep '^@def' '{}' \
+    fd . -e texi -E '*-dev.texi' "$GAUCHE_DOC" -x grep '^@def' '{}' \
         | sort \
         | uniq
     set -o pipefail
