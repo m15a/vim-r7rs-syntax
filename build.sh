@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+author='Mitsuhiro Nakamura'
+email='m.nacamura@gmail.com'
+homepage='https://github.com/mnacamura/vim-gauche-syntax'
+
+readonly author email homepage
+
 set -euo pipefail
 
 show_usage() {
@@ -77,8 +83,8 @@ build_syntax() {
 \" Vim syntax file
 \" Language: Scheme (Gauche)
 \" Last Change: $(date +"%Y-%m-%d")
-\" Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
-\" URL: https://github.com/mnacamura/vim-gauche-syntax
+\" Author: $author <$email>
+\" URL: $homepage
 \" Notes: To enable this plugin, set filetype=scheme and (b|g):is_gauche=1.
 
 if !exists('b:did_scheme_syntax')
