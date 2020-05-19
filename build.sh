@@ -58,11 +58,11 @@ build_special() {
         exit 1
     fi
 
-    awk '/^@defspec/ { print $2 }' "$1" | while read -r spec; do
-        if ! grep "syn keyword schemeSpecialSyntax $spec" \
+    awk '/^@defspec/ { print $2 }' "$1" | uniq | while read -r spec; do
+        if ! grep "syn keyword schemeSyntaxSyntax $spec " \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
-            echo "syn keyword schemeSpecialSyntax $spec"
+            echo "syn keyword schemeSyntaxSyntax $spec"
         fi
     done
 }
