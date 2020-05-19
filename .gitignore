@@ -1,3 +1,5 @@
+_build
+
 # Nix and direnv stuff
 .direnv
 result
