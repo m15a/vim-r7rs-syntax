@@ -59,13 +59,15 @@ build_macro() {
     awk '/^@defmacx?/ { print $2 }' "$1" | sort | uniq | while read -r mac; do
         if [ "$mac" = '^c' ]; then
             # ^c where c is one of [_a-z] is a macro in gauche
-            echo "syn match schemeSyntax /\^[_a-z]/"
-        elif ! grep "syn keyword schemeSyntax $mac " \
+            echo "syn match gaucheMacro /\^[_a-z]/"
+        elif ! grep "^syn keyword scheme\w*Syntax $mac\$" \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
-            echo "syn keyword schemeSyntax ${mac/@@/@}"
+            echo "syn keyword gaucheMacro ${mac/@@/@}"
         fi
     done
+
+    echo $'\n'"hi def link gaucheMacro Statement"
 }
 
 build_specialform() {
@@ -78,12 +80,14 @@ build_specialform() {
 
     local spec
     awk '/^@defspecx?/ { print $2 }' "$1" | sort | uniq | while read -r spec; do
-        if ! grep "syn keyword schemeSyntaxSyntax $spec " \
+        if ! grep "^syn keyword scheme\w*Syntax $spec\$" \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
-            echo "syn keyword schemeSyntaxSyntax ${spec/@@/@}"
+            echo "syn keyword gaucheSpecialForm ${spec/@@/@}"
         fi
     done
+
+    echo $'\n'"hi def link gaucheSpecialForm Special"
 }
 
 build_variable() {

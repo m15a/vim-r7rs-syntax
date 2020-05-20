@@ -12,7 +12,6 @@ endif
 
 setl lispwords+=and-let*
 setl lispwords+=and-let1
-setl lispwords+=case-lambda
 setl lispwords+=char-set:ascii-letter
 setl lispwords+=char-set:ascii-letter+digit
 setl lispwords+=char-set:ascii-lower-case
@@ -33,7 +32,6 @@ setl lispwords+=define-dict-interface
 setl lispwords+=define-generic
 setl lispwords+=define-in-module
 setl lispwords+=define-inline
-setl lispwords+=define-library
 setl lispwords+=define-macro
 setl lispwords+=define-method
 setl lispwords+=define-module
