@@ -1,5 +1,5 @@
 BUILD := _build
-VIM_NAMES := macro specialform variable
+VIM_NAMES := macro specialform variable constant comparator
 VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))
 
 .PHONY: build clean
@@ -22,6 +22,12 @@ $(BUILD)/specialform.vim: $(BUILD)/data.txt
 
 $(BUILD)/variable.vim: $(BUILD)/data.txt
 	./build.sh variable $< > $@
+
+$(BUILD)/constant.vim: $(BUILD)/data.txt
+	./build.sh constant $< > $@
+
+$(BUILD)/comparator.vim: $(BUILD)/data.txt
+	./build.sh comparator $< > $@
 
 $(BUILD)/data.txt:
 	mkdir -p $(BUILD)
