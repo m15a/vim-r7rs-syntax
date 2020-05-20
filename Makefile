@@ -14,24 +14,24 @@ syntax/gauche.vim: $(VIM_FILES)
 ftplugin/gauche.vim: $(VIM_FILES)
 	./build.sh ftplugin $^ > $@
 
-$(BUILD)/macro.vim: $(BUILD)/data.txt
+$(BUILD)/macro.vim: $(BUILD)/atdef.txt
 	./build.sh macro $< > $@
 
-$(BUILD)/specialform.vim: $(BUILD)/data.txt
+$(BUILD)/specialform.vim: $(BUILD)/atdef.txt
 	./build.sh specialform $< > $@
 
-$(BUILD)/function.vim: $(BUILD)/data.txt
+$(BUILD)/function.vim: $(BUILD)/atdef.txt
 	./build.sh function $< > $@
 
-$(BUILD)/variable.vim: $(BUILD)/data.txt
+$(BUILD)/variable.vim: $(BUILD)/atdef.txt
 	./build.sh variable $< > $@
 
-$(BUILD)/constant.vim: $(BUILD)/data.txt
+$(BUILD)/constant.vim: $(BUILD)/atdef.txt
 	./build.sh constant $< > $@
 
-$(BUILD)/comparator.vim: $(BUILD)/data.txt
+$(BUILD)/comparator.vim: $(BUILD)/atdef.txt
 	./build.sh comparator $< > $@
 
-$(BUILD)/data.txt:
+$(BUILD)/atdef.txt:
 	mkdir -p $(BUILD)
-	./build.sh data > $@
+	./build.sh atdef > $@
