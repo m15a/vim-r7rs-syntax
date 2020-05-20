@@ -228,13 +228,13 @@ build_ftplugin() {
 
     local word
     awk '{ print $4 }' "$@" \
-        | awk '/\<(|r|g)let(|rec)(|1|\*)(|-)/ || /-let(|rec)(|1|\*)\>/ \
-            || /\<define(|-)/ || /-define\>/ \
-            || /\<(|rx)match(|-)/ || /-match\>/ \
-            || /\<(|e)case(|-)/ || /-case\>/ \
-            || /\<lambda(|-)/ || /-lambda(|\*)\>/ \
+        | awk '/^(|r|g)let((|rec)(|1|\*)($|-)|\/)/ || /-let(|rec)(|1|\*)$/ \
+            || /^define($|-)/ || /-define$/ \
+            || /^match($|-)/ || /-match$/ \
+            || /^(|e)case($|-)/ || ( /-(|e)case$/ && $0 !~ /(lower|upper|title)-case$/ ) \
+            || /^lambda($|-)/ || /-lambda(|\*)$/ \
             || /^set!($|-)/ || ( /-set!$/ && $0 !~ /char-set!$/ ) \
-            || /\<do(-|times|list)/' \
+            || /^do(-|times|list)/' \
         | sort \
         | uniq \
         | while read -r word; do
