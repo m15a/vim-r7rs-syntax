@@ -334,6 +334,7 @@ syn keyword schemeConstant Z_NO_COMPRESSION
 syn keyword schemeConstant Z_RLE
 syn keyword schemeConstant Z_TEXT
 syn keyword schemeConstant Z_UNKNOWN
+syn keyword schemeConstant bag-comparator
 syn keyword schemeConstant boolean-comparator
 syn keyword schemeConstant bytevector-comparator
 syn keyword schemeConstant char-ci-comparator
@@ -475,6 +476,7 @@ syn keyword schemeConstant pi/2
 syn keyword schemeConstant pi/4
 syn keyword schemeConstant rational-comparator
 syn keyword schemeConstant real-comparator
+syn keyword schemeConstant set-comparator
 syn keyword schemeConstant ssax:Prefix-XML
 syn keyword schemeConstant stream-null
 syn keyword schemeConstant string-ci-comparator
