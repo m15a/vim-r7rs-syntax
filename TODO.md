@@ -15,16 +15,8 @@
 
 - `@deffn`
 - `@deffnx`
-- `@defivar`
-- `@defivarx`
 - `@deftp`
 - `@deftpx`
-- `@deftypefn`
-- `@deftypefnx`
-- `@deftypefun`
-- `@deftypefunx`
-- `@deftypevr`
-- `@deftypevrx`
 - `@defun`
 - `@defunx`
 
@@ -42,3 +34,4 @@
 ## No need
 
 - `@defcodeindex`: generating texinfo index, can be skipped
+- `@defivar`, `@defivarx`: instance variables
