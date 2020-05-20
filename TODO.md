@@ -19,8 +19,6 @@
 - `@deffnx`
 - `@deftp`
 - `@deftpx`
-- `@defun`
-- `@defunx`
 
 ## Done
 
@@ -28,6 +26,8 @@
 - `@defmacx`
 - `@defspec`
 - `@defspecx`
+- `@defun`
+- `@defunx`
 - `@defvar`
 - `@defvarx`
 - `@defvr`
