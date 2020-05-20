@@ -18,7 +18,7 @@ EOF
 set -euo pipefail
 
 show_usage() {
-    echo " Usage: $0 (data|macro|syntax) [ARG...]" >&2
+    echo " Usage: $0 (data|macro|specialform|variable|syntax|ftplugin) [ARG...]" >&2
 }
 
 check_gauche_doc() {
