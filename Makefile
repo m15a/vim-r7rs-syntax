@@ -1,6 +1,16 @@
 BUILD := _build
-VIM_NAMES := macro specialform function variable constant comparator
+
+VIM_NAMES := \
+	macro specialform \
+	function \
+	variable constant comparator
 VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))
+
+TEXI_NAMES := \
+	corelib coresyn macro object \
+	modgauche modutil \
+	modr7rs modsrfi
+TEXI_FILES = $(addprefix $(GAUCHE_SRC)/doc/, $(addsuffix .texi, $(TEXI_NAMES)))
 
 .PHONY: build clean
 build: syntax/gauche.vim ftplugin/gauche.vim
@@ -32,6 +42,9 @@ $(BUILD)/constant.vim: $(BUILD)/atdef.txt
 $(BUILD)/comparator.vim: $(BUILD)/atdef.txt
 	./build.sh comparator $< > $@
 
-$(BUILD)/atdef.txt:
+$(BUILD)/atdef.txt: $(TEXI_FILES)
+ifndef GAUCHE_SRC
+	$(error Please set GAUCHE_SRC to gauche source path)
+endif
 	mkdir -p $(BUILD)
-	./build.sh atdef > $@
+	./build.sh atdef $^ > $@

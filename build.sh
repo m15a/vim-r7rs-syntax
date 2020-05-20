@@ -34,13 +34,6 @@ show_usage() {
 	EOF
 }
 
-check_gauche_src() {
-    if [ -z "${GAUCHE_SRC+defined}" ]; then
-        echo "Please set GAUCHE_SRC to gauche source path" >&2
-        exit 1
-    fi
-}
-
 check_vim_src() {
     if [ -z "${VIM_SRC+defined}" ]; then
         echo "Please set VIM_SRC to vim source path" >&2
@@ -53,18 +46,12 @@ esc() {
 }
 
 build_atdef() {
-    check_gauche_src
+    if [ -z "${1+defined}" ]; then
+        echo " Usage: $0 atdef [FILE...], where FILE is texi files in gauche src path" >&2
+        exit 1
+    fi
 
-    set +o pipefail
-    find "$GAUCHE_SRC"/doc \( \
-        -name 'core*.texi' -o \
-        -name 'macro.texi' -o \
-        -name 'mod*.texi' -o \
-        -name 'object.texi' \
-        \) -exec grep -E '^@def' {} \; \
-        | sort \
-        | uniq
-    set -o pipefail
+    grep -Eh '^@def' "$@" | sort | uniq
 }
 
 build_macro() {
@@ -256,7 +243,8 @@ fi
 
 case "$1" in
     atdef)
-        build_atdef
+        shift
+        build_atdef "$@"
         ;;
     macro)
         shift
