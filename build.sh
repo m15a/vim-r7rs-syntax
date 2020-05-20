@@ -47,6 +47,10 @@ check_vim_runtime() {
     fi
 }
 
+esc() {
+    echo "$1" | sed -e 's@\(\*\|\+\|\.\|\^\|\$\)@\\\1@g'
+}
+
 build_data() {
     check_gauche_doc
 
@@ -72,7 +76,7 @@ build_macro() {
         if [ "$mac" = '^c' ]; then
             # ^c where c is one of [_a-z] is a macro in gauche
             echo "syn match gaucheMacro /\^[_a-z]/"
-        elif ! grep "^syn keyword scheme\w*Syntax $mac\$" \
+        elif ! grep "^syn keyword scheme\\w*Syntax $(esc "$mac")\$" \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheMacro ${mac/@@/@}"
@@ -90,7 +94,7 @@ build_specialform() {
 
     local spec
     awk '/^@defspecx?/ { print $2 }' "$1" | sort | uniq | while read -r spec; do
-        if ! grep "^syn keyword scheme\w*Syntax $spec\$" \
+        if ! grep "^syn keyword scheme\\w*Syntax $(esc "$spec")\$" \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheSpecialForm ${spec/@@/@}"
@@ -108,7 +112,7 @@ build_variable() {
 
     local var
     awk '/^@defvarx?/ { print $2 }' "$1" | sort | uniq | while read -r var; do
-        if ! grep "^syn keyword schemeConstant $var\$" \
+        if ! grep "^syn keyword schemeConstant $(esc "$var")\$" \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheVariable ${var/@@/@}"
@@ -126,7 +130,7 @@ build_constant() {
 
     local var
     awk '/^@defvrx? {Constant}/ { print $3 }' "$1" | sort | uniq | while read -r var; do
-        if ! grep "^syn keyword schemeConstant $var\$" \
+        if ! grep "^syn keyword schemeConstant $(esc "$var")\$" \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheConstant ${var/@@/@}"
@@ -144,7 +148,7 @@ build_comparator() {
 
     local var
     awk '/^@defvrx? {Comparator}/ { print $3 }' "$1" | sort | uniq | while read -r var; do
-        if ! grep "^syn keyword schemeConstant $var\$" \
+        if ! grep "^syn keyword schemeConstant $(esc "$var")\$" \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheComparator ${var/@@/@}"
@@ -201,17 +205,17 @@ build_ftplugin() {
 
     local word
     awk '{ print $4 }' "$@" \
-        | awk '/\<(|r|g)let(|rec)(|1|*)(|-)/ || /-let(|rec)(|1|*)\>/ \
+        | awk '/\<(|r|g)let(|rec)(|1|\*)(|-)/ || /-let(|rec)(|1|\*)\>/ \
             || /\<define(|-)/ || /-define\>/ \
             || /\<(|rx)match(|-)/ || /-match\>/ \
             || /\<(|e)case(|-)/ || /-case\>/ \
-            || /\<lambda(|-)/ || /-lambda(|*)\>/ \
+            || /\<lambda(|-)/ || /-lambda(|\*)\>/ \
             || /\<set!(|-)/ \
             || /\<do(-|times|list)/' \
         | sort \
         | uniq \
         | while read -r word; do
-        if ! grep "setl lispwords+=$word" \
+        if ! grep -F "setl lispwords+=$word" \
             "$VIM_RUNTIME"/ftplugin/scheme.vim > /dev/null 2>&1
         then
             echo "setl lispwords+=$word"
