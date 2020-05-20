@@ -78,8 +78,6 @@ build_macro() {
             echo "syn keyword gaucheMacro ${mac/@@/@}"
         fi
     done
-
-    echo $'\n'"hi def link gaucheMacro Statement"
 }
 
 build_specialform() {
@@ -98,8 +96,6 @@ build_specialform() {
             echo "syn keyword gaucheSpecialForm ${spec/@@/@}"
         fi
     done
-
-    echo $'\n'"hi def link gaucheSpecialForm PreProc"
 }
 
 build_variable() {
@@ -118,8 +114,6 @@ build_variable() {
             echo "syn keyword gaucheVariable ${var/@@/@}"
         fi
     done
-
-    echo $'\n'"hi def link gaucheVariable Keyword"
 }
 
 build_constant() {
@@ -138,8 +132,6 @@ build_constant() {
             echo "syn keyword gaucheConstant ${var/@@/@}"
         fi
     done
-
-    echo $'\n'"hi def link gaucheConstant Constant"
 }
 
 build_comparator() {
@@ -158,8 +150,6 @@ build_comparator() {
             echo "syn keyword gaucheComparator ${var/@@/@}"
         fi
     done
-
-    echo $'\n'"hi def link gaucheComparator Keyword"
 }
 
 build_syntax() {
@@ -182,6 +172,15 @@ build_syntax() {
         echo
         cat "$file"
     done
+
+    echo
+    cat <<-EOF
+	hi def link gaucheMacro schemeSyntax
+	hi def link gaucheSpecialForm schemeSpecialSyntax
+	hi def link gaucheVariable schemeConstant
+	hi def link gaucheConstant schemeConstant
+	hi def link gaucheComparator schemeConstant
+	EOF
 }
 
 build_ftplugin() {

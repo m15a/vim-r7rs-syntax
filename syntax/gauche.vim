@@ -145,8 +145,6 @@ syn keyword gaucheMacro with-time-counter
 syn keyword gaucheMacro xml-token-head
 syn keyword gaucheMacro xml-token-kind
 
-hi def link gaucheMacro Statement
-
 syn keyword gaucheSpecialForm %macroexpand
 syn keyword gaucheSpecialForm %macroexpand-1
 syn keyword gaucheSpecialForm ^
@@ -166,8 +164,6 @@ syn keyword gaucheSpecialForm require
 syn keyword gaucheSpecialForm select-module
 syn keyword gaucheSpecialForm with-cf-subst
 syn keyword gaucheSpecialForm with-module
-
-hi def link gaucheSpecialForm PreProc
 
 syn keyword gaucheVariable *argv*
 syn keyword gaucheVariable *load-path*
@@ -345,8 +341,6 @@ syn keyword gaucheVariable string-comparator
 syn keyword gaucheVariable uvector-comparator
 syn keyword gaucheVariable vector-comparator
 
-hi def link gaucheVariable Keyword
-
 syn keyword gaucheConstant *rfc2396-unreserved-char-set*
 syn keyword gaucheConstant *rfc3986-unreserved-char-set*
 syn keyword gaucheConstant *rfc822-atext-chars*
@@ -456,9 +450,11 @@ syn keyword gaucheConstant time-tai
 syn keyword gaucheConstant time-thread
 syn keyword gaucheConstant time-utc
 
-hi def link gaucheConstant Constant
-
 syn keyword gaucheComparator bag-comparator
 syn keyword gaucheComparator set-comparator
 
-hi def link gaucheComparator Keyword
+hi def link gaucheMacro schemeSyntax
+hi def link gaucheSpecialForm schemeSpecialSyntax
+hi def link gaucheVariable schemeConstant
+hi def link gaucheConstant schemeConstant
+hi def link gaucheComparator schemeConstant
