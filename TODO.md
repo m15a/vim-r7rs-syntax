@@ -9,6 +9,8 @@
     - [x] Add `set!`-related words to `lispwords`
     - [x] Add `do`-related words to `lispwords`
     - [ ] Add `call-with-*` to `lispwords`
+    - [ ] Add `with-*` to `lispwords`
+    - [ ] Add `for-each*` to `lispwords`
 - [ ] Build vim syntax file from texinfo commands below
 
 ## Todo
