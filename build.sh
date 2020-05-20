@@ -99,7 +99,7 @@ build_specialform() {
         fi
     done
 
-    echo $'\n'"hi def link gaucheSpecialForm Special"
+    echo $'\n'"hi def link gaucheSpecialForm PreProc"
 }
 
 build_variable() {

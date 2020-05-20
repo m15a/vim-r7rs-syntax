@@ -167,7 +167,7 @@ syn keyword gaucheSpecialForm select-module
 syn keyword gaucheSpecialForm with-cf-subst
 syn keyword gaucheSpecialForm with-module
 
-hi def link gaucheSpecialForm Special
+hi def link gaucheSpecialForm PreProc
 
 syn keyword gaucheVariable *argv*
 syn keyword gaucheVariable *load-path*
