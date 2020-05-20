@@ -77,13 +77,15 @@ build_special() {
     done
 }
 
-common_meta="\
-\" Language: Scheme (Gauche)
-\" Last Change: $(date +"%Y-%m-%d")
-\" Author: $author <$email>
-\" URL: $homepage
-\" Notes: To enable this plugin, set filetype=scheme and (b|g):is_gauche=1.
-"
+set +e
+read -r -d '' common_meta <<EOF
+" Language: Scheme (Gauche)
+" Last Change: $(date +"%Y-%m-%d")
+" Author: $author <$email>
+" URL: $homepage
+" Notes: To enable this plugin, set filetype=scheme and (b|g):is_gauche=1.
+EOF
+set -e
 
 build_syntax() {
     if [ "$#" -eq 0 ]; then
@@ -91,13 +93,14 @@ build_syntax() {
         exit 1
     fi
 
-    echo -n "\
-\" Vim syntax file
-$common_meta
-if !exists('b:did_scheme_syntax')
-  finish
-endif
-"
+    cat <<-EOF
+	" Vim syntax file
+	$common_meta
+	
+	if !exists('b:did_scheme_syntax')
+	  finish
+	endif
+	EOF
 
     local file
     for file in "$@"; do
@@ -112,14 +115,15 @@ build_ftplugin() {
         exit 1
     fi
 
-    echo -n "\
-\" Vim filetype plugin file
-$common_meta
-if !exists('b:did_scheme_ftplugin')
-  finish
-endif
-
-"
+    cat <<-EOF
+	" Vim filetype plugin file
+	$common_meta
+	
+	if !exists('b:did_scheme_ftplugin')
+	  finish
+	endif
+	
+	EOF
 
     local word
     awk '{ print $4 }' "$@" \
