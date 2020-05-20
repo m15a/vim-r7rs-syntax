@@ -13,6 +13,15 @@ endif
 setl lispwords+=and-let*
 setl lispwords+=and-let1
 setl lispwords+=case-lambda
+setl lispwords+=char-set:ascii-letter
+setl lispwords+=char-set:ascii-letter+digit
+setl lispwords+=char-set:ascii-lower-case
+setl lispwords+=char-set:ascii-upper-case
+setl lispwords+=char-set:letter
+setl lispwords+=char-set:letter+digit
+setl lispwords+=char-set:lower-case
+setl lispwords+=char-set:title-case
+setl lispwords+=char-set:upper-case
 setl lispwords+=define-cise-expr
 setl lispwords+=define-cise-macro
 setl lispwords+=define-cise-stmt

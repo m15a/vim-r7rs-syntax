@@ -1,4 +1,6 @@
 BUILD := _build
+VIM_NAMES := macro special variable
+VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))
 
 .PHONY: build clean
 build: syntax/gauche.vim ftplugin/gauche.vim
@@ -6,10 +8,10 @@ build: syntax/gauche.vim ftplugin/gauche.vim
 clean:
 	rm -rf _build
 
-syntax/gauche.vim: $(BUILD)/macro.vim $(BUILD)/special.vim
+syntax/gauche.vim: $(VIM_FILES)
 	./build.sh syntax $^ > $@
 
-ftplugin/gauche.vim: $(BUILD)/macro.vim $(BUILD)/special.vim
+ftplugin/gauche.vim: $(VIM_FILES)
 	./build.sh ftplugin $^ > $@
 
 $(BUILD)/macro.vim: $(BUILD)/data.txt
@@ -17,6 +19,9 @@ $(BUILD)/macro.vim: $(BUILD)/data.txt
 
 $(BUILD)/special.vim: $(BUILD)/data.txt
 	./build.sh special $< > $@
+
+$(BUILD)/variable.vim: $(BUILD)/data.txt
+	./build.sh variable $< > $@
 
 $(BUILD)/data.txt:
 	mkdir -p $(BUILD)

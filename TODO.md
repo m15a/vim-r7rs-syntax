@@ -27,8 +27,6 @@
 - `@deftypevrx`
 - `@defun`
 - `@defunx`
-- `@defvar`
-- `@defvarx`
 - `@defvr`
 - `@defvrx`
 
@@ -38,6 +36,8 @@
 - `@defmacx`
 - `@defspec`
 - `@defspecx`
+- `@defvar`
+- `@defvarx`
 
 ## No need
 
