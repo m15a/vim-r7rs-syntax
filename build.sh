@@ -95,7 +95,9 @@ build_variable() {
     fi
 
     local var
-    awk '/^@defvar/ { print $2 }' "$1" | sort | uniq | while read -r var; do
+    awk '{ if ( /^@defvarx?/ ) print $2
+           else if ( /^@defvrx? {Constant}/ ) print $3 \
+         }' "$1" | sort | uniq | while read -r var; do
         if ! grep "syn keyword schemeConstant $var " \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
