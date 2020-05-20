@@ -83,6 +83,7 @@ read -r -d '' common_meta <<EOF
 " Last Change: $(date +"%Y-%m-%d")
 " Author: $author <$email>
 " URL: $homepage
+" License: Public domain
 " Notes: To enable this plugin, set filetype=scheme and (b|g):is_gauche=1.
 EOF
 set -e
