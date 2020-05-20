@@ -1,21 +1,21 @@
 with import <nixpkgs> {};
 
 let
-  gauche_doc = runCommand "${gauche.name}-doc" {
+  gauche_src = runCommand "${gauche.name}-src" {
     inherit (gauche) src;
   } ''
     tar xf "$src"
-    mkdir -p "$out"
-    cp -r */doc/*.texi "$out"/
+    mkdir -p "$out"/doc
+    cp -r */doc/*.texi "$out"/doc
   '';
 in
 
 mkShell {
   buildInputs = [ gauche shellcheck ];
 
-  GAUCHE_DOC = gauche_doc;
+  GAUCHE_SRC = gauche_src;
 
-  VIM_RUNTIME = "${vim.src}/runtime";
+  VIM_SRC = vim.src;
 
   shellHook = ''
   '';
