@@ -1,5 +1,5 @@
 BUILD := _build
-VIM_NAMES := macro special variable
+VIM_NAMES := macro specialform variable
 VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))
 
 .PHONY: build clean
@@ -17,8 +17,8 @@ ftplugin/gauche.vim: $(VIM_FILES)
 $(BUILD)/macro.vim: $(BUILD)/data.txt
 	./build.sh macro $< > $@
 
-$(BUILD)/special.vim: $(BUILD)/data.txt
-	./build.sh special $< > $@
+$(BUILD)/specialform.vim: $(BUILD)/data.txt
+	./build.sh specialform $< > $@
 
 $(BUILD)/variable.vim: $(BUILD)/data.txt
 	./build.sh variable $< > $@
