@@ -63,7 +63,7 @@ build_macro() {
         elif ! grep "syn keyword schemeSyntax $mac " \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
-            echo "syn keyword schemeSyntax $mac"
+            echo "syn keyword schemeSyntax ${mac/@@/@}"
         fi
     done
 }
@@ -81,7 +81,7 @@ build_special() {
         if ! grep "syn keyword schemeSyntaxSyntax $spec " \
             "$VIM_RUNTIME"/syntax/scheme.vim > /dev/null 2>&1
         then
-            echo "syn keyword schemeSyntaxSyntax $spec"
+            echo "syn keyword schemeSyntaxSyntax ${spec/@@/@}"
         fi
     done
 }
