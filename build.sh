@@ -233,7 +233,7 @@ build_ftplugin() {
             || /\<(|rx)match(|-)/ || /-match\>/ \
             || /\<(|e)case(|-)/ || /-case\>/ \
             || /\<lambda(|-)/ || /-lambda(|\*)\>/ \
-            || /\<set!(|-)/ \
+            || /^set!($|-)/ || ( /-set!$/ && $0 !~ /char-set!$/ ) \
             || /\<do(-|times|list)/' \
         | sort \
         | uniq \
