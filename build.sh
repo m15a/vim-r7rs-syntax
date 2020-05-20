@@ -49,7 +49,7 @@ check_vim_src() {
 }
 
 esc() {
-    echo "$1" | sed -e 's@\(\*\|\+\|\.\|\^\|\$\)@\\\1@g'
+    echo "$1" | sed -E 's@(\*|\+|\.|\^|\$)@\\\1@g'
 }
 
 build_atdef() {
@@ -61,7 +61,7 @@ build_atdef() {
         -name 'macro.texi' -o \
         -name 'mod*.texi' -o \
         -name 'object.texi' \
-        \) -exec grep '^@def' {} \; \
+        \) -exec grep -E '^@def' {} \; \
         | sort \
         | uniq
     set -o pipefail
@@ -80,7 +80,7 @@ build_macro() {
         if [ "$mac" = '^c' ]; then
             # ^c where c is one of [_a-z] is a macro in gauche
             echo "syn match gaucheMacro /\^[_a-z]/"
-        elif ! grep "^syn keyword scheme\\w*Syntax $(esc "$mac")\$" \
+        elif ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$mac")\$" \
             "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheMacro ${mac/@@/@}"
@@ -98,7 +98,7 @@ build_specialform() {
 
     local spec
     awk '/^@defspecx?/ { print $2 }' "$1" | sort | uniq | while read -r spec; do
-        if ! grep "^syn keyword scheme\\w*Syntax $(esc "$spec")\$" \
+        if ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$spec")\$" \
             "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheSpecialForm ${spec/@@/@}"
@@ -119,7 +119,7 @@ build_function() {
              if ( match($0, /^@defunx? {\(setter (.+)\)}/, m) ) { print m[1] } \
              else { print $2 } \
          }' "$1" | sort | uniq | while read -r fun; do
-        if ! grep "^syn keyword schemeFunction $(esc "$fun")\$" \
+        if ! grep -E "^syn keyword schemeFunction $(esc "$fun")\$" \
             "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheFunction ${fun/@@/@}"
@@ -137,7 +137,7 @@ build_variable() {
 
     local var
     awk '/^@defvarx?/ { print $2 }' "$1" | sort | uniq | while read -r var; do
-        if ! grep "^syn keyword schemeConstant $(esc "$var")\$" \
+        if ! grep -E "^syn keyword schemeConstant $(esc "$var")\$" \
             "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheVariable ${var/@@/@}"
@@ -155,7 +155,7 @@ build_constant() {
 
     local var
     awk '/^@defvrx? {Constant}/ { print $3 }' "$1" | sort | uniq | while read -r var; do
-        if ! grep "^syn keyword schemeConstant $(esc "$var")\$" \
+        if ! grep -E "^syn keyword schemeConstant $(esc "$var")\$" \
             "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheConstant ${var/@@/@}"
@@ -173,7 +173,7 @@ build_comparator() {
 
     local var
     awk '/^@defvrx? {Comparator}/ { print $3 }' "$1" | sort | uniq | while read -r var; do
-        if ! grep "^syn keyword schemeConstant $(esc "$var")\$" \
+        if ! grep -E "^syn keyword schemeConstant $(esc "$var")\$" \
             "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "syn keyword gaucheComparator ${var/@@/@}"
