@@ -6,6 +6,15 @@ homepage='https://github.com/mnacamura/vim-gauche'
 
 readonly author email homepage
 
+read -r -d '' common_meta <<EOF
+" Language: Scheme (Gauche)
+" Last Change: $(date +"%Y-%m-%d")
+" Author: $author <$email>
+" URL: $homepage
+" License: Public domain
+" Notes: To enable this plugin, set filetype=scheme and (b|g):is_gauche=1.
+EOF
+
 set -euo pipefail
 
 show_usage() {
@@ -76,17 +85,6 @@ build_special() {
         fi
     done
 }
-
-set +e
-read -r -d '' common_meta <<EOF
-" Language: Scheme (Gauche)
-" Last Change: $(date +"%Y-%m-%d")
-" Author: $author <$email>
-" URL: $homepage
-" License: Public domain
-" Notes: To enable this plugin, set filetype=scheme and (b|g):is_gauche=1.
-EOF
-set -e
 
 build_syntax() {
     if [ "$#" -eq 0 ]; then
