@@ -30,8 +30,9 @@ build_data() {
     check_gauche_doc
 
     set +o pipefail
-    find "$GAUCHE_DOC" -iregex '.*\.texi$' ! -iregex '.*-dev\.texi$' \
-        -exec grep '^@def' \{\} \; \
+    find "$GAUCHE_DOC" -name '*.texi' \
+                       ! -name 'gauche-dev.texi' \
+                       -exec grep '^@def' {} \; \
         | sort \
         | uniq
     set -o pipefail
