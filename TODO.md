@@ -15,10 +15,36 @@
 
 ## Todo
 
-- `@deffn`
-- `@deffnx`
-- `@deftp`
-- `@deftpx`
+- [ ] `@deffn`, `@deffnx`
+    - [ ] `{CiSE Expression}`
+    - [ ] `{CiSE Statement}`
+    - [ ] `{CiSE Type}`
+    - [ ] `{Configuration Language}`
+    - [ ] `{EC Qualifier}`
+    - [ ] `{Function}`
+    - [ ] `{Generic Function}`
+    - [ ] `{Generic application}`
+    - [ ] `{Generic function}`
+    - [ ] `{Method}`
+    - [ ] `{Next method}`
+    - [ ] `{Parameter}`
+    - [ ] `{Program Clause}`
+    - [ ] `{Stub Form}`
+- [ ] `@deftp`, `@deftpx`
+    - [ ] `{Builtin Class}`
+    - [ ] `{Builtin Module}`
+    - [ ] `{Class}`
+    - [ ] `{Condition Type}`
+    - [ ] `{Condition type}`
+    - [ ] `{Environment Variable}`
+    - [ ] `{Function}`
+    - [ ] `{Metaclass}`
+    - [ ] `{Module}`
+    - [ ] `{Parameter}`
+    - [ ] `{Reader Syntax}`
+    - [ ] `{Record type}`
+    - [ ] `{Record}`
+    - [ ] `{Subprocess argument}`
 
 ## Done
 
