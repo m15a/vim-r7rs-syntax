@@ -10,6 +10,8 @@ if !exists('b:did_scheme_syntax')
   finish
 endif
 
+syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=\(import\|use\)\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment
+
 syn keyword gaucheBuiltinMacro $
 syn match gaucheBuiltinMacro /\^[_a-z]/
 syn keyword gaucheBuiltinMacro and-let*
