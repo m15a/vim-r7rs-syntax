@@ -32,14 +32,14 @@
     - [ ] `{Stub Form}`
 - [ ] `@deftp`, `@deftpx`
     - [ ] `{Builtin Class}`
-    - [ ] `{Builtin Module}`
+    - [x] `{Builtin Module}`
     - [ ] `{Class}`
     - [ ] `{Condition Type}`
     - [ ] `{Condition type}`
     - [ ] `{Environment Variable}`
     - [ ] `{Function}`
     - [ ] `{Metaclass}`
-    - [ ] `{Module}`
+    - [x] `{Module}`
     - [ ] `{Parameter}`
     - [ ] `{Reader Syntax}`
     - [ ] `{Record type}`

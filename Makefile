@@ -3,7 +3,8 @@ BUILD := _build
 VIM_NAMES := \
 	macro specialform \
 	function \
-	variable constant comparator
+	variable constant comparator \
+	module
 VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))
 
 TEXI_NAMES := \
@@ -41,6 +42,9 @@ $(BUILD)/constant.vim: $(BUILD)/atdef.txt
 
 $(BUILD)/comparator.vim: $(BUILD)/atdef.txt
 	./build.sh comparator $< > $@
+
+$(BUILD)/module.vim: $(BUILD)/atdef.txt
+	./build.sh module $< > $@
 
 $(BUILD)/atdef.txt: $(TEXI_FILES)
 ifndef GAUCHE_SRC

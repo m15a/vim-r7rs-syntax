@@ -10,7 +10,11 @@ if !exists('b:did_scheme_syntax')
   finish
 endif
 
-syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=\(import\|use\)\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment
+syn region schemeImport matchgroup=schemeImport
+      \ start="\(([ \t\n]*\)\@<=\(import\|use\)\>"
+      \ end=")"me=e-1
+      \ contained
+      \ contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheBuiltinModule,gaucheExtModule,gaucheUtilModule
 
 syn keyword gaucheBuiltinMacro $
 syn match gaucheBuiltinMacro /\^[_a-z]/
@@ -3653,12 +3657,214 @@ syn keyword gaucheUtilConstant pi/4
 syn keyword gaucheR7rsComparator bag-comparator
 syn keyword gaucheR7rsComparator set-comparator
 
+syn keyword gaucheBuiltinModule gauche
+syn keyword gaucheBuiltinModule gauche.keyword
+syn keyword gaucheBuiltinModule keyword
+syn keyword gaucheBuiltinModule null
+syn keyword gaucheBuiltinModule scheme
+syn keyword gaucheBuiltinModule user
+syn keyword gaucheExtModule gauche.array
+syn keyword gaucheExtModule gauche.base
+syn keyword gaucheExtModule gauche.cgen
+syn keyword gaucheExtModule gauche.charconv
+syn keyword gaucheExtModule gauche.collection
+syn keyword gaucheExtModule gauche.config
+syn keyword gaucheExtModule gauche.configure
+syn keyword gaucheExtModule gauche.connection
+syn keyword gaucheExtModule gauche.dictionary
+syn keyword gaucheExtModule gauche.fcntl
+syn keyword gaucheExtModule gauche.generator
+syn keyword gaucheExtModule gauche.hook
+syn keyword gaucheExtModule gauche.interactive
+syn keyword gaucheExtModule gauche.lazy
+syn keyword gaucheExtModule gauche.listener
+syn keyword gaucheExtModule gauche.logger
+syn keyword gaucheExtModule gauche.mop.propagate
+syn keyword gaucheExtModule gauche.mop.singleton
+syn keyword gaucheExtModule gauche.mop.validator
+syn keyword gaucheExtModule gauche.net
+syn keyword gaucheExtModule gauche.package
+syn keyword gaucheExtModule gauche.parameter
+syn keyword gaucheExtModule gauche.parseopt
+syn keyword gaucheExtModule gauche.partcont
+syn keyword gaucheExtModule gauche.process
+syn keyword gaucheExtModule gauche.record
+syn keyword gaucheExtModule gauche.reload
+syn keyword gaucheExtModule gauche.selector
+syn keyword gaucheExtModule gauche.sequence
+syn keyword gaucheExtModule gauche.syslog
+syn keyword gaucheExtModule gauche.termios
+syn keyword gaucheExtModule gauche.test
+syn keyword gaucheExtModule gauche.threads
+syn keyword gaucheExtModule gauche.time
+syn keyword gaucheExtModule gauche.unicode
+syn keyword gaucheExtModule gauche.uvector
+syn keyword gaucheExtModule gauche.version
+syn keyword gaucheExtModule gauche.vport
+syn keyword gaucheR7rsModule scheme.base
+syn keyword gaucheR7rsModule scheme.bitwise
+syn keyword gaucheR7rsModule scheme.box
+syn keyword gaucheR7rsModule scheme.case-lambda
+syn keyword gaucheR7rsModule scheme.char
+syn keyword gaucheR7rsModule scheme.charset
+syn keyword gaucheR7rsModule scheme.comparator
+syn keyword gaucheR7rsModule scheme.complex
+syn keyword gaucheR7rsModule scheme.cxr
+syn keyword gaucheR7rsModule scheme.division
+syn keyword gaucheR7rsModule scheme.ephemeron
+syn keyword gaucheR7rsModule scheme.eval
+syn keyword gaucheR7rsModule scheme.file
+syn keyword gaucheR7rsModule scheme.fixnum
+syn keyword gaucheR7rsModule scheme.flonum
+syn keyword gaucheR7rsModule scheme.generator
+syn keyword gaucheR7rsModule scheme.hash-table
+syn keyword gaucheR7rsModule scheme.ideque
+syn keyword gaucheR7rsModule scheme.inexact
+syn keyword gaucheR7rsModule scheme.lazy
+syn keyword gaucheR7rsModule scheme.list
+syn keyword gaucheR7rsModule scheme.list-queue
+syn keyword gaucheR7rsModule scheme.load
+syn keyword gaucheR7rsModule scheme.lseq
+syn keyword gaucheR7rsModule scheme.mapping
+syn keyword gaucheR7rsModule scheme.mapping.hash
+syn keyword gaucheR7rsModule scheme.process-context
+syn keyword gaucheR7rsModule scheme.r5rs
+syn keyword gaucheR7rsModule scheme.read
+syn keyword gaucheR7rsModule scheme.regex
+syn keyword gaucheR7rsModule scheme.repl
+syn keyword gaucheR7rsModule scheme.set
+syn keyword gaucheR7rsModule scheme.sort
+syn keyword gaucheR7rsModule scheme.stream
+syn keyword gaucheR7rsModule scheme.time
+syn keyword gaucheR7rsModule scheme.vector
+syn keyword gaucheR7rsModule scheme.vector.@@
+syn keyword gaucheR7rsModule scheme.write
+syn keyword gaucheSrfiModule srfi-1
+syn keyword gaucheSrfiModule srfi-106
+syn keyword gaucheSrfiModule srfi-111
+syn keyword gaucheSrfiModule srfi-112
+syn keyword gaucheSrfiModule srfi-113
+syn keyword gaucheSrfiModule srfi-114
+syn keyword gaucheSrfiModule srfi-115
+syn keyword gaucheSrfiModule srfi-117
+syn keyword gaucheSrfiModule srfi-118
+syn keyword gaucheSrfiModule srfi-127
+syn keyword gaucheSrfiModule srfi-13
+syn keyword gaucheSrfiModule srfi-132
+syn keyword gaucheSrfiModule srfi-133
+syn keyword gaucheSrfiModule srfi-14
+syn keyword gaucheSrfiModule srfi-141
+syn keyword gaucheSrfiModule srfi-143
+syn keyword gaucheSrfiModule srfi-146
+syn keyword gaucheSrfiModule srfi-146.hash
+syn keyword gaucheSrfiModule srfi-151
+syn keyword gaucheSrfiModule srfi-152
+syn keyword gaucheSrfiModule srfi-154
+syn keyword gaucheSrfiModule srfi-158
+syn keyword gaucheSrfiModule srfi-160
+syn keyword gaucheSrfiModule srfi-162
+syn keyword gaucheSrfiModule srfi-173
+syn keyword gaucheSrfiModule srfi-19
+syn keyword gaucheSrfiModule srfi-27
+syn keyword gaucheSrfiModule srfi-29
+syn keyword gaucheSrfiModule srfi-37
+syn keyword gaucheSrfiModule srfi-4
+syn keyword gaucheSrfiModule srfi-41
+syn keyword gaucheSrfiModule srfi-42
+syn keyword gaucheSrfiModule srfi-43
+syn keyword gaucheSrfiModule srfi-5
+syn keyword gaucheSrfiModule srfi-55
+syn keyword gaucheSrfiModule srfi-60
+syn keyword gaucheSrfiModule srfi-66
+syn keyword gaucheSrfiModule srfi-69
+syn keyword gaucheSrfiModule srfi-7
+syn keyword gaucheSrfiModule srfi-74
+syn keyword gaucheSrfiModule srfi-98
+syn keyword gaucheUtilModule binary.io
+syn keyword gaucheUtilModule binary.pack
+syn keyword gaucheUtilModule compat.chibi-test
+syn keyword gaucheUtilModule compat.norational
+syn keyword gaucheUtilModule control.job
+syn keyword gaucheUtilModule control.thread-pool
+syn keyword gaucheUtilModule crypt.bcrypt
+syn keyword gaucheUtilModule data.cache
+syn keyword gaucheUtilModule data.heap
+syn keyword gaucheUtilModule data.ideque
+syn keyword gaucheUtilModule data.imap
+syn keyword gaucheUtilModule data.queue
+syn keyword gaucheUtilModule data.random
+syn keyword gaucheUtilModule data.ring-buffer
+syn keyword gaucheUtilModule data.sparse
+syn keyword gaucheUtilModule data.trie
+syn keyword gaucheUtilModule dbi
+syn keyword gaucheUtilModule dbm
+syn keyword gaucheUtilModule dbm.fsdbm
+syn keyword gaucheUtilModule dbm.gdbm
+syn keyword gaucheUtilModule dbm.ndbm
+syn keyword gaucheUtilModule dbm.odbm
+syn keyword gaucheUtilModule file.filter
+syn keyword gaucheUtilModule file.util
+syn keyword gaucheUtilModule math.const
+syn keyword gaucheUtilModule math.mt-random
+syn keyword gaucheUtilModule math.prime
+syn keyword gaucheUtilModule os.windows
+syn keyword gaucheUtilModule rfc.822
+syn keyword gaucheUtilModule rfc.base64
+syn keyword gaucheUtilModule rfc.cookie
+syn keyword gaucheUtilModule rfc.ftp
+syn keyword gaucheUtilModule rfc.hmac
+syn keyword gaucheUtilModule rfc.http
+syn keyword gaucheUtilModule rfc.icmp
+syn keyword gaucheUtilModule rfc.ip
+syn keyword gaucheUtilModule rfc.json
+syn keyword gaucheUtilModule rfc.md5
+syn keyword gaucheUtilModule rfc.mime
+syn keyword gaucheUtilModule rfc.quoted-printable
+syn keyword gaucheUtilModule rfc.sha
+syn keyword gaucheUtilModule rfc.sha1
+syn keyword gaucheUtilModule rfc.tls
+syn keyword gaucheUtilModule rfc.uri
+syn keyword gaucheUtilModule rfc.zlib
+syn keyword gaucheUtilModule slib
+syn keyword gaucheUtilModule sxml.serializer
+syn keyword gaucheUtilModule sxml.ssax
+syn keyword gaucheUtilModule sxml.sxpath
+syn keyword gaucheUtilModule sxml.tools
+syn keyword gaucheUtilModule text.console
+syn keyword gaucheUtilModule text.csv
+syn keyword gaucheUtilModule text.diff
+syn keyword gaucheUtilModule text.edn
+syn keyword gaucheUtilModule text.gettext
+syn keyword gaucheUtilModule text.html-lite
+syn keyword gaucheUtilModule text.parse
+syn keyword gaucheUtilModule text.progress
+syn keyword gaucheUtilModule text.sql
+syn keyword gaucheUtilModule text.template
+syn keyword gaucheUtilModule text.tr
+syn keyword gaucheUtilModule text.tree
+syn keyword gaucheUtilModule util.combinations
+syn keyword gaucheUtilModule util.digest
+syn keyword gaucheUtilModule util.dominator
+syn keyword gaucheUtilModule util.isomorph
+syn keyword gaucheUtilModule util.lcs
+syn keyword gaucheUtilModule util.levenshtein
+syn keyword gaucheUtilModule util.match
+syn keyword gaucheUtilModule util.record
+syn keyword gaucheUtilModule util.relation
+syn keyword gaucheUtilModule util.stream
+syn keyword gaucheUtilModule util.toposort
+syn keyword gaucheUtilModule util.unification
+syn keyword gaucheUtilModule www.cgi
+syn keyword gaucheUtilModule www.cgi.test
+syn keyword gaucheUtilModule www.css
+
 hi def link gaucheBuiltinMacro schemeSyntax
 hi def link gaucheBuiltinSpecialForm schemeSpecialSyntax
 hi def link gaucheBuiltinFunction schemeFunction
 hi def link gaucheBuiltinVariable schemeConstant
 hi def link gaucheBuiltinConstant schemeConstant
 hi def link gaucheBuiltinComparator schemeConstant
+hi def link gaucheBuiltinModule Type
 
 hi def link gaucheExtMacro schemeSyntax
 hi def link gaucheExtSpecialForm schemeSpecialSyntax
@@ -3666,6 +3872,7 @@ hi def link gaucheExtFunction schemeFunction
 hi def link gaucheExtVariable schemeConstant
 hi def link gaucheExtConstant schemeConstant
 hi def link gaucheExtComparator schemeConstant
+hi def link gaucheExtModule Type
 
 hi def link gaucheUtilMacro schemeSyntax
 hi def link gaucheUtilSpecialForm schemeSpecialSyntax
@@ -3673,3 +3880,4 @@ hi def link gaucheUtilFunction schemeFunction
 hi def link gaucheUtilVariable schemeConstant
 hi def link gaucheUtilConstant schemeConstant
 hi def link gaucheUtilComparator schemeConstant
+hi def link gaucheUtilModule Type
