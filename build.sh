@@ -42,7 +42,7 @@ check_vim_src() {
 }
 
 esc() {
-    echo "$1" | sed -E 's@(\*|\+|\.|\^|\$)@\\\1@g'
+    echo "$1" | sed -E 's@(\?|\*|\+|\.|\^|\$)@\\\1@g'
 }
 
 build_atdef() {
@@ -51,7 +51,10 @@ build_atdef() {
         exit 1
     fi
 
-    grep -Eh '^@def' "$@" | sort | uniq
+    grep -E '^@def' "$@" \
+        | sed 's/:/ /' \
+        | awk '{ sub(".*/", "", $1); print }' \
+        | sort | uniq
 }
 
 build_macro() {
@@ -62,17 +65,31 @@ build_macro() {
         exit 1
     fi
 
-    local mac
-    awk '/^@defmacx?/ { print $2 }' "$1" | sort | uniq | while read -r mac; do
-        if [ "$mac" = '^c' ]; then
-            # ^c where c is one of [_a-z] is a macro in gauche
-            echo "syn match gaucheMacro /\^[_a-z]/"
-        elif ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$mac")\$" \
-            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-        then
-            echo "syn keyword gaucheMacro ${mac/@@/@}"
-        fi
-    done
+    local line name
+    awk '/@defmacx?/ {
+             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $3 }
+             else if ( $1 ~ /gauche/ ) { print "Ext", $3 }
+             else if ( $1 ~ /r7rs/ ) { print "R7rs", $3 }
+             else if ( $1 ~ /srfi/ ) { print "Srfi", $3 }
+             else if ( $1 ~ /util/ ) { print "Util", $3 }
+         }' "$1" \
+        | sort | uniq \
+        | while read -r line; do
+              name="$(echo "$line" | awk '{ print $2 }')"
+              if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
+                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+              then
+                  echo "$line"
+              fi
+          done \
+        | awk '{ if ( $2 == "use" ) {
+                     # skip it as it is handled in schemeImport
+                 } else if ( $2 == "^c" ) {
+                     print "syn match gauche"$1"Macro /\\^[_a-z]/"
+                 } else {
+                     print "syn keyword gauche"$1"Macro", $2
+                 }
+               }'
 }
 
 build_specialform() {
@@ -83,14 +100,29 @@ build_specialform() {
         exit 1
     fi
 
-    local spec
-    awk '/^@defspecx?/ { print $2 }' "$1" | sort | uniq | while read -r spec; do
-        if ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$spec")\$" \
-            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-        then
-            echo "syn keyword gaucheSpecialForm ${spec/@@/@}"
-        fi
-    done
+    local line name
+    awk '/@defspecx?/ {
+             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $3 }
+             else if ( $1 ~ /gauche/ ) { print "Ext", $3 }
+             else if ( $1 ~ /r7rs/ ) { print "R7rs", $3 }
+             else if ( $1 ~ /srfi/ ) { print "Srfi", $3 }
+             else if ( $1 ~ /util/ ) { print "Util", $3 }
+         }' "$1" \
+        | sort | uniq \
+        | while read -r line; do
+              name="$(echo "$line" | awk '{ print $2 }')"
+              if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
+                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+              then
+                  echo "$line"
+              fi
+          done \
+        | awk '{ if ( $2 == "import" ) {
+                     # skip it as it is handled in schemeImport
+                 } else {
+                     print "syn keyword gauche"$1"SpecialForm", $2
+                 }
+               }'
 }
 
 build_function() {
@@ -101,17 +133,28 @@ build_function() {
         exit 1
     fi
 
-    local fun
-    awk '/^@defunx?/ { \
-             if ( match($0, /^@defunx? {\(setter (.+)\)}/, m) ) { print m[1] } \
-             else { print $2 } \
-         }' "$1" | sort | uniq | while read -r fun; do
-        if ! grep -E "^syn keyword schemeFunction $(esc "$fun")\$" \
-            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-        then
-            echo "syn keyword gaucheFunction ${fun/@@/@}"
-        fi
-    done
+    local line name
+    awk 'function fname(line,    words) {
+             if ( match(line, /{\(setter (.+)\)}/, m) ) { return m[1] }
+             else { split(line, words); return words[3] }
+         }
+         /@defunx?/ {
+             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", fname($0) }
+             else if ( $1 ~ /gauche/ ) { print "Ext", fname($0) }
+             else if ( $1 ~ /r7rs/ ) { print "R7rs", fname($0) }
+             else if ( $1 ~ /srfi/ ) { print "Srfi", fname($0) }
+             else if ( $1 ~ /util/ ) { print "Util", fname($0) }
+         }' "$1" \
+        | sort | uniq \
+        | while read -r line; do
+              name="$(echo "$line" | awk '{ print $2 }')"
+              if ! grep -E "syn keyword schemeFunction $(esc "$name")" \
+                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+              then
+                  echo "$line"
+              fi
+          done \
+        | awk '{ print "syn keyword gauche"$1"Function", $2 }'
 }
 
 build_variable() {
@@ -122,14 +165,40 @@ build_variable() {
         exit 1
     fi
 
-    local var
-    awk '/^@defvarx?/ { print $2 }' "$1" | sort | uniq | while read -r var; do
-        if ! grep -E "^syn keyword schemeConstant $(esc "$var")\$" \
-            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-        then
-            echo "syn keyword gaucheVariable ${var/@@/@}"
-        fi
-    done
+    local line name
+    awk '/@defvarx?/ {
+             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $3 }
+             else if ( $1 ~ /gauche/ ) { print "Ext", $3 }
+             else if ( $1 ~ /r7rs/ ) { print "R7rs", $3 }
+             else if ( $1 ~ /srfi/ ) { print "Srfi", $3 }
+             else if ( $1 ~ /util/ ) { print "Util", $3 }
+         }' "$1" \
+        | sort | uniq \
+        | while read -r line; do
+              name="$(echo "$line" | awk '{ print $2 }')"
+              if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
+                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+              then
+                  echo "$line"
+              fi
+          done \
+        | awk 'BEGIN {
+                   at[0] = "u8"; at[1] = "s8";
+                   at[2] = "u16"; at[3] = "s16";
+                   at[4] = "u32"; at[5] = "s32";
+                   at[6] = "u64"; at[7] = "s64";
+                   at[8] = "f16"; at[9] = "f32"; at[10] = "f64";
+                   at[11] = "c32";  at[12] = "c64"; at[12] = "c128";
+               }
+               { if ( /@@/ ) {
+                     for (i in at) {
+                         line = $0
+                         sub(/@@/, at[i], line)
+                         print line
+                     }
+                 } else { print }
+               }' \
+        | awk '{ print "syn keyword gauche"$1"Variable", $2 }'
 }
 
 build_constant() {
@@ -140,14 +209,24 @@ build_constant() {
         exit 1
     fi
 
-    local var
-    awk '/^@defvrx? {Constant}/ { print $3 }' "$1" | sort | uniq | while read -r var; do
-        if ! grep -E "^syn keyword schemeConstant $(esc "$var")\$" \
-            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-        then
-            echo "syn keyword gaucheConstant ${var/@@/@}"
-        fi
-    done
+    local line name
+    awk '/@defvrx? {Constant}/ {
+             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $4 }
+             else if ( $1 ~ /gauche/ ) { print "Ext", $4 }
+             else if ( $1 ~ /r7rs/ ) { print "R7rs", $4 }
+             else if ( $1 ~ /srfi/ ) { print "Srfi", $4 }
+             else if ( $1 ~ /util/ ) { print "Util", $4 }
+         }' "$1" \
+        | sort | uniq \
+        | while read -r line; do
+              name="$(echo "$line" | awk '{ print $2 }')"
+              if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
+                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+              then
+                  echo "$line"
+              fi
+          done \
+        | awk '{ print "syn keyword gauche"$1"Constant", $2 }'
 }
 
 build_comparator() {
@@ -158,14 +237,24 @@ build_comparator() {
         exit 1
     fi
 
-    local var
-    awk '/^@defvrx? {Comparator}/ { print $3 }' "$1" | sort | uniq | while read -r var; do
-        if ! grep -E "^syn keyword schemeConstant $(esc "$var")\$" \
-            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-        then
-            echo "syn keyword gaucheComparator ${var/@@/@}"
-        fi
-    done
+    local line name
+    awk '/@defvrx? {Comparator}/ {
+             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $4 }
+             else if ( $1 ~ /gauche/ ) { print "Ext", $4 }
+             else if ( $1 ~ /r7rs/ ) { print "R7rs", $4 }
+             else if ( $1 ~ /srfi/ ) { print "Srfi", $4 }
+             else if ( $1 ~ /util/ ) { print "Util", $4 }
+         }' "$1" \
+        | sort | uniq \
+        | while read -r line; do
+              name="$(echo "$line" | awk '{ print $2 }')"
+              if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
+                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+              then
+                  echo "$line"
+              fi
+          done \
+        | awk '{ print "syn keyword gauche"$1"Comparator", $2 }'
 }
 
 build_syntax() {
@@ -191,12 +280,26 @@ build_syntax() {
 
     echo
     cat <<-EOF
-	hi def link gaucheMacro schemeSyntax
-	hi def link gaucheSpecialForm schemeSpecialSyntax
-	hi def link gaucheFunction schemeFunction
-	hi def link gaucheVariable schemeConstant
-	hi def link gaucheConstant schemeConstant
-	hi def link gaucheComparator schemeConstant
+	hi def link gaucheBuiltinMacro schemeSyntax
+	hi def link gaucheBuiltinSpecialForm schemeSpecialSyntax
+	hi def link gaucheBuiltinFunction schemeFunction
+	hi def link gaucheBuiltinVariable schemeConstant
+	hi def link gaucheBuiltinConstant schemeConstant
+	hi def link gaucheBuiltinComparator schemeConstant
+	
+	hi def link gaucheExtMacro schemeSyntax
+	hi def link gaucheExtSpecialForm schemeSpecialSyntax
+	hi def link gaucheExtFunction schemeFunction
+	hi def link gaucheExtVariable schemeConstant
+	hi def link gaucheExtConstant schemeConstant
+	hi def link gaucheExtComparator schemeConstant
+	
+	hi def link gaucheUtilMacro schemeSyntax
+	hi def link gaucheUtilSpecialForm schemeSpecialSyntax
+	hi def link gaucheUtilFunction schemeFunction
+	hi def link gaucheUtilVariable schemeConstant
+	hi def link gaucheUtilConstant schemeConstant
+	hi def link gaucheUtilComparator schemeConstant
 	EOF
 }
 
