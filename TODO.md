@@ -15,49 +15,42 @@
 
 ## Todo
 
-- [ ] `@deffn`, `@deffnx`
-    - [ ] `{CiSE Expression}`
-    - [ ] `{CiSE Statement}`
-    - [ ] `{CiSE Type}`
-    - [ ] `{Configuration Language}`
-    - [ ] `{EC Qualifier}`
-    - [ ] `{Function}`
-    - [ ] `{Generic Function}`
-    - [ ] `{Generic application}`
-    - [ ] `{Generic function}`
-    - [ ] `{Method}`
-    - [ ] `{Next method}`
-    - [ ] `{Parameter}`
-    - [ ] `{Program Clause}`
-    - [ ] `{Stub Form}`
-- [ ] `@deftp`, `@deftpx`
-    - [x] `{Builtin Class}`
-    - [x] `{Builtin Module}`
-    - [x] `{Class}`
-    - [ ] `{Condition Type}`
-    - [ ] `{Condition type}`
-    - [ ] `{Environment Variable}`
-    - [ ] `{Function}`
-    - [x] `{Metaclass}`
-    - [x] `{Module}`
-    - [ ] `{Parameter}`
-    - [ ] `{Reader Syntax}`
-    - [ ] `{Record type}`
-    - [ ] `{Record}`
-    - [ ] `{Subprocess argument}`
+- [ ] `@deffnx?`
+    - [ ] `{cise expression}`
+    - [ ] `{cise statement}`
+    - [ ] `{cise type}`
+    - [ ] `{configuration language}`
+    - [ ] `{ec qualifier}`
+    - [ ] `{function}`
+    - [ ] `{generic function}`
+    - ~~`{generic application}`~~ no need
+    - [ ] `{method}`
+    - [ ] `{next method}`
+    - [ ] `{parameter}`
+    - [ ] `{program clause}`
+    - [ ] `{stub form}`
+- [ ] `@deftpx?`
+    - [x] `{builtin class}`
+    - [x] `{builtin module}`
+    - [x] `{class}`
+    - [ ] `{condition type}`
+    - [ ] `{environment variable}`
+    - [ ] `{function}`
+    - [x] `{metaclass}`
+    - [x] `{module}`
+    - [ ] `{parameter}`
+    - [ ] `{reader syntax}`
+    - [ ] `{record type}`
+    - [ ] `{record}`
+    - [ ] `{subprocess argument}`
 
 ## Done
 
-- `@defmac`
-- `@defmacx`
-- `@defspec`
-- `@defspecx`
-- `@defun`
-- `@defunx`
-- `@defvar`
-- `@defvarx`
-- `@defvr`
-- `@defvrx`
+- `@defmacx?`
+- `@defspecx?`
+- `@defunx?`
+- `@defvarx?`
+- `@defvrx?`
 
 ## No need
 
