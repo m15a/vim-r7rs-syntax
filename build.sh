@@ -105,6 +105,7 @@ EOF
     local line name
     awk -F '\t' -f "$awklib" -e '/@defmacx?/ { print libtype($1), $3 }' "$1" \
         | sort | uniq \
+        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
               if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
@@ -139,6 +140,7 @@ EOF
     local line name
     awk -F '\t' -f "$awklib" -e '/@defspecx?/ { print libtype($1), $3 }' "$1" \
         | sort | uniq \
+        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
@@ -171,6 +173,7 @@ EOF
     local line name
     awk -F '\t' -f "$awklib" -e '/@defunx?/ { print libtype($1), unwrap($3) }' "$1" \
         | sort | uniq \
+        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeFunction $(esc "$name")" \
@@ -198,14 +201,7 @@ EOF
     local line name
     awk -F '\t' -f "$awklib" -e '/@defvarx?/ { print libtype($1), $3 }' "$1" \
         | sort | uniq \
-        | awk -F '\t' -f "$awklib" -e '{ if ( $2 ~ /@@/ ) {
-                                             for (i in at) {
-                                                 line = $0
-                                                 sub(/@@/, at[i], line)
-                                                 print line
-                                             }
-                                         } else { print }
-                                       }' \
+        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
@@ -235,6 +231,7 @@ EOF
                                      print libtype($1), $4
                                  }' "$1" \
         | sort | uniq \
+        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
@@ -264,6 +261,7 @@ EOF
                                      print libtype($1), $4
                                  }' "$1" \
         | sort | uniq \
+        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
@@ -293,6 +291,7 @@ EOF
                                      print libtype($1), $4
                                  }' "$1" \
         | sort | uniq \
+        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
         | awk -F '\t' '{ print "syn keyword gauche"$1"Module", $2 }'
 }
 
@@ -314,6 +313,7 @@ EOF
                                      print libtype($1), $4
                                  }' "$1" \
         | sort | uniq \
+        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
         | awk -F '\t' '{ print "syn keyword gauche"$1"Class", $2 }'
 }
 
@@ -466,6 +466,17 @@ function unwrap(field,    m) {
     if ( match(field, /{\(\w+ (.+)\)}/, m) )
         return m[1]
     return field
+}
+function expandat(    i, line) {
+    if ( /@@/ ) {
+        for (i in at) {
+            line = $0
+            gsub(/@@/, at[i], line)
+            print line
+        }
+    } else {
+        print
+    }
 }
 BEGIN {
     OFS = "\t"
