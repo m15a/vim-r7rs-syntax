@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-05-22
+" Last Change: 2020-05-23
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche
 " License: Public domain
@@ -3504,6 +3504,7 @@ syn keyword gaucheExtVariable f16vector-comparator
 syn keyword gaucheExtVariable f32vector-comparator
 syn keyword gaucheExtVariable f64vector-comparator
 syn keyword gaucheExtVariable c32vector-comparator
+syn keyword gaucheExtVariable c64vector-comparator
 syn keyword gaucheExtVariable c128vector-comparator
 syn keyword gaucheExtVariable MSG_CTRUNC
 syn keyword gaucheExtVariable MSG_DONTROUTE
