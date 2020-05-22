@@ -58,7 +58,7 @@ EOF
 
     grep -E '^@def' "${files[@]}" \
         | sed 's/:/ /' \
-        | awk '{ sub(".*/", "", $1); print }' \
+        | awk -f "$awklib" -e '{ $1 = basename($1); print }' \
         | sort | uniq
 }
 
@@ -74,13 +74,7 @@ EOF
     fi
 
     local line name
-    awk '/@defmacx?/ {
-             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $3 }
-             else if ( $1 ~ /gauche/ ) { print "Ext", $3 }
-             else if ( $1 ~ /r7rs/ ) { print "R7rs", $3 }
-             else if ( $1 ~ /srfi/ ) { print "Srfi", $3 }
-             else if ( $1 ~ /util/ ) { print "Util", $3 }
-         }' "$1" \
+    awk -f "$awklib" -e '/@defmacx?/ { print libtype($1), $3 }' "$1" \
         | sort | uniq \
         | while read -r line; do
               name="$(echo "$line" | awk '{ print $2 }')"
@@ -112,13 +106,7 @@ EOF
     fi
 
     local line name
-    awk '/@defspecx?/ {
-             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $3 }
-             else if ( $1 ~ /gauche/ ) { print "Ext", $3 }
-             else if ( $1 ~ /r7rs/ ) { print "R7rs", $3 }
-             else if ( $1 ~ /srfi/ ) { print "Srfi", $3 }
-             else if ( $1 ~ /util/ ) { print "Util", $3 }
-         }' "$1" \
+    awk -f "$awklib" -e '/@defspecx?/ { print libtype($1), $3 }' "$1" \
         | sort | uniq \
         | while read -r line; do
               name="$(echo "$line" | awk '{ print $2 }')"
@@ -148,17 +136,7 @@ EOF
     fi
 
     local line name
-    awk 'function fname(line,    words) {
-             if ( match(line, /{\(setter (.+)\)}/, m) ) { return m[1] }
-             else { split(line, words); return words[3] }
-         }
-         /@defunx?/ {
-             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", fname($0) }
-             else if ( $1 ~ /gauche/ ) { print "Ext", fname($0) }
-             else if ( $1 ~ /r7rs/ ) { print "R7rs", fname($0) }
-             else if ( $1 ~ /srfi/ ) { print "Srfi", fname($0) }
-             else if ( $1 ~ /util/ ) { print "Util", fname($0) }
-         }' "$1" \
+    awk -f "$awklib" -e '/@defunx?/ { print libtype($1), fname($0) }' "$1" \
         | sort | uniq \
         | while read -r line; do
               name="$(echo "$line" | awk '{ print $2 }')"
@@ -183,13 +161,7 @@ EOF
     fi
 
     local line name
-    awk '/@defvarx?/ {
-             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $3 }
-             else if ( $1 ~ /gauche/ ) { print "Ext", $3 }
-             else if ( $1 ~ /r7rs/ ) { print "R7rs", $3 }
-             else if ( $1 ~ /srfi/ ) { print "Srfi", $3 }
-             else if ( $1 ~ /util/ ) { print "Util", $3 }
-         }' "$1" \
+    awk -f "$awklib" -e '/@defvarx?/ { print libtype($1), $3 }' "$1" \
         | sort | uniq \
         | while read -r line; do
               name="$(echo "$line" | awk '{ print $2 }')"
@@ -230,13 +202,7 @@ EOF
     fi
 
     local line name
-    awk '/@defvrx? {Constant}/ {
-             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $4 }
-             else if ( $1 ~ /gauche/ ) { print "Ext", $4 }
-             else if ( $1 ~ /r7rs/ ) { print "R7rs", $4 }
-             else if ( $1 ~ /srfi/ ) { print "Srfi", $4 }
-             else if ( $1 ~ /util/ ) { print "Util", $4 }
-         }' "$1" \
+    awk -f "$awklib" -e '/@defvrx? {Constant}/ { print libtype($1), $4 }' "$1" \
         | sort | uniq \
         | while read -r line; do
               name="$(echo "$line" | awk '{ print $2 }')"
@@ -261,13 +227,7 @@ EOF
     fi
 
     local line name
-    awk '/@defvrx? {Comparator}/ {
-             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", $4 }
-             else if ( $1 ~ /gauche/ ) { print "Ext", $4 }
-             else if ( $1 ~ /r7rs/ ) { print "R7rs", $4 }
-             else if ( $1 ~ /srfi/ ) { print "Srfi", $4 }
-             else if ( $1 ~ /util/ ) { print "Util", $4 }
-         }' "$1" \
+    awk -f "$awklib" -e '/@defvrx? {Comparator}/ { print libtype($1), $4 }' "$1" \
         | sort | uniq \
         | while read -r line; do
               name="$(echo "$line" | awk '{ print $2 }')"
@@ -292,18 +252,9 @@ EOF
     fi
 
     local line name
-    awk 'function mname(line,    words) {
-             split(line, words)
-             if ( words[4] ~ /}$/ ) { return words[5] }
-             else { return words[4] }
-         }
-         /@deftpx? {(Builtin )?Module}/ {
-             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", mname($0) }
-             else if ( $1 ~ /gauche/ ) { print "Ext", mname($0) }
-             else if ( $1 ~ /r7rs/ ) { print "R7rs", mname($0) }
-             else if ( $1 ~ /srfi/ ) { print "Srfi", mname($0) }
-             else if ( $1 ~ /util/ ) { print "Util", mname($0) }
-         }' "$1" \
+    awk -f "$awklib" -e '/@deftpx? {(Builtin )?Module}/ {
+                             print libtype($1), mname($0)
+                         }' "$1" \
         | sort | uniq \
         | awk '{ print "syn keyword gauche"$1"Module", $2 }'
 }
@@ -320,18 +271,9 @@ EOF
     fi
 
     local line name
-    awk 'function kname(line,    words) {
-             split(line, words)
-             if ( words[4] ~ /}$/ ) { return words[5] }
-             else { return words[4] }
-         }
-         /@deftpx? {((Builtin )?Class|Metaclass)}/ {
-             if ( $1 ~ /(core|macro|object)/ ) { print "Builtin", kname($0) }
-             else if ( $1 ~ /gauche/ ) { print "Ext", kname($0) }
-             else if ( $1 ~ /r7rs/ ) { print "R7rs", kname($0) }
-             else if ( $1 ~ /srfi/ ) { print "Srfi", kname($0) }
-             else if ( $1 ~ /util/ ) { print "Util", kname($0) }
-         }' "$1" \
+    awk -f "$awklib" -e '/@deftpx? {((Builtin )?Class|Metaclass)}/ {
+                             print libtype($1), kname($0)
+                         }' "$1" \
         | sort | uniq \
         | awk '{ print "syn keyword gauche"$1"Class", $2 }'
 }
@@ -457,6 +399,47 @@ if [ -z "${1+defined}" ]; then
     show_usage
     exit 1
 fi
+
+awklib="$(mktemp --suffix vimgauche)"
+cat > "$awklib" <<'EOF'
+function basename(path,    _path) {
+    _path = path
+    sub(".*/", "", _path)
+    return _path
+}
+function libtype(texifile) {
+    if ( texifile ~ /(core|macro|object)/ )
+        return "Builtin"
+    if ( texifile ~ /gauche/ )
+        return "Ext"
+    if ( texifile ~ /r7rs/ )
+        return "R7rs"
+    if ( texifile ~ /srfi/ )
+        return "Srfi"
+    if ( texifile ~ /util/ )
+        return "Util"
+    return "Unknown"
+}
+function fname(line,    words) {
+    if ( match(line, /{\(setter (.+)\)}/, m) ) { return m[1] }
+    else { split(line, words); return words[3] }
+}
+function mname(line,    words) {
+    split(line, words)
+    if ( words[4] ~ /}$/ ) { return words[5] }
+    else { return words[4] }
+}
+function kname(line,    words) {
+    split(line, words)
+    if ( words[4] ~ /}$/ ) { return words[5] }
+    else { return words[4] }
+}
+EOF
+
+cleanup() {
+    rm -f "$awklib"
+}
+trap cleanup ERR SIGTERM EXIT
 
 case "$1" in
     atdef|macro|specialform|function|variable|constant|comparator|module|class|syntax|ftplugin)
