@@ -33,30 +33,30 @@ syntax/gauche.vim: $(VIM_FILES)
 ftplugin/gauche.vim: $(VIM_FILES)
 	./build.sh ftplugin $^ > $@
 
-$(BUILD)/macro.vim: $(BUILD)/atdef.txt
+$(BUILD)/macro.vim: $(BUILD)/atdef.tsv
 	./build.sh macro $< > $@
 
-$(BUILD)/specialform.vim: $(BUILD)/atdef.txt
+$(BUILD)/specialform.vim: $(BUILD)/atdef.tsv
 	./build.sh specialform $< > $@
 
-$(BUILD)/function.vim: $(BUILD)/atdef.txt
+$(BUILD)/function.vim: $(BUILD)/atdef.tsv
 	./build.sh function $< > $@
 
-$(BUILD)/variable.vim: $(BUILD)/atdef.txt
+$(BUILD)/variable.vim: $(BUILD)/atdef.tsv
 	./build.sh variable $< > $@
 
-$(BUILD)/constant.vim: $(BUILD)/atdef.txt
+$(BUILD)/constant.vim: $(BUILD)/atdef.tsv
 	./build.sh constant $< > $@
 
-$(BUILD)/comparator.vim: $(BUILD)/atdef.txt
+$(BUILD)/comparator.vim: $(BUILD)/atdef.tsv
 	./build.sh comparator $< > $@
 
-$(BUILD)/module.vim: $(BUILD)/atdef.txt
+$(BUILD)/module.vim: $(BUILD)/atdef.tsv
 	./build.sh module $< > $@
 
-$(BUILD)/class.vim: $(BUILD)/atdef.txt
+$(BUILD)/class.vim: $(BUILD)/atdef.tsv
 	./build.sh class $< > $@
 
-$(BUILD)/atdef.txt:
+$(BUILD)/atdef.tsv:
 	mkdir -p $(BUILD)
-	./build.sh atdef $(TEXI_NAMES) > $@
+	./build.sh tsv $(TEXI_NAMES) > $@
