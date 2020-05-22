@@ -79,13 +79,13 @@ EOF
                                  print
                                }' \
         | sed -E 's/\t+/\t/g' \
-        | awk -F '\t' '{ if ( $3 ~ /^{.+}$/ )
-                             # $3 may have various cases:
-                             # e.g. {Condition Type} and {Condition type}
-                             print $1, $2, tolower($3), $4
-                         else
-                             print $1, $2, $3
-                       }' \
+        | awk -F '\t' -f "$awklib" -e '{ if ( $3 ~ /^{.+}$/ )
+                                             # $3 may have various cases:
+                                             # e.g. {Condition Type} and {Condition type}
+                                             print $1, $2, tolower($3), $4
+                                         else
+                                             print $1, $2, $3
+                                       }' \
         | sort | uniq
 }
 
