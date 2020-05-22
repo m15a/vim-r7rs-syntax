@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (Gauche)
-" Last Change: 2020-05-21
+" Last Change: 2020-05-22
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche
 " License: Public domain

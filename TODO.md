@@ -31,14 +31,14 @@
     - [ ] `{Program Clause}`
     - [ ] `{Stub Form}`
 - [ ] `@deftp`, `@deftpx`
-    - [ ] `{Builtin Class}`
+    - [x] `{Builtin Class}`
     - [x] `{Builtin Module}`
-    - [ ] `{Class}`
+    - [x] `{Class}`
     - [ ] `{Condition Type}`
     - [ ] `{Condition type}`
     - [ ] `{Environment Variable}`
     - [ ] `{Function}`
-    - [ ] `{Metaclass}`
+    - [x] `{Metaclass}`
     - [x] `{Module}`
     - [ ] `{Parameter}`
     - [ ] `{Reader Syntax}`
