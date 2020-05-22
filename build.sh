@@ -394,49 +394,10 @@ if [ -z "${1+defined}" ]; then
 fi
 
 case "$1" in
-    atdef)
+    atdef|macro|specialform|function|variable|constant|comparator|module|class|syntax|ftplugin)
+        cmd="$1"
         shift
-        build_atdef "$@"
-        ;;
-    macro)
-        shift
-        build_macro "$@"
-        ;;
-    specialform)
-        shift
-        build_specialform "$@"
-        ;;
-    function)
-        shift
-        build_function "$@"
-        ;;
-    variable)
-        shift
-        build_variable "$@"
-        ;;
-    constant)
-        shift
-        build_constant "$@"
-        ;;
-    comparator)
-        shift
-        build_comparator "$@"
-        ;;
-    module)
-        shift
-        build_module "$@"
-        ;;
-    class)
-        shift
-        build_class "$@"
-        ;;
-    syntax)
-        shift
-        build_syntax "$@"
-        ;;
-    ftplugin)
-        shift
-        build_ftplugin "$@"
+        build_"$cmd" "$@"
         ;;
     *)
         show_usage
