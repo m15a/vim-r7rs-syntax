@@ -42,11 +42,16 @@ esc() {
 
 build_atdef() {
     if [ -z "${1+defined}" ]; then
-        echo " Usage: $0 atdef [FILE...], where FILE is texi files in gauche src path" >&2
+        echo " Usage: $0 atdef [NAME...], where NAME... are of texi files (excluding suffix) in gauche src path" >&2
         exit 1
     fi
 
-    grep -E '^@def' "$@" \
+    local name files=()
+    for name in "$@"; do
+        files+=("$GAUCHE_SRC/doc/$name.texi")
+    done
+
+    grep -E '^@def' "${files[@]}" \
         | sed 's/:/ /' \
         | awk '{ sub(".*/", "", $1); print }' \
         | sort | uniq
@@ -382,6 +387,11 @@ build_ftplugin() {
         fi
     done
 }
+
+if [ -z "${GAUCHE_SRC+defined}" ]; then
+    echo "Please set GAUCHE_SRC to gauche source path" >&2
+    exit 1
+fi
 
 if [ -z "${VIM_SRC+defined}" ]; then
     echo "Please set VIM_SRC to vim source path" >&2
