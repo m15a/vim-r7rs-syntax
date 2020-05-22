@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-05-21
+" Last Change: 2020-05-22
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche
 " License: Public domain
@@ -10,11 +10,14 @@ if !exists('b:did_scheme_syntax')
   finish
 endif
 
-syn region schemeImport matchgroup=schemeImport
-      \ start="\(([ \t\n]*\)\@<=\(import\|use\)\>"
-      \ end=")"me=e-1
-      \ contained
-      \ contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheBuiltinModule,gaucheExtModule,gaucheUtilModule
+syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=\(import\|use\)\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheBuiltinModule,gaucheExtModule,gaucheUtilModule
+
+syn region gaucheSharpString start=/\(\\\)\@<!#"/ skip=/\\[\\"]/ end=/"/ contains=gaucheSharpStringUnquote
+hi def link gaucheSharpString schemeString
+
+syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\(\~\)\@!/ end=/[ `'\t\n\[\]()";]/me=e-1 contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
+syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
+syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 
 syn keyword gaucheBuiltinMacro $
 syn match gaucheBuiltinMacro /\^[_a-z]/

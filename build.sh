@@ -294,12 +294,18 @@ build_syntax() {
 	if !exists('b:did_scheme_syntax')
 	  finish
 	endif
+	EOF
+
+    echo
+    cat <<-'EOF'
+	syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=\(import\|use\)\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheBuiltinModule,gaucheExtModule,gaucheUtilModule
 	
-	syn region schemeImport matchgroup=schemeImport
-	      \\ start="\(([ \t\n]*\)\@<=\(import\|use\)\>"
-	      \\ end=")"me=e-1
-	      \\ contained
-	      \\ contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheBuiltinModule,gaucheExtModule,gaucheUtilModule
+	syn region gaucheSharpString start=/\(\\\)\@<!#"/ skip=/\\[\\"]/ end=/"/ contains=gaucheSharpStringUnquote
+	hi def link gaucheSharpString schemeString
+	
+	syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\(\~\)\@!/ end=/[ `'\t\n\[\]()";]/me=e-1 contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
+	syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
+	syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 	EOF
 
     local file
