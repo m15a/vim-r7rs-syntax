@@ -53,7 +53,7 @@ EOF
 
     local name files=()
     for name in "$@"; do
-        files+=("$GAUCHE_SRC/doc/${name/.texi/}.texi")
+        files+=("$GAUCHE_SRC/doc/${name%.texi}.texi")
     done
 
     grep -E '^@def' "${files[@]}" \
@@ -374,8 +374,7 @@ EOF
             || /^lambda($|-)/ || ( /-lambda(|\*)$/ && $0 !~ /^scheme\.case-lambda$/ ) \
             || /^set!($|-)/ || ( /-set!$/ && $0 !~ /char-set!$/ ) \
             || /^do(-|times|list)/' \
-        | sort \
-        | uniq \
+        | sort | uniq \
         | while read -r word; do
         if ! grep -F "setl lispwords+=$word" \
             "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
