@@ -1,17 +1,25 @@
 # TODO
 
-- [ ] Add ftplugin
-    - [x] Add `let`-related words to `lispwords`
-    - [x] Add `define`-related words to `lispwords`
-    - [x] Add `match`-related words to `lispwords`
-    - [x] Add `case`-related words to `lispwords`
-    - [x] Add `lambda`-related words to `lispwords`
-    - [x] Add `set!`-related words to `lispwords`
-    - [x] Add `do`-related words to `lispwords`
-    - [ ] Add `call-with-*` to `lispwords`
-    - [ ] Add `with-*` to `lispwords`
-    - [ ] Add `for-each*` to `lispwords`
-- [ ] Build vim syntax file from texinfo commands
+- [ ] Add sharp syntax
+    - [ ] `#!`
+    - [x] `#"`
+    - [x] `#(` included in `syntax/scheme.vim`
+    - [ ] `#*`
+    - [ ] `#,`
+    - [ ] `#/`
+    - [ ] `#0`...`#9`
+    - [ ] `#:`
+    - [x] `#;` included in `syntax/scheme.vim`
+    - ~~`#<`~~ unreadable object, no need
+    - [ ] `#?`
+    - [ ] `#b`, `#d`, `#e`, `#i`, `#o`, `#x`
+    - [x] `#t`, `#f` included in `syntax/scheme.vim`
+    - [ ] `#s`, `#u`
+    - [ ] `#[`
+    - [ ] `#\`
+    - [x] `#|` included in `syntax/scheme.vim`
+- [ ] Add numeric literals
+- [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
     - [x] `@defspecx?`
     - [x] `@defunx?`
@@ -49,3 +57,14 @@
         - [ ] `{subprocess argument}`
     - ~~`@defivarx?`~~ instance variables
     - ~~`@defcodeindex`~~ generating texinfo index, can be skipped
+- [ ] Add ftplugin
+    - [x] Add `let`-related words to `lispwords`
+    - [x] Add `define`-related words to `lispwords`
+    - [x] Add `match`-related words to `lispwords`
+    - [x] Add `case`-related words to `lispwords`
+    - [x] Add `lambda`-related words to `lispwords`
+    - [x] Add `set!`-related words to `lispwords`
+    - [x] Add `do`-related words to `lispwords`
+    - [ ] Add `call-with-*` to `lispwords`
+    - [ ] Add `with-*` to `lispwords`
+    - [ ] Add `for-each*` to `lispwords`
