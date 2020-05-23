@@ -30,7 +30,7 @@ syn match gaucheSharpSpecial /\(\%^\)\@<!#![^ '`\t\n()\[\]"|;]\+/
 
 " String interpolation (#") {{{1
 
-syn region gaucheSharpString start=/\(\\\)\@<!#"/ skip=/\\[\\"]/ end=/"/ contains=gaucheSharpStringUnquote
+syn region gaucheSharpString start=/#"/ skip=/\\[\\"]/ end=/"/ contains=gaucheSharpStringUnquote
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\(\~\)\@!/ end=/[ `'\t\n\[\]()";]/me=e-1 contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
