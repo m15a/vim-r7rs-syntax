@@ -7,8 +7,8 @@ VIM_NAMES := \
 	variable \
 	constant \
 	comparator \
-	module \
-	class
+	module
+	# class
 VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))
 
 TEXI_NAMES := \

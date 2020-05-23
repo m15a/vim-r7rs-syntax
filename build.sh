@@ -355,6 +355,10 @@ syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 
+" Class (<foo>) {{{1
+
+syn match gaucheClass /<[^ '`\t\n()\[\]"|;]\+>/
+
 " Keywords {{{1
 
 EOF

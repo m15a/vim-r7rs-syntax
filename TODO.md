@@ -42,13 +42,13 @@
         - [x] `{comparator}`
         - [x] `{constant}`
     - [ ] `@deftpx?`
-        - [x] `{builtin class}`
+        - [x] `{builtin class}` regex match
         - [x] `{builtin module}`
-        - [x] `{class}`
+        - [x] `{class}` regex match
         - [ ] `{condition type}`
         - [ ] `{environment variable}`
         - [x] `{function}`
-        - [x] `{metaclass}`
+        - [x] `{metaclass}` regex match
         - [x] `{module}`
         - [ ] `{parameter}`
         - ~~`{reader syntax}`~~ no need
