@@ -6,7 +6,6 @@ VIM_NAMES := \
 	function \
 	variable \
 	constant \
-	comparator \
 	module
 	# class
 VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))
@@ -47,9 +46,6 @@ $(BUILD)/variable.vim: $(BUILD)/atdef.tsv
 
 $(BUILD)/constant.vim: $(BUILD)/atdef.tsv
 	./build.sh constant $< > $@
-
-$(BUILD)/comparator.vim: $(BUILD)/atdef.tsv
-	./build.sh comparator $< > $@
 
 $(BUILD)/module.vim: $(BUILD)/atdef.tsv
 	./build.sh module $< > $@

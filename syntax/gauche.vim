@@ -250,8 +250,6 @@ syn keyword gaucheModule util.unification
 syn keyword gaucheModule www.cgi
 syn keyword gaucheModule www.cgi.test
 syn keyword gaucheModule www.css
-syn keyword schemeComparator bag-comparator
-syn keyword schemeComparator set-comparator
 syn keyword schemeConstant *rfc2396-unreserved-char-set*
 syn keyword schemeConstant *rfc3986-unreserved-char-set*
 syn keyword schemeConstant *rfc822-atext-chars*
@@ -4585,6 +4583,7 @@ syn keyword schemeVariable SO_OOBINLINE
 syn keyword schemeVariable SO_PRIORITY
 syn keyword schemeVariable SO_REUSEADDR
 syn keyword schemeVariable SO_TYPE
+syn keyword schemeVariable bag-comparator
 syn keyword schemeVariable boolean-comparator
 syn keyword schemeVariable bytevector-comparator
 syn keyword schemeVariable c128vector-comparator
@@ -4686,6 +4685,7 @@ syn keyword schemeVariable s16vector-comparator
 syn keyword schemeVariable s32vector-comparator
 syn keyword schemeVariable s64vector-comparator
 syn keyword schemeVariable s8vector-comparator
+syn keyword schemeVariable set-comparator
 syn keyword schemeVariable ssax:Prefix-XML
 syn keyword schemeVariable stream-null
 syn keyword schemeVariable string-ci-comparator
@@ -4703,7 +4703,6 @@ syn match schemeSyntax /\^[_a-z]/
 hi def link gaucheClass Type
 hi def link gaucheModule Type
 hi def link gaucheSharpString schemeString
-hi def link schemeComparator Structure
 hi def link schemeConditionType Type
 hi def link schemeVariable Identifier
 
