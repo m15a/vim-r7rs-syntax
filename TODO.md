@@ -30,7 +30,7 @@
         - [ ] `{configuration language}` in `srfi-7`
         - [ ] `{ec qualifier}`
         - [x] `{function}`
-        - [ ] `{generic function}`
+        - [x] `{generic function}`
         - ~~`{generic application}`~~ no need
         - ~~`{method}`~~ included in `{generic function}`
         - [ ] `{next method}`

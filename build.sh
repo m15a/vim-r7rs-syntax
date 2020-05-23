@@ -179,7 +179,7 @@ EOF
     local line name
     awk -f"$lib" -e '/@defunx?/ || \
                      ( /@deftpx?/ && /{function}/ ) || \
-                     ( /@deffnx?/ && /{function}/ ) {
+                     ( /@deffnx?/ && /{(generic )?function}/ ) {
                          print libtype($1), $4
                      }' "$1" \
         | sort | uniq \
