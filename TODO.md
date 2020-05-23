@@ -1,7 +1,7 @@
 # TODO
 
 - [ ] Add sharp syntax
-    - [ ] `#!`
+    - [x] `#!`
     - [x] `#"`
     - [x] `#(` included in `syntax/scheme.vim`
     - [ ] `#*`

@@ -23,6 +23,11 @@ syn region schemeQuasiquoteForm matchgroup=schemeData start=/\(#\)\@<!\[/ end=/\
 
 syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheModule
 
+" Hash-bang (#!) {{{1
+
+syn match gaucheShebang /\(\%^\)\@<=#![\/ ].*$/
+syn match gaucheSharpSpecial /\(\%^\)\@<!#![^ '`\t\n()\[\]"|;]\+/
+
 " String interpolation (#") {{{1
 
 syn region gaucheSharpString start=/\(\\\)\@<!#"/ skip=/\\[\\"]/ end=/"/ contains=gaucheSharpStringUnquote
@@ -4702,7 +4707,9 @@ syn match schemeSyntax /\^[_a-z]/
 
 hi def link gaucheClass Type
 hi def link gaucheModule Type
+hi def link gaucheSharpSpecial PreProc
 hi def link gaucheSharpString schemeString
+hi def link gaucheShebang Comment
 hi def link schemeConditionType Type
 hi def link schemeVariable Identifier
 
