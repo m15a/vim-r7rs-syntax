@@ -341,14 +341,27 @@ EOF
 
     echo
     cat <<'EOF'
-syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=\(import\|use\)\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheBuiltinModule,gaucheExtModule,gaucheUtilModule
+" [] as parentheses {{{1
+
+syn region schemeQuote matchgroup=schemeData start=/'['`]*\[/ end=/\]/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster
+syn region schemeQuasiquote matchgroup=schemeData start=/`['`]*\[/ end=/\]/ contains=ALLBUT,schemeQuote,schemeQuoteForm,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster
+syn region schemeUnquote matchgroup=schemeParentheses start=/,\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
+syn region schemeUnquote matchgroup=schemeParentheses start=/,@\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
+syn region schemeQuoteForm matchgroup=schemeData start=/\(#\)\@<!\[/ end=/\]/ contained contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster
+syn region schemeQuasiquoteForm matchgroup=schemeData start=/\(#\)\@<!\[/ end=/\]/ contained contains=ALLBUT,schemeQuote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster
+
+" 'use' as import syntax {{{1
+
+syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheBuiltinModule,gaucheExtModule,gaucheUtilModule
+
+" String interpolation (#") {{{1
 
 syn region gaucheSharpString start=/\(\\\)\@<!#"/ skip=/\\[\\"]/ end=/"/ contains=gaucheSharpStringUnquote
-hi def link gaucheSharpString schemeString
-
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\(\~\)\@!/ end=/[ `'\t\n\[\]()";]/me=e-1 contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
+
+" Keywords {{{1
 EOF
 
     local file
@@ -357,8 +370,12 @@ EOF
         cat "$file"
     done
 
-    echo
     cat <<EOF
+
+" Highlights {{{1
+
+hi def link gaucheSharpString schemeString
+
 hi def link gaucheBuiltinMacro schemeSyntax
 hi def link gaucheBuiltinSpecialForm schemeSpecialSyntax
 hi def link gaucheBuiltinFunction schemeFunction
@@ -382,6 +399,8 @@ hi def link gaucheUtilVariable schemeConstant
 hi def link gaucheUtilConstant schemeConstant
 hi def link gaucheUtilComparator schemeConstant
 hi def link gaucheUtilModule Type
+
+" vim: fdm=marker
 EOF
 }
 
