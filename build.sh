@@ -355,9 +355,10 @@ syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 
-" Class (<foo>) {{{1
+" Class (<foo>) and condition type (&bar) {{{1
 
 syn match gaucheClass /<[^ '`\t\n()\[\]"|;]\+>/
+syn match schemeConditionType /&[^ '`\t\n()\[\]"|;]\+/
 
 " Keywords {{{1
 
@@ -373,6 +374,7 @@ hi def link gaucheClass Type
 hi def link gaucheModule Type
 hi def link gaucheSharpString schemeString
 hi def link schemeComparator Structure
+hi def link schemeConditionType Type
 hi def link schemeVariable Identifier
 
 " vim: fdm=marker
