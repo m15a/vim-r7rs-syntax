@@ -3,21 +3,21 @@
 - [ ] Add sharp syntax
     - [x] `#!`
     - [x] `#"`
-    - [x] `#(` included in `syntax/scheme.vim`
-    - [ ] `#*`
+    - [x] `#(` implemented in `syntax/scheme.vim`
+    - [x] `#*`
     - [ ] `#,`
     - [ ] `#/`
     - [ ] `#0`...`#9`
     - [ ] `#:`
-    - [x] `#;` included in `syntax/scheme.vim`
+    - [x] `#;` implemented in `syntax/scheme.vim`
     - ~~`#<`~~ unreadable object, no need
     - [ ] `#?`
     - [ ] `#b`, `#d`, `#e`, `#i`, `#o`, `#x`
-    - [x] `#t`, `#f` included in `syntax/scheme.vim`
-    - [ ] `#s`, `#u`
+    - [x] `#t`, `#f` implemented in `syntax/scheme.vim`
+    - [x] `#s`, `#u` implemented in `syntax/scheme.vim`
     - [ ] `#[`
     - [ ] `#\`
-    - [x] `#|` included in `syntax/scheme.vim`
+    - [x] `#|` implemented in `syntax/scheme.vim`
 - [ ] Add numeric literals
 - [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
