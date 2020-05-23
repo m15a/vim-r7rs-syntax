@@ -106,7 +106,7 @@ EOF
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
-              if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
+              if ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$name")$" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
                   echo "$line"
@@ -114,10 +114,13 @@ EOF
           done \
         | awk -F'\t' '{ if ( $2 == "use" )
                             {}  # skip it as it is handled in schemeImport
+                        else if ( $2 == "define-class" )
+                            # Can be defined only on toplevel
+                            print "syn keyword schemeSpecialSyntax "$2
                         else if ( $2 == "^c" )
-                            print "syn match gauche"$1"Macro /\\^[_a-z]/"
+                            print "syn match schemeSyntax /\\^[_a-z]/"
                         else
-                            print "syn keyword gauche"$1"Macro", $2
+                            print "syn keyword schemeSyntax "$2
                       }'
 }
 
@@ -140,7 +143,7 @@ EOF
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
-              if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
+              if ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$name")$" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
                   echo "$line"
@@ -148,8 +151,15 @@ EOF
           done \
         | awk -F'\t' '{ if ( $2 == "import" )
                             {}  # skip it as it is handled in schemeImport
+                        else if ( $2 == "require" || \
+                                  $2 ~ /^define-(constant|in-module|inline)$/ )
+                            # Can be defined only on toplevel (except define-inline)
+                            print "syn keyword schemeSpecialSyntax "$2
+                        else if ( $2 ~ /^(define|select)-module$/ || \
+                                  $2 == "export-all" )
+                            print "syn keyword schemeLibrarySyntax "$2
                         else
-                            print "syn keyword gauche"$1"SpecialForm", $2
+                            print "syn keyword schemeSyntax "$2
                       }'
 }
 
@@ -176,13 +186,13 @@ EOF
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
-              if ! grep -E "syn keyword schemeFunction $(esc "$name")" \
+              if ! grep -E "^syn keyword schemeFunction $(esc "$name")$" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
                   echo "$line"
               fi
           done \
-        | awk -F'\t' '{ print "syn keyword gauche"$1"Function", $2 }'
+        | awk -F'\t' '{ print "syn keyword schemeFunction "$2 }'
 }
 
 build_variable() {
@@ -202,15 +212,7 @@ EOF
     awk -f"$lib" -e '/@defvarx?/ { print libtype($1), $4 }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | while read -r line; do
-              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
-              if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
-                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-              then
-                  echo "$line"
-              fi
-          done \
-        | awk -F'\t' '{ print "syn keyword gauche"$1"Variable", $2 }'
+        | awk -F'\t' '{ print "syn keyword schemeVariable "$2 }'
 }
 
 build_constant() {
@@ -234,13 +236,13 @@ EOF
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
-              if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
+              if ! grep -E "^syn keyword schemeConstant $(esc "$name")$" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
                   echo "$line"
               fi
           done \
-        | awk -F'\t' '{ print "syn keyword gauche"$1"Constant", $2 }'
+        | awk -F'\t' '{ print "syn keyword schemeConstant "$2 }'
 }
 
 build_comparator() {
@@ -262,15 +264,7 @@ EOF
                      }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | while read -r line; do
-              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
-              if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
-                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-              then
-                  echo "$line"
-              fi
-          done \
-        | awk -F'\t' '{ print "syn keyword gauche"$1"Comparator", $2 }'
+        | awk -F'\t' '{ print "syn keyword schemeComparator "$2 }'
 }
 
 build_module() {
@@ -292,7 +286,7 @@ EOF
                      }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | awk -F'\t' '{ print "syn keyword gauche"$1"Module", $2 }'
+        | awk -F'\t' '{ print "syn keyword gaucheModule "$2 }'
 }
 
 build_class() {
@@ -314,7 +308,7 @@ EOF
                      }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | awk -F'\t' '{ print "syn keyword gauche"$1"Class", $2 }'
+        | awk -F'\t' '{ print "syn keyword gaucheClass "$2 }'
 }
 
 build_syntax() {
@@ -352,7 +346,7 @@ syn region schemeQuasiquoteForm matchgroup=schemeData start=/\(#\)\@<!\[/ end=/\
 
 " 'use' as import syntax {{{1
 
-syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheBuiltinModule,gaucheExtModule,gaucheUtilModule
+syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheModule
 
 " String interpolation (#") {{{1
 
@@ -362,43 +356,20 @@ syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 
 " Keywords {{{1
+
 EOF
 
-    local file
-    for file in "$@"; do
-        echo
-        cat "$file"
-    done
+    cat "$@" | sort | uniq
 
     cat <<EOF
 
 " Highlights {{{1
 
+hi def link gaucheClass Type
+hi def link gaucheModule Type
 hi def link gaucheSharpString schemeString
-
-hi def link gaucheBuiltinMacro schemeSyntax
-hi def link gaucheBuiltinSpecialForm schemeSpecialSyntax
-hi def link gaucheBuiltinFunction schemeFunction
-hi def link gaucheBuiltinVariable schemeConstant
-hi def link gaucheBuiltinConstant schemeConstant
-hi def link gaucheBuiltinComparator schemeConstant
-hi def link gaucheBuiltinModule Type
-
-hi def link gaucheExtMacro schemeSyntax
-hi def link gaucheExtSpecialForm schemeSpecialSyntax
-hi def link gaucheExtFunction schemeFunction
-hi def link gaucheExtVariable schemeConstant
-hi def link gaucheExtConstant schemeConstant
-hi def link gaucheExtComparator schemeConstant
-hi def link gaucheExtModule Type
-
-hi def link gaucheUtilMacro schemeSyntax
-hi def link gaucheUtilSpecialForm schemeSpecialSyntax
-hi def link gaucheUtilFunction schemeFunction
-hi def link gaucheUtilVariable schemeConstant
-hi def link gaucheUtilConstant schemeConstant
-hi def link gaucheUtilComparator schemeConstant
-hi def link gaucheUtilModule Type
+hi def link schemeComparator Structure
+hi def link schemeVariable Identifier
 
 " vim: fdm=marker
 EOF
@@ -569,15 +540,15 @@ function basename(path,    _path) {
 }
 function libtype(texifile) {
     if ( texifile ~ /(core|macro|object)/ )
-        return "Builtin"
+        return "gaucheBuiltin"
     if ( texifile ~ /gauche/ )
-        return "Ext"
+        return "gaucheExt"
     if ( texifile ~ /r7rs/ )
-        return "R7rs"
+        return "scheme"
     if ( texifile ~ /srfi/ )
-        return "Srfi"
+        return "srfi"
     if ( texifile ~ /util/ )
-        return "Util"
+        return "gaucheUtil"
     return "Unknown"
 }
 function unwrap(field,    m) {
