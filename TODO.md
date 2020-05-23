@@ -27,7 +27,7 @@
         - [ ] `{cise expression}`
         - [ ] `{cise statement}`
         - [ ] `{cise type}`
-        - [ ] `{configuration language}`
+        - [ ] `{configuration language}` in `srfi-7`
         - [ ] `{ec qualifier}`
         - [x] `{function}`
         - [ ] `{generic function}`
@@ -35,7 +35,7 @@
         - ~~`{method}`~~ included in `{generic function}`
         - [ ] `{next method}`
         - [ ] `{parameter}`
-        - [ ] `{program clause}`
+        - [ ] `{program clause}` in `srfi-7`
         - [ ] `{stub form}`
     - [x] `@defvarx?`
     - [x] `@defvrx?`
@@ -46,15 +46,15 @@
         - [x] `{builtin module}`
         - [x] `{class}` regex match
         - [x] `{condition type}` regex match
-        - [ ] `{environment variable}`
+        - ~~`{environment variable}`~~ no need
         - [x] `{function}`
         - [x] `{metaclass}` regex match
         - [x] `{module}`
         - [ ] `{parameter}`
         - ~~`{reader syntax}`~~ no need
-        - [ ] `{record type}`
-        - [ ] `{record}`
-        - [ ] `{subprocess argument}`
+        - ~~`{record type}`~~ they are class
+        - ~~`{record}`~~ ditto
+        - [ ] `{subprocess argument}` DSL in `gauche.process`
     - ~~`@defivarx?`~~ instance variables
     - ~~`@defcodeindex`~~ generating texinfo index, can be skipped
 - [ ] Add ftplugin
