@@ -80,9 +80,9 @@ EOF
         | sed -E 's/\t\t+/\t/g' \
         | awk -f"$lib" -e '{ if ( $3 ~ /^{[^()]+}$/ )  # function could be like {(setter ...)}
                                  # $3 may have various cases; e.g. {Condition [tT]ype}
-                                 print $1, $2, tolower($3), $4
+                                 print $1, $2, tolower($3), unwrap($4)
                              else
-                                 print $1, $2, "", $3
+                                 print $1, $2, "", unwrap($3)
                            }' \
         | sort | uniq
 }
@@ -167,7 +167,7 @@ EOF
     fi
 
     local line name
-    awk -f"$lib" -e '/@defunx?/ { print libtype($1), unwrap($4) }' "$1" \
+    awk -f"$lib" -e '/@defunx?/ { print libtype($1), $4 }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
         | while read -r line; do
