@@ -340,6 +340,10 @@ syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 syn region gaucheSharpStringUnquote matchgroup=schemeParentheses start=/\(\~\)\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster
 
+" Incomplete string (#*) {{{1
+
+syn region gaucheIncompleteString start=/#\*"/ skip=/\\[\\"]/ end=/"/
+
 " Class (<foo>) and condition type (&bar) {{{1
 
 syn match gaucheClass /<[^ '`\t\n()\[\]"|;]\+>/
@@ -356,6 +360,7 @@ EOF
 " Highlights {{{1
 
 hi def link gaucheClass Type
+hi def link gaucheIncompleteString schemeString
 hi def link gaucheModule Type
 hi def link gaucheSharpSpecial PreProc
 hi def link gaucheSharpString schemeString
