@@ -60,32 +60,31 @@ EOF
 
     grep -E '^@def' "${files[@]}" \
         | sed 's/:/ /' \
-        | awk -f "$awklib" -e '{ $1 = basename($1)
-                                 # Join fields surrounded by {}
-                                 for (i = 3; i <= NF; i++) {
-                                     j = i
-                                     while ( $i ~ /^{/ && $j !~ /}$/ ) {
-                                         j++
-                                         if ( j > NF )
-                                             break
-                                     }
-                                     if ( j > i ) {
-                                         for ( k = i + 1; k <= j; k++ ) {
-                                             $i = $i" "$k
-                                             $k = ""
-                                         }
-                                     }
+        | awk -f"$lib" -e 'BEGIN { FS = " " }
+                           { $1 = basename($1)
+                             # Join fields surrounded by {}
+                             for (i = 3; i <= NF; i++) {
+                                 j = i
+                                 while ( $i ~ /^{/ && $j !~ /}$/ ) {
+                                     j++
+                                     if ( j > NF ) break
                                  }
-                                 print
-                               }' \
+                                 if ( j > i )
+                                     for ( k = i + 1; k <= j; k++ ) {
+                                         $i = $i" "$k
+                                         $k = ""
+                                     }
+                             }
+                             print
+                           }' \
         | sed -E 's/\t+/\t/g' \
-        | awk -F '\t' -f "$awklib" -e '{ if ( $3 ~ /^{.+}$/ )
-                                             # $3 may have various cases:
-                                             # e.g. {Condition Type} and {Condition type}
-                                             print $1, $2, tolower($3), $4
-                                         else
-                                             print $1, $2, $3
-                                       }' \
+        | awk -f"$lib" -e '{ if ( $3 ~ /^{.+}$/ )
+                                 # $3 may have various cases:
+                                 # e.g. {Condition Type} and {Condition type}
+                                 print $1, $2, tolower($3), $4
+                             else
+                                 print $1, $2, $3
+                           }' \
         | sort | uniq
 }
 
@@ -103,25 +102,24 @@ EOF
     fi
 
     local line name
-    awk -F '\t' -f "$awklib" -e '/@defmacx?/ { print libtype($1), $3 }' "$1" \
+    awk -f"$lib" -e '/@defmacx?/ { print libtype($1), $3 }' "$1" \
         | sort | uniq \
-        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
+        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
         | while read -r line; do
-              name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
+              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
                   echo "$line"
               fi
           done \
-        | awk -F '\t' '{ if ( $2 == "use" ) {
-                             # skip it as it is handled in schemeImport
-                         } else if ( $2 == "^c" ) {
-                             print "syn match gauche"$1"Macro /\\^[_a-z]/"
-                         } else {
-                             print "syn keyword gauche"$1"Macro", $2
-                         }
-                       }'
+        | awk -F'\t' '{ if ( $2 == "use" )
+                            {}  # skip it as it is handled in schemeImport
+                        else if ( $2 == "^c" )
+                            print "syn match gauche"$1"Macro /\\^[_a-z]/"
+                        else
+                            print "syn keyword gauche"$1"Macro", $2
+                      }'
 }
 
 build_specialform() {
@@ -138,9 +136,9 @@ EOF
     fi
 
     local line name
-    awk -F '\t' -f "$awklib" -e '/@defspecx?/ { print libtype($1), $3 }' "$1" \
+    awk -f"$lib" -e '/@defspecx?/ { print libtype($1), $3 }' "$1" \
         | sort | uniq \
-        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
+        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
@@ -149,12 +147,11 @@ EOF
                   echo "$line"
               fi
           done \
-        | awk -F '\t' '{ if ( $2 == "import" ) {
-                             # skip it as it is handled in schemeImport
-                         } else {
-                             print "syn keyword gauche"$1"SpecialForm", $2
-                         }
-                       }'
+        | awk -F'\t' '{ if ( $2 == "import" )
+                            {}  # skip it as it is handled in schemeImport
+                        else
+                            print "syn keyword gauche"$1"SpecialForm", $2
+                      }'
 }
 
 build_function() {
@@ -171,18 +168,18 @@ EOF
     fi
 
     local line name
-    awk -F '\t' -f "$awklib" -e '/@defunx?/ { print libtype($1), unwrap($3) }' "$1" \
+    awk -f"$lib" -e '/@defunx?/ { print libtype($1), unwrap($3) }' "$1" \
         | sort | uniq \
-        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
+        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
         | while read -r line; do
-              name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
+              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeFunction $(esc "$name")" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
                   echo "$line"
               fi
           done \
-        | awk -F '\t' '{ print "syn keyword gauche"$1"Function", $2 }'
+        | awk -F'\t' '{ print "syn keyword gauche"$1"Function", $2 }'
 }
 
 build_variable() {
@@ -199,18 +196,18 @@ EOF
     fi
 
     local line name
-    awk -F '\t' -f "$awklib" -e '/@defvarx?/ { print libtype($1), $3 }' "$1" \
+    awk -f"$lib" -e '/@defvarx?/ { print libtype($1), $3 }' "$1" \
         | sort | uniq \
-        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
+        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
         | while read -r line; do
-              name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
+              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
                   echo "$line"
               fi
           done \
-        | awk -F '\t' '{ print "syn keyword gauche"$1"Variable", $2 }'
+        | awk -F'\t' '{ print "syn keyword gauche"$1"Variable", $2 }'
 }
 
 build_constant() {
@@ -227,20 +224,20 @@ EOF
     fi
 
     local line name
-    awk -F '\t' -f "$awklib" -e '/@defvrx?/ && /{constant}/ {
-                                     print libtype($1), $4
-                                 }' "$1" \
+    awk -f"$lib" -e '/@defvrx?/ && /{constant}/ {
+                         print libtype($1), $4
+                     }' "$1" \
         | sort | uniq \
-        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
+        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
         | while read -r line; do
-              name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
+              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
                   echo "$line"
               fi
           done \
-        | awk -F '\t' '{ print "syn keyword gauche"$1"Constant", $2 }'
+        | awk -F'\t' '{ print "syn keyword gauche"$1"Constant", $2 }'
 }
 
 build_comparator() {
@@ -257,20 +254,20 @@ EOF
     fi
 
     local line name
-    awk -F '\t' -f "$awklib" -e '/@defvrx?/ && /{comparator}/ {
-                                     print libtype($1), $4
-                                 }' "$1" \
+    awk -f"$lib" -e '/@defvrx?/ && /{comparator}/ {
+                         print libtype($1), $4
+                     }' "$1" \
         | sort | uniq \
-        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
+        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
         | while read -r line; do
-              name="$(echo "$line" | awk -F '\t' '{ print $2 }')"
+              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
                   echo "$line"
               fi
           done \
-        | awk -F '\t' '{ print "syn keyword gauche"$1"Comparator", $2 }'
+        | awk -F'\t' '{ print "syn keyword gauche"$1"Comparator", $2 }'
 }
 
 build_module() {
@@ -287,12 +284,12 @@ EOF
     fi
 
     local line name
-    awk -F '\t' -f "$awklib" -e '/@deftpx?/ && /{(builtin )?module}/ {
-                                     print libtype($1), $4
-                                 }' "$1" \
+    awk -f"$lib" -e '/@deftpx?/ && /{(builtin )?module}/ { 
+                         print libtype($1), $4
+                     }' "$1" \
         | sort | uniq \
-        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
-        | awk -F '\t' '{ print "syn keyword gauche"$1"Module", $2 }'
+        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -F'\t' '{ print "syn keyword gauche"$1"Module", $2 }'
 }
 
 build_class() {
@@ -309,12 +306,12 @@ EOF
     fi
 
     local line name
-    awk -F '\t' -f "$awklib" -e '/@deftpx?/ && /{((builtin )?class|metaclass)}/ {
-                                     print libtype($1), $4
-                                 }' "$1" \
+    awk -f"$lib" -e '/@deftpx?/ && /{((builtin )?class|metaclass)}/ {
+                         print libtype($1), $4
+                     }' "$1" \
         | sort | uniq \
-        | awk -F '\t' -f "$awklib" -e '{ expandat() }' \
-        | awk -F '\t' '{ print "syn keyword gauche"$1"Class", $2 }'
+        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -F'\t' '{ print "syn keyword gauche"$1"Class", $2 }'
 }
 
 build_syntax() {
@@ -419,12 +416,12 @@ EOF
             || /^do(-|times|list)/' \
         | sort | uniq \
         | while read -r word; do
-        if ! grep -F "setl lispwords+=$word" \
-            "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
-        then
-            echo "setl lispwords+=$word"
-        fi
-    done
+              if ! grep -F "setl lispwords+=$word" \
+                  "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
+              then
+                  echo "setl lispwords+=$word"
+              fi
+          done
 }
 
 if [ -z "${GAUCHE_SRC+defined}" ]; then
@@ -442,8 +439,26 @@ if [ -z "${1+defined}" ]; then
     exit 1
 fi
 
-awklib="$(mktemp --suffix vimgauche)"
-cat > "$awklib" <<'EOF'
+lib="$(mktemp --suffix vimgauche)"
+cat > "$lib" <<'EOF'
+BEGIN {
+    FS = "\t"
+    OFS = "\t"
+    atat[0] = "u8"
+    atat[1] = "s8"
+    atat[2] = "u16"
+    atat[3] = "s16"
+    atat[4] = "u32"
+    atat[5] = "s32"
+    atat[6] = "u64"
+    atat[7] = "s64"
+    atat[8] = "f16"
+    atat[9] = "f32"
+    atat[10] = "f64"
+    atat[11] = "c32"
+    atat[12] = "c64"
+    atat[13] = "c128"
+}
 function basename(path,    _path) {
     _path = path
     sub(".*/", "", _path)
@@ -463,42 +478,24 @@ function libtype(texifile) {
     return "Unknown"
 }
 function unwrap(field,    m) {
-    if ( match(field, /{\(\w+ (.+)\)}/, m) )
+    if ( match(field, /^{\(\w+ (.+)\)}$/, m) )
         return m[1]
     return field
 }
-function expandat(    i, line) {
-    if ( /@@/ ) {
-        for (i in at) {
-            line = $0
-            gsub(/@@/, at[i], line)
-            print line
+function print_with_atat_expanded(line,    i, _line) {
+    if ( line ~ /@@/ )
+        for (i in atat) {
+            _line = line
+            gsub(/@@/, atat[i], _line)
+            print _line
         }
-    } else {
-        print
-    }
-}
-BEGIN {
-    OFS = "\t"
-    at[0] = "u8"
-    at[1] = "s8"
-    at[2] = "u16"
-    at[3] = "s16"
-    at[4] = "u32"
-    at[5] = "s32"
-    at[6] = "u64"
-    at[7] = "s64"
-    at[8] = "f16"
-    at[9] = "f32"
-    at[10] = "f64"
-    at[11] = "c32"
-    at[12] = "c64"
-    at[13] = "c128"
+    else
+        print line
 }
 EOF
 
 cleanup() {
-    rm -f "$awklib"
+    rm -f "$lib"
 }
 trap cleanup ERR SIGTERM EXIT
 
