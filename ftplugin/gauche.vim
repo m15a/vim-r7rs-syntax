@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (Gauche)
-" Last Change: 2020-05-22
+" Last Change: 2020-05-23
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche
 " License: Public domain
@@ -32,6 +32,9 @@ setl lispwords+=blob-u64-native-set!
 setl lispwords+=blob-u64-set!
 setl lispwords+=blob-u8-set!
 setl lispwords+=blob-uint-set!
+setl lispwords+=c128vector-set!
+setl lispwords+=c32vector-set!
+setl lispwords+=c64vector-set!
 setl lispwords+=cf-define
 setl lispwords+=class-slot-set!
 setl lispwords+=condition-variable-specific-set!
@@ -60,6 +63,9 @@ setl lispwords+=dolist
 setl lispwords+=dotimes
 setl lispwords+=dynamic-lambda
 setl lispwords+=ecase
+setl lispwords+=f16vector-set!
+setl lispwords+=f32vector-set!
+setl lispwords+=f64vector-set!
 setl lispwords+=fluid-let
 setl lispwords+=glet*
 setl lispwords+=glet1
@@ -88,6 +94,10 @@ setl lispwords+=ring-buffer-set!
 setl lispwords+=rlet1
 setl lispwords+=rxmatch-case
 setl lispwords+=rxmatch-let
+setl lispwords+=s16vector-set!
+setl lispwords+=s32vector-set!
+setl lispwords+=s64vector-set!
+setl lispwords+=s8vector-set!
 setl lispwords+=set!-values
 setl lispwords+=slot-set!
 setl lispwords+=sparse-matrix-set!
@@ -100,6 +110,10 @@ setl lispwords+=string-byte-set!
 setl lispwords+=sys-fdset-set!
 setl lispwords+=thread-specific-set!
 setl lispwords+=trie-longest-match
+setl lispwords+=u16vector-set!
+setl lispwords+=u32vector-set!
+setl lispwords+=u64vector-set!
+setl lispwords+=u8vector-set!
 setl lispwords+=uvector-set!
 setl lispwords+=weak-vector-set!
 setl lispwords+=zstream-params-set!

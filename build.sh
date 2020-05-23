@@ -103,7 +103,7 @@ EOF
     local line name
     awk -f"$lib" -e '/@defmacx?/ { print libtype($1), $4 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
@@ -137,7 +137,7 @@ EOF
     local line name
     awk -f"$lib" -e '/@defspecx?/ { print libtype($1), $4 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword scheme\\w*Syntax $(esc "$name")" \
@@ -167,9 +167,13 @@ EOF
     fi
 
     local line name
-    awk -f"$lib" -e '/@defunx?/ { print libtype($1), $4 }' "$1" \
+    awk -f"$lib" -e '/@defunx?/ || \
+                     ( /@deftpx?/ && /{function}/ ) || \
+                     ( /@deffnx?/ && /{function}/ ) {
+                         print libtype($1), $4
+                     }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeFunction $(esc "$name")" \
@@ -197,7 +201,7 @@ EOF
     local line name
     awk -f"$lib" -e '/@defvarx?/ { print libtype($1), $4 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
@@ -227,7 +231,7 @@ EOF
                          print libtype($1), $4
                      }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
@@ -257,7 +261,7 @@ EOF
                          print libtype($1), $4
                      }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
               name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
               if ! grep -E "syn keyword schemeConstant $(esc "$name")" \
@@ -287,7 +291,7 @@ EOF
                          print libtype($1), $4
                      }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | awk -F'\t' '{ print "syn keyword gauche"$1"Module", $2 }'
 }
 
@@ -309,7 +313,7 @@ EOF
                          print libtype($1), $4
                      }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_atat_expanded($0) }' \
+        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | awk -F'\t' '{ print "syn keyword gauche"$1"Class", $2 }'
 }
 
@@ -457,6 +461,87 @@ BEGIN {
     atat[11] = "c32"
     atat[12] = "c64"
     atat[13] = "c128"
+    html[0] = "a"
+    html[1] = "abbr"
+    html[2] = "acronym"
+    html[3] = "address"
+    html[4] = "area"
+    html[5] = "b"
+    html[6] = "base"
+    html[7] = "bdo"
+    html[8] = "big"
+    html[9] = "blockquote"
+    html[10] = "body"
+    html[11] = "br"
+    html[12] = "button"
+    html[13] = "caption"
+    html[14] = "cite"
+    html[15] = "code"
+    html[16] = "col"
+    html[17] = "colgroup"
+    html[18] = "dd"
+    html[19] = "del"
+    html[20] = "dfn"
+    html[21] = "div"
+    html[22] = "dl"
+    html[23] = "dt"
+    html[24] = "em"
+    html[25] = "fieldset"
+    html[26] = "form"
+    html[27] = "frame"
+    html[28] = "frameset"
+    html[29] = "h1"
+    html[30] = "h2"
+    html[31] = "h3"
+    html[32] = "h4"
+    html[33] = "h5"
+    html[34] = "h6"
+    html[35] = "head"
+    html[36] = "hr"
+    html[37] = "html"
+    html[38] = "i"
+    html[39] = "iframe"
+    html[40] = "img"
+    html[41] = "input"
+    html[42] = "ins"
+    html[43] = "kbd"
+    html[44] = "label"
+    html[45] = "legend"
+    html[46] = "li"
+    html[47] = "link"
+    html[48] = "map"
+    html[49] = "meta"
+    html[50] = "noframes"
+    html[51] = "noscript"
+    html[52] = "object"
+    html[53] = "ol"
+    html[54] = "optgroup"
+    html[55] = "option"
+    html[56] = "p"
+    html[57] = "param"
+    html[58] = "pre"
+    html[59] = "q"
+    html[60] = "samp"
+    html[61] = "script"
+    html[62] = "select"
+    html[63] = "small"
+    html[64] = "span"
+    html[65] = "strong"
+    html[66] = "style"
+    html[67] = "sub"
+    html[68] = "sup"
+    html[69] = "table"
+    html[70] = "tbody"
+    html[71] = "td"
+    html[72] = "textarea"
+    html[73] = "tfoot"
+    html[74] = "th"
+    html[75] = "thead"
+    html[76] = "title"
+    html[77] = "tr"
+    html[78] = "tt"
+    html[79] = "ul"
+    html[80] = "var"
 }
 function basename(path,    _path) {
     _path = path
@@ -481,11 +566,17 @@ function unwrap(field,    m) {
         return m[1]
     return field
 }
-function print_with_atat_expanded(line,    i, _line) {
+function print_with_at_expanded(line,    i, _line) {
     if ( line ~ /@@/ )
         for (i in atat) {
             _line = line
             gsub(/@@/, atat[i], _line)
+            print _line
+        }
+    else if ( line ~ /html:@var{element}/ )
+        for (i in html) {
+            _line = line
+            gsub(/@var{element}/, html[i], _line)
             print _line
         }
     else

@@ -21,10 +21,10 @@
         - [ ] `{cise type}`
         - [ ] `{configuration language}`
         - [ ] `{ec qualifier}`
-        - [ ] `{function}`
+        - [x] `{function}`
         - [ ] `{generic function}`
         - ~~`{generic application}`~~ no need
-        - [ ] `{method}`
+        - ~~`{method}`~~ included in `{generic function}`
         - [ ] `{next method}`
         - [ ] `{parameter}`
         - [ ] `{program clause}`
@@ -39,7 +39,7 @@
         - [x] `{class}`
         - [ ] `{condition type}`
         - [ ] `{environment variable}`
-        - [ ] `{function}`
+        - [x] `{function}`
         - [x] `{metaclass}`
         - [x] `{module}`
         - [ ] `{parameter}`
@@ -47,5 +47,5 @@
         - [ ] `{record type}`
         - [ ] `{record}`
         - [ ] `{subprocess argument}`
-    - ~~|`@defivarx?`~~ instance variables
+    - ~~`@defivarx?`~~ instance variables
     - ~~`@defcodeindex`~~ generating texinfo index, can be skipped
