@@ -1,16 +1,10 @@
 #!/usr/bin/env bash
 
-author='Mitsuhiro Nakamura'
-email='m.nacamura@gmail.com'
-homepage='https://github.com/mnacamura/vim-gauche'
-
-readonly author email homepage
-
 read -r -d '' common_meta <<EOF
 " Language: Scheme (Gauche)
 " Last Change: $(date +"%Y-%m-%d")
-" Author: $author <$email>
-" URL: $homepage
+" Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
+" URL: https://github.com/mnacamura/vim-gauche
 " License: Public domain
 " Notes: To enable this plugin, set filetype=scheme and (b|g):is_gauche=1.
 EOF
@@ -37,6 +31,17 @@ EOF
 
 esc() {
     echo "$1" | sed -E 's@(\?|\*|\+|\.|\^|\$)@\\\1@g'
+}
+
+find_undefined_keywords_in() {
+    local groupname="$1" keyword
+    while read -r keyword; do
+        if ! grep -E "^syn keyword $groupname $(esc "$keyword")$" \
+            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+        then
+            echo "$keyword"
+        fi
+    done
 }
 
 build_tsv() {
@@ -104,27 +109,19 @@ EOF
         exit 1
     fi
 
-    local line name
-    awk -f"$lib" -e '/@defmacx?/ { print libtype($1), $4 }' "$1" \
+    awk -F'\t' '/@defmacx?/ { print $4 }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | while read -r line; do
-              name="$(echo "$line" | cut -f2)"
-              if ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$name")$" \
-                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-              then
-                  echo "$line"
-              fi
-          done \
-        | awk -F'\t' '{ if ( $2 == "use" )
+        | find_undefined_keywords_in 'scheme\w*Syntax' \
+        | awk -F'\t' '{ if ( /^use$/ )
                             {}  # skip it as it is handled in schemeImport
-                        else if ( $2 == "define-class" )
+                        else if ( /^define-class$/ )
                             # Can be defined only on toplevel
-                            print "syn keyword schemeSpecialSyntax "$2
-                        else if ( $2 == "^c" )
+                            print "syn keyword schemeSpecialSyntax "$0
+                        else if ( /^\^c$/ )
                             print "syn match schemeSyntax /\\^[_a-z]/"
                         else
-                            print "syn keyword schemeSyntax "$2
+                            print "syn keyword schemeSyntax "$0
                       }'
 }
 
@@ -141,29 +138,21 @@ EOF
         exit 1
     fi
 
-    local line name
-    awk -f"$lib" -e '/@defspecx?/ { print libtype($1), $4 }' "$1" \
+    awk -F'\t' '/@defspecx?/ { print $4 }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | while read -r line; do
-              name="$(echo "$line" | cut -f2)"
-              if ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$name")$" \
-                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-              then
-                  echo "$line"
-              fi
-          done \
-        | awk -F'\t' '{ if ( $2 == "import" )
+        | find_undefined_keywords_in 'scheme\w*Syntax' \
+        | awk -F'\t' '{ if ( /^import$/ )
                             {}  # skip it as it is handled in schemeImport
-                        else if ( $2 == "require" || \
-                                  $2 ~ /^define-(constant|in-module|inline)$/ )
+                        else if ( /^require$/ || \
+                                  /^define-(constant|in-module|inline)$/ )
                             # Can be defined only on toplevel (except define-inline)
-                            print "syn keyword schemeSpecialSyntax "$2
-                        else if ( $2 ~ /^(define|select)-module$/ || \
-                                  $2 == "export-all" )
-                            print "syn keyword schemeLibrarySyntax "$2
+                            print "syn keyword schemeSpecialSyntax "$0
+                        else if ( /^(define|select)-module$/ || \
+                                  /^export-all$/ )
+                            print "syn keyword schemeLibrarySyntax "$0
                         else
-                            print "syn keyword schemeSyntax "$2
+                            print "syn keyword schemeSyntax "$0
                       }'
 }
 
@@ -180,23 +169,15 @@ EOF
         exit 1
     fi
 
-    local line name
-    awk -f"$lib" -e '/@defunx?/ || \
-                     ( /@deftpx?/ && /{function}/ ) || \
-                     ( /@deffnx?/ && /{(generic )?function}/ ) {
-                         print libtype($1), $4
-                     }' "$1" \
+    awk -F'\t' '/@defunx?/ || \
+                ( /@deftpx?/ && /{function}/ ) || \
+                ( /@deffnx?/ && /{(generic )?function}/ ) {
+                    print $4
+                }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | while read -r line; do
-              name="$(echo "$line" | cut -f2)"
-              if ! grep -E "^syn keyword schemeFunction $(esc "$name")$" \
-                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-              then
-                  echo "$line"
-              fi
-          done \
-        | awk -F'\t' '{ print "syn keyword schemeFunction "$2 }'
+        | find_undefined_keywords_in 'schemeFunction' \
+        | awk -F'\t' '{ print "syn keyword schemeFunction "$0 }'
 }
 
 build_variable() {
@@ -212,13 +193,13 @@ EOF
         exit 1
     fi
 
-    awk -f"$lib" -e '/@defvarx?/ || \
-                     /@defvrx?/ && /{comparator}/ {
-                         print libtype($1), $4
-                     }' "$1" \
+    awk -F'\t' '/@defvarx?/ || \
+                /@defvrx?/ && /{comparator}/ {
+                    print $4
+                }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | awk -F'\t' '{ print "syn keyword schemeVariable "$2 }'
+        | awk -F'\t' '{ print "syn keyword schemeVariable "$0 }'
 }
 
 build_constant() {
@@ -234,21 +215,11 @@ EOF
         exit 1
     fi
 
-    local line name
-    awk -f"$lib" -e '/@defvrx?/ && /{constant}/ {
-                         print libtype($1), $4
-                     }' "$1" \
+    awk -F'\t' '/@defvrx?/ && /{constant}/ { print $4 }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | while read -r line; do
-              name="$(echo "$line" | cut -f2)"
-              if ! grep -E "^syn keyword schemeConstant $(esc "$name")$" \
-                  "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-              then
-                  echo "$line"
-              fi
-          done \
-        | awk -F'\t' '{ print "syn keyword schemeConstant "$2 }'
+        | find_undefined_keywords_in 'schemeConstant' \
+        | awk -F'\t' '{ print "syn keyword schemeConstant "$0 }'
 }
 
 build_module() {
@@ -264,12 +235,10 @@ EOF
         exit 1
     fi
 
-    awk -f"$lib" -e '/@deftpx?/ && /{(builtin )?module}/ { 
-                         print libtype($1), $4
-                     }' "$1" \
+    awk -F'\t' '/@deftpx?/ && /{(builtin )?module}/ { print $4 }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | awk -F'\t' '{ print "syn keyword gaucheModule "$2 }'
+        | awk -F'\t' '{ print "syn keyword gaucheModule "$0 }'
 }
 
 build_class() {
@@ -285,13 +254,10 @@ EOF
         exit 1
     fi
 
-    local line name
-    awk -f"$lib" -e '/@deftpx?/ && /{((builtin )?class|metaclass)}/ {
-                         print libtype($1), $4
-                     }' "$1" \
+    awk -F'\t' '/@deftpx?/ && /{((builtin )?class|metaclass)}/ { print $4 }' "$1" \
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | awk -F'\t' '{ print "syn keyword gaucheClass "$2 }'
+        | awk -F'\t' '{ print "syn keyword gaucheClass "$0 }'
 }
 
 build_syntax() {
@@ -544,19 +510,6 @@ function basename(path,    _path) {
     _path = path
     sub(".*/", "", _path)
     return _path
-}
-function libtype(texifile) {
-    if ( texifile ~ /(core|macro|object)/ )
-        return "gaucheBuiltin"
-    if ( texifile ~ /gauche/ )
-        return "gaucheExt"
-    if ( texifile ~ /r7rs/ )
-        return "scheme"
-    if ( texifile ~ /srfi/ )
-        return "srfi"
-    if ( texifile ~ /util/ )
-        return "gaucheUtil"
-    return "Unknown"
 }
 function unwrap(field,    m) {
     if ( match(field, /^{\(\w+ (.+)\)}$/, m) )
