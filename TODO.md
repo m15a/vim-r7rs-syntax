@@ -7,7 +7,7 @@
     - [x] `#*`
     - [x] `#,`
     - [x] `#/`
-    - [ ] `#0`...`#9`
+    - [x] `#0`...`#9`
     - [ ] `#:`
     - [x] `#;` implemented in `syntax/scheme.vim`
     - ~~`#<`~~ unreadable object, no need
@@ -18,7 +18,7 @@
     - [ ] `#[`
     - [x] `#\` implemented in `syntax/scheme.vim`
     - [x] `#|` implemented in `syntax/scheme.vim`
-- [ ] Add numeric literals
+- [ ] Add numeric literals (including `#\d[rR]...`)
 - [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
     - [x] `@defspecx?`

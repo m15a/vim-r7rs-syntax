@@ -49,6 +49,10 @@ syn region schemeReadTimeCtor matchgroup=PreProc start="#,(" end=")" contains=AL
 syn match schemeReadTimeCtorTag /\(#,([ \t\n]*\)\@<=[^ '`\t\n()\[\]"|;]\+/ containedin=schemeReadTimeCtor
 syn match schemeReadTimeCtorTag /\(define-reader-ctor[ \t\n]\+'\)\@<=[^ '`\t\n()\[\]"|;]\+/ containedin=schemeQuote
 
+" SRFI-38 shared structure (#0..#9) {{{1
+
+syn match schemeSharedStructure /#\d[#=]/
+
 " Regular expression (#/) {{{1
 
 syn region gaucheRegexp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/
@@ -4526,6 +4530,7 @@ hi def link gaucheSpecialToken PreProc
 hi def link gaucheShebang Comment
 hi def link schemeConditionType Type
 hi def link schemeReadTimeCtorTag Tag
+hi def link schemeSharedStructure PreProc
 hi def link schemeStringMetaChar Special
 hi def link schemeVariable Identifier
 
