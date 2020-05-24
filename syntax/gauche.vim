@@ -39,6 +39,12 @@ syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\
 
 syn region gaucheIncompleteString start=/#\*"/ skip=/\\[\\"]/ end=/"/
 
+" SRFI-10 read-time constructor (#,) {{{1
+
+syn region schemeReadTimeCtor matchgroup=PreProc start="#,(" end=")" contains=ALLBUT,schemeUnquote,schemeDatumCommentForm,@schemeImportCluster
+syn match schemeReadTimeCtorTag /\(#,([ \t\n]*\)\@<=[^ '`\t\n()\[\]"|;]\+/ containedin=schemeReadTimeCtor
+syn match schemeReadTimeCtorTag /\(define-reader-ctor[ \t\n]\+'\)\@<=[^ '`\t\n()\[\]"|;]\+/ containedin=schemeQuote
+
 " Class (<foo>) and condition type (&bar) {{{1
 
 syn match gaucheClass /<[^ '`\t\n()\[\]"|;]\+>/
@@ -4716,6 +4722,7 @@ hi def link gaucheModule Type
 hi def link gaucheSpecialToken PreProc
 hi def link gaucheShebang Comment
 hi def link schemeConditionType Type
+hi def link schemeReadTimeCtorTag Tag
 hi def link schemeVariable Identifier
 
 " vim: fdm=marker
