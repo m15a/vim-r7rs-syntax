@@ -295,7 +295,7 @@ syn region schemeQuasiquoteForm matchgroup=schemeData start=/\(#\)\@<!\[/ end=/\
 
 " 'use' as import syntax {{{1
 
-syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,gaucheModule
+syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment
 
 " Hash-bang (#!) {{{1
 
@@ -337,7 +337,6 @@ EOF
 hi def link gaucheClass Type
 hi def link gaucheIncompleteString schemeString
 hi def link gaucheInterpolatedString schemeString
-hi def link gaucheModule Type
 hi def link gaucheSpecialToken PreProc
 hi def link gaucheShebang Comment
 hi def link schemeConditionType Type

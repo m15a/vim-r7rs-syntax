@@ -5,8 +5,8 @@ VIM_NAMES := \
 	specialform \
 	function \
 	variable \
-	constant \
-	module
+	constant
+	# module
 	# class
 VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))
 
