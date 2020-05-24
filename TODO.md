@@ -18,6 +18,7 @@
     - [ ] `#[`
     - [x] `#\` implemented in `syntax/scheme.vim`
     - [x] `#|` implemented in `syntax/scheme.vim`
+- [ ] Highlight keywords (`:key`)
 - [ ] Add numeric literals (including `#\d[rR]...`)
 - [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
