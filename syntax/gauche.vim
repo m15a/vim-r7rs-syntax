@@ -45,6 +45,10 @@ syn region schemeReadTimeCtor matchgroup=PreProc start="#,(" end=")" contains=AL
 syn match schemeReadTimeCtorTag /\(#,([ \t\n]*\)\@<=[^ '`\t\n()\[\]"|;]\+/ containedin=schemeReadTimeCtor
 syn match schemeReadTimeCtorTag /\(define-reader-ctor[ \t\n]\+'\)\@<=[^ '`\t\n()\[\]"|;]\+/ containedin=schemeQuote
 
+" Regular expression (#/) {{{1
+
+syn region gaucheRegexp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/
+
 " Class (<foo>) and condition type (&bar) {{{1
 
 syn match gaucheClass /<[^ '`\t\n()\[\]"|;]\+>/
@@ -4505,6 +4509,7 @@ syn match schemeSyntax /\^[_a-z]/
 hi def link gaucheClass Type
 hi def link gaucheIncompleteString schemeString
 hi def link gaucheInterpolatedString schemeString
+hi def link gaucheRegexp String
 hi def link gaucheSpecialToken PreProc
 hi def link gaucheShebang Comment
 hi def link schemeConditionType Type

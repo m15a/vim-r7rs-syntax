@@ -6,7 +6,7 @@
     - [x] `#(` implemented in `syntax/scheme.vim`
     - [x] `#*`
     - [x] `#,`
-    - [ ] `#/`
+    - [x] `#/`
     - [ ] `#0`...`#9`
     - [ ] `#:`
     - [x] `#;` implemented in `syntax/scheme.vim`
