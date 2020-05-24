@@ -322,6 +322,13 @@ syn match schemeReadTimeCtorTag /\(define-reader-ctor[ \t\n]\+'\)\@<=[^ '`\t\n()
 " Regular expression (#/) {{{1
 
 syn region gaucheRegexp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/
+syn match gaucheRegexpMetaChar /[*+?\^$(|).]/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /\\[\\sSdDwWbB;"#]/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /{\d\+\(,\d\+\)\?}/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /?\(-\?i\)\?:/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /?<\w\+>/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /?\(<\?[=!]\|>\)/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /\\\(\d\|k<\w\+>\)/ containedin=gaucheRegexp
 
 " Class (<foo>) and condition type (&bar) {{{1
 
@@ -342,6 +349,7 @@ hi def link gaucheClass Type
 hi def link gaucheIncompleteString schemeString
 hi def link gaucheInterpolatedString schemeString
 hi def link gaucheRegexp String
+hi def link gaucheRegexpMetaChar Special
 hi def link gaucheSpecialToken PreProc
 hi def link gaucheShebang Comment
 hi def link schemeConditionType Type
