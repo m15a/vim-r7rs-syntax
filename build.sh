@@ -313,6 +313,10 @@ syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\
 
 syn region gaucheIncompleteString start=/#\*"/ skip=/\\[\\"]/ end=/"/
 
+" Highlight \\ and \" in strings {{{1
+
+syn match schemeStringMetaChar /\\[\\"]/ containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
+
 " SRFI-10 read-time constructor (#,) {{{1
 
 syn region schemeReadTimeCtor matchgroup=PreProc start="#,(" end=")" contains=ALLBUT,schemeUnquote,schemeDatumCommentForm,@schemeImportCluster
@@ -354,6 +358,7 @@ hi def link gaucheSpecialToken PreProc
 hi def link gaucheShebang Comment
 hi def link schemeConditionType Type
 hi def link schemeReadTimeCtorTag Tag
+hi def link schemeStringMetaChar Special
 hi def link schemeVariable Identifier
 
 " vim: fdm=marker
