@@ -16,7 +16,7 @@
     - [x] `#t`, `#f` implemented in `syntax/scheme.vim`
     - [x] `#s`, `#u` implemented in `syntax/scheme.vim`
     - [ ] `#[`
-    - [ ] `#\`
+    - [x] `#\` implemented in `syntax/scheme.vim`
     - [x] `#|` implemented in `syntax/scheme.vim`
 - [ ] Add numeric literals
 - [ ] Build syntax file from texinfo tags
