@@ -77,12 +77,17 @@ EOF
                              print
                            }' \
         | sed -E 's/\t\t+/\t/g' \
-        | awk -f"$lib" -e '{ if ( $3 ~ /^{[^()]+}$/ )  # function could be like {(setter ...)}
-                                 # $3 may have various cases; e.g. {Condition [tT]ype}
-                                 print $1, $2, tolower($3), unwrap($4)
-                             else
-                                 print $1, $2, "", unwrap($3)
-                           }' \
+        | awk -f"$lib" \
+              -e '{ # $3 is either description in @def(fn|tp)x? (e.g. {Class})
+                    # or identifier in @def(mac|spec|fun)x? (e.g. let).
+                    # Some identifiers are surrounded by {} (e.g. {(setter ...)}),
+                    # having () inside.
+                    if ( $3 ~ /^{[^()]+}$/ )
+                        # $3 may have inconsistent cases; e.g. {Condition [tT]ype}
+                        print $1, $2, tolower($3), unwrap($4)
+                    else
+                        print $1, $2, "", unwrap($3)
+                  }' \
         | sort | uniq
 }
 
@@ -104,7 +109,7 @@ EOF
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
-              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
+              name="$(echo "$line" | cut -f2)"
               if ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$name")$" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
@@ -141,7 +146,7 @@ EOF
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
-              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
+              name="$(echo "$line" | cut -f2)"
               if ! grep -E "^syn keyword scheme\\w*Syntax $(esc "$name")$" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
@@ -184,7 +189,7 @@ EOF
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
-              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
+              name="$(echo "$line" | cut -f2)"
               if ! grep -E "^syn keyword schemeFunction $(esc "$name")$" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
@@ -207,7 +212,6 @@ EOF
         exit 1
     fi
 
-    local line name
     awk -f"$lib" -e '/@defvarx?/ || \
                      /@defvrx?/ && /{comparator}/ {
                          print libtype($1), $4
@@ -237,7 +241,7 @@ EOF
         | sort | uniq \
         | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | while read -r line; do
-              name="$(echo "$line" | awk -F'\t' '{ print $2 }')"
+              name="$(echo "$line" | cut -f2)"
               if ! grep -E "^syn keyword schemeConstant $(esc "$name")$" \
                   "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
               then
@@ -260,7 +264,6 @@ EOF
         exit 1
     fi
 
-    local line name
     awk -f"$lib" -e '/@deftpx?/ && /{(builtin )?module}/ { 
                          print libtype($1), $4
                      }' "$1" \
@@ -397,13 +400,13 @@ EOF
 
     local word
     awk '{ print $4 }' "$@" \
-        | awk '/^(|r|g)let((|rec)(|1|\*)($|-)|\/)/ || /-let(|rec)(|1|\*)$/ \
-            || /^define($|-)/ || /-define$/ \
-            || /^match($|-)/ || /-match$/ \
-            || /^(|e)case($|-)/ || ( /-(|e)case$/ && $0 !~ /(lower|upper|title)-case$/ ) \
-            || /^lambda($|-)/ || ( /-lambda(|\*)$/ && $0 !~ /^scheme\.case-lambda$/ ) \
-            || /^set!($|-)/ || ( /-set!$/ && $0 !~ /char-set!$/ ) \
-            || /^do(-|times|list)/' \
+        | awk '/^(|r|g)let((|rec)(|1|\*)($|-)|\/)/ || /-let(|rec)(|1|\*)$/ || \
+               /^define($|-)/ || /-define$/ || \
+               /^match($|-)/ || /-match$/ || \
+               /^(|e)case($|-)/ || ( /-(|e)case$/ && $0 !~ /(lower|upper|title)-case$/ ) || \
+               /^lambda($|-)/ || ( /-lambda(|\*)$/ && $0 !~ /^scheme\.case-lambda$/ ) || \
+               /^set!($|-)/ || ( /-set!$/ && $0 !~ /char-set!$/ ) || \
+               /^do(-|times|list)/' \
         | sort | uniq \
         | while read -r word; do
               if ! grep -F "setl lispwords+=$word" \
