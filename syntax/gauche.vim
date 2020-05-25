@@ -56,14 +56,15 @@ syn match schemeSharedStructure /#\d[#=]/
 " Regular expression (#/) {{{1
 
 syn region gaucheRegexp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/
-syn match gaucheRegexpMetaChar /[*+?\^$(|).]/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /[*+?^$(|).]/ containedin=gaucheRegexp
+syn match gaucheRegexpEscChar /\\[*+?^$(|).]/ containedin=gaucheRegexp
 syn match gaucheRegexpMetaChar /\\[sSdDwWbB]/ containedin=gaucheRegexp
-syn match gaucheRegexpEscChar /\\[\\;"#]/ containedin=gaucheRegexp
-syn match gaucheRegexpMetaChar /{\d\+\(,\d\+\)\?}/ containedin=gaucheRegexp
+syn match gaucheRegexpEscChar /\\[\\\/;"#]/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /{\(\d\+\)\?\(,\)\?\(\d\+\)\?}/ containedin=gaucheRegexp
 syn match gaucheRegexpMetaChar /?\(-\?i\)\?:/ containedin=gaucheRegexp
-syn match gaucheRegexpMetaChar /?<\w\+>/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /?<\(\\>\|[^>=!]\)*>/ containedin=gaucheRegexp
 syn match gaucheRegexpMetaChar /?\(<\?[=!]\|>\)/ containedin=gaucheRegexp
-syn match gaucheRegexpMetaChar /\\\(\d\|k<\w\+>\)/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /\\\(\d\+\|k<\(\\>\|[^>]\)*>\)/ containedin=gaucheRegexp
 
 " Class (<foo>) and condition type (&bar) {{{1
 
