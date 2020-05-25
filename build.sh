@@ -64,7 +64,7 @@ EOF
 
     grep -E '^@def' "${files[@]}" \
         | sed 's/:/ /' \
-        | gawk -f"$lib" -e 'BEGIN { FS = " " }
+        | gawk -i"$lib" 'BEGIN { FS = " " }
                            { $1 = basename($1)
                              # Join fields surrounded by {}
                              for (i = 3; i <= NF; i++) {
@@ -82,8 +82,8 @@ EOF
                              print
                            }' \
         | sed -E 's/\t\t+/\t/g' \
-        | gawk -f"$lib" \
-              -e '{ # $3 is either description in @def(fn|tp)x? (e.g. {Class})
+        | gawk -i"$lib" \
+              '{ # $3 is either description in @def(fn|tp)x? (e.g. {Class})
                     # or identifier in @def(mac|spec|fun)x? (e.g. let).
                     # Some identifiers are surrounded by {} (e.g. {(setter ...)}),
                     # having () inside.
@@ -111,7 +111,7 @@ EOF
 
     gawk -F'\t' '/@defmacx?/ { print $4 }' "$1" \
         | sort | uniq \
-        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -i"$lib" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'scheme\w*Syntax' \
         | gawk -F'\t' '{ if ( /^use$/ )
                             {}  # skip it as it is handled in schemeImport
@@ -140,7 +140,7 @@ EOF
 
     gawk -F'\t' '/@defspecx?/ { print $4 }' "$1" \
         | sort | uniq \
-        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -i"$lib" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'scheme\w*Syntax' \
         | gawk -F'\t' '{ if ( /^import$/ )
                             {}  # skip it as it is handled in schemeImport
@@ -175,7 +175,7 @@ EOF
                     print $4
                 }' "$1" \
         | sort | uniq \
-        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -i"$lib" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'schemeFunction' \
         | gawk -F'\t' '{ print "syn keyword schemeFunction "$0 }'
 }
@@ -198,7 +198,7 @@ EOF
                     print $4
                 }' "$1" \
         | sort | uniq \
-        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -i"$lib" '{ print_with_at_expanded($0) }' \
         | gawk -F'\t' '{ print "syn keyword schemeVariable "$0 }'
 }
 
@@ -217,7 +217,7 @@ EOF
 
     gawk -F'\t' '/@defvrx?/ && /{constant}/ { print $4 }' "$1" \
         | sort | uniq \
-        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -i"$lib" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'schemeConstant' \
         | gawk -F'\t' '{ print "syn keyword schemeConstant "$0 }'
 }
@@ -237,7 +237,7 @@ EOF
 
     gawk -F'\t' '/@deftpx?/ && /{(builtin )?module}/ { print $4 }' "$1" \
         | sort | uniq \
-        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -i"$lib" '{ print_with_at_expanded($0) }' \
         | gawk -F'\t' '{ print "syn keyword gaucheModule "$0 }'
 }
 
@@ -256,7 +256,7 @@ EOF
 
     gawk -F'\t' '/@deftpx?/ && /{((builtin )?class|metaclass)}/ { print $4 }' "$1" \
         | sort | uniq \
-        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -i"$lib" '{ print_with_at_expanded($0) }' \
         | gawk -F'\t' '{ print "syn keyword gaucheClass "$0 }'
 }
 
