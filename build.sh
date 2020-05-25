@@ -64,7 +64,7 @@ EOF
 
     grep -E '^@def' "${files[@]}" \
         | sed 's/:/ /' \
-        | awk -f"$lib" -e 'BEGIN { FS = " " }
+        | gawk -f"$lib" -e 'BEGIN { FS = " " }
                            { $1 = basename($1)
                              # Join fields surrounded by {}
                              for (i = 3; i <= NF; i++) {
@@ -82,7 +82,7 @@ EOF
                              print
                            }' \
         | sed -E 's/\t\t+/\t/g' \
-        | awk -f"$lib" \
+        | gawk -f"$lib" \
               -e '{ # $3 is either description in @def(fn|tp)x? (e.g. {Class})
                     # or identifier in @def(mac|spec|fun)x? (e.g. let).
                     # Some identifiers are surrounded by {} (e.g. {(setter ...)}),
@@ -109,11 +109,11 @@ EOF
         exit 1
     fi
 
-    awk -F'\t' '/@defmacx?/ { print $4 }' "$1" \
+    gawk -F'\t' '/@defmacx?/ { print $4 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'scheme\w*Syntax' \
-        | awk -F'\t' '{ if ( /^use$/ )
+        | gawk -F'\t' '{ if ( /^use$/ )
                             {}  # skip it as it is handled in schemeImport
                         else if ( /^define-class$/ )
                             # Can be defined only on toplevel
@@ -138,11 +138,11 @@ EOF
         exit 1
     fi
 
-    awk -F'\t' '/@defspecx?/ { print $4 }' "$1" \
+    gawk -F'\t' '/@defspecx?/ { print $4 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'scheme\w*Syntax' \
-        | awk -F'\t' '{ if ( /^import$/ )
+        | gawk -F'\t' '{ if ( /^import$/ )
                             {}  # skip it as it is handled in schemeImport
                         else if ( /^require$/ || \
                                   /^define-(constant|in-module|inline)$/ )
@@ -169,15 +169,15 @@ EOF
         exit 1
     fi
 
-    awk -F'\t' '/@defunx?/ || \
+    gawk -F'\t' '/@defunx?/ || \
                 ( /@deftpx?/ && /{function}/ ) || \
                 ( /@deffnx?/ && /{(generic )?function}/ ) {
                     print $4
                 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'schemeFunction' \
-        | awk -F'\t' '{ print "syn keyword schemeFunction "$0 }'
+        | gawk -F'\t' '{ print "syn keyword schemeFunction "$0 }'
 }
 
 build_variable() {
@@ -193,13 +193,13 @@ EOF
         exit 1
     fi
 
-    awk -F'\t' '/@defvarx?/ || \
+    gawk -F'\t' '/@defvarx?/ || \
                 /@defvrx?/ && /{comparator}/ {
                     print $4
                 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | awk -F'\t' '{ print "syn keyword schemeVariable "$0 }'
+        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -F'\t' '{ print "syn keyword schemeVariable "$0 }'
 }
 
 build_constant() {
@@ -215,11 +215,11 @@ EOF
         exit 1
     fi
 
-    awk -F'\t' '/@defvrx?/ && /{constant}/ { print $4 }' "$1" \
+    gawk -F'\t' '/@defvrx?/ && /{constant}/ { print $4 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'schemeConstant' \
-        | awk -F'\t' '{ print "syn keyword schemeConstant "$0 }'
+        | gawk -F'\t' '{ print "syn keyword schemeConstant "$0 }'
 }
 
 build_module() {
@@ -235,10 +235,10 @@ EOF
         exit 1
     fi
 
-    awk -F'\t' '/@deftpx?/ && /{(builtin )?module}/ { print $4 }' "$1" \
+    gawk -F'\t' '/@deftpx?/ && /{(builtin )?module}/ { print $4 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | awk -F'\t' '{ print "syn keyword gaucheModule "$0 }'
+        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -F'\t' '{ print "syn keyword gaucheModule "$0 }'
 }
 
 build_class() {
@@ -254,10 +254,10 @@ EOF
         exit 1
     fi
 
-    awk -F'\t' '/@deftpx?/ && /{((builtin )?class|metaclass)}/ { print $4 }' "$1" \
+    gawk -F'\t' '/@deftpx?/ && /{((builtin )?class|metaclass)}/ { print $4 }' "$1" \
         | sort | uniq \
-        | awk -f"$lib" -e '{ print_with_at_expanded($0) }' \
-        | awk -F'\t' '{ print "syn keyword gaucheClass "$0 }'
+        | gawk -f"$lib" -e '{ print_with_at_expanded($0) }' \
+        | gawk -F'\t' '{ print "syn keyword gaucheClass "$0 }'
 }
 
 build_syntax() {
@@ -399,8 +399,8 @@ endif
 EOF
 
     local word
-    awk '{ print $4 }' "$@" \
-        | awk '/^(|r|g)let((|rec)(|1|\*)($|-)|\/)/ || /-let(|rec)(|1|\*)$/ || \
+    gawk '{ print $4 }' "$@" \
+        | gawk '/^(|r|g)let((|rec)(|1|\*)($|-)|\/)/ || /-let(|rec)(|1|\*)$/ || \
                /^define($|-)/ || /-define$/ || \
                /^match($|-)/ || /-match$/ || \
                /^(|e)case($|-)/ || ( /-(|e)case$/ && $0 !~ /(lower|upper|title)-case$/ ) || \
