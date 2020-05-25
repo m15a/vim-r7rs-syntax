@@ -315,7 +315,7 @@ syn region gaucheIncompleteString start=/#\*"/ skip=/\\[\\"]/ end=/"/
 
 " Highlight \\ and \" in strings {{{1
 
-syn match schemeStringMetaChar /\\[\\"]/ containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
+syn match schemeStringEscChar /\\[\\"]/ containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
 
 " SRFI-10 read-time constructor (#,) {{{1
 
@@ -331,7 +331,8 @@ syn match schemeSharedStructure /#\d[#=]/
 
 syn region gaucheRegexp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/
 syn match gaucheRegexpMetaChar /[*+?\^$(|).]/ containedin=gaucheRegexp
-syn match gaucheRegexpMetaChar /\\[\\sSdDwWbB;"#]/ containedin=gaucheRegexp
+syn match gaucheRegexpMetaChar /\\[sSdDwWbB]/ containedin=gaucheRegexp
+syn match gaucheRegexpEscChar /\\[\\;"#]/ containedin=gaucheRegexp
 syn match gaucheRegexpMetaChar /{\d\+\(,\d\+\)\?}/ containedin=gaucheRegexp
 syn match gaucheRegexpMetaChar /?\(-\?i\)\?:/ containedin=gaucheRegexp
 syn match gaucheRegexpMetaChar /?<\w\+>/ containedin=gaucheRegexp
@@ -358,12 +359,13 @@ hi def link gaucheIncompleteString schemeString
 hi def link gaucheInterpolatedString schemeString
 hi def link gaucheRegexp String
 hi def link gaucheRegexpMetaChar Special
+hi def link gaucheRegexpEscChar schemeCharacter
 hi def link gaucheSpecialToken PreProc
 hi def link gaucheShebang Comment
 hi def link schemeConditionType Type
 hi def link schemeReadTimeCtorTag Tag
 hi def link schemeSharedStructure PreProc
-hi def link schemeStringMetaChar Special
+hi def link schemeStringEscChar schemeCharacter
 hi def link schemeVariable Identifier
 
 " vim: fdm=marker
