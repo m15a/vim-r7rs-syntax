@@ -313,8 +313,9 @@ syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\
 
 syn region gaucheIncompleteString start=/#\*"/ skip=/\\[\\"]/ end=/"/
 
-" Highlight \\ and \" in strings {{{1
+" Highlight \\, \", and \  \n in strings {{{1
 
+syn match schemeStringMetaChar /\\\s*$/ containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
 syn match schemeStringEscChar /\\[\\"]/ containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
 
 " SRFI-10 read-time constructor (#,) {{{1
@@ -366,6 +367,7 @@ hi def link gaucheShebang Comment
 hi def link schemeConditionType Type
 hi def link schemeReadTimeCtorTag Tag
 hi def link schemeSharedStructure PreProc
+hi def link schemeStringMetaChar Special
 hi def link schemeStringEscChar schemeCharacter
 hi def link schemeVariable Identifier
 
