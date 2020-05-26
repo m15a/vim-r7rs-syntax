@@ -21,32 +21,6 @@ EOF
 exit 1
 }
 
-esc() {
-    echo "$1" | sed -E 's@(\?|\*|\+|\.|\^|\$)@\\\1@g'
-}
-
-find_undefined_keywords_in() {
-    local groupname="$1" keyword
-    while read -r keyword; do
-        if ! grep -E "^syn keyword $groupname $(esc "$keyword")$" \
-            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
-        then
-            echo "$keyword"
-        fi
-    done
-}
-
-find_undefined_lispwords() {
-    local lispword
-    while read -r lispword; do
-        if ! grep -F "^setl lispwords+=$lispword$" \
-            "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
-        then
-            echo "$lispword"
-        fi
-    done
-}
-
 build_tsv() {
     if [ -z "${1+defined}" ]; then
         cat >&2 <<EOF
@@ -340,6 +314,33 @@ EOF
             | sed -E 's/(.*)/setl lispwords+=\1/'
     } > "$tmp"
     cp "$tmp" "$path"
+}
+
+find_undefined_keywords_in() {
+    local groupname="$1" keyword
+    while read -r keyword; do
+        if ! grep "^syn keyword $groupname $(esc "$keyword")$" \
+            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+        then
+            echo "$keyword"
+        fi
+    done
+}
+
+find_undefined_lispwords() {
+    local lispword
+    while read -r lispword; do
+        if ! grep "^setl lispwords+=$(esc "$lispword")$" \
+            "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
+        then
+            echo "$lispword"
+        fi
+    done
+}
+
+# Escape meta characters in basic regular expressions
+esc() {
+    echo "$1" | sed -E 's@(\*|\.|\^|\$)@\\\1@g'
 }
 
 if [ -z "${GAUCHE_SRC+defined}" ]; then
