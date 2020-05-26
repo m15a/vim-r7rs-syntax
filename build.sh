@@ -105,17 +105,22 @@ EOF
         | sort | uniq \
         | gawk -i"$lib" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'scheme\w*Syntax' \
-        | gawk -F'\t' \
-              '{ if (/^use$/)
-                     {}  # skip it as it is handled in schemeImport
-                 else if (/^define-class$/)
-                     # Can be defined only on toplevel
-                     print "syn keyword schemeSpecialSyntax " $0
-                 else if (/^\^c$/)
-                     print "syn match schemeSyntax /\\^[_a-z]/"
-                 else
-                     print "syn keyword schemeSyntax " $0
-               }'
+        | gawk '{ switch ($0) {
+                  case /^use$/:
+                      # skip it as it is handled in schemeImport
+                      break
+                  case /^define-class$/:
+                      # Can be defined only on toplevel
+                      print "syn keyword schemeSpecialSyntax " $0
+                      break
+                  case /^\^c$/:
+                      print "syn match schemeSyntax /\\^[_a-z]/"
+                      break
+                  default:
+                      print "syn keyword schemeSyntax " $0
+                      break
+                  }
+                }'
 }
 
 build_specialform() {
@@ -135,19 +140,22 @@ EOF
         | sort | uniq \
         | gawk -i"$lib" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'scheme\w*Syntax' \
-        | gawk -F'\t' \
-              '{ if (/^import$/)
-                     {}  # skip it as it is handled in schemeImport
-                 else if (/^require$/ ||
-                          /^define-(constant|in-module|inline)$/)
-                     # Can be defined only on toplevel (except define-inline)
-                     print "syn keyword schemeSpecialSyntax " $0
-                 else if (/^(define|select)-module$/ ||
-                          /^export-all$/)
-                     print "syn keyword schemeLibrarySyntax " $0
-                 else
-                     print "syn keyword schemeSyntax " $0
-               }'
+        | gawk '{ switch ($0) {
+                  case /^import$/:
+                      # skip it as it is handled in schemeImport
+                      break
+                  case /^(require|define-(constant|in-module|inline))$/:
+                      # Can be defined only on toplevel (except define-inline)
+                      print "syn keyword schemeSpecialSyntax " $0
+                      break
+                  case /^((define|select)-module|export-all)$/:
+                      print "syn keyword schemeLibrarySyntax " $0
+                      break
+                  default:
+                      print "syn keyword schemeSyntax " $0
+                      break
+                  }
+                }'
 }
 
 build_function() {
@@ -447,10 +455,9 @@ BEGIN {
     HTML[79] = "ul"
     HTML[80] = "var"
 }
-function basename(path,    _path) {
-    _path = path
-    sub(".*/", "", _path)
-    return _path
+function basename(path) {
+    sub(".*/", "", path)
+    return path
 }
 function unwrap(field,    m) {
     if (match(field, /^{\(\w+ (.+)\)}$/, m))
@@ -458,20 +465,25 @@ function unwrap(field,    m) {
     return field
 }
 function print_with_at_expanded(line,    i, _line) {
-    if (line ~ /@@/)
+    switch (line) {
+    case /@@/:
         for (i in ATAT) {
             _line = line
             gsub(/@@/, ATAT[i], _line)
             print _line
         }
-    else if (line ~ /html:@var{element}/)
+        break
+    case /html:@var{element}/:
         for (i in HTML) {
             _line = line
             gsub(/@var{element}/, HTML[i], _line)
             print _line
         }
-    else
+        break
+    default:
         print line
+        break
+    }
 }
 EOF
 
