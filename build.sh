@@ -291,16 +291,16 @@ EOF
     local path="$1"
     shift
 
-    local tmp="$tmpd/syntax.vim"
-    sed -nE '1, /^" Keywords \{\{\{1$/ p' "$path" > "$tmp"
-    sed -Ei "$tmp" \
-        -e 's/^(" Last Change: )[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$(date +%Y-%m-%d)/"
+    local date tmp="$tmpd/syntax.vim"
+    date="$(date +%Y-%m-%d)"
     {
+        sed -n '1, /^" Keywords {{{1$/ p' "$path" \
+            | sed -E 's/^(" Last Change:)[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$date/"
         echo
         cat "$@" | sort | uniq
         echo
-    } >> "$tmp"
-    sed -nE '/^" Highlights \{\{\{1$/, $ p' "$path" >> "$tmp"
+        sed -n '/^" Highlights {{{1$/, $ p' "$path"
+    } > "$tmp"
     cp "$tmp" "$path"
 }
 
@@ -321,11 +321,11 @@ EOF
     local path="$1"
     shift
 
-    local tmp="$tmpd/ftplugin.vim"
-    sed -nE '1, /^" lispwords \{\{\{1$/ p' "$path" > "$tmp"
-    sed -Ei "$tmp" \
-        -e 's/^(" Last Change: )[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$(date +%Y-%m-%d)/"
+    local date tmp="$tmpd/ftplugin.vim"
+    date="$(date +%Y-%m-%d)"
     {
+        sed -n '1, /^" lispwords {{{1$/ p' "$path" \
+            | sed -E 's/^(" Last Change: )[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$date/"
         echo
         gawk '{ print $4 }' "$@" \
             | gawk '/^(|r|g)let((|rec)(|1|\*)($|-)|\/)/ || /-let(|rec)(|1|\*)$/ ||
@@ -338,7 +338,7 @@ EOF
             | sort | uniq \
             | find_undefined_lispwords \
             | sed -E 's/(.*)/setl lispwords+=\1/'
-    } >> "$tmp"
+    } > "$tmp"
     cp "$tmp" "$path"
 }
 
