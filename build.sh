@@ -160,12 +160,22 @@ main() {
 
     local cmd
     case "$1" in
-        tsv|macro|specialform|function|variable|constant|module|class|syntax|ftplugin)
+        ( tsv \
+        | macro \
+        | specialform \
+        | function \
+        | variable \
+        | constant \
+        | module \
+        | class \
+        | syntax \
+        | ftplugin \
+        )
             cmd="$1"
             shift
             build_"$cmd" "$@"
             ;;
-        *)
+        (*)
             usage
             ;;
     esac
@@ -494,7 +504,7 @@ find_undefined_keywords_in() {
     local groupname="$1" keyword
     while read -r keyword; do
         if ! grep "^syn keyword $groupname $(esc "$keyword")$" \
-            "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+               "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
         then
             echo "$keyword"
         fi
@@ -505,7 +515,7 @@ find_undefined_lispwords() {
     local lispword
     while read -r lispword; do
         if ! grep "^setl lispwords+=$(esc "$lispword")$" \
-            "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
+               "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
         then
             echo "$lispword"
         fi
