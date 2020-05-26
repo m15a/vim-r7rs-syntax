@@ -36,6 +36,17 @@ find_undefined_keywords_in() {
     done
 }
 
+find_undefined_lispwords() {
+    local lispword
+    while read -r lispword; do
+        if ! grep -F "^setl lispwords+=$lispword$" \
+            "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
+        then
+            echo "$lispword"
+        fi
+    done
+}
+
 build_tsv() {
     if [ -z "${1+defined}" ]; then
         cat >&2 <<EOF
@@ -325,13 +336,8 @@ EOF
                     /^set!($|-)/ || ( /-set!$/ && $0 !~ /char-set!$/ ) ||
                     /^do(-|times|list)/' \
             | sort | uniq \
-            | while read -r word; do
-                  if ! grep -F "setl lispwords+=$word" \
-                      "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
-                  then
-                      echo "setl lispwords+=$word"
-                  fi
-              done
+            | find_undefined_lispwords \
+            | sed -E 's/(.*)/setl lispwords+=\1/'
     } >> "$tmp"
     cp "$tmp" "$path"
 }
