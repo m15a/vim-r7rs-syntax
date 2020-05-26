@@ -18,6 +18,7 @@ Commands:
     syntax
     ftplugin
 EOF
+exit 1
 }
 
 esc() {
@@ -347,7 +348,6 @@ fi
 
 if [ -z "${1+defined}" ]; then
     show_usage
-    exit 1
 fi
 
 tmpd="$(mktemp -d --suffix vimgauche)"
@@ -495,6 +495,5 @@ case "$1" in
         ;;
     *)
         show_usage
-        exit 1
         ;;
 esac
