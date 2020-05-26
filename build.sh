@@ -402,7 +402,7 @@ BEGIN {
     HTML[34] = "h6"
     HTML[35] = "head"
     HTML[36] = "hr"
-    HTML[37] = "HTML"
+    HTML[37] = "html"
     HTML[38] = "i"
     HTML[39] = "iframe"
     HTML[40] = "img"
