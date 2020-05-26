@@ -92,14 +92,14 @@ EOF
         | gawk -i "$lib" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'scheme\w*Syntax' \
         | gawk '{ switch ($0) {
-                  case /^use$/:
+                  case "use":
                       # skip it as it is handled in schemeImport
                       break
-                  case /^define-class$/:
+                  case "define-class":
                       # Can be defined only on toplevel
                       print "syn keyword schemeSpecialSyntax", $0
                       break
-                  case /^\^c$/:
+                  case "^c":
                       print "syn match schemeSyntax /\\^[_a-z]/"
                       break
                   default:
@@ -127,7 +127,7 @@ EOF
         | gawk -i "$lib" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'scheme\w*Syntax' \
         | gawk '{ switch ($0) {
-                  case /^import$/:
+                  case "import":
                       # skip it as it is handled in schemeImport
                       break
                   case /^(require|define-(constant|in-module|inline))$/:
