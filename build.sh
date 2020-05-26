@@ -264,8 +264,7 @@ EOF
     local path="$1"
     shift
 
-    local date tmp="$tmpd/syntax.vim"
-    date="$(date +%Y-%m-%d)"
+    local tmp="$tmpd/syntax.vim"
     {
         sed -n '1, /^" Keywords {{{1$/ p' "$path" \
             | sed -E 's/^(" Last Change:)[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$date/"
@@ -294,8 +293,7 @@ EOF
     local path="$1"
     shift
 
-    local date tmp="$tmpd/ftplugin.vim"
-    date="$(date +%Y-%m-%d)"
+    local tmp="$tmpd/ftplugin.vim"
     {
         sed -n '1, /^" lispwords {{{1$/ p' "$path" \
             | sed -E 's/^(" Last Change: )[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$date/"
@@ -361,6 +359,8 @@ fi
 if [ -z "${1+defined}" ]; then
     show_usage
 fi
+
+date="$(date +%Y-%m-%d)"
 
 tmpd="$(mktemp -d --suffix vimgauche)"
 cleanup() { rm -rf "$tmpd"; }
