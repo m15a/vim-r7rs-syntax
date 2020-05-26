@@ -449,7 +449,7 @@ EOF
         echo
         cat "$@" | sort | uniq
         echo
-        sed -n '/^" Highlights {{{1$/, $ p' "$path"
+        echo '" vim: fdm=marker'
     } > "$tmp"
     cp "$tmp" "$path"
 }

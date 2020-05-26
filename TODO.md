@@ -3,22 +3,23 @@
 - [ ] Add sharp syntax
     - [x] `#!`
     - [x] `#"`
-    - [x] `#(` implemented in `syntax/scheme.vim`
+    - [ ] `#(` implemented in `syntax/scheme.vim` but have to check numeric
+          vectors
     - [x] `#*`
     - [x] `#,`
-    - [x] `#/`
+    - [ ] `#/`
     - [x] `#0`...`#9`
     - [ ] `#:`
-    - [x] `#;` implemented in `syntax/scheme.vim`
+    - [ ] `#;` implemented in `syntax/scheme.vim` but have to care about `#;[]`
     - ~~`#<`~~ unreadable object, no need
     - [ ] `#?`
     - [ ] `#b`, `#d`, `#e`, `#i`, `#o`, `#x`
     - [x] `#t`, `#f` implemented in `syntax/scheme.vim`
     - [x] `#s`, `#u` implemented in `syntax/scheme.vim`
     - [ ] `#[`
-    - [x] `#\` implemented in `syntax/scheme.vim`
+    - [ ] `#\` implemented in `syntax/scheme.vim`
     - [x] `#|` implemented in `syntax/scheme.vim`
-- [ ] Highlight keywords (`:key`)
+- [ ] Highlight keywords (`:key` and `#:key`)
 - [ ] Add numeric literals (including `#\d[rR]...`)
 - [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
@@ -68,4 +69,4 @@
     - [x] Add `do`-related words to `lispwords`
     - [ ] Add `call-with-*` to `lispwords`
     - [ ] Add `with-*` to `lispwords`
-    - [ ] Add `for-each*` to `lispwords`
+    - [ ] ~~Add `for-each*` to `lispwords`~~
