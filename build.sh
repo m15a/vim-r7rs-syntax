@@ -144,22 +144,21 @@ function print_with_at_expanded(line,    i, _line) {
 EOF
 
 main() {
-    if [ -z "${GAUCHE_SRC+defined}" ]; then
+    if [[ -z "${GAUCHE_SRC+defined}" ]]; then
         echo "Please set GAUCHE_SRC to gauche source path" >&2
         exit 1
     fi
 
-    if [ -z "${VIM_SRC+defined}" ]; then
+    if [[ -z "${VIM_SRC+defined}" ]]; then
         echo "Please set VIM_SRC to vim source path" >&2
         exit 1
     fi
 
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         usage
     fi
 
     local cmd
-
     case "$1" in
         tsv|macro|specialform|function|variable|constant|module|class|syntax|ftplugin)
             cmd="$1"
@@ -192,7 +191,7 @@ EOF
 }
 
 build_tsv() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 tsv [NAME...]
 
@@ -245,7 +244,7 @@ EOF
 }
 
 build_macro() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 macro FILE
 
@@ -280,7 +279,7 @@ EOF
 }
 
 build_specialform() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 specialform FILE
 
@@ -315,7 +314,7 @@ EOF
 }
 
 build_function() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 function FILE
 
@@ -337,7 +336,7 @@ EOF
 }
 
 build_variable() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 variable FILE
 
@@ -358,7 +357,7 @@ EOF
 }
 
 build_constant() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 constant FILE
 
@@ -378,7 +377,7 @@ EOF
 }
 
 build_module() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 module FILE
 
@@ -398,7 +397,7 @@ EOF
 }
 
 build_class() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 class FILE
 
@@ -418,7 +417,7 @@ EOF
 }
 
 build_syntax() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 syntax PATH [FILE...]
 
@@ -446,7 +445,7 @@ EOF
 }
 
 build_ftplugin() {
-    if [ -z "${1+defined}" ]; then
+    if [[ -z "${1+defined}" ]]; then
         cat >&2 <<EOF
 Usage: $0 ftplugin PATH [FILE...]
 
