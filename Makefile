@@ -27,10 +27,10 @@ clean:
 	rm -rf _build
 
 syntax/gauche.vim: $(VIM_FILES)
-	./build.sh syntax $^ > $@
+	./build.sh syntax $@ $^
 
 ftplugin/gauche.vim: $(VIM_FILES)
-	./build.sh ftplugin $^ > $@
+	./build.sh ftplugin $@ $^
 
 $(BUILD)/macro.vim: $(BUILD)/atdef.tsv
 	./build.sh macro $< > $@
