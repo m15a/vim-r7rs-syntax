@@ -10,49 +10,163 @@ if !exists('b:did_scheme_syntax')
   finish
 endif
 
-" Redefine cluster to exclude additional syntaxes below from (quasi)quotes {{{1
-
-syn cluster schemeSyntaxCluster contains=schemeFunction,schemeKeyword,schemeSyntax,schemeExtraSyntax,schemeLibrarySyntax,schemeSyntaxSyntax,schemeConditionType,gaucheClass
-syn cluster schemeLiteralCluster contains=schemeStringEscChar,schemeStringMetaChar,schemeCharSetEscChar,schemeCharSetMetaChar,schemeRegExpEscChar,schemeRegExpMetaChar
-
-" Redefine parentheses ((), [], and #()) {{{1
-
-syn clear schemeQuote
-syn region schemeQuote matchgroup=schemeData start=/'[`']*/ end=/[ \t\n()\[\]";]/me=e-1
-syn region schemeQuote matchgroup=schemeData start=/'['`]*"/ skip=/\\[\\"]/ end=/"/
-syn region schemeQuote matchgroup=schemeData start=/'['`]*|/ skip=/\\[\\|]/ end=/|/
+" Add [] to parentheses and ignore literals inside {{{1
 syn region schemeQuote matchgroup=schemeData start=/'['`]*#\?(/ end=/)/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeQuote matchgroup=schemeData start=/'['`]*\[/ end=/\]/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
-
-syn clear schemeQuasiquote
-syn region schemeQuasiquote matchgroup=schemeData start=/`['`]*/ end=/[ \t\n()\[\]";]/me=e-1
 syn region schemeQuasiquote matchgroup=schemeData start=/`['`]*#\?(/ end=/)/ contains=ALLBUT,schemeQuote,schemeQuoteForm,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeQuasiquote matchgroup=schemeData start=/`['`]*\[/ end=/\]/ contains=ALLBUT,schemeQuote,schemeQuoteForm,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
-
 syn clear schemeUnquote
-syn region schemeUnquote matchgroup=schemeParentheses start=/,/ end=/[ `'\t\n\[\]()";]/me=e-1 contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-syn region schemeUnquote matchgroup=schemeParentheses start=/,@/ end=/[ `'\t\n\[\]()";]/me=e-1 contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-syn region schemeUnquote matchgroup=schemeParentheses start=/,(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-syn region schemeUnquote matchgroup=schemeParentheses start=/,\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-syn region schemeUnquote matchgroup=schemeParentheses start=/,@(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-syn region schemeUnquote matchgroup=schemeParentheses start=/,@\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-
-syn clear schemeQuoteForm
+syn region schemeUnquote matchgroup=schemeParentheses start=/,@\?/ end=/[ `'\t\n\[\]()";]/me=e-1 contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
+syn region schemeUnquote matchgroup=schemeParentheses start=/,@\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
+syn region schemeUnquote matchgroup=schemeParentheses start=/,@\?\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
 syn region schemeQuoteForm matchgroup=schemeData start=/(/ end=/)/ contained contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeQuoteForm matchgroup=schemeData start=/#\@<!\[/ end=/\]/ contained contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
-
-syn clear schemeQuasiquoteForm
 syn region schemeQuasiquoteForm matchgroup=schemeData start=/(/ end=/)/ contained contains=ALLBUT,schemeQuote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeQuasiquoteForm matchgroup=schemeData start=/#\@<!\[/ end=/\]/ contained contains=ALLBUT,schemeQuote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
-
 syn clear schemeForm
-syn region schemeForm matchgroup=schemeParentheses start="(" end=")" contains=ALLBUT,schemeUnquote,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-syn region schemeForm matchgroup=schemeParentheses start="#\@<!\[" end="\]" contains=ALLBUT,schemeUnquote,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
+syn region schemeForm matchgroup=schemeParentheses start=/(/ end=/)/ contains=ALLBUT,schemeUnquote,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
+syn region schemeForm matchgroup=schemeParentheses start=/#\@<!\[/ end=/\]/ contains=ALLBUT,schemeUnquote,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
 
-" TODO: ensure numeric vectors
-syn clear schemeVector
-syn region schemeVector matchgroup=schemeData start="#(" end=")" contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
-syn region schemeVector matchgroup=schemeData start="#[fsu]\d\+(" end=")" contains=schemeNumber,schemeComment,schemeDatumComment
+" Incomplete string (#*) {{{1
+syn region gaucheIncompleteString start=/#\*"/ skip=/\\[\\"]/ end=/"/
+
+" String interpolation (#") {{{1
+syn region gaucheInterpolatedString start=/#"/ skip=/\\[\\"]/ end=/"/ contains=gaucheInterpolatedStringUnquote
+syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\~\@<!\~\~\@!/ end=/[ `'\t\n\[\]()";]/me=e-1 contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
+syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\~\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
+syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\~\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
+
+" Highlight escaped characters in "strings" and in |symbols| if \xHEX; {{{1
+syn match schemeStringEscChar /\\[\\"]/ contained containedin=schemeString,gaucheIncompleteString,gaucheInterpolatedString
+syn match schemeStringEscChar /\\x\x\+;/ contained containedin=schemeSymbol,schemeString,gaucheIncompleteString,gaucheInterpolatedString
+syn match schemeStringEscChar /\(\\u\x\{4}\|\\U\x\{8}\)/ contained containedin=schemeString,gaucheIncompleteString,gaucheInterpolatedString
+syn match schemeStringMetaChar /\\[nrftab0]/ contained containedin=schemeString,gaucheIncompleteString,gaucheInterpolatedString
+syn match schemeStringMetaChar /\\[ \t]*$/ contained containedin=schemeString,gaucheIncompleteString,gaucheInterpolatedString
+
+" Numeric literals {{{1
+syn clear schemeNumber
+" Anatomy of numeric literals (see R7RS, pp. 62-63 and Gauche ref, sec. 4.1)
+"
+" Non-decimal number (binary)
+" ( #b | #[ei]#b | #b#[ei] ) ( ( [+-]?[_01]+(\/[_01]+)?
+"                              | [+-](inf|nan)\.0
+"                              )
+"                              \@
+"                              ( [+-]?[_01]+(\/[_01]+)?
+"                              | [+-](inf|nan)\.0
+"                              )
+"                              (pi)?
+"                            | ( [+-]?[_01]+(\/[_01]+)?
+"                              | [+-](inf|nan)\.0
+"                              )?
+"                              [+-]
+"                              ( [_01]+(\/[_01]+)?
+"                              | (inf|nan)\.0
+"                              )?
+"                              i
+"                            | ( [+-]?[_01]+(\/[_01]+)?
+"                              | [+-](inf|nan)\.0
+"                              )
+"                            )
+" Other radixes are analogeous to the above case
+syn match schemeNumber /\v%(#b|#[ei]#b|#b#[ei])%(%([+-]?[_01]+%(\/[_01]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[_01]+%(\/[_01]+)?|[+-]%(inf|nan)\.0)%(pi)?|%([+-]?[_01]+%(\/[_01]+)?|[+-]%(inf|nan)\.0)?[+-]%([_01]+%(\/[_01]+)?|%(inf|nan)\.0)?i|%([+-]?[_01]+%(\/[_01]+)?|[+-]%(inf|nan)\.0))>/
+syn match schemeNumber /\v%(#o|#[ei]#o|#o#[ei])%(%([+-]?[_0-7]+%(\/[_0-7]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[_0-7]+%(\/[_0-7]+)?|[+-]%(inf|nan)\.0)%(pi)?|%([+-]?[_0-7]+%(\/[_0-7]+)?|[+-]%(inf|nan)\.0)?[+-]%([_0-7]+%(\/[_0-7]+)?|%(inf|nan)\.0)?i|%([+-]?[_0-7]+%(\/[_0-7]+)?|[+-]%(inf|nan)\.0))>/
+syn match schemeNumber /\v%(#x|#[ei]#x|#x#[ei])%(%([+-]?[_0-9a-fA-F]+%(\/[_0-9a-fA-F]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[_0-9a-fA-F]+%(\/[_0-9a-fA-F]+)?|[+-]%(inf|nan)\.0)%(pi)?|%([+-]?[_0-9a-fA-F]+%(\/[_0-9a-fA-F]+)?|[+-]%(inf|nan)\.0)?[+-]%([_0-9a-fA-F]+%(\/[_0-9a-fA-F]+)?|%(inf|nan)\.0)?i|%([+-]?[_0-9a-fA-F]+%(\/[_0-9a-fA-F]+)?|[+-]%(inf|nan)\.0))>/
+syn match schemeNumber /\v%(#\d{2,2}[rR]|#[ei]#\d{1,2}[rR]|#\d{1,2}[rR]#[ei])%(%([+-]?\w+%(\/\w+)?|[+-]%(inf|nan)\.0)\@%([+-]?\w+%(\/\w+)?|[+-]%(inf|nan)\.0)%(pi)?|%([+-]?\w+%(\/\w+)?|[+-]%(inf|nan)\.0)?[+-]%(\w+%(\/\w+)?|%(inf|nan)\.0)?i|%([+-]?\w+%(\/\w+)?|[+-]%(inf|nan)\.0))>/
+"
+" Decimal number (prefixed)
+" ( #d | #[ei] | #[ei]#d | #d#[ei] ) ( ( [+-]? ( ( [_0-9]+\.[_0-9]*
+"                                              | [_0]*\.[_0-9]+
+"                                              )
+"                                              ([esfdl][+-][0-9]+)?
+"                                            | [_0-9]+(\/[_0-9]+)?
+"                                            )
+"                                    | [+-](inf|nan)\.0
+"                                    )
+"                                    \@
+"                                    ( [+-]? ( ( [_0-9]+\.[_0-9]*
+"                                              | [_0]*\.[_0-9]+
+"                                              )
+"                                              ([esfdl][+-][0-9]+)?
+"                                            | [_0-9]+(\/[_0-9]+)?
+"                                            )
+"                                    | [+-](inf|nan)\.0
+"                                    )
+"                                    (pi)?
+"                                  | ( [+-]? ( ( [_0-9]+\.[_0-9]*
+"                                              | [_0]*\.[_0-9]+
+"                                              )
+"                                              ([esfdl][+-][0-9]+)?
+"                                            | [_0-9]+(\/[_0-9]+)?
+"                                            )
+"                                    | [+-](inf|nan)\.0
+"                                    )?
+"                                    [+-]
+"                                    ( ( [_0-9]+\.[_0-9]*
+"                                      | [_0]*\.[_0-9]+
+"                                      )
+"                                      ([esfdl][+-][0-9]+)?
+"                                    | [_0-9]+(\/[_0-9]+)?
+"                                    | (inf|nan)\.0
+"                                    )?
+"                                    i
+"                                  | ( [+-]? ( ( [_0-9]+\.[_0-9]*
+"                                              | [_0]*\.[_0-9]+
+"                                              )
+"                                              ([esfdl][+-][0-9]+)?
+"                                            | [_0-9]+(\/[_0-9]+)?
+"                                            )
+"                                    | [+-](inf|nan)\.0
+"                                    )
+"                                  )
+syn match schemeNumber /\v%(#d|#[ei]|#[ei]#d|#d#[ei])%(%([+-]?%(%([_0-9]+\.[_0-9]*|[_0]*\.[_0-9]+)%([esfdl][+-][0-9]+)?|[_0-9]+%(\/[_0-9]+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(%([_0-9]+\.[_0-9]*|[_0]*\.[_0-9]+)%([esfdl][+-][0-9]+)?|[_0-9]+%(\/[_0-9]+)?)|[+-]%(inf|nan)\.0)%(pi)?|%([+-]?%(%([_0-9]+\.[_0-9]*|[_0]*\.[_0-9]+)%([esfdl][+-][0-9]+)?|[_0-9]+%(\/[_0-9]+)?)|[+-]%(inf|nan)\.0)?[+-]%(%([_0-9]+\.[_0-9]*|[_0]*\.[_0-9]+)%([esfdl][+-][0-9]+)?|[_0-9]+%(\/[_0-9]+)?|%(inf|nan)\.0)?i|%([+-]?%(%([_0-9]+\.[_0-9]*|[_0]*\.[_0-9]+)%([esfdl][+-][0-9]+)?|[_0-9]+%(\/[_0-9]+)?)|[+-]%(inf|nan)\.0))>/
+"
+" Decimal number (no prefix; in this case, '_' is not allowed in digits)
+" ( #d | #[ei]#d | #d#[ei] )@<! ( ( [+-]? ( ( [0-9]+\.[0-9]*
+"                                         | 0*\.[0-9]+
+"                                         )
+"                                         ([esfdl][+-][0-9]+)?
+"                                       | [0-9]+(\/[0-9]+)?
+"                                       )
+"                               | [+-](inf|nan)\.0
+"                               )
+"                               \@
+"                               ( [+-]? ( ( [0-9]+\.[0-9]*
+"                                         | 0*\.[0-9]+
+"                                         )
+"                                         ([esfdl][+-][0-9]+)?
+"                                       | [0-9]+(\/[0-9]+)?
+"                                       )
+"                               | [+-](inf|nan)\.0
+"                               )
+"                               (pi)?
+"                             | ( [+-]? ( ( [0-9]+\.[0-9]*
+"                                         | 0*\.[0-9]+
+"                                         )
+"                                         ([esfdl][+-][0-9]+)?
+"                                       | [0-9]+(\/[0-9]+)?
+"                                       )
+"                               | [+-](inf|nan)\.0
+"                               )?
+"                               [+-]
+"                               ( ( [0-9]+\.[0-9]*
+"                                 | 0*\.[0-9]+
+"                                 )
+"                                 ([esfdl][+-][0-9]+)?
+"                               | [0-9]+(\/[0-9]+)?
+"                               | (inf|nan)\.0
+"                               )?
+"                               i
+"                             | ( [+-]? ( ( [0-9]+\.[0-9]*
+"                                         | 0*\.[0-9]+
+"                                         )
+"                                         ([esfdl][+-][0-9]+)?
+"                                       | [0-9]+(\/[0-9]+)?
+"                                       )
+"                               | [+-](inf|nan)\.0
+"                               )
+"                             )
+syn match schemeNumber /\v%(#d|#[ei]#d|#d#[ei])@<!%(%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0)%(pi)?|%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0)?[+-]%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?|%(inf|nan)\.0)?i|%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0))>/
 
 " Hash-bang (#!) {{{1
 
@@ -61,41 +175,10 @@ syn match gaucheSpecialToken /\%^\@<!#![^ '`\t\n()\[\]"|;]\+/
 hi def link gaucheShebang Comment
 hi def link gaucheSpecialToken PreProc
 
-" TODO: Datum comments {{{1
+" Datum comments for [] {{{1
 
-
-
-" Highlight escaped characters in strings {{{1
-
-syn match schemeStringEscChar /\\[\\"]/ contained containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
-syn match schemeStringEscChar /\\x[0-9a-zA-Z]/ contained containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
-syn match schemeStringEscChar /\\u[0-9a-zA-Z]\{4}/ contained containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
-syn match schemeStringEscChar /\\U[0-9a-zA-Z]\{8}/ contained containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
-syn match schemeStringMetaChar /\\[nrftab0]/ contained containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
-syn match schemeStringMetaChar /\\[ \t]*$/ contained containedin=schemeString,gaucheInterpolatedString,gaucheIncompleteString
-hi def link schemeStringEscChar schemeCharacter
-hi def link schemeStringMetaChar Special
-
-" Incomplete string (#*) {{{1
-
-syn region gaucheIncompleteString start=/#\*"/ skip=/\\[\\"]/ end=/"/
-hi def link gaucheIncompleteString schemeString
-
-" String interpolation (#") {{{1
-
-syn region gaucheInterpolatedString start=/#"/ skip=/\\[\\"]/ end=/"/ contains=gaucheInterpolatedStringUnquote
-syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\~\@<!\~\~\@!/ end=/[ `'\t\n\[\]()";]/me=e-1 contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\~\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\~\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
-hi def link gaucheInterpolatedString schemeString
-
-" TODO: Characters {{{1
-
-
-
-" TODO: Character sets (#[) {{{1
-
-
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\*\?"/ skip=/\\[\\"]/ end=/"/
+syn region schemeDatumCommentForm start=/#\@<!\[/ end=/\]/ contained contains=schemeDatumCommentForm
 
 " TODO: Regular expression (#/) {{{1
 
@@ -113,13 +196,22 @@ hi def link gaucheInterpolatedString schemeString
 " hi def link gaucheRegexpMetaChar Special
 " hi def link gaucheRegexpEscChar schemeCharacter
 
+" TODO: Characters {{{1
+
+
+
+" TODO: Character sets (#[) {{{1
+
+
+
 " TODO: Highlight keyword symbols (:key) {{{1
 
 
 
-" TODO: Numeric literals {{{1
-
-
+" TODO: ensure numeric vectors {{{1
+syn clear schemeVector
+syn region schemeVector matchgroup=schemeData start="#(" end=")" contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
+syn region schemeVector matchgroup=schemeData start="#[fsu]\d\+(" end=")" contains=schemeNumber,schemeComment,schemeDatumComment
 
 " TODO: Import syntaxes {{{1
 
@@ -139,18 +231,24 @@ syn match schemeSharedStruct /#\d[#=]/
 hi def link schemeSharedStruct PreProc
 
 " Class (<foo>) and condition type (&bar) {{{1
-
 syn match gaucheClass /<[^ '`\t\n()\[\]"|;]\+>/
 syn match schemeConditionType /&[^ '`\t\n()\[\]"|;]\+/
 hi def link gaucheClass Type
 hi def link schemeConditionType Type
 
-" Other highlights {{{1
+" Redefine cluster to exclude additional syntaxes below from parentheses {{{1
+syn cluster schemeSyntaxCluster contains=schemeFunction,schemeKeyword,schemeSyntax,schemeExtraSyntax,schemeLibrarySyntax,schemeSyntaxSyntax,schemeConditionType,gaucheClass
+syn cluster schemeLiteralCluster contains=schemeStringEscChar,schemeStringMetaChar,gaucheCharSetEscChar,gaucheCharSetMetaChar,gaucheRegExpEscChar,gaucheRegExpMetaChar
+
+" Highlights {{{1
+hi def link gaucheIncompleteString schemeString
+hi def link gaucheInterpolatedString schemeString
+hi def link schemeStringEscChar schemeCharacter
+hi def link schemeStringMetaChar Special
 
 hi def link schemeVariable Identifier
 
 " Keywords {{{1
-
 syn keyword schemeConstant *rfc2396-unreserved-char-set*
 syn keyword schemeConstant *rfc3986-unreserved-char-set*
 syn keyword schemeConstant *rfc822-atext-chars*

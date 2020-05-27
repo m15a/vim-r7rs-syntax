@@ -446,7 +446,6 @@ EOF
     local tmp="$TMPD/syntax.vim"
     {
         sed -n '1, /^" Keywords {{{1$/ p' "$path" | update_timestamp
-        echo
         cat "$@" | sort | uniq
         echo
         echo '" vim: fdm=marker'
