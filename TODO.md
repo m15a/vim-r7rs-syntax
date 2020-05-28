@@ -3,21 +3,22 @@
 - [ ] Add sharp syntax
     - [x] `#!`
     - [x] `#"`
-    - [x] `#(` implemented in `syntax/scheme.vim`
+    - [x] `#(` implemented in `syntax/scheme.vim` (refined)
     - [x] `#*`
-    - [x] `#,`
+    - [ ] `#,`
     - [ ] `#/`
-    - [x] `#0`...`#9`
+    - [ ] `#0`...`#9`
     - [ ] `#:`
     - [ ] `#;` implemented in `syntax/scheme.vim` but have to care about `#;[]`
     - ~~`#<`~~ unreadable object, no need
     - [ ] `#?`
     - [x] `#b`, `#d`, `#o`, `#x`, `#e`, `#i`
     - [x] `#t`, `#f` implemented in `syntax/scheme.vim`
-    - [x] `#s`, `#u`, `#f`, `#c`
+    - [x] `#u`, `#s`, `#f` implemented in `syntax/scheme.vim` (refined)
+    - [x] `#c`
     - [ ] `#[`
     - [x] `#\` implemented in `syntax/scheme.vim` (refined)
-    - [x] `#|` implemented in `syntax/scheme.vim`
+    - [x] `#|` implemented in `syntax/scheme.vim` (refined)
 - [ ] Highlight keywords (`:key` and `#:key`)
 - [x] Add numeric literals (including `#\d[rR]...`)
 - [ ] Build syntax file from texinfo tags
