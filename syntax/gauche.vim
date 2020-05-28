@@ -191,9 +191,6 @@ syn match schemeCharacter /#\\x\x\+/
 " syn match gaucheRegexpMetaChar /?<\(\\>\|[^>=!]\)*>/ containedin=gaucheRegexp
 " syn match gaucheRegexpMetaChar /?\(<\?[=!]\|>\)/ containedin=gaucheRegexp
 " syn match gaucheRegexpMetaChar /\\\(\d\+\|k<\(\\>\|[^>]\)*>\)/ containedin=gaucheRegexp
-" hi def link gaucheRegexp String
-" hi def link gaucheRegexpMetaChar Special
-" hi def link gaucheRegexpEscChar schemeCharacter
 
 " Vectors (#(, #[usfc]\d+) {{{1
 syn clear schemeVector
@@ -211,27 +208,21 @@ syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#
 syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\@<!\[/ end=/\]/ contains=schemeDatumCommentForm
 
 " Hash-bang (#!) {{{1
-syn match gaucheShebang /\%^\@<=#![\/ ].*$/
-syn match gaucheSpecialToken /\%^\@<!#![^ '`\t\n()\[\]"|;]\+/
-hi def link gaucheShebang Comment
-hi def link gaucheSpecialToken PreProc
+syn match schemeShebang /\%^\@<=#![\/ ].*$/
+syn match schemeDirective /\%^\@<!#![^ '`\t\n()\[\]"|;]\+/
 
 " TODO: SRFI-10 read-time constructor (#,) {{{1
 " syn cluster schemeReadTimeCtorCluster contains=schemeReadTimeCtor,schemeReadTimeCtorTag
 " syn region schemeReadTimeCtor matchgroup=PreProc start="#,(" end=")" contains=ALLBUT,schemeUnquote,schemeDatumCommentForm,@schemeImportCluster
 " syn match schemeReadTimeCtorTag /\(#,([ \t\n]*\)\@<=[^ '`\t\n()\[\]"|;]\+/ contained "containedin=schemeReadTimeCtor
 " syn match schemeReadTimeCtorTag /\(define-reader-ctor[ \t\n]\+'\)\@<=[^ '`\t\n()\[\]"|;]\+/ contained containedin=schemeQuote
-" hi def link schemeReadTimeCtorTag Tag
 
 " SRFI-38 shared structure (#0..#9) {{{1
 syn match schemeSharedStruct /#\d[#=]/
-hi def link schemeSharedStruct PreProc
 
 " Class (<foo>) and condition type (&bar) {{{1
 syn match gaucheClass /<[^ '`\t\n()\[\]"|;]\+>/
 syn match schemeConditionType /&[^ '`\t\n()\[\]"|;]\+/
-hi def link gaucheClass Type
-hi def link schemeConditionType Type
 
 " Exclude some of additional syntaxes above from parentheses {{{1
 syn cluster schemeSyntaxCluster contains=schemeFunction,schemeKeyword,schemeSyntax,schemeExtraSyntax,schemeLibrarySyntax,schemeSyntaxSyntax,schemeConditionType,gaucheClass
@@ -242,7 +233,16 @@ hi def link gaucheIncompleteString schemeString
 hi def link gaucheInterpolatedString schemeString
 hi def link schemeStringEscChar schemeCharacter
 hi def link schemeStringMetaChar Special
+" hi def link gaucheRegexp String
+" hi def link gaucheRegexpMetaChar Special
+" hi def link gaucheRegexpEscChar schemeCharacter
+hi def link schemeShebang Comment
+hi def link schemeDirective PreProc
+" hi def link schemeReadTimeCtorTag Tag
+hi def link schemeSharedStruct PreProc
 hi def link schemeVariable Identifier
+hi def link gaucheClass Type
+hi def link schemeConditionType Type
 
 " Keywords {{{1
 syn keyword schemeConstant *rfc2396-unreserved-char-set*
