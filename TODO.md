@@ -9,7 +9,7 @@
     - [ ] `#/`
     - [ ] `#0`...`#9`
     - [ ] `#:`
-    - [ ] `#;` implemented in `syntax/scheme.vim` but have to care about `#;[]`
+    - [x] `#;` implemented in `syntax/scheme.vim` (extended)
     - ~~`#<`~~ unreadable object, no need
     - [ ] `#?`
     - [x] `#b`, `#d`, `#o`, `#x`, `#e`, `#i`

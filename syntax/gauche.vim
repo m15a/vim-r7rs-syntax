@@ -187,10 +187,17 @@ syn clear schemeVector
 syn region schemeVector matchgroup=schemeData start=/#(/ end=/)/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeVector matchgroup=schemeData start=/\v#%([us]%(8|16|32|64)|f%(16|32|64)|c%(32|64|128))\(/ end=/)/ contains=schemeNumber,schemeComment,schemeDatumComment
 
-" Datum comments for [] {{{1
+" TODO: Import syntaxes {{{1
 
+" syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment
+
+" Datum comments for #\, #", #*", #[sufc]\d+(, #[, and [] {{{1
+
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\\/ end=/[ \t\n()\[\]";]/me=e-1
 syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\*\?"/ skip=/\\[\\"]/ end=/"/
-syn region schemeDatumCommentForm start=/#\@<!\[/ end=/\]/ contained contains=schemeDatumCommentForm
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/\v#;[ \t\n`']*%(#%([us]%(8|16|32|64)|f%(16|32|64)|c%(32|64|128))?)?\(/ end=/)/
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\[/ skip=/\\[\\\]]/ end=/\]/
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\@<!\[/ end=/\]/ contains=schemeDatumCommentForm
 
 " TODO: Regular expression (#/) {{{1
 
@@ -219,10 +226,6 @@ syn region schemeDatumCommentForm start=/#\@<!\[/ end=/\]/ contained contains=sc
 " TODO: Highlight keyword symbols (:key) {{{1
 
 
-
-" TODO: Import syntaxes {{{1
-
-" syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment
 
 " TODO: SRFI-10 read-time constructor (#,) {{{1
 
