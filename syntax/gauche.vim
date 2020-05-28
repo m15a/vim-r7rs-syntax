@@ -182,6 +182,11 @@ syn match gaucheSpecialToken /\%^\@<!#![^ '`\t\n()\[\]"|;]\+/
 hi def link gaucheShebang Comment
 hi def link gaucheSpecialToken PreProc
 
+" Vectors (#(, #[usfc]\d+) {{{1
+syn clear schemeVector
+syn region schemeVector matchgroup=schemeData start=/#(/ end=/)/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
+syn region schemeVector matchgroup=schemeData start=/\v#%([us]%(8|16|32|64)|f%(16|32|64)|c%(32|64|128))\(/ end=/)/ contains=schemeNumber,schemeComment,schemeDatumComment
+
 " Datum comments for [] {{{1
 
 syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\*\?"/ skip=/\\[\\"]/ end=/"/
@@ -214,11 +219,6 @@ syn region schemeDatumCommentForm start=/#\@<!\[/ end=/\]/ contained contains=sc
 " TODO: Highlight keyword symbols (:key) {{{1
 
 
-
-" TODO: ensure numeric vectors {{{1
-syn clear schemeVector
-syn region schemeVector matchgroup=schemeData start="#(" end=")" contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
-syn region schemeVector matchgroup=schemeData start="#[fsu]\d\+(" end=")" contains=schemeNumber,schemeComment,schemeDatumComment
 
 " TODO: Import syntaxes {{{1
 

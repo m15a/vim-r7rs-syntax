@@ -3,8 +3,7 @@
 - [ ] Add sharp syntax
     - [x] `#!`
     - [x] `#"`
-    - [ ] `#(` implemented in `syntax/scheme.vim` but have to check numeric
-          vectors
+    - [x] `#(` implemented in `syntax/scheme.vim`
     - [x] `#*`
     - [x] `#,`
     - [ ] `#/`
@@ -15,7 +14,7 @@
     - [ ] `#?`
     - [x] `#b`, `#d`, `#o`, `#x`, `#e`, `#i`
     - [x] `#t`, `#f` implemented in `syntax/scheme.vim`
-    - [x] `#s`, `#u` implemented in `syntax/scheme.vim`
+    - [x] `#s`, `#u`, `#f`, `#c`
     - [ ] `#[`
     - [x] `#\` implemented in `syntax/scheme.vim` (refined)
     - [x] `#|` implemented in `syntax/scheme.vim`
