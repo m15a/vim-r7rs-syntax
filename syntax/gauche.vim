@@ -36,7 +36,7 @@ syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\
 syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\~\@<!\~#\?(/ end=/)/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
 syn region gaucheInterpolatedStringUnquote matchgroup=schemeParentheses start=/\~\@<!\~\[/ end=/\]/ contained contains=ALLBUT,schemeDatumCommentForm,@schemeImportCluster,@schemeLiteralCluster
 
-" Highlight escaped characters in "strings" and in |symbols| if \xHEX; {{{1
+" Highlight escaped characters in strings and symbols surrounded by || {{{1
 syn match schemeStringEscChar /\\[\\"]/ contained containedin=schemeString,gaucheIncompleteString,gaucheInterpolatedString
 syn match schemeStringEscChar /\\x\x\+;/ contained containedin=schemeSymbol,schemeString,gaucheIncompleteString,gaucheInterpolatedString
 syn match schemeStringEscChar /\(\\u\x\{4}\|\\U\x\{8}\)/ contained containedin=schemeString,gaucheIncompleteString,gaucheInterpolatedString
@@ -168,39 +168,19 @@ syn match schemeNumber /\v%(#d|#[ei]|#[ei]#d|#d#[ei])%(%([+-]?%(%([_0-9]+\.[_0-9
 "                             )
 syn match schemeNumber /\v%(#d|#[ei]#d|#d#[ei])@<!%(%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0)%(pi)?|%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0)?[+-]%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?|%(inf|nan)\.0)?i|%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0))>/
 
-" Character {{{1
+" TODO: Keyword symbol (:key) {{{1
 
+
+" Character {{{1
 syn clear schemeCharacter
 " See Gauche ref, sec. 6.10
 syn match schemeCharacter /#\\\([ ()\[\]{}"\\|;#`'\t\n]\|[^ `'\t\n\[\]()]\+\)/
 syn match schemeCharacter /#\\x\x\+/
 
-" Hash-bang (#!) {{{1
+" TODO: Character set (#[) {{{1
 
-syn match gaucheShebang /\%^\@<=#![\/ ].*$/
-syn match gaucheSpecialToken /\%^\@<!#![^ '`\t\n()\[\]"|;]\+/
-hi def link gaucheShebang Comment
-hi def link gaucheSpecialToken PreProc
-
-" Vectors (#(, #[usfc]\d+) {{{1
-syn clear schemeVector
-syn region schemeVector matchgroup=schemeData start=/#(/ end=/)/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
-syn region schemeVector matchgroup=schemeData start=/\v#%([us]%(8|16|32|64)|f%(16|32|64)|c%(32|64|128))\(/ end=/)/ contains=schemeNumber,schemeComment,schemeDatumComment
-
-" TODO: Import syntaxes {{{1
-
-" syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment
-
-" Datum comments for #\, #", #*", #[sufc]\d+(, #[, and [] {{{1
-
-syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\\/ end=/[ \t\n()\[\]";]/me=e-1
-syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\*\?"/ skip=/\\[\\"]/ end=/"/
-syn region schemeDatumComment matchgroup=schemeDatumComment start=/\v#;[ \t\n`']*%(#%([us]%(8|16|32|64)|f%(16|32|64)|c%(32|64|128))?)?\(/ end=/)/
-syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\[/ skip=/\\[\\\]]/ end=/\]/
-syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\@<!\[/ end=/\]/ contains=schemeDatumCommentForm
 
 " TODO: Regular expression (#/) {{{1
-
 " syn region gaucheRegexp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/
 " syn match gaucheRegexpMetaChar /[*+?^$(|).]/ containedin=gaucheRegexp
 " syn match gaucheRegexpEscChar /\\[*+?^$(|).]/ containedin=gaucheRegexp
@@ -215,20 +195,28 @@ syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#
 " hi def link gaucheRegexpMetaChar Special
 " hi def link gaucheRegexpEscChar schemeCharacter
 
-" TODO: Characters {{{1
+" Vectors (#(, #[usfc]\d+) {{{1
+syn clear schemeVector
+syn region schemeVector matchgroup=schemeData start=/#(/ end=/)/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
+syn region schemeVector matchgroup=schemeData start=/\v#%([us]%(8|16|32|64)|f%(16|32|64)|c%(32|64|128))\(/ end=/)/ contains=schemeNumber,schemeComment,schemeDatumComment
 
+" TODO: Import syntax {{{1
+" syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment
 
+" Datum comments for #\, #", #*", #[sufc]\d+(, #[, and [] {{{1
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\\/ end=/[ \t\n()\[\]";]/me=e-1
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\*\?"/ skip=/\\[\\"]/ end=/"/
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/\v#;[ \t\n`']*%(#%([us]%(8|16|32|64)|f%(16|32|64)|c%(32|64|128))?)?\(/ end=/)/
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\[/ skip=/\\[\\\]]/ end=/\]/
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\@<!\[/ end=/\]/ contains=schemeDatumCommentForm
 
-" TODO: Character sets (#[) {{{1
-
-
-
-" TODO: Highlight keyword symbols (:key) {{{1
-
-
+" Hash-bang (#!) {{{1
+syn match gaucheShebang /\%^\@<=#![\/ ].*$/
+syn match gaucheSpecialToken /\%^\@<!#![^ '`\t\n()\[\]"|;]\+/
+hi def link gaucheShebang Comment
+hi def link gaucheSpecialToken PreProc
 
 " TODO: SRFI-10 read-time constructor (#,) {{{1
-
 " syn cluster schemeReadTimeCtorCluster contains=schemeReadTimeCtor,schemeReadTimeCtorTag
 " syn region schemeReadTimeCtor matchgroup=PreProc start="#,(" end=")" contains=ALLBUT,schemeUnquote,schemeDatumCommentForm,@schemeImportCluster
 " syn match schemeReadTimeCtorTag /\(#,([ \t\n]*\)\@<=[^ '`\t\n()\[\]"|;]\+/ contained "containedin=schemeReadTimeCtor
@@ -236,7 +224,6 @@ syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#
 " hi def link schemeReadTimeCtorTag Tag
 
 " SRFI-38 shared structure (#0..#9) {{{1
-
 syn match schemeSharedStruct /#\d[#=]/
 hi def link schemeSharedStruct PreProc
 
@@ -246,7 +233,7 @@ syn match schemeConditionType /&[^ '`\t\n()\[\]"|;]\+/
 hi def link gaucheClass Type
 hi def link schemeConditionType Type
 
-" Redefine cluster to exclude additional syntaxes below from parentheses {{{1
+" Exclude some of additional syntaxes above from parentheses {{{1
 syn cluster schemeSyntaxCluster contains=schemeFunction,schemeKeyword,schemeSyntax,schemeExtraSyntax,schemeLibrarySyntax,schemeSyntaxSyntax,schemeConditionType,gaucheClass
 syn cluster schemeLiteralCluster contains=schemeStringEscChar,schemeStringMetaChar,gaucheCharSetEscChar,gaucheCharSetMetaChar,gaucheRegExpEscChar,gaucheRegExpMetaChar
 
@@ -255,7 +242,6 @@ hi def link gaucheIncompleteString schemeString
 hi def link gaucheInterpolatedString schemeString
 hi def link schemeStringEscChar schemeCharacter
 hi def link schemeStringMetaChar Special
-
 hi def link schemeVariable Identifier
 
 " Keywords {{{1
