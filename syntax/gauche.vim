@@ -43,6 +43,9 @@ syn match schemeStringEscChar /\(\\u\x\{4}\|\\U\x\{8}\)/ contained containedin=s
 syn match schemeStringMetaChar /\\[nrftab0]/ contained containedin=schemeString,gaucheIncompleteString,gaucheInterpolatedString
 syn match schemeStringMetaChar /\\[ \t]*$/ contained containedin=schemeString,gaucheIncompleteString,gaucheInterpolatedString
 
+" Keyword symbol (:key) {{{1
+syn match gaucheKeyword /:[^ '`\t\n()\[\]"|;]\+/
+
 " Numeric literals {{{1
 syn clear schemeNumber
 " Anatomy of numeric literals (see R7RS, pp. 62-63 and Gauche ref, sec. 4.1)
@@ -168,9 +171,6 @@ syn match schemeNumber /\v%(#d|#[ei]|#[ei]#d|#d#[ei])%(%([+-]?%(%([_0-9]+\.[_0-9
 "                             )
 syn match schemeNumber /\v%(#d|#[ei]#d|#d#[ei])@<!%(%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0)%(pi)?|%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0)?[+-]%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?|%(inf|nan)\.0)?i|%([+-]?%(%([0-9]+\.[0-9]*|0*\.[0-9]+)%([esfdl][+-][0-9]+)?|[0-9]+%(\/[0-9]+)?)|[+-]%(inf|nan)\.0))>/
 
-" TODO: Keyword symbol (:key) {{{1
-
-
 " Character {{{1
 syn clear schemeCharacter
 " See Gauche ref, sec. 6.10
@@ -225,7 +225,7 @@ syn match gaucheClass /<[^ '`\t\n()\[\]"|;]\+>/
 syn match schemeConditionType /&[^ '`\t\n()\[\]"|;]\+/
 
 " Exclude some of additional syntaxes above from parentheses {{{1
-syn cluster schemeSyntaxCluster contains=schemeFunction,schemeKeyword,schemeSyntax,schemeExtraSyntax,schemeLibrarySyntax,schemeSyntaxSyntax,schemeConditionType,gaucheClass
+syn cluster schemeSyntaxCluster contains=schemeFunction,schemeKeyword,schemeSyntax,schemeExtraSyntax,schemeLibrarySyntax,schemeSyntaxSyntax,schemeConditionType,gaucheKeyword,gaucheClass
 syn cluster schemeLiteralCluster contains=schemeStringEscChar,schemeStringMetaChar,gaucheCharSetEscChar,gaucheCharSetMetaChar,gaucheRegExpEscChar,gaucheRegExpMetaChar
 
 " Highlights {{{1
@@ -233,6 +233,7 @@ hi def link gaucheIncompleteString schemeString
 hi def link gaucheInterpolatedString schemeString
 hi def link schemeStringEscChar schemeCharacter
 hi def link schemeStringMetaChar Special
+hi def link gaucheKeyword Tag
 " hi def link gaucheRegexp String
 " hi def link gaucheRegexpMetaChar Special
 " hi def link gaucheRegexpEscChar schemeCharacter
