@@ -180,12 +180,13 @@ syn match schemeCharacter /#\\\([ ()\[\]{}"\\|;#`'\t\n]\|[^ `'\t\n\[\]()]\+\)/
 syn match schemeCharacter /#\\x\x\+/
 
 " Character set (#[) {{{1
-syn region gaucheCharSet start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contains=gaucheCharSetEscChar,gaucheCharSetMetaChar
-syn match gaucheCharSetEscChar /\v\\@<!\\[\-\^\\]/ contained
+syn region gaucheCharSet start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contains=gaucheCharSetForm
+syn region gaucheCharSetForm start=/\\\@<!\[\zs/ skip=/\\[\\\]]/ end=/\ze\]/ contained contains=gaucheCharSetEscChar,gaucheCharSetMetaChar
+syn match gaucheCharSetEscChar /\\[-^\\\[\]]/ contained
 syn match gaucheCharSetEscChar /\\x\x\+;/ contained
-syn match gaucheCharSetMetaChar /\v\\@<!\-/ contained
-syn match gaucheCharSetMetaChar /\v%(#\[)@<=\^/ contained
-syn match gaucheCharSetMetaChar /\v\\@<!\\[sSdDwW]/ contained
+syn match gaucheCharSetMetaChar /\%(\\\@<!\[^\?\)\@<!-\]\@!/ contained
+syn match gaucheCharSetMetaChar /\%(\\\@<!\[\)\@<=^/ contained
+syn match gaucheCharSetMetaChar /\\[sSdDwW]/ contained
 syn match gaucheCharSetMetaChar /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
 syn match gaucheCharSetMetaChar /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
@@ -240,7 +241,7 @@ syn match schemeConditionType /&[^ '`\t\n()\[\]"|;]\+/
 
 " Exclude some of additional syntaxes above from parentheses {{{1
 syn cluster schemeSyntaxCluster contains=schemeFunction,schemeKeyword,schemeSyntax,schemeExtraSyntax,schemeLibrarySyntax,schemeSyntaxSyntax,schemeConditionType,gaucheKeyword,gaucheClass
-syn cluster schemeLiteralCluster contains=schemeStringEscChar,schemeStringMetaChar,gaucheCharSetEscChar,gaucheCharSetMetaChar,gaucheRegExpEscChar,gaucheRegExpMetaChar
+syn cluster schemeLiteralCluster contains=schemeStringEscChar,schemeStringMetaChar,gaucheCharSetEscChar,gaucheCharSetMetaChar,gaucheCharSetForm,gaucheRegExpEscChar,gaucheRegExpMetaChar
 
 " Highlights {{{1
 hi def link gaucheIncompleteString schemeString
@@ -248,8 +249,9 @@ hi def link gaucheInterpolatedString schemeString
 hi def link schemeStringEscChar schemeCharacter
 hi def link schemeStringMetaChar Special
 hi def link gaucheKeyword Tag
-hi def link gaucheCharSet schemeCharacter
-hi def link gaucheCharSetEscChar Special
+hi def link gaucheCharSet Special
+hi def link gaucheCharSetForm schemeString
+hi def link gaucheCharSetEscChar schemeCharacter
 hi def link gaucheCharSetMetaChar Special
 " hi def link gaucheRegexp String
 " hi def link gaucheRegexpMetaChar Special
