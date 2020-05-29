@@ -11,7 +11,7 @@
     - ~~`#:`~~ it's ok to colorize this as ordinal symbol
     - [x] `#;` implemented in `syntax/scheme.vim` (extended)
     - ~~`#<`~~ unreadable object, no need
-    - [ ] `#?`
+    - [x] `#?`
     - [x] `#b`, `#d`, `#o`, `#x`, `#e`, `#i`
     - [x] `#t`, `#f` implemented in `syntax/scheme.vim`
     - [x] `#u`, `#s`, `#f` implemented in `syntax/scheme.vim` (refined)

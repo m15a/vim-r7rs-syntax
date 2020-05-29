@@ -213,6 +213,9 @@ syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#
 syn match schemeShebang /\%^\@<=#![\/ ].*$/
 syn match schemeDirective /\%^\@<!#![^ '`\t\n()\[\]"|;]\+/
 
+" Debug (#?) {{{1
+syn match gaucheDebug /#?[,=]/
+
 " TODO: SRFI-10 read-time constructor (#,) {{{1
 " syn cluster schemeReadTimeCtorCluster contains=schemeReadTimeCtor,schemeReadTimeCtorTag
 " syn region schemeReadTimeCtor matchgroup=PreProc start="#,(" end=")" contains=ALLBUT,schemeUnquote,schemeDatumCommentForm,@schemeImportCluster
@@ -241,6 +244,7 @@ hi def link gaucheKeyword Tag
 " hi def link gaucheRegexpEscChar schemeCharacter
 hi def link schemeShebang Comment
 hi def link schemeDirective PreProc
+hi def link gaucheDebug Debug
 " hi def link schemeReadTimeCtorTag Tag
 hi def link schemeSharedStruct PreProc
 hi def link schemeVariable Identifier
