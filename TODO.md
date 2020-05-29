@@ -22,6 +22,7 @@
 - [x] Highlight `use` like `import`
 - [x] Highlight keywords (`:key` ~~and `#:key`~~)
 - [x] Add numeric literals (including `#\d[rR]...`)
+- [ ] Highlight `format` keywords?
 - [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
     - [x] `@defspecx?`
