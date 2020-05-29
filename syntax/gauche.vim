@@ -191,7 +191,7 @@ syn match gaucheCharSetMetaChar /\\[sSdDwW]/ contained
 syn match gaucheCharSetMetaChar /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
 syn match gaucheCharSetMetaChar /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
-" TODO: Regular expression (#/) {{{1
+" Regular expression (#/) {{{1
 syn cluster gaucheRegExpCluster contains=gaucheRegExpEscChar,gaucheRegExpMetaChar,gaucheRegExpCapture,gaucheRegExpPattern,gaucheRegExpCharSet
 syn region gaucheRegExp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheRegExpCluster,gaucheRegExpCap,gaucheRegExpDollar
 syn region gaucheRegExpCapture matchgroup=gaucheRegExpMetaChar start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRegExpCluster
@@ -218,11 +218,12 @@ syn clear schemeImport schemeImportKeyword
 syn region schemeImport matchgroup=schemeImport start=/\%(([ \t\n]*\)\@<=\%(import\|use\)\>/ end=/)/me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,schemeImportKeyword
 syn match schemeImportKeyword /:\?\%(only\|except\|rename\|prefix\)\>/
 
-" Datum comments for #\, #", #*", #[sufc]\d+(, #[, and [] {{{1
+" Datum comments for sharp syntax and [] {{{1
 syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\\/ end=/[ \t\n()\[\]";]/me=e-1
 syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\*\?"/ skip=/\\[\\"]/ end=/"/
 syn region schemeDatumComment matchgroup=schemeDatumComment start=/\v#;[ \t\n`']*%(#%([us]%(8|16|32|64)|f%(16|32|64)|c%(32|64|128))?)?\(/ end=/)/
 syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\[/ skip=/\\[\\\]]/ end=/\]/
+syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\// skip=/\\[\\\/]/ end=/\//
 syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\@<!\[/ end=/\]/ contains=schemeDatumCommentForm
 
 " Hash-bang (#!) {{{1
