@@ -6,7 +6,7 @@
     - [x] `#(` implemented in `syntax/scheme.vim` (refined)
     - [x] `#*`
     - [ ] `#,`
-    - [ ] `#/`
+    - [x] `#/`
     - [x] `#0`...`#9`
     - ~~`#:`~~ it's ok to colorize this as ordinal symbol
     - [x] `#;` implemented in `syntax/scheme.vim` (extended)

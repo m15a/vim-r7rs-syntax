@@ -14,6 +14,7 @@ endif
 syn region schemeQuote matchgroup=schemeData start=/'['`]*#\?(/ end=/)/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeQuote matchgroup=schemeData start=/'['`]*#\@<!\[/ end=/\]/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeQuote matchgroup=schemeData start=/'['`]*#\[/ skip=/\\[\\\]]/ end=/\]/
+syn region schemeQuote matchgroup=schemeData start=/'['`]*#\// skip=/\\[\\\/]/ end=/\//
 syn region schemeQuote matchgroup=schemeData start=/'['`]*#\*\?"/ skip=/\\[\\"]/ end=/"/
 syn region schemeQuasiquote matchgroup=schemeData start=/`['`]*#\?(/ end=/)/ contains=ALLBUT,schemeQuote,schemeQuoteForm,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeQuasiquote matchgroup=schemeData start=/`['`]*\[/ end=/\]/ contains=ALLBUT,schemeQuote,schemeQuoteForm,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
@@ -191,16 +192,21 @@ syn match gaucheCharSetMetaChar /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|grap
 syn match gaucheCharSetMetaChar /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
 " TODO: Regular expression (#/) {{{1
-" syn region gaucheRegexp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/
-" syn match gaucheRegexpMetaChar /[*+?^$(|).]/ containedin=gaucheRegexp
-" syn match gaucheRegexpEscChar /\\[*+?^$(|).]/ containedin=gaucheRegexp
-" syn match gaucheRegexpMetaChar /\\[sSdDwWbB]/ containedin=gaucheRegexp
-" syn match gaucheRegexpEscChar /\\[\\\/;"#]/ containedin=gaucheRegexp
-" syn match gaucheRegexpMetaChar /{\(\d\+\)\?\(,\)\?\(\d\+\)\?}/ containedin=gaucheRegexp
-" syn match gaucheRegexpMetaChar /?\(-\?i\)\?:/ containedin=gaucheRegexp
-" syn match gaucheRegexpMetaChar /?<\(\\>\|[^>=!]\)*>/ containedin=gaucheRegexp
-" syn match gaucheRegexpMetaChar /?\(<\?[=!]\|>\)/ containedin=gaucheRegexp
-" syn match gaucheRegexpMetaChar /\\\(\d\+\|k<\(\\>\|[^>]\)*>\)/ containedin=gaucheRegexp
+syn cluster gaucheRegExpCluster contains=gaucheRegExpEscChar,gaucheRegExpMetaChar,gaucheRegExpCapture,gaucheRegExpPattern,gaucheRegExpCharSet
+syn region gaucheRegExp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheRegExpCluster,gaucheRegExpCap,gaucheRegExpDollar
+syn region gaucheRegExpCapture matchgroup=gaucheRegExpMetaChar start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRegExpCluster
+syn region gaucheRegExpCapture matchgroup=gaucheRegExpMetaChar start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRegExpCluster
+syn region gaucheRegExpCapture matchgroup=gaucheRegExpMetaChar start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRegExpCluster
+syn region gaucheRegExpPattern matchgroup=gaucheRegExpMetaChar start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRegExpCluster,gaucheRegExpCap,gaucheRegExpDollar
+syn match gaucheRegExpCap /\%(#\/\|\\\@<!(?\%(<\?[=!]\|>\)\|\\\@<!|\)\@<=\^/ contained
+syn match gaucheRegExpDollar /\$\([|)\/]\)\@=/ contained
+syn match gaucheRegExpEscChar /\\[.*+?{,}:<>-|\[\]^$=!;"#\\\/]/ contained
+syn match gaucheRegExpMetaChar /\\\@<![.*+?|]/ contained
+syn match gaucheRegExpMetaChar /\\[sSdDwWbB]/ contained
+syn match gaucheRegExpMetaChar /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
+syn match gaucheRegExpMetaChar /\\\(\d\+\|k<\(\\>\|[^>]\)*>\)/ contained
+syn region gaucheRegExpCharSet start=/\\\@<!\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheRegExpCharSetForm
+syn region gaucheRegExpCharSetForm start=/\\\@<!\[\zs/ skip=/\\[\\\]]/ end=/\ze\]/ contained contains=gaucheCharSetEscChar,gaucheCharSetMetaChar
 
 " Vectors (#(, #[usfc]\d+) {{{1
 syn clear schemeVector
@@ -241,7 +247,7 @@ syn match schemeConditionType /&[^ '`\t\n()\[\]"|;]\+/
 
 " Exclude some of additional syntaxes above from parentheses {{{1
 syn cluster schemeSyntaxCluster contains=schemeFunction,schemeKeyword,schemeSyntax,schemeExtraSyntax,schemeLibrarySyntax,schemeSyntaxSyntax,schemeConditionType,gaucheKeyword,gaucheClass
-syn cluster schemeLiteralCluster contains=schemeStringEscChar,schemeStringMetaChar,gaucheCharSetEscChar,gaucheCharSetMetaChar,gaucheCharSetForm,gaucheRegExpEscChar,gaucheRegExpMetaChar
+syn cluster schemeLiteralCluster contains=schemeStringEscChar,schemeStringMetaChar,gaucheCharSetEscChar,gaucheCharSetMetaChar,gaucheCharSetForm,gaucheRegExpEscChar,gaucheRegExpMetaChar,gaucheRegExpCapture,gaucheRegExpPattern,gaucheRegExpCharSet,gaucheRegExpCharSetForm
 
 " Highlights {{{1
 hi def link gaucheIncompleteString schemeString
@@ -253,9 +259,15 @@ hi def link gaucheCharSet Special
 hi def link gaucheCharSetForm schemeString
 hi def link gaucheCharSetEscChar schemeCharacter
 hi def link gaucheCharSetMetaChar Special
-" hi def link gaucheRegexp String
-" hi def link gaucheRegexpMetaChar Special
-" hi def link gaucheRegexpEscChar schemeCharacter
+hi def link gaucheRegExp schemeString
+hi def link gaucheRegExpEscChar schemeCharacter
+hi def link gaucheRegExpMetaChar Special
+hi def link gaucheRegExpCapture gaucheRegExp
+hi def link gaucheRegExpPattern gaucheRegExp
+hi def link gaucheRegExpCap gaucheRegExpMetaChar
+hi def link gaucheRegExpDollar gaucheRegExpMetaChar
+hi def link gaucheRegExpCharSet gaucheCharSet
+hi def link gaucheRegExpCharSetForm gaucheCharSetForm
 hi def link schemeShebang Comment
 hi def link schemeDirective PreProc
 hi def link gaucheDebug Debug
