@@ -7,8 +7,8 @@
     - [x] `#*`
     - [ ] `#,`
     - [ ] `#/`
-    - [ ] `#0`...`#9`
-    - [ ] `#:`
+    - [x] `#0`...`#9`
+    - ~~`#:`~~ it's ok to colorize this as ordinal symbol
     - [x] `#;` implemented in `syntax/scheme.vim` (extended)
     - ~~`#<`~~ unreadable object, no need
     - [ ] `#?`
@@ -19,7 +19,7 @@
     - [ ] `#[`
     - [x] `#\` implemented in `syntax/scheme.vim` (refined)
     - [x] `#|` implemented in `syntax/scheme.vim` (refined)
-- [x] Highlight keywords (`:key` and `#:key`)
+- [x] Highlight keywords (`:key` ~~and `#:key`~~)
 - [x] Add numeric literals (including `#\d[rR]...`)
 - [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
