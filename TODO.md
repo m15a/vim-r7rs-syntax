@@ -16,7 +16,7 @@
     - [x] `#t`, `#f` implemented in `syntax/scheme.vim`
     - [x] `#u`, `#s`, `#f` implemented in `syntax/scheme.vim` (refined)
     - [x] `#c`
-    - [ ] `#[`
+    - [x] `#[`
     - [x] `#\` implemented in `syntax/scheme.vim` (refined)
     - [x] `#|` implemented in `syntax/scheme.vim` (refined)
 - [x] Highlight `use` like `import`

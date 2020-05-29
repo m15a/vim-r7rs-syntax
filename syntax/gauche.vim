@@ -12,7 +12,8 @@ endif
 
 " Add [] to parentheses and ignore literals inside {{{1
 syn region schemeQuote matchgroup=schemeData start=/'['`]*#\?(/ end=/)/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
-syn region schemeQuote matchgroup=schemeData start=/'['`]*\[/ end=/\]/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
+syn region schemeQuote matchgroup=schemeData start=/'['`]*#\@<!\[/ end=/\]/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
+syn region schemeQuote matchgroup=schemeData start=/'['`]*#\[/ skip=/\\[\\\]]/ end=/\]/
 syn region schemeQuote matchgroup=schemeData start=/'['`]*#\*\?"/ skip=/\\[\\"]/ end=/"/
 syn region schemeQuasiquote matchgroup=schemeData start=/`['`]*#\?(/ end=/)/ contains=ALLBUT,schemeQuote,schemeQuoteForm,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeQuasiquote matchgroup=schemeData start=/`['`]*\[/ end=/\]/ contains=ALLBUT,schemeQuote,schemeQuoteForm,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
@@ -178,8 +179,15 @@ syn clear schemeCharacter
 syn match schemeCharacter /#\\\([ ()\[\]{}"\\|;#`'\t\n]\|[^ `'\t\n\[\]()]\+\)/
 syn match schemeCharacter /#\\x\x\+/
 
-" TODO: Character set (#[) {{{1
-
+" Character set (#[) {{{1
+syn region gaucheCharSet start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contains=gaucheCharSetEscChar,gaucheCharSetMetaChar
+syn match gaucheCharSetEscChar /\v\\@<!\\[\-\^\\]/ contained
+syn match gaucheCharSetEscChar /\\x\x\+;/ contained
+syn match gaucheCharSetMetaChar /\v\\@<!\-/ contained
+syn match gaucheCharSetMetaChar /\v%(#\[)@<=\^/ contained
+syn match gaucheCharSetMetaChar /\v\\@<!\\[sSdDwW]/ contained
+syn match gaucheCharSetMetaChar /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
+syn match gaucheCharSetMetaChar /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
 " TODO: Regular expression (#/) {{{1
 " syn region gaucheRegexp start=/#\// skip=/\\[\\\/]/ end=/\/i\?/
@@ -240,6 +248,9 @@ hi def link gaucheInterpolatedString schemeString
 hi def link schemeStringEscChar schemeCharacter
 hi def link schemeStringMetaChar Special
 hi def link gaucheKeyword Tag
+hi def link gaucheCharSet schemeCharacter
+hi def link gaucheCharSetEscChar Special
+hi def link gaucheCharSetMetaChar Special
 " hi def link gaucheRegexp String
 " hi def link gaucheRegexpMetaChar Special
 " hi def link gaucheRegexpEscChar schemeCharacter
