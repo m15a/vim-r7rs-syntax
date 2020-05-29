@@ -19,6 +19,7 @@
     - [ ] `#[`
     - [x] `#\` implemented in `syntax/scheme.vim` (refined)
     - [x] `#|` implemented in `syntax/scheme.vim` (refined)
+- [x] Highlight `use` like `import`
 - [x] Highlight keywords (`:key` ~~and `#:key`~~)
 - [x] Add numeric literals (including `#\d[rR]...`)
 - [ ] Build syntax file from texinfo tags

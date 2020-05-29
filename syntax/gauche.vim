@@ -197,8 +197,10 @@ syn clear schemeVector
 syn region schemeVector matchgroup=schemeData start=/#(/ end=/)/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeVector matchgroup=schemeData start=/\v#%([us]%(8|16|32|64)|f%(16|32|64)|c%(32|64|128))\(/ end=/)/ contains=schemeNumber,schemeComment,schemeDatumComment
 
-" TODO: Import syntax {{{1
-" syn region schemeImport matchgroup=schemeImport start="\(([ \t\n]*\)\@<=use\>" end=")"me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment
+" import and use {{{1
+syn clear schemeImport schemeImportKeyword
+syn region schemeImport matchgroup=schemeImport start=/\%(([ \t\n]*\)\@<=\%(import\|use\)\>/ end=/)/me=e-1 contained contains=schemeImportForm,schemeIdentifier,schemeComment,schemeDatumComment,schemeImportKeyword
+syn match schemeImportKeyword /:\?\%(only\|except\|rename\|prefix\)\>/
 
 " Datum comments for #\, #", #*", #[sufc]\d+(, #[, and [] {{{1
 syn region schemeDatumComment matchgroup=schemeDatumComment start=/#;[ \t\n`']*#\\/ end=/[ \t\n()\[\]";]/me=e-1
