@@ -10,6 +10,9 @@ if !exists('b:did_scheme_syntax')
   finish
 endif
 
+" Let extra closing )] be error {{{1
+syn match Error /[)\]]/
+
 " Add [] to parentheses and ignore literals inside {{{1
 syn region schemeQuote matchgroup=schemeData start=/'['`]*#\?(/ end=/)/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
 syn region schemeQuote matchgroup=schemeData start=/'['`]*#\@<!\[/ end=/\]/ contains=ALLBUT,schemeQuasiquote,schemeQuasiquoteForm,schemeUnquote,schemeForm,schemeDatumCommentForm,schemeImport,@schemeImportCluster,@schemeSyntaxCluster,@schemeLiteralCluster
