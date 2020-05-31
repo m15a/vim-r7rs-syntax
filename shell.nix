@@ -17,6 +17,8 @@ mkShell {
 
   VIM_SRC = vim.src;
 
+  GAUCHE_READ_EDIT = "yes";
+
   shellHook = ''
   '';
 }
