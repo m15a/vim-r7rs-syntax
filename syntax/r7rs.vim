@@ -12,7 +12,7 @@ endif
 let s:cpo = &cpo
 set cpo&vim
 
-" Options {{{
+" Options {{{1
 
 " If (b|g):r7rs_strict is true, the following options are set to obey strict R7RS.
 if !exists('b:r7rs_strict')
@@ -37,21 +37,8 @@ if !exists('b:r7rs_strict_identifier')
   let b:r7rs_strict_identifier = get(g:, 'r7rs_strict_identifier', 0)
 endif
 
-" }}}
-
-" Anything visible other than defined below are error.
+" Anything visible other than defined below are error. {{{1
 syn match r7rsErr /[^[:space:]\n]/
-
-" Delimiters {{{1
-let s:parens = '()'
-if b:r7rs_brackets_as_parens
-  let s:parens .= '\[\]'
-endif
-if b:r7rs_braces_as_parens
-  let s:parens .= '{}'
-endif
-exe 'syn match r7rsDelim /[|' . s:parens . '";]/'
-unlet s:parens
 
 " Comments and directives {{{1
 syn cluster r7rsComments contains=r7rsComment,r7rsCommentNested,r7rsCommentSharp,r7rsDirective
@@ -67,7 +54,8 @@ syn region r7rsCommentSharp start=/#;/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ ski
 syn match r7rsDirective /#!\%(no-\)\?fold-case/
 
 " Simple data (cf. R7RS, sec. 7.1.2) {{{1
-syn cluster r7rsData contains=r7rsId,r7rsBool,r7rsNum,r7rsChar,r7rsStr,r7rsByteVec
+syn cluster r7rsData contains=@r7rsDataSimple,@r7rsDataCompound,r7rsLabel
+syn cluster r7rsDataSimple contains=r7rsId,r7rsBool,r7rsNum,r7rsChar,r7rsStr,r7rsByteVec
 
 " Identifiers (cf. R7RS, sec. 2.1 ,p. 62, and SmallErrata, 7) {{{2
 
@@ -201,27 +189,72 @@ syn match r7rsEscWrap /\\[[:space:]]*$/ contained
 " Bytevectors {{{2
 syn region r7rsByteVec matchgroup=r7rsDelim start=/#u8(/ end=/)/ contains=r7rsErr,r7rsNum
 
-" Compound data {{{1
+" Compound data (cf. R7RS, sec. 7.1.2) {{{1
+syn cluster r7rsDataCompound contains=r7rsList,r7rsVec,r7rsQ,r7rsQQ
 
-" Note that , and ,@ are omitted since they can appear only in quasiquotes.
-" syn cluster r7rsData add=r7rsList,r7rsVec,r7rsQ,r7rsQQ,
-" Labels
-" syn cluster r7rsData add=r7rsLabel
+" Normal lists and vector {{{2
+syn region r7rsList matchgroup=r7rsDelim start=/#\@<!(/ end=/)/ contains=r7rsErr,@r7rsComments,@r7rsData
+if b:r7rs_brackets_as_parens
+  syn region r7rsList matchgroup=r7rsDelim start=/#\@<!\[/ end=/\]/ contains=r7rsErr,@r7rsComments,@r7rsData
+endif
+if b:r7rs_braces_as_parens
+  syn region r7rsList matchgroup=r7rsDelim start=/#\@<!{/ end=/}/ contains=r7rsErr,@r7rsComments,@r7rsData
+endif
+syn region r7rsVec matchgroup=r7rsDelim start=/#(/ end=/)/ contains=r7rsErr,@r7rsComments,@r7rsData
 
-" syn cluster r7rsData add=r7rsSyn,r7rsProc
-" Auxiliary syntax
-" syn cluster r7rsSynAux contains=r7rsUnq,r7rsDot,r7rsElse
+" Quoted simple data (any identifier, |symbol|, \"string\", or #-syntax other than '#(') {{{2
+syn match r7rsQ /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=r7rsDataSimple
+syn match r7rsQ /'\ze#[^(]/ nextgroup=r7rsDataSimple
 
-  " syn region r7rsParens start=/(/ end=/)/ contains=@r7rsTokens,@r7rsComments
-  " syn region r7rsParens start=/\[/ end=/\]/ contains=r7rsParens,@r7rsComments
+" Quoted lists and vector {{{2
+syn match r7rsQ /'\ze(/ nextgroup=r7rsQList
+syn region r7rsQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData
+if b:r7rs_brackets_as_parens
+  syn match r7rsQ /'\ze\[/ nextgroup=r7rsQList
+  syn region r7rsQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contains=r7rsErr,@r7rsComments,@r7rsData
+endif
+if b:r7rs_braces_as_parens
+  syn match r7rsQ /'\ze{/ nextgroup=r7rsQList
+  syn region r7rsQList matchgroup=r7rsDelim start=/{/ end=/}/ contains=r7rsErr,@r7rsComments,@r7rsData
+endif
+syn match r7rsQ /'\ze#(/ nextgroup=r7rsQVec
+syn region r7rsQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData
 
-" TODO: Add more datum pattern
-" syn region r7rsCommentDatum start=/(/ end=/)/ contained
-" if b:r7rs_use_square_brackets
-"   syn region r7rsCommentDatum start=/\[/ end=/\]/ contained
-" endif
+" Quoted quotes {{{2
+syn match r7rsQ /'\ze'/ nextgroup=r7rsQ
+syn match r7rsQ /'\ze`/ nextgroup=r7rsQQ
 
-" syn region r7rsQuote start=/'['`]*/ end=/\ze[[:space:]\n|()";]/ contains=r7rsIdentifier
+" Quasiquoted simple data (any identifier, |symbol|, \"string\", or #-syntax other than '#(') {{{2
+syn match r7rsQQ /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=r7rsDataSimple
+syn match r7rsQQ /`\ze#[^(]/ nextgroup=r7rsDataSimple
+
+" Quasiquoted lists and vector {{{2
+syn match r7rsQQ /`\ze(/ nextgroup=r7rsQQList
+syn region r7rsQQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData,r7rsU
+if b:r7rs_brackets_as_parens
+  syn match r7rsQQ /`\ze\[/ nextgroup=r7rsQQList
+  syn region r7rsQQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contains=r7rsErr,@r7rsComments,@r7rsData,r7rsU
+endif
+if b:r7rs_braces_as_parens
+  syn match r7rsQQ /`\ze{/ nextgroup=r7rsQQList
+  syn region r7rsQQList matchgroup=r7rsDelim start=/{/ end=/}/ contains=r7rsErr,@r7rsComments,@r7rsData,r7rsU
+endif
+syn match r7rsQQ /`\ze#(/ nextgroup=r7rsQQVec
+syn region r7rsQQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData,r7rsU
+
+" Quasiquoted quotes {{{2
+syn match r7rsQQ /`\ze'/ nextgroup=r7rsQ
+syn match r7rsQQ /`\ze`/ nextgroup=r7rsQQ
+
+" Unquote {{{2
+" It allows comments before reaching any datum.
+syn region r7rsU start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
+
+" Dot '.' {{{2
+syn keyword r7rsDot . contained containedin=r7rsList,r7rsQList,r7rsQQList
+
+" Labels {{{1
+" syn match r7rsLabel
 
 " Highlights {{{1
 
@@ -241,6 +274,11 @@ hi def link r7rsEscDelim Character
 hi def link r7rsEscHex Character
 hi def link r7rsEscMnemonic SpecialChar
 hi def link r7rsEscWrap SpecialChar
+hi def link r7rsQ r7rsSyn
+hi def link r7rsQQ r7rsSyn
+hi def link r7rsU Special
+hi def link r7rsDot Special
+hi def link r7rsSyn Statement
 
 " Keywords {{{1
 
@@ -250,4 +288,4 @@ let b:current_syntax = 'r7rs'
 let &cpo = s:cpo
 unlet s:cpo
 
-" vim: tw=120 fdm=marker
+" vim: tw=150 fdm=marker
