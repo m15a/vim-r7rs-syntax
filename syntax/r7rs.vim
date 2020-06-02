@@ -253,8 +253,9 @@ syn region r7rsU start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained co
 " Dot '.' {{{2
 syn keyword r7rsDot . contained containedin=r7rsList,r7rsQList,r7rsQQList
 
-" Labels {{{1
-" syn match r7rsLabel
+" Labels (cf. R7RS, sec. 2.4) {{{1
+syn match r7rsLabel /#\d\+#/
+syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Highlights {{{1
 
@@ -279,6 +280,7 @@ hi def link r7rsQQ r7rsSyn
 hi def link r7rsU Special
 hi def link r7rsDot Special
 hi def link r7rsSyn Statement
+hi def link r7rsLabel Underlined
 
 " Keywords {{{1
 
