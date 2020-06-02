@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (Gauche)
-" Last Change: 2020-05-26
+" Last change: 2020-05-26
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche
 " License: Public domain
@@ -10,7 +10,7 @@ if !exists('b:did_scheme_ftplugin')
   finish
 endif
 
-" lispwords {{{1
+" lispwords {{{
 
 setl lispwords+=and-let*
 setl lispwords+=and-let1
@@ -119,3 +119,7 @@ setl lispwords+=u8vector-set!
 setl lispwords+=uvector-set!
 setl lispwords+=weak-vector-set!
 setl lispwords+=zstream-params-set!
+
+" }}}
+
+" vim: et sw=2 sts=-1 tw=0 fdm=marker

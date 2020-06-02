@@ -1,1 +1,1 @@
-au BufNewFile,BufFilePre,BufRead *.scm,*.ss,*.sld set filetype=r7rs
+au BufNewFile,BufFilePre,BufRead *.scm,*.sld,*.ss set filetype=r7rs

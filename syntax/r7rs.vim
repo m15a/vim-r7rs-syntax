@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS-small)
-" Last Change: 2020-05-31
+" Last change: 2020-05-31
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: Public domain
@@ -41,33 +41,33 @@ endif
 syn match r7rsErr /[^[:space:]\n]/
 
 " Comments and directives {{{1
-syn cluster r7rsComments contains=r7rsComment,r7rsCommentNested,r7rsCommentSharp,r7rsDirective
+syn cluster r7rsComs contains=r7rsCom,r7rsComNested,r7rsComSharp,r7rsDirective
 
 " Comments
-syn region r7rsComment start=/#\@<!;/ end=/$/
-syn region r7rsCommentNested start=/#|/ end=/|#/ contains=r7rsCommentNested
+syn region r7rsCom start=/#\@<!;/ end=/$/
+syn region r7rsComNested start=/#|/ end=/|#/ contains=r7rsComNested
 " FIXME: highlight nested #;
-" In `#; #; hello hello r7rs!`, the two `hello`s should be r7rsCommentDatum but not implemented yet.
-syn region r7rsCommentSharp start=/#;/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=r7rsCommentDatum
+" In `#; #; hello hello r7rs!`, the two `hello`s should be r7rsComDatum but not implemented yet.
+syn region r7rsComSharp start=/#;/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComs skipwhite skipempty nextgroup=r7rsComDatum
 
 " Comment out anything like literal identifier or number
-syn match r7rsCommentDatum /#\?[^[:space:]\n|()";'`,\\#\[\]{}]\+/ contained
+syn match r7rsComDatum /#\?[^[:space:]\n|()";'`,\\#\[\]{}]\+/ contained
 " Comment out character
-syn match r7rsCommentDatum /#\\./ contained
-syn match r7rsCommentDatum /#\\[^[:space:]\n|()";'`,\\#\[\]{}]\+/ contained
+syn match r7rsComDatum /#\\./ contained
+syn match r7rsComDatum /#\\[^[:space:]\n|()";'`,\\#\[\]{}]\+/ contained
 " Comment out enclosed identifier
-syn region r7rsCommentDatum start=/|/ skip=/\\[\\|]/ end=/|/ contained
+syn region r7rsComDatum start=/|/ skip=/\\[\\|]/ end=/|/ contained
 " Comment out string
-syn region r7rsCommentDatum start=/"/ skip=/\\[\\"]/ end=/"/ contained
+syn region r7rsComDatum start=/"/ skip=/\\[\\"]/ end=/"/ contained
 " Comment out label
-syn match r7rsCommentDatum /#\d\+#/ contained
-syn region r7rsCommentDatum start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=r7rsCommentDatum
+syn match r7rsComDatum /#\d\+#/ contained
+syn region r7rsComDatum start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComs skipwhite skipempty nextgroup=r7rsComDatum
 " Comment out parens
-syn region r7rsCommentDatum start=/(/ end=/)/ contained contains=r7rsCommentDatum
-syn region r7rsCommentDatum start=/\[/ end=/\]/ contained contains=r7rsCommentDatum
-syn region r7rsCommentDatum start=/{/ end=/}/ contained contains=r7rsCommentDatum
+syn region r7rsComDatum start=/(/ end=/)/ contained contains=r7rsComDatum
+syn region r7rsComDatum start=/\[/ end=/\]/ contained contains=r7rsComDatum
+syn region r7rsComDatum start=/{/ end=/}/ contained contains=r7rsComDatum
 " Move on when prefix before parens found
-syn match r7rsCommentDatum /\(['`]\|,@\?\|#\([[:alpha:]]\d\+\)\?\ze(\)/ contained nextgroup=r7rsCommentDatum
+syn match r7rsComDatum /\(['`]\|,@\?\|#\([[:alpha:]]\d\+\)\?\ze(\)/ contained nextgroup=r7rsComDatum
 
 " Directives (cf. R7RS, sec. 2.1 (p. 8) last paragraph)
 syn match r7rsDirective /#!\%(no-\)\?fold-case/
@@ -82,25 +82,22 @@ syn cluster r7rsDataSimple contains=r7rsId,r7rsBool,r7rsNum,r7rsChar,r7rsStr,r7r
 syn region r7rsId matchgroup=r7rsDelim start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
 
 if b:r7rs_strict_identifier
+  " Those starting with other than ., <explicit sign>, and <digit>
+  " <subsequent> are replaced with [^[:space:]\n|()";'`,\\#\[\]{}].
+  " <subsequent> \ <initial> = <digit> | <special subsequent> =  [.+\-0-9] and thus
+  " <initial> <subsequent>* is equal to this regexp.
+  syn match r7rsId /[^.+\-0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
 
-" Those starting with other than ., <explicit sign>, and <digit>
-"   Here, <subsequent> are replaced with [^[:space:]\n|()";'`,\\#\[\]{}].
-"   <subsequent> \ <initial> = <digit> | <special subsequent> =  [.+\-0-9]
-syn match r7rsId /[^.+\-0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
+  " Peculiar identifier case 1 and 2
+  " <sign subsequent> = <initial> | <explicit sign> = [^.0-9[:space:]\n|()";'`,\\#\[\]{}]
+  syn match r7rsId /[+-]\%([^.0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*\)\?/
 
-" Peculiar identifier case 1 and 2
-"   <sign subsequent> = <initial> | <explicit sign> = [^.0-9[:space:]\n|()";'`,\\#\[\]{}]
-syn match r7rsId /[+-]\%([^.0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*\)\?/
-
-" Peculiar identifier case 3 and 4
-syn match r7rsId /[+-]\?\.[^0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
-
+  " Peculiar identifier case 3 and 4
+  syn match r7rsId /[+-]\?\.[^0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
 else
-
-" Anything except single '.' is permitted.
-syn match r7rsId /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/
-syn match r7rsId /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
-
+  " Anything except single '.' is permitted.
+  syn match r7rsId /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/
+  syn match r7rsId /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
 endif
 
 " Number (cf. R7RS, pp. 62-63) {{{2
@@ -196,70 +193,70 @@ syn match r7rsChar /#\\\%(alarm\|backspace\|delete\|escape\|newline\|null\|retur
 " String {{{2
 syn region r7rsStr matchgroup=r7rsDelim start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
 
-" Escaped characters (embedded in \"strings\" and |symbols|) {{{2
+" Escaped characters (embedded in \"strings\" and |identifiers|) {{{2
 syn cluster r7rsEscChars contains=r7rsEscDelim,r7rsEscHex,r7rsEscMnemonic
 syn match r7rsEscDelim /\\[\\|"]/ contained
 syn match r7rsEscHex /\\x\x\+;/ contained
 syn match r7rsEscMnemonic /\\[abtnr]/ contained
 
-" This can be contained in strings but symbols
+" This can be contained in strings but identifiers
 syn match r7rsEscWrap /\\[[:space:]]*$/ contained
 
 " Bytevectors {{{2
-syn region r7rsByteVec matchgroup=r7rsDelim start=/#u8(/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsNum
+syn region r7rsByteVec matchgroup=r7rsDelim start=/#u8(/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsNum
 
 " Compound data (cf. R7RS, sec. 7.1.2) {{{1
 syn cluster r7rsDataCompound contains=r7rsList,r7rsVec,r7rsQ,r7rsQQ
 
 " Normal lists and vector {{{2
-syn region r7rsList matchgroup=r7rsDelim start=/#\@<!(/ end=/)/ contains=r7rsErr,@r7rsComments,@r7rsData
+syn region r7rsList matchgroup=r7rsDelim start=/#\@<!(/ end=/)/ contains=r7rsErr,@r7rsComs,@r7rsData
 if b:r7rs_brackets_as_parens
-  syn region r7rsList matchgroup=r7rsDelim start=/#\@<!\[/ end=/\]/ contains=r7rsErr,@r7rsComments,@r7rsData
+  syn region r7rsList matchgroup=r7rsDelim start=/#\@<!\[/ end=/\]/ contains=r7rsErr,@r7rsComs,@r7rsData
 endif
 if b:r7rs_braces_as_parens
-  syn region r7rsList matchgroup=r7rsDelim start=/#\@<!{/ end=/}/ contains=r7rsErr,@r7rsComments,@r7rsData
+  syn region r7rsList matchgroup=r7rsDelim start=/#\@<!{/ end=/}/ contains=r7rsErr,@r7rsComs,@r7rsData
 endif
-syn region r7rsVec matchgroup=r7rsDelim start=/#(/ end=/)/ contains=r7rsErr,@r7rsComments,@r7rsData
+syn region r7rsVec matchgroup=r7rsDelim start=/#(/ end=/)/ contains=r7rsErr,@r7rsComs,@r7rsData
 
-" Quoted simple data (any identifier, |symbol|, \"string\", or #-syntax other than '#(') {{{2
+" Quoted simple data (any identifier, |identifier|, \"string\", or #-syntax other than '#(') {{{2
 syn match r7rsQ /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=r7rsDataSimple
 syn match r7rsQ /'\ze#[^(]/ nextgroup=r7rsDataSimple
 
 " Quoted lists and vector {{{2
 syn match r7rsQ /'\ze(/ nextgroup=r7rsQList
-syn region r7rsQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData
+syn region r7rsQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsData
 if b:r7rs_brackets_as_parens
   syn match r7rsQ /'\ze\[/ nextgroup=r7rsQList
-  syn region r7rsQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComments,@r7rsData
+  syn region r7rsQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComs,@r7rsData
 endif
 if b:r7rs_braces_as_parens
   syn match r7rsQ /'\ze{/ nextgroup=r7rsQList
-  syn region r7rsQList matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComments,@r7rsData
+  syn region r7rsQList matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComs,@r7rsData
 endif
 syn match r7rsQ /'\ze#(/ nextgroup=r7rsQVec
-syn region r7rsQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData
+syn region r7rsQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsData
 
 " Quoted quotes {{{2
 syn match r7rsQ /'\ze'/ nextgroup=r7rsQ
 syn match r7rsQ /'\ze`/ nextgroup=r7rsQQ
 
-" Quasiquoted simple data (any identifier, |symbol|, \"string\", or #-syntax other than '#(') {{{2
+" Quasiquoted simple data (any identifier, |idenfitier|, \"string\", or #-syntax other than '#(') {{{2
 syn match r7rsQQ /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=r7rsDataSimple
 syn match r7rsQQ /`\ze#[^(]/ nextgroup=r7rsDataSimple
 
 " Quasiquoted lists and vector {{{2
 syn match r7rsQQ /`\ze(/ nextgroup=r7rsQQList
-syn region r7rsQQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData,r7rsU
+syn region r7rsQQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsData,r7rsU
 if b:r7rs_brackets_as_parens
   syn match r7rsQQ /`\ze\[/ nextgroup=r7rsQQList
-  syn region r7rsQQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contains=r7rsErr,@r7rsComments,@r7rsData,r7rsU
+  syn region r7rsQQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contains=r7rsErr,@r7rsComs,@r7rsData,r7rsU
 endif
 if b:r7rs_braces_as_parens
   syn match r7rsQQ /`\ze{/ nextgroup=r7rsQQList
-  syn region r7rsQQList matchgroup=r7rsDelim start=/{/ end=/}/ contains=r7rsErr,@r7rsComments,@r7rsData,r7rsU
+  syn region r7rsQQList matchgroup=r7rsDelim start=/{/ end=/}/ contains=r7rsErr,@r7rsComs,@r7rsData,r7rsU
 endif
 syn match r7rsQQ /`\ze#(/ nextgroup=r7rsQQVec
-syn region r7rsQQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData,r7rsU
+syn region r7rsQQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsData,r7rsU
 
 " Quasiquoted quotes {{{2
 syn match r7rsQQ /`\ze'/ nextgroup=r7rsQ
@@ -267,23 +264,26 @@ syn match r7rsQQ /`\ze`/ nextgroup=r7rsQQ
 
 " Unquote {{{2
 " It allows comments before reaching any datum.
-syn region r7rsU start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
+syn region r7rsU start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
 
 " Dot '.' {{{2
 syn keyword r7rsDot . contained containedin=r7rsList,r7rsQList,r7rsQQList
 
 " Labels (cf. R7RS, sec. 2.4) {{{1
 syn match r7rsLabel /#\d\+#/
-syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
+syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
+
+" Keywords {{{1
+
 
 " Highlights {{{1
 
 hi def link r7rsErr Error
 hi def link r7rsDelim Delimiter
-hi def link r7rsComment Comment
-hi def link r7rsCommentNested Comment
-hi def link r7rsCommentSharp Comment
-hi def link r7rsCommentDatum r7rsCommentSharp
+hi def link r7rsCom Comment
+hi def link r7rsComNested Comment
+hi def link r7rsComSharp Comment
+hi def link r7rsComDatum r7rsComSharp
 hi def link r7rsDirective Comment
 hi def link r7rsId Normal
 hi def link r7rsNum Number
@@ -301,12 +301,11 @@ hi def link r7rsDot Special
 hi def link r7rsSyn Statement
 hi def link r7rsLabel Underlined
 
-" Keywords {{{1
-
+" }}}
 
 let b:current_syntax = 'r7rs'
 
 let &cpo = s:cpo
 unlet s:cpo
 
-" vim: tw=150 fdm=marker
+" vim: et sw=2 sts=-1 tw=0 fdm=marker
