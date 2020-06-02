@@ -46,9 +46,28 @@ syn cluster r7rsComments contains=r7rsComment,r7rsCommentNested,r7rsCommentSharp
 " Comments
 syn region r7rsComment start=/#\@<!;/ end=/$/
 syn region r7rsCommentNested start=/#|/ end=/|#/ contains=r7rsCommentNested
-" TODO: highlight nested #;
+" FIXME: highlight nested #;
 " In `#; #; hello hello r7rs!`, the two `hello`s should be r7rsCommentDatum but not implemented yet.
 syn region r7rsCommentSharp start=/#;/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=r7rsCommentDatum
+
+" Comment out anything like literal identifier or number
+syn match r7rsCommentDatum /#\?[^[:space:]\n|()";'`,\\#\[\]{}]\+/ contained
+" Comment out character
+syn match r7rsCommentDatum /#\\./ contained
+syn match r7rsCommentDatum /#\\[^[:space:]\n|()";'`,\\#\[\]{}]\+/ contained
+" Comment out enclosed identifier
+syn region r7rsCommentDatum start=/|/ skip=/\\[\\|]/ end=/|/ contained
+" Comment out string
+syn region r7rsCommentDatum start=/"/ skip=/\\[\\"]/ end=/"/ contained
+" Comment out label
+syn match r7rsCommentDatum /#\d\+#/ contained
+syn region r7rsCommentDatum start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=r7rsCommentDatum
+" Comment out parens
+syn region r7rsCommentDatum start=/(/ end=/)/ contained contains=r7rsCommentDatum
+syn region r7rsCommentDatum start=/\[/ end=/\]/ contained contains=r7rsCommentDatum
+syn region r7rsCommentDatum start=/{/ end=/}/ contained contains=r7rsCommentDatum
+" Move on when prefix before parens found
+syn match r7rsCommentDatum /\(['`]\|,@\?\|#\([[:alpha:]]\d\+\)\?\ze(\)/ contained nextgroup=r7rsCommentDatum
 
 " Directives (cf. R7RS, sec. 2.1 (p. 8) last paragraph)
 syn match r7rsDirective /#!\%(no-\)\?fold-case/
@@ -61,7 +80,6 @@ syn cluster r7rsDataSimple contains=r7rsId,r7rsBool,r7rsNum,r7rsChar,r7rsStr,r7r
 
 " Those enclosed by |
 syn region r7rsId matchgroup=r7rsDelim start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
-syn region r7rsCommentDatum start=/|/ skip=/\\[\\|]/ end=/|/ contained
 
 if b:r7rs_strict_identifier
 
@@ -69,24 +87,19 @@ if b:r7rs_strict_identifier
 "   Here, <subsequent> are replaced with [^[:space:]\n|()";'`,\\#\[\]{}].
 "   <subsequent> \ <initial> = <digit> | <special subsequent> =  [.+\-0-9]
 syn match r7rsId /[^.+\-0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
-syn match r7rsCommentDatum /[^.+\-0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/ contained
 
 " Peculiar identifier case 1 and 2
 "   <sign subsequent> = <initial> | <explicit sign> = [^.0-9[:space:]\n|()";'`,\\#\[\]{}]
 syn match r7rsId /[+-]\%([^.0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*\)\?/
-syn match r7rsCommentDatum /[+-]\%([^.0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*\)\?/ contained
 
 " Peculiar identifier case 3 and 4
 syn match r7rsId /[+-]\?\.[^0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
-syn match r7rsCommentDatum /[+-]\?\.[^0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/ contained
 
 else
 
 " Anything except single '.' is permitted.
 syn match r7rsId /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 syn match r7rsId /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
-syn match r7rsCommentDatum /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/ contained
-syn match r7rsCommentDatum /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/ contained
 
 endif
 
@@ -103,11 +116,8 @@ endif
 " )
 " Other radixes are analogous to the above binary case.
 syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsCommentDatum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/ contained
 syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsCommentDatum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/ contained
 syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/ contained
 
 " Complex number in rectangular notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -116,11 +126,8 @@ syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(i
 " ( [01]+(\/[01]+)? | (inf|nan)\.0 )?
 " i
 syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)?[+-]%([01]+%(\/[01]+)?|%(inf|nan)\.0)?i>/
-syn match r7rsCommentDatum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)?[+-]%([01]+%(\/[01]+)?|%(inf|nan)\.0)?i>/ contained
 syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)?[+-]%(\o+%(\/\o+)?|%(inf|nan)\.0)?i>/
-syn match r7rsCommentDatum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)?[+-]%(\o+%(\/\o+)?|%(inf|nan)\.0)?i>/ contained
 syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)?[+-]%(\x+%(\/\x+)?|%(inf|nan)\.0)?i>/
-syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)?[+-]%(\x+%(\/\x+)?|%(inf|nan)\.0)?i>/ contained
 
 " Complex number in polar notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -128,11 +135,8 @@ syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(i
 " \@
 " ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )
 syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsCommentDatum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/ contained
 syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)\@%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsCommentDatum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)\@%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/ contained
 syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)\@%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)\@%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/ contained
 
 " Decimal number {{{3
 
@@ -148,7 +152,6 @@ syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(i
 " | [+-](inf|nan)\.0
 " )
 syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/
-syn match r7rsCommentDatum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/ contained
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )?
@@ -165,7 +168,6 @@ syn match r7rsCommentDatum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|
 " )?
 " i
 syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|%(inf|nan)\.0)?i>/
-syn match r7rsCommentDatum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|%(inf|nan)\.0)?i>/ contained
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )?
@@ -181,25 +183,18 @@ syn match r7rsCommentDatum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|
 " | [+-](inf|nan)\.0
 " )
 syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/
-syn match r7rsCommentDatum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/ contained
 
 " Boolean {{{2
 syn match r7rsBool /#t\%(rue\)\?/
 syn match r7rsBool /#f\%(alse\)\?/
-syn match r7rsCommentDatum /#t\%(rue\)\?/ contained
-syn match r7rsCommentDatum /#f\%(alse\)\?/ contained
 
 " Character {{{2
 syn match r7rsChar /#\\./
 syn match r7rsChar /#\\x\x\+/
 syn match r7rsChar /#\\\%(alarm\|backspace\|delete\|escape\|newline\|null\|return\|space\|tab\)/
-syn match r7rsCommentDatum /#\\./ contained
-syn match r7rsCommentDatum /#\\x\x\+/ contained
-syn match r7rsCommentDatum /#\\\%(alarm\|backspace\|delete\|escape\|newline\|null\|return\|space\|tab\)/ contained
 
 " String {{{2
 syn region r7rsStr matchgroup=r7rsDelim start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
-syn region r7rsCommentDatum start=/"/ skip=/\\[\\"]/ end=/"/ contained
 
 " Escaped characters (embedded in \"strings\" and |symbols|) {{{2
 syn cluster r7rsEscChars contains=r7rsEscDelim,r7rsEscHex,r7rsEscMnemonic
@@ -235,11 +230,11 @@ syn match r7rsQ /'\ze(/ nextgroup=r7rsQList
 syn region r7rsQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData
 if b:r7rs_brackets_as_parens
   syn match r7rsQ /'\ze\[/ nextgroup=r7rsQList
-  syn region r7rsQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contains=r7rsErr,@r7rsComments,@r7rsData
+  syn region r7rsQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComments,@r7rsData
 endif
 if b:r7rs_braces_as_parens
   syn match r7rsQ /'\ze{/ nextgroup=r7rsQList
-  syn region r7rsQList matchgroup=r7rsDelim start=/{/ end=/}/ contains=r7rsErr,@r7rsComments,@r7rsData
+  syn region r7rsQList matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComments,@r7rsData
 endif
 syn match r7rsQ /'\ze#(/ nextgroup=r7rsQVec
 syn region r7rsQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsData
