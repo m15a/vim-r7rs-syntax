@@ -20,11 +20,14 @@ TEXI_NAMES := \
 	modr7rs \
 	modsrfi
 
-.PHONY: build clean
+.PHONY: build clean timestamp
 build: syntax/gauche.vim ftplugin/gauche.vim
 
 clean:
 	rm -rf _build
+
+timestamp:
+	./build.sh timestamp **/*.vim
 
 syntax/gauche.vim: $(VIM_FILES)
 	./build.sh syntax $@ $^
