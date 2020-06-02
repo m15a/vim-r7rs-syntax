@@ -94,70 +94,94 @@ endif
 
 " Note that alphabets are case-insensitive in numeric literals.
 
-" Non-decimal number
-" ( #b | #[ei]#b | #b#[ei] )  " prefix #b and #[ei] can be swapped
-" ( " Real number
-"   ( [+-]?[01]+(\/[01]+)?  " integer or rational
-"   | [+-](inf|nan)\.0      " inf or nan
-"   )
-"   " Complex number in rectangular notation
-" | ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )?
-"   [+-]
-"   ( [01]+(\/[01]+)? | (inf|nan)\.0 )?
-"   i
-"   " Complex number in polar notation
-" | ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )
-"   \@
-"   ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )
-" )
-" >  " word boundary
-" Other radixes are analogous to the above binary case.
-syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%(%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)|%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)?[+-]%([01]+%(\/[01]+)?|%(inf|nan)\.0)?i|%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0))>/
-syn match r7rsCommentDatum /\v\c%(#b|#[ei]#b|#b#[ei])%(%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)|%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)?[+-]%([01]+%(\/[01]+)?|%(inf|nan)\.0)?i|%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0))>/ contained
-syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%(%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)|%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)?[+-]%(\o+%(\/\o+)?|%(inf|nan)\.0)?i|%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)\@%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0))>/
-syn match r7rsCommentDatum /\v\c%(#o|#[ei]#o|#o#[ei])%(%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)|%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)?[+-]%(\o+%(\/\o+)?|%(inf|nan)\.0)?i|%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)\@%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0))>/ contained
-syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%(%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)|%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)?[+-]%(\x+%(\/\x+)?|%(inf|nan)\.0)?i|%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)\@%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0))>/
-syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%(%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)|%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)?[+-]%(\x+%(\/\x+)?|%(inf|nan)\.0)?i|%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)\@%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0))>/ contained
+" Non-decimal number {{{3
 
-" Decimal number
-" ( #[dei] | #[ei]#d | #d#[ei] )?  " no prefix or prefixed by #d, #[ei], #d#[ei], or #[ei]#d
-" ( " Real number
-"   ( [+-]? ( \d+(\/\d+)?   " integer or rational
-"           | ( \d+\.\d*    " fractional case 1
-"             | 0*\.\d+      " fractional case 2
-"             )
-"             ([esfdl][+-]\d+)?  " fractional number may have this suffix
-"           )
-"   | [+-](inf|nan)\.0
-"   )
-"   " Complex number in rectangular notation
-" | ( [+-]? ( \d+(\/\d+)?
-"           | ( \d+\.\d* | 0*\.\d+ ) ([esfdl][+-]\d+)?
-"           )
-"   | [+-](inf|nan)\.0
-"   )?
-"   [+-]
-"   ( \d+(\/\d+)?
-"   | ( \d+\.\d* | 0*\.\d+ ) ([esfdl][+-]\d+)?
-"   | (inf|nan)\.0
-"   )?
-"   i
-"   " Complex number in polar notation
-" | ( [+-]? ( \d+(\/\d+)?
-"           | ( \d+\.\d* | 0*\.\d+ ) ([esfdl][+-]\d+)?
-"           )
-"   | [+-](inf|nan)\.0
-"   )
-"   \@
-"   ( [+-]? ( \d+(\/\d+)?
-"           | ( \d+\.\d* | 0*\.\d+ ) ([esfdl][+-]\d+)?
-"           )
-"   | [+-](inf|nan)\.0
-"   )
+" Real number {{{4
+" ( #b | #[ei]#b | #b#[ei] )  " prefix #b and #[ei] can be swapped
+" ( [+-]?[01]+(\/[01]+)?      " integer or rational
+" | [+-](inf|nan)\.0          " inf or nan
 " )
-" >  " word boundary
-syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%(%([+-]?%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)|%([+-]?%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?|%(inf|nan)\.0)?i|%([+-]?%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0))>/
-syn match r7rsCommentDatum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%(%([+-]?%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)|%([+-]?%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?|%(inf|nan)\.0)?i|%([+-]?%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+\.\d*|0*\.\d+)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0))>/ contained
+" Other radixes are analogous to the above binary case.
+syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/
+syn match r7rsCommentDatum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/ contained
+syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/
+syn match r7rsCommentDatum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/ contained
+syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/
+syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/ contained
+
+" Complex number in rectangular notation {{{4
+" ( #b | #[ei]#b | #b#[ei] )
+" ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )?
+" [+-]
+" ( [01]+(\/[01]+)? | (inf|nan)\.0 )?
+" i
+syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)?[+-]%([01]+%(\/[01]+)?|%(inf|nan)\.0)?i>/
+syn match r7rsCommentDatum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)?[+-]%([01]+%(\/[01]+)?|%(inf|nan)\.0)?i>/ contained
+syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)?[+-]%(\o+%(\/\o+)?|%(inf|nan)\.0)?i>/
+syn match r7rsCommentDatum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)?[+-]%(\o+%(\/\o+)?|%(inf|nan)\.0)?i>/ contained
+syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)?[+-]%(\x+%(\/\x+)?|%(inf|nan)\.0)?i>/
+syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)?[+-]%(\x+%(\/\x+)?|%(inf|nan)\.0)?i>/ contained
+
+" Complex number in polar notation {{{4
+" ( #b | #[ei]#b | #b#[ei] )
+" ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )
+" \@
+" ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )
+syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/
+syn match r7rsCommentDatum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/ contained
+syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)\@%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/
+syn match r7rsCommentDatum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)\@%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/ contained
+syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)\@%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/
+syn match r7rsCommentDatum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)\@%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/ contained
+
+" Decimal number {{{3
+
+" Real number {{{4
+" ( #[dei] | #[ei]#d | #d#[ei] )?  " no prefix or prefixed by #d, #[ei], #d#[ei], or #[ei]#d
+" ( [+-]? ( \d+(\/\d+)?            " integer or rational
+"         | ( \d+                  " fractional case 1
+"           | \.\d+                " fractional case 2
+"           | \d+\.\d*             " fractional case 3
+"           )
+"           ([esfdl][+-]\d+)?      " fractional number may have this suffix
+"         )
+" | [+-](inf|nan)\.0
+" )
+syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/
+syn match r7rsCommentDatum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/ contained
+
+" Complex number in rectangular notation {{{4
+" ( #[dei] | #[ei]#d | #d#[ei] )?
+" ( [+-]? ( \d+(\/\d+)?
+"         | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]\d+)?
+"         )
+" | [+-](inf|nan)\.0
+" )?
+" [+-]
+" ( ( \d+(\/\d+)?
+"   | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]\d+)?
+"   )
+" | (inf|nan)\.0
+" )?
+" i
+syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|%(inf|nan)\.0)?i>/
+syn match r7rsCommentDatum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|%(inf|nan)\.0)?i>/ contained
+
+" Complex number in polar notation {{{4
+" ( #[dei] | #[ei]#d | #d#[ei] )?
+" ( [+-]? ( \d+(\/\d+)?
+"         | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]\d+)?
+"         )
+" | [+-](inf|nan)\.0
+" )
+" \@
+" ( [+-]? ( \d+(\/\d+)?
+"         | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]\d+)?
+"         )
+" | [+-](inf|nan)\.0
+" )
+syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/
+syn match r7rsCommentDatum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/ contained
 
 " Boolean {{{2
 syn match r7rsBool /#t\%(rue\)\?/
