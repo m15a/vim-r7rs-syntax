@@ -21,7 +21,7 @@ endif
 
 if b:r7rs_strict
   " Gauche allows [] and even {} to be parentheses, whereas R7RS does not.
-  let b:r7rs_braces_as_parens = 0
+  let b:r7rs_brackets_as_parens = 0
   let b:r7rs_braces_as_parens = 0
   " Gauche allows identifiers to begin with '.', [+-], or [0-9], whereas R7RS has some restriction.
   let b:r7rs_strict_identifier = 1
@@ -48,7 +48,7 @@ syn region r7rsComment start=/#\@<!;/ end=/$/
 syn region r7rsCommentNested start=/#|/ end=/|#/ contains=r7rsCommentNested
 " TODO: highlight nested #;
 " In `#; #; hello hello r7rs!`, the two `hello`s should be r7rsCommentDatum but not implemented yet.
-syn region r7rsCommentSharp start=/#;/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ skipempty contains=@r7rsComments nextgroup=r7rsCommentDatum
+syn region r7rsCommentSharp start=/#;/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=r7rsCommentDatum
 
 " Directives (cf. R7RS, sec. 2.1 (p. 8) last paragraph)
 syn match r7rsDirective /#!\%(no-\)\?fold-case/
@@ -187,7 +187,7 @@ syn match r7rsEscMnemonic /\\[abtnr]/ contained
 syn match r7rsEscWrap /\\[[:space:]]*$/ contained
 
 " Bytevectors {{{2
-syn region r7rsByteVec matchgroup=r7rsDelim start=/#u8(/ end=/)/ contains=r7rsErr,r7rsNum
+syn region r7rsByteVec matchgroup=r7rsDelim start=/#u8(/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsNum
 
 " Compound data (cf. R7RS, sec. 7.1.2) {{{1
 syn cluster r7rsDataCompound contains=r7rsList,r7rsVec,r7rsQ,r7rsQQ
