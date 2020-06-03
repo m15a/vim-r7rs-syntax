@@ -1,4 +1,5 @@
 _build
+doc/tags
 
 # Nix and direnv stuff
 .direnv
