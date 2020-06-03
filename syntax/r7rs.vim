@@ -21,21 +21,20 @@ endif
 
 if b:r7rs_strict
   " Gauche allows [] and even {} to be parentheses, whereas R7RS does not.
-  let b:r7rs_brackets_as_parens = 0
-  let b:r7rs_braces_as_parens = 0
+  let b:r7rs_more_parens = ''
   " Gauche allows identifiers to begin with '.', [+-], or [0-9], whereas R7RS has some restriction.
   let b:r7rs_strict_identifier = 1
 endif
 
-if !exists('b:r7rs_brackets_as_parens')
-  let b:r7rs_brackets_as_parens = get(g:, 'r7rs_brackets_as_parens', 1)
-endif
-if !exists('b:r7rs_braces_as_parens')
-  let b:r7rs_braces_as_parens = get(g:, 'r7rs_braces_as_parens', 0)
+if !exists('b:r7rs_more_parens')
+  let b:r7rs_more_parens = get(g:, 'r7rs_more_parens', ']')
 endif
 if !exists('b:r7rs_strict_identifier')
   let b:r7rs_strict_identifier = get(g:, 'r7rs_strict_identifier', 0)
 endif
+
+let s:use_brackets_as_parens = match(b:r7rs_more_parens, '[\[\]]') != -1
+let s:use_braces_as_parens = match(b:r7rs_more_parens, '[()]') != -1
 
 " Anything visible other than defined below are error. {{{1
 syn match r7rsErr /[^[:space:]\n]/
@@ -212,10 +211,10 @@ syn cluster r7rsDataCompound contains=r7rsList,r7rsVec,r7rsQ,r7rsQQ
 
 " Normal lists and vector {{{2
 syn region r7rsList matchgroup=r7rsDelim start=/#\@<!(/ end=/)/ contains=r7rsErr,@r7rsComs,@r7rsData
-if b:r7rs_brackets_as_parens
+if s:use_brackets_as_parens
   syn region r7rsList matchgroup=r7rsDelim start=/#\@<!\[/ end=/\]/ contains=r7rsErr,@r7rsComs,@r7rsData
 endif
-if b:r7rs_braces_as_parens
+if s:use_braces_as_parens
   syn region r7rsList matchgroup=r7rsDelim start=/#\@<!{/ end=/}/ contains=r7rsErr,@r7rsComs,@r7rsData
 endif
 syn region r7rsVec matchgroup=r7rsDelim start=/#(/ end=/)/ contains=r7rsErr,@r7rsComs,@r7rsData
@@ -227,11 +226,11 @@ syn match r7rsQ /'\ze#[^(]/ nextgroup=r7rsDataSimple
 " Quoted lists and vector {{{2
 syn match r7rsQ /'\ze(/ nextgroup=r7rsQList
 syn region r7rsQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsData
-if b:r7rs_brackets_as_parens
+if s:use_brackets_as_parens
   syn match r7rsQ /'\ze\[/ nextgroup=r7rsQList
   syn region r7rsQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComs,@r7rsData
 endif
-if b:r7rs_braces_as_parens
+if s:use_braces_as_parens
   syn match r7rsQ /'\ze{/ nextgroup=r7rsQList
   syn region r7rsQList matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComs,@r7rsData
 endif
@@ -249,11 +248,11 @@ syn match r7rsQQ /`\ze#[^(]/ nextgroup=r7rsDataSimple
 " Quasiquoted lists and vector {{{2
 syn match r7rsQQ /`\ze(/ nextgroup=r7rsQQList
 syn region r7rsQQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsData,r7rsU
-if b:r7rs_brackets_as_parens
+if s:use_brackets_as_parens
   syn match r7rsQQ /`\ze\[/ nextgroup=r7rsQQList
   syn region r7rsQQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contains=r7rsErr,@r7rsComs,@r7rsData,r7rsU
 endif
-if b:r7rs_braces_as_parens
+if s:use_braces_as_parens
   syn match r7rsQQ /`\ze{/ nextgroup=r7rsQQList
   syn region r7rsQQList matchgroup=r7rsDelim start=/{/ end=/}/ contains=r7rsErr,@r7rsComs,@r7rsData,r7rsU
 endif
