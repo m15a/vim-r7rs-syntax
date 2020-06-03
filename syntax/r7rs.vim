@@ -274,6 +274,22 @@ syn keyword r7rsDot . contained containedin=r7rsList,r7rsQList,r7rsQQList
 syn match r7rsLabel /#\d\+#/
 syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
 
+" Library declaration (cf. R7RS, sec. 5.6) {{{1
+syn region r7rsLibName matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsLibNameParts
+syn cluster r7rsLibNameParts contains=r7rsId,r7rsUInt,r7rsLibNamePartRsvd
+syn match r7rsUInt /\d\+/ contained
+syn keyword r7rsLibNamePartRsvd contained scheme srfi
+
+" Import declaration (cf. R7RS, sec. 5.2) {{{1
+syn region r7rsImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@r7rsImportSets
+syn keyword r7rsImportSyn contained import
+syn cluster r7rsImportSets contains=r7rsLibName,r7rsImportOEP,r7rsImportR
+syn keyword r7rsImportKey contained only except prefix rename
+syn region r7rsImportOEP matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*\%(only\|except\|prefix\)/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsImportKey,@r7rsImportSets,r7rsId
+syn region r7rsImportR matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*rename/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsImportKey,@r7rsImportSets,r7rsImportRList
+syn region r7rsImportRList matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*(/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsImportRPair
+syn region r7rsImportRPair matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsId
+
 " Keywords {{{1
 
 
@@ -288,6 +304,7 @@ hi def link r7rsComDatum r7rsComSharp
 hi def link r7rsDirective Comment
 hi def link r7rsId Normal
 hi def link r7rsNum Number
+hi def link r7rsUInt Number
 hi def link r7rsBool Boolean
 hi def link r7rsChar Character
 hi def link r7rsStr String
@@ -301,6 +318,9 @@ hi def link r7rsU Special
 hi def link r7rsDot Special
 hi def link r7rsSyn Statement
 hi def link r7rsLabel Underlined
+" hi def link r7rsLibNamePartRsvd Identifier
+hi def link r7rsImportSyn PreProc
+hi def link r7rsImportKey Special
 
 " }}}
 
