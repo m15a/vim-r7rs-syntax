@@ -37,17 +37,19 @@ else
   let s:use_braces_as_parens = match(b:r7rs_more_parens, '[()]') != -1
 endif
 
-" Anything visible other than defined below are error. {{{1
+" }}}
+
+" Anything visible other than defined below are error.
 syn match r7rsErr /[^[:space:]\n]/
 
 " Comments and directives {{{1
 syn cluster r7rsComs contains=r7rsCom,r7rsComNested,r7rsComSharp,r7rsDirective
 
-" Comments
+" Comments {{{2
 syn region r7rsCom start=/#\@<!;/ end=/$/
 syn region r7rsComNested start=/#|/ end=/|#/ contains=r7rsComNested
 " FIXME: highlight nested #;
-" In `#; #; hello hello r7rs!`, the two `hello`s should be r7rsComDatum but not implemented yet.
+" In `#; #; hello hello R7RS!`, the two `hello`s should be commented out but not.
 syn region r7rsComSharp start=/#;/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComs skipwhite skipempty nextgroup=r7rsComDatum
 
 " Comment out anything like literal identifier or number
@@ -69,10 +71,10 @@ syn region r7rsComDatum start=/{/ end=/}/ contained contains=r7rsComDatum
 " Move on when prefix before parens found
 syn match r7rsComDatum /\(['`]\|,@\?\|#\([[:alpha:]]\d\+\)\?\ze(\)/ contained nextgroup=r7rsComDatum
 
-" Directives (cf. R7RS, sec. 2.1 (p. 8) last paragraph)
+" Directives (cf. R7RS, sec. 2.1 (p. 8) last paragraph) {{{2
 syn match r7rsDirective /#!\%(no-\)\?fold-case/
 
-" }}}
+" }}} }}}
 
 " All data are classified into two types: quoted and non-quoted. Once a list or
 " vector is quoted, its children are also quoted. As the children may not have
