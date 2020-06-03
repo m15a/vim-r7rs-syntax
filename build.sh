@@ -386,7 +386,7 @@ EOF
 }
 
 update_timestamp() {
-    sed -E 's/^(" Last change: )[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$(date +%Y-%m-%d)/"
+    sed -E 's/^(.*Last change: )[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$(date +%Y-%m-%d)/"
 }
 
 find_undefined_keywords_in() {

@@ -27,7 +27,7 @@ clean:
 	rm -rf _build
 
 timestamp:
-	./build.sh timestamp **/*.vim
+	./build.sh timestamp **/*.{vim,txt}
 
 syntax/gauche.vim: $(VIM_FILES)
 	./build.sh syntax $@ $^
