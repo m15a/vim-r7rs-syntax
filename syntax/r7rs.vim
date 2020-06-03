@@ -311,8 +311,10 @@ syn region r7rsImportR matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*rename/ end
 syn region r7rsImportRList matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*(/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsImportRPair
 syn region r7rsImportRPair matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsId
 
-" Keywords {{{1
+" General expressions {{{1
 
+syn cluster r7rsData add=@r7rsExprs
+syn cluster r7rsExprs contains=r7rsImport,r7rsCondExpand,r7rsSyn
 
 " Highlights {{{1
 
