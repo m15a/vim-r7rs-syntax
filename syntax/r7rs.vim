@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS-small)
-" Last change: 2020-05-31
+" Last change: 2020-06-03
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: Public domain
@@ -82,18 +82,20 @@ syn cluster r7rsDataSimple contains=r7rsId,r7rsBool,r7rsNum,r7rsChar,r7rsStr,r7r
 syn region r7rsId matchgroup=r7rsDelim start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
 
 if b:r7rs_strict_identifier
-  " Those starting with other than ., <explicit sign>, and <digit>
-  " <subsequent> are replaced with [^[:space:]\n|()";'`,\\#\[\]{}].
-  " <subsequent> \ <initial> = <digit> | <special subsequent> =  [.+\-0-9] and thus
-  " <initial> <subsequent>* is equal to this regexp.
-  syn match r7rsId /[^.+\-0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
+  " <initial> <subsequent>*
+  " where <initial> -> [:alpha:] | [!$%&*\/:<=>?^_~@]
+  "       <subsequent> -> [:alnum:] | [!$%&*\/:<=>?^_~@] | [.+-]
+  syn match r7rsId /[[:alpha:]!$%&*\/:<=>?^_~@][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
 
   " Peculiar identifier case 1 and 2
-  " <sign subsequent> = <initial> | <explicit sign> = [^.0-9[:space:]\n|()";'`,\\#\[\]{}]
-  syn match r7rsId /[+-]\%([^.0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*\)\?/
+  " [+-] | [+-] <sign subsequent> <subsequent>*
+  " where <sign subsequent> = <initial> | [+-]
+  syn match r7rsId /[+-]\%([[:alpha:]!$%&*\/:<=>?^_~@+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*\)\?/
 
   " Peculiar identifier case 3 and 4
-  syn match r7rsId /[+-]\?\.[^0-9[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
+  " [+-] . <dot subsequent> <subsequent>* | . <dot subsequent> <subsequent>*
+  " where <dot subsequent> -> <initial> | [.+-]
+  syn match r7rsId /[+-]\?\.[[:alpha:]!$%&*\/:<=>?^_~@.+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
 else
   " Anything except single '.' is permitted.
   syn match r7rsId /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/
