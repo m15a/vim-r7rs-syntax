@@ -275,10 +275,31 @@ syn match r7rsLabel /#\d\+#/
 syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
 
 " Library declaration (cf. R7RS, sec. 5.6) {{{1
+syn region r7rsLib matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*define-library/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsLibDef,r7rsLibName,@r7rsLibDecls
+syn keyword r7rsLibDef contained define-library
 syn region r7rsLibName matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsLibNameParts
 syn cluster r7rsLibNameParts contains=r7rsId,r7rsUInt,r7rsLibNamePartRsvd
 syn match r7rsUInt /\d\+/ contained
 syn keyword r7rsLibNamePartRsvd contained scheme srfi
+syn cluster r7rsLibDecls contains=r7rsLibExport,r7rsImport,r7rsLibBegin,r7rsLibInclude,r7rsCondExpand
+syn keyword r7rsLibSyn contained export begin include include-ci include-library-declarations
+syn region r7rsLibExport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*export/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsLibSyn,r7rsId,r7rsLibExportR
+syn region r7rsLibExportR matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*rename/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsLibExportRKey,r7rsId
+syn keyword r7rsLibExportRKey contained rename
+" This begin is different from usual begin (cf. R7RS, sec 5.6.1 and 4.2.3)
+syn region r7rsLibBegin matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*begin/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsLibSyn,@r7rsData
+syn region r7rsLibInclude matchgroup=r7rsDelim start=/([[:space:]\n]*\zeinclude\%(-ci\|-library-declarations\)\?/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsLibSyn,r7rsStr
+
+" cond-expand (cf. R7RS, p. 15) {{{2
+syn region r7rsCondExpand matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*cond-expand/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsCESyn,r7rsCEClause
+syn keyword r7rsCESyn contained cond-expand
+syn region r7rsCEClause matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsCEFeatures,@r7rsData
+syn cluster r7rsCEFeatures contains=r7rsCEFeatureId,r7rsCEFeatureLib,r7rsCEFeatureAON,r7rsCEFeatureElse
+syn match r7rsCEFeatureId /\%(r7rs\|exact-closed\|exact-complex\|ieee-float\|full-unicode\|ratios\|posix\|windows\|unix\|darwin\|gnu-linux\|bsd\|freebsd\|solaris\)/ contained
+syn region r7rsCEFeatureLib matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*library/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsCEKey,r7rsLibName
+syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsCEKey,@r7rsCEFeatures
+syn keyword r7rsCEFeatureElse contained else
+syn keyword r7rsCEKey contained library and or not
 
 " Import declaration (cf. R7RS, sec. 5.2) {{{1
 syn region r7rsImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@r7rsImportSets
@@ -318,7 +339,14 @@ hi def link r7rsU Special
 hi def link r7rsDot Special
 hi def link r7rsSyn Statement
 hi def link r7rsLabel Underlined
+hi def link r7rsLibDef PreProc
 " hi def link r7rsLibNamePartRsvd Identifier
+hi def link r7rsLibSyn PreProc
+hi def link r7rsLibExportRKey Special
+hi def link r7rsCESyn PreProc
+hi def link r7rsCEKey PreProc
+hi def link r7rsCEFeatureId Tag
+hi def link r7rsCEFeatureElse Special
 hi def link r7rsImportSyn PreProc
 hi def link r7rsImportKey Special
 
