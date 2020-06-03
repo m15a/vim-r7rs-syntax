@@ -19,20 +19,21 @@ if !exists('b:r7rs_strict')
   let b:r7rs_strict = get(g:, 'r7rs_strict', 0)
 endif
 
+if !exists('b:r7rs_more_parens')
+  let b:r7rs_more_parens = get(g:, 'r7rs_more_parens', ']')
+endif
+if !exists('b:r7rs_strict_identifier')
+  let b:r7rs_strict_identifier = get(g:, 'r7rs_strict_identifier', 0)
+endif
+
 if b:r7rs_strict
   " Gauche allows [] and even {} to be parentheses, whereas R7RS does not.
   let s:use_brackets_as_parens = 0
   let s:use_braces_as_parens = 0
   " Gauche allows identifiers to begin with '.', [+-], or [0-9], whereas R7RS has some restriction.
-  let s:strict_identifier = 1
+  let s:use_strict_identifier = 1
 else
-  if !exists('b:r7rs_more_parens')
-    let b:r7rs_more_parens = get(g:, 'r7rs_more_parens', ']')
-  endif
-  if !exists('b:r7rs_strict_identifier')
-    let b:r7rs_strict_identifier = get(g:, 'r7rs_strict_identifier', 0)
-  endif
-  let s:strict_identifier = b:r7rs_strict_identifier
+  let s:use_strict_identifier = b:r7rs_strict_identifier
   let s:use_brackets_as_parens = match(b:r7rs_more_parens, '[\[\]]') != -1
   let s:use_braces_as_parens = match(b:r7rs_more_parens, '[()]') != -1
 endif
@@ -91,7 +92,7 @@ syn cluster r7rsDataSimple contains=r7rsId,r7rsBool,r7rsNum,r7rsChar,r7rsStr,r7r
 " Those enclosed by |
 syn region r7rsId matchgroup=r7rsDelim start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
 
-if s:strict_identifier
+if s:use_strict_identifier
   " <initial> <subsequent>*
   " where <initial> -> [:alpha:] | [!$%&*\/:<=>?^_~@]
   "       <subsequent> -> [:alnum:] | [!$%&*\/:<=>?^_~@] | [.+-]
