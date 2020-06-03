@@ -3,7 +3,7 @@
 " Last change: 2020-05-26
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche
-" License: Public domain
+" License: MIT
 " Notes: To enable this plugin, set filetype=scheme and (b|g):is_gauche=1.
 
 if !exists('b:did_scheme_ftplugin')

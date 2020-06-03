@@ -3,7 +3,7 @@
 " Last change: 2020-05-31
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
-" License: Public domain
+" License: MIT
 
 if exists('b:did_ftplugin')
   finish

@@ -3,7 +3,7 @@
 " Last change: 2020-06-03
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
-" License: Public domain
+" License: MIT
 
 if exists('b:current_syntax')
   finish
