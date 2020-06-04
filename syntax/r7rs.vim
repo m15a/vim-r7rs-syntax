@@ -434,12 +434,13 @@ syn keyword r7rsCEAux contained library
 syn region r7rsCEClause matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsCEFeatures,@r7rsData
 syn cluster r7rsCEFeatures contains=r7rsCEFeatureId,r7rsCEFeatureLib,r7rsCEFeatureAON,r7rsCEFeatureElse
 syn keyword r7rsCEFeatureId r7rs exact-closed exact-complex ieee-float full-unicode ratios contained
-syn keyword r7rsCEFeatureId posix windows unix darwin gnu-linux bsd freebsd solaris contained
+syn keyword r7rsCEFeatureId posix windows dos unix darwin gnu-linux bsd freebsd solaris contained
 syn keyword r7rsCEFeatureId i386 x86-64 ppc sparc jvm clr llvm contained
 syn keyword r7rsCEFeatureId ilp32 lp64 ilp64 contained
 syn keyword r7rsCEFeatureId big-endian little-endian contained
-" TODO: add feature ids of Scheme implementations
-" syn match r7rsCEFeatureId /\%(gauche\|chibi\|...\)/ contained
+syn keyword r7rsCEFeatureId debug contained
+" Scheme implementations found in schemepunk codes
+syn keyword r7rsCEFeatureId chibi chicken gambit gauche gerbil kawa larceny sagittarius contained
 syn region r7rsCEFeatureLib matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*library/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsCEAux,r7rsLibName
 syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsCESyn,@r7rsCEFeatures
 syn keyword r7rsCEFeatureElse contained else
