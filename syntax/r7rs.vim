@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS-small)
-" Last Change: 2020-06-04
+" Last Change: 2020-06-05
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: MIT
@@ -214,8 +214,8 @@ syn match r7rsChar /#\\\%(alarm\|backspace\|delete\|escape\|newline\|null\|retur
 syn region r7rsStr matchgroup=r7rsDelim start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
 
 " Escaped characters (embedded in \"strings\" and |identifiers|) {{{2
-syn cluster r7rsEscChars contains=r7rsEscDelim,r7rsEscHex,r7rsEscMnemonic
-syn match r7rsEscDelim /\\[\\|"]/ contained
+syn cluster r7rsEscChars contains=r7rsEscLiteral,r7rsEscHex,r7rsEscMnemonic
+syn match r7rsEscLiteral /\\[\\|"]/ contained
 syn match r7rsEscHex /\\x\x\+;/ contained
 syn match r7rsEscMnemonic /\\[abtnr]/ contained
 
@@ -518,7 +518,7 @@ hi def link r7rsBool Boolean
 hi def link r7rsChar Character
 hi def link r7rsCharM SpecialChar
 hi def link r7rsStr String
-hi def link r7rsEscDelim r7rsChar
+hi def link r7rsEscLiteral r7rsChar
 hi def link r7rsEscHex r7rsChar
 hi def link r7rsEscMnemonic r7rsCharM
 hi def link r7rsEscWrap r7rsCharM
