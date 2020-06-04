@@ -391,6 +391,7 @@ syn keyword r7rsProc call-with-current-continuation call/cc values call-with-val
 
 " R7RS, sec. 6.11 {{{2
 syn keyword r7rsProc with-exception-handler raise raise-continuable error error-object? error-object-message error-object-irritants
+syn keyword r7rsProc read-error? file-error?
 
 " R7RS, sec. 6.12 {{{2
 syn keyword r7rsProc environment scheme-report-environment null-environment interaction-environment eval
