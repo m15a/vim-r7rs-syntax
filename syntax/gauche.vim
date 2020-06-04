@@ -209,6 +209,7 @@ syn match gaucheEscHex /\\U\x\{8}/ contained
 syn match gaucheEscMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
+syn clear r7rsBVec
 syn region gaucheUVec matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
 syn region gaucheUVec matchgroup=r7rsDelim start=/#f%\(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
 syn region gaucheUVec matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
