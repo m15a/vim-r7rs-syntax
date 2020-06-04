@@ -37,7 +37,7 @@ Turning it on is equivalent to setting
     let g:r7rs_strict_identifier = 1
 ```
 
-Note: If `g:r7rs_strict` is set, the other relevant options are ignored even
+NOTE: If `g:r7rs_strict` is set, the other relevant options are ignored even
 if they are set.
 
 ### r7rs_more_parens

@@ -12,9 +12,6 @@ endif
 let s:cpo = &cpo
 set cpo&vim
 
-" NOTE: This may cause slow down but accurate.
-syn sync fromstart
-
 " Options {{{1
 
 " If (b|g):r7rs_strict is true, the following options are set to obey strict R7RS.
@@ -42,6 +39,9 @@ else
 endif
 
 " }}}
+
+" This may cause slow down but provide accurate syntax highlight.
+syn sync fromstart
 
 " Anything visible other than defined below are error.
 syn match r7rsErr /[^[:space:]\n]/
@@ -120,7 +120,7 @@ endif
 
 " Number (cf. R7RS, pp. 62-63) {{{2
 
-" Note that alphabets are case-insensitive in numeric literals.
+" NOTE: alphabets are case-insensitive in numeric literals.
 
 " Non-decimal number {{{3
 
