@@ -12,6 +12,9 @@ endif
 let s:cpo = &cpo
 set cpo&vim
 
+" NOTE: This may cause slow down but accurate.
+syn sync fromstart
+
 " Options {{{1
 
 " If (b|g):r7rs_strict is true, the following options are set to obey strict R7RS.
