@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last change: 2020-05-31
+" Last Change: 2020-05-31
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: MIT
