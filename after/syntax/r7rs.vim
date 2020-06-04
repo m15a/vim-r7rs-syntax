@@ -17,6 +17,18 @@ if !b:r7rs_use_gauche
   finish
 endif
 
+fun! s:check_conflict(option)
+  if !exists(a:option)
+    return
+  endif
+  let l:val = eval(a:option)
+  if l:val
+    echoe "gauche-syntax: '" . a:option . " = " . l:val ."' is not compatible with Gauche"
+  endif
+endfun
+call s:check_conflict('b:r7rs_strict')
+call s:check_conflict('b:r7rs_strict_identifier')
+
 let s:cpo = &cpo
 set cpo&vim
 
