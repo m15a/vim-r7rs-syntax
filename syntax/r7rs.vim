@@ -315,7 +315,7 @@ syn match r7rsLabel /#\d\+#/
 syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
 
 " Common expressions (cf. R7RS, sec. 4) {{{1
-syn cluster r7rsExprs contains=r7rsSyn,r7rsSynM,r7rsAux,r7rsCondExpand,r7rsImport,r7rsProc
+syn cluster r7rsExprs contains=r7rsSyn,r7rsSynM,r7rsAux,r7rsProc,r7rsCondExpand,r7rsImport
 
 " R7RS, sec. 4.1 {{{2
 syn keyword r7rsSyn quote lambda if
@@ -355,10 +355,10 @@ syn keyword r7rsProc number->string string->number
 syn keyword r7rsProc not boolean? boolean=?
 
 " R7RS, sec. 6.4 {{{2
-syn keyword r7rsProcM set-car! set-cdr! list-set!
 syn keyword r7rsProc pair? cons car cdr caar cdar cadr cddr caaar cdaar cadar cddar caadr cdadr caddr cdddr
 syn keyword r7rsProc caaaar cdaaar cadaar cddaar caadar cdadar caddar cdddar caaadr cdaadr cadadr cddadr caaddr cdaddr cadddr cddddr
 syn keyword r7rsProc null? list? make-list list length append reverse list-tail list-ref memq memv member assq assv assoc list-copy
+syn keyword r7rsProcM set-car! set-cdr! list-set!
 
 " R7RS, sec. 6.5 {{{2
 syn keyword r7rsProc symbol? symbol=? symbol->string string->symbol
@@ -369,21 +369,21 @@ syn keyword r7rsProc char-alphabetic? char-numeric? char-whitespace? char-upper-
 syn keyword r7rsProc char-upcase char-downcase char-foldcase
 
 " R7RS, sec. 6.7 {{{2
-syn keyword r7rsProcM string-set! string-copy! string-fill!
 syn keyword r7rsProc string? make-string string string-length string-ref
 syn keyword r7rsProc string=? string-ci=? string<? string-ci<? string>? string-ci>? string<=? string-ci<=? string>=? string-ci>=?
 syn keyword r7rsProc string-upcase string-downcase string-foldcase
 syn keyword r7rsProc substring string-append string->list list->string string-copy
+syn keyword r7rsProcM string-set! string-copy! string-fill!
 
 " R7RS, sec. 6.8 {{{2
-syn keyword r7rsProcM vector-set! vector-copy! vector-fill!
 syn keyword r7rsProc vector? make-vector vector vector-length vector-ref vector->list list->vector vector->string string->vector vector-copy
 syn keyword r7rsProc vector-append
+syn keyword r7rsProcM vector-set! vector-copy! vector-fill!
 
 " R7RS, sec. 6.9 {{{2
-syn keyword r7rsProcM bytevector-u8-set! bytevector-copy!
 syn keyword r7rsProc bytevector? make-bytevector bytevector bytevector-length bytevector-u8-ref bytevector-copy bytevector-append utf8->string
 syn keyword r7rsProc string->utf8
+syn keyword r7rsProcM bytevector-u8-set! bytevector-copy!
 
 " R7RS, sec. 6.10 {{{2
 syn keyword r7rsProc procedure? apply map string-map vector-map for-each string-for-each vector-for-each
@@ -405,13 +405,13 @@ syn keyword r7rsProc close-port close-input-port close-output-port
 syn keyword r7rsProc open-input-string open-output-string get-output-string open-input-bytevector open-output-bytevector get-output-bytevector
 syn keyword r7rsProc read read-char peek-char read-line eof-object? eof-object char-ready? read-string read-u8 peek-u8 u8-ready?
 syn keyword r7rsProc read-bytevector
-syn keyword r7rsProcM read-bytevector!
 syn keyword r7rsProc write write-shared write-simple display newline write-char write-string write-u8 write-bytevector flush-output-port
+syn keyword r7rsProcM read-bytevector!
 
 " R7RS, sec. 6.14 {{{2
-syn keyword r7rsProcM load
 syn keyword r7rsProc file-exists? delete-file command-line exit emergency-exit get-environment-variable get-environment-variables
 syn keyword r7rsProc current-second current-jiffy jiffies-per-second features
+syn keyword r7rsProcM load
 
 " Library declaration (cf. R7RS, sec. 5.6) {{{1
 syn region r7rsLib matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*define-library/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsLibSyn,r7rsLibName,@r7rsLibDecls
@@ -482,11 +482,11 @@ hi def link r7rsQQ r7rsSyn
 hi def link r7rsU r7rsAux
 hi def link r7rsDot r7rsAux
 hi def link r7rsLabel Underlined
-hi def link r7rsSynM PreProc
 hi def link r7rsSyn Statement
+hi def link r7rsSynM PreProc
 hi def link r7rsAux Special
-hi def link r7rsProcM PreProc
 hi def link r7rsProc Function
+hi def link r7rsProcM PreProc
 hi def link r7rsLibSyn r7rsSynM
 hi def link r7rsLibAux r7rsAux
 hi def link r7rsCESyn r7rsLibSyn
