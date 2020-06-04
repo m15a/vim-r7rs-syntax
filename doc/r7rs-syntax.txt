@@ -1,4 +1,4 @@
-*r7rs-syntax.txt*	*vim-gauche-syntax*	Last change: 2020-06-03
+*r7rs-syntax.txt*	*vim-gauche-syntax*	Last change: 2020-06-04
 
                                         *r7rs-syntax* *ft-r7rs-syntax*
 
@@ -6,7 +6,8 @@
 OPTIONS                                          *r7rs-syntax-options*
 
 For all options below, if both global and buffer local ones are found, the
-buffer local one takes precedence.
+buffer local one takes precedence. In the example codes, only global options
+`g:...` are shown but `b:...` also works.
 
                                                        *g:r7rs_strict*
                                                        *b:r7rs_strict*
@@ -15,16 +16,15 @@ specification in R7RS: it restricts use of `[]` and `{}` as parentheses (see
 |g:r7rs_more_parens|) and rejects some identifiers that could be accepted in
 the wild (see |g:r7rs_strict_identifier|).
 >
-    let _:r7rs_strict = 1  " default: 0
+    let g:r7rs_strict = 1  " default: 0
 <
-where `_` reads either `g` or `b` henceforth. Turning it on is equivalent to
-setting
+Turning it on is equivalent to setting
 >
-    let _:r7rs_more_parens = ''
-    let _:r7rs_strict_identifier = 1
+    let g:r7rs_more_parens = ''
+    let g:r7rs_strict_identifier = 1
 <
 
-Note: If |_:r7rs_strict| is set, the other relevant options are ignored even
+Note: If |g:r7rs_strict| is set, the other relevant options are ignored even
 if they are set.
 
                                                   *g:r7rs_more_parens*
@@ -32,7 +32,7 @@ if they are set.
 If square brackets `[]` and curly braces `{}` are included in this option,
 they are accepted as additional parentheses.
 >
-    let _:r7rs_more_parens = ']}'  " default: ']'
+    let g:r7rs_more_parens = ']}'  " default: ']'
 <
 It does not care about whether the parens are opening `[{` or closing `]}`.
 
@@ -41,7 +41,7 @@ It does not care about whether the parens are opening `[{` or closing `]}`.
 If this option is turned off, any identifier other than single `.` are
 accepted. If turned on, only those specified in R7RS are accepted.
 >
-    let _:r7rs_strict_identifier = 1  " default: 0
+    let g:r7rs_strict_identifier = 1  " default: 0
 <
 If this option is turned on, identifiers starting from digits, containing
 non-ascii letters, etc. are rejected. For more details, see R7RS
