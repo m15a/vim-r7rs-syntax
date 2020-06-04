@@ -80,12 +80,14 @@ syn match r7rsDirective /#!\%(no-\)\?fold-case/
 
 " }}} }}}
 
-" All data are classified into two types: quoted and non-quoted. Once a list or
-" vector is quoted, its children are also quoted. As the children may not have
-" ' or `, it is difficult to distinguish between them from their look.
-" To highlight them differently, preparing two syntax groups is mandatory.
+" All data are classified into three types: unquoted, quoted, and quasiquoted.
+" Once a list or vector is (quasi)quoted, its children are also (quasi)quoted.
+" As the children may not be prefixed by ' or `, it is difficult to distinguish
+" between them from their look. To highlight them differently, preparing three
+" syntax groups is mandatory.
 syn cluster r7rsData contains=@r7rsDataSimple,@r7rsDataCompound,r7rsLabel
 syn cluster r7rsDataQ contains=@r7rsDataSimple,@r7rsDataCompoundQ,r7rsLabel
+syn cluster r7rsDataQQ contains=@r7rsDataSimple,@r7rsDataCompoundQQ,r7rsLabel
 
 " Simple data (cf. R7RS, sec. 7.1.2) {{{1
 syn cluster r7rsDataSimple contains=r7rsId,r7rsBool,r7rsNum,r7rsChar,r7rsStr,r7rsByteVec
@@ -224,8 +226,9 @@ syn region r7rsByteVec matchgroup=r7rsDelim start=/#u8(/ end=/)/ contains=r7rsEr
 " Compound data (cf. R7RS, sec. 7.1.2) {{{1
 syn cluster r7rsDataCompound contains=r7rsList,r7rsVec,r7rsQ,r7rsQQ
 syn cluster r7rsDataCompoundQ contains=r7rsListQ,r7rsVecQ,r7rsQ,r7rsQQ
+syn cluster r7rsDataCompoundQQ contains=r7rsListQQ,r7rsVecQQ,r7rsQ,r7rsQQ
 
-" Non-quoted lists and vector {{{2
+" Unquoted lists and vector {{{2
 syn region r7rsList matchgroup=r7rsDelim start=/#\@<!(/ end=/)/ contains=r7rsErr,@r7rsComs,@r7rsData,@r7rsExprs
 if s:use_brackets_as_parens
   syn region r7rsList matchgroup=r7rsDelim start=/#\@<!\[/ end=/\]/ contains=r7rsErr,@r7rsComs,@r7rsData,@r7rsExprs
@@ -235,7 +238,7 @@ if s:use_braces_as_parens
 endif
 syn region r7rsVec matchgroup=r7rsDelim start=/#(/ end=/)/ contains=r7rsErr,@r7rsComs,@r7rsData,@r7rsExprs
 
-" Apparently non-quoted but quoted lists and vector, as their ancestral parens are quoted {{{2
+" Apparently unquoted but quoted lists and vector {{{2
 syn region r7rsListQ matchgroup=r7rsDelim start=/#\@<!(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQ
 if s:use_brackets_as_parens
   syn region r7rsListQ matchgroup=r7rsDelim start=/#\@<!\[/ end=/\]/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQ
@@ -244,6 +247,16 @@ if s:use_braces_as_parens
   syn region r7rsListQ matchgroup=r7rsDelim start=/#\@<!{/ end=/}/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQ
 endif
 syn region r7rsVecQ matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQ
+
+" Apparently unquoted but quasiquoted lists and vector {{{2
+syn region r7rsListQQ matchgroup=r7rsDelim start=/#\@<!(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
+if s:use_brackets_as_parens
+  syn region r7rsListQQ matchgroup=r7rsDelim start=/#\@<!\[/ end=/\]/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
+endif
+if s:use_braces_as_parens
+  syn region r7rsListQQ matchgroup=r7rsDelim start=/#\@<!{/ end=/}/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
+endif
+syn region r7rsVecQQ matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
 
 " Quoted simple data (any identifier, |identifier|, \"string\", or #-syntax other than '#(') {{{2
 syn match r7rsQ /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=r7rsDataSimple
@@ -273,17 +286,17 @@ syn match r7rsQQ /`\ze#[^(]/ nextgroup=r7rsDataSimple
 
 " Quasiquoted lists and vector {{{2
 syn match r7rsQQ /`\ze(/ nextgroup=r7rsQQList
-syn region r7rsQQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQ,r7rsU
+syn region r7rsQQList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
 if s:use_brackets_as_parens
   syn match r7rsQQ /`\ze\[/ nextgroup=r7rsQQList
-  syn region r7rsQQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contains=r7rsErr,@r7rsComs,@r7rsDataQ,r7rsU
+  syn region r7rsQQList matchgroup=r7rsDelim start=/\[/ end=/\]/ contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
 endif
 if s:use_braces_as_parens
   syn match r7rsQQ /`\ze{/ nextgroup=r7rsQQList
-  syn region r7rsQQList matchgroup=r7rsDelim start=/{/ end=/}/ contains=r7rsErr,@r7rsComs,@r7rsDataQ,r7rsU
+  syn region r7rsQQList matchgroup=r7rsDelim start=/{/ end=/}/ contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
 endif
 syn match r7rsQQ /`\ze#(/ nextgroup=r7rsQQVec
-syn region r7rsQQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQ,r7rsU
+syn region r7rsQQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
 
 " Quasiquoted quotes {{{2
 syn match r7rsQQ /`\ze'/ nextgroup=r7rsQ
@@ -294,7 +307,7 @@ syn match r7rsQQ /`\ze`/ nextgroup=r7rsQQ
 syn region r7rsU start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
 
 " Dot '.' {{{2
-syn keyword r7rsDot . contained containedin=r7rsList,r7rsListQ,r7rsQList,r7rsQQList
+syn keyword r7rsDot . contained containedin=r7rsList,r7rsListQ,r7rsListQQ,r7rsQList,r7rsQQList
 
 " Labels (cf. R7RS, sec. 2.4) {{{1
 syn match r7rsLabel /#\d\+#/
