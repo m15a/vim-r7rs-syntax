@@ -36,9 +36,9 @@ if b:r7rs_strict
   " Gauche allows identifiers to begin with '.', [+-], or [0-9], whereas R7RS has some restriction.
   let s:use_strict_identifier = 1
 else
-  let s:use_strict_identifier = b:r7rs_strict_identifier
   let s:use_brackets_as_parens = match(b:r7rs_more_parens, '[\[\]]') != -1
   let s:use_braces_as_parens = match(b:r7rs_more_parens, '[{}]') != -1
+  let s:use_strict_identifier = b:r7rs_strict_identifier
 endif
 
 " }}}
