@@ -20,19 +20,9 @@ setl lisp
 
 " lispwords {{{
 
-setl lispwords+=case
-setl lispwords+=define
-setl lispwords+=define-syntax
-setl lispwords+=if
-setl lispwords+=lambda
-setl lispwords+=let
-setl lispwords+=let*
-setl lispwords+=let-syntax
-setl lispwords+=letrec
-setl lispwords+=letrec-syntax
-setl lispwords+=set!
-setl lispwords+=unless
-setl lispwords+=when
+setl lispwords+=lambda,set!,case,when,unless,let,let*,letrec,letrec*,let-values,let*-values
+setl lispwords+=parameterize,guard,let-syntax,letrec-syntax,syntax-rules,define,define-values
+setl lispwords+=define-syntax,define-record-type,define-library
 
 " }}}
 
