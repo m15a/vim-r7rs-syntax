@@ -50,8 +50,8 @@ syn match r7rsErr /[^[:space:]\n]/
 syn cluster r7rsComs contains=r7rsCom,r7rsComNested,r7rsComSharp,r7rsDirective
 
 " Comments {{{2
-syn region r7rsCom start=/#\@<!;/ end=/$/
-syn region r7rsComNested start=/#|/ end=/|#/ contains=r7rsComNested
+syn region r7rsCom start=/#\@<!;/ end=/$/ contains=r7rsComTodo
+syn region r7rsComNested start=/#|/ end=/|#/ contains=r7rsComNested,r7rsComTodo
 " FIXME: highlight nested #;
 " In `#; #; hello hello R7RS!`, the two `hello`s should be commented out but not.
 syn region r7rsComSharp start=/#;/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComs skipwhite skipempty nextgroup=r7rsComDatum
@@ -74,6 +74,8 @@ syn region r7rsComDatum start=/\[/ end=/\]/ contained contains=r7rsComDatum
 syn region r7rsComDatum start=/{/ end=/}/ contained contains=r7rsComDatum
 " Move on when prefix before parens found
 syn match r7rsComDatum /\(['`]\|,@\?\|#\([[:alpha:]]\d\+\)\?\ze(\)/ contained nextgroup=r7rsComDatum
+
+syntax match r7rsComTodo /\c^[[:space:]]*\(FIXME\|TODO\|NOTE\):/ contained
 
 " Directives (cf. R7RS, sec. 2.1 (p. 8) last paragraph) {{{2
 syn match r7rsDirective /#!\%(no-\)\?fold-case/
@@ -507,6 +509,7 @@ hi def link r7rsCom Comment
 hi def link r7rsComNested r7rsCom
 hi def link r7rsComSharp r7rsCom
 hi def link r7rsComDatum r7rsCom
+hi def link r7rsComTodo TODO
 hi def link r7rsDirective Comment
 hi def link r7rsId Normal
 hi def link r7rsNum Number
