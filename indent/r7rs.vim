@@ -1,6 +1,6 @@
 " Vim indent file
 " Language: Scheme (R7RS-small)
-" Last change: 2020-05-31
+" Last change: 2020-06-04
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: MIT
@@ -15,3 +15,5 @@ setl nosmartindent
 let b:undo_indent = "setl ai< si<"
 
 let b:did_indent = 1
+
+" vim: et sw=2 sts=-1 tw=150 fdm=marker
