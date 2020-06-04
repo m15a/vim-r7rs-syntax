@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-04
+" Last Change: 2020-06-05
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: MIT
@@ -13,8 +13,8 @@ endif
 syn cluster r7rsComs add=gaucheShebang,gaucheDirective,gaucheDebug
 
 " Directives {{{2
-syn match gaucheShebang /\%^\zs#![\/ ].*$/
-syn keyword gaucheDirective gauche-legacy r6rs r7rs
+syn match gaucheShebang /\%^#![\/ ].*$/
+syn match gaucheDirective /#!\(gauche-legacy\|r[67]rs\)/
 
 " Debug directive {{{2
 syn match gaucheDebug /#?[,=]/
@@ -170,7 +170,7 @@ syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+
 " | (inf|nan)\.0
 " )?
 " i
-syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|%(inf|nan)\.0)?i>/
+syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|%(inf|nan)\.0)?i>/
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )@<!
@@ -186,7 +186,7 @@ syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+|\
 " | [+-](inf|nan)\.0
 " )
 " (pi)?
-syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)(pi)?>/
+syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)(pi)?>/
 
 " Character {{{2
 
@@ -211,11 +211,14 @@ syn match gaucheEscMnemonic /\\[f0]/ contained
 " Uniform vectors {{{2
 syn clear r7rsBVec
 syn region gaucheUVec matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
-syn region gaucheUVec matchgroup=r7rsDelim start=/#f%\(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
+syn region gaucheUVec matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
 syn region gaucheUVec matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
 
 " Highlights {{{1
 
+hi def link gaucheShebang r7rsCom
+hi def link gaucheDirective r7rsDirective
+hi def link gaucheDebug r7rsCom
 hi def link gaucheKey Special
 hi def link gaucheNum r7rsNum
 hi def link gaucheChar r7rsChar
