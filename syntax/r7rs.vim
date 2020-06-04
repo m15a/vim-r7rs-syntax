@@ -298,9 +298,10 @@ endif
 syn match r7rsQQ /`\ze#(/ nextgroup=r7rsQQVec
 syn region r7rsQQVec matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
 
-" Quasiquoted quotes {{{2
+" Quasiquoted (un)quotes {{{2
 syn match r7rsQQ /`\ze'/ nextgroup=r7rsQ
 syn match r7rsQQ /`\ze`/ nextgroup=r7rsQQ
+syn match r7rsQQ /`\ze,@\?/ nextgroup=r7rsU
 
 " Unquote {{{2
 " It allows comments before reaching any datum.
