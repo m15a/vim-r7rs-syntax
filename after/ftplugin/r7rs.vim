@@ -26,3 +26,5 @@ unlet b:did_r7rs_ftplugin
 
 let &cpo = s:cpo
 unlet s:cpo
+
+" vim: et sw=2 sts=-1 tw=100 fdm=marker

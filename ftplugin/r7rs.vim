@@ -42,4 +42,4 @@ let b:did_ftplugin = 1
 let &cpo = s:cpo
 unlet s:cpo
 
-" vim: et sw=2 sts=-1 tw=150 fdm=marker
+" vim: et sw=2 sts=-1 tw=100 fdm=marker

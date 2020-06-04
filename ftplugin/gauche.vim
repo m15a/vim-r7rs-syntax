@@ -13,4 +13,4 @@ endif
 
 " }}}
 
-" vim: et sw=2 sts=-1 tw=150 fdm=marker
+" vim: et sw=2 sts=-1 tw=100 fdm=marker
