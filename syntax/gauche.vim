@@ -12,6 +12,11 @@ endif
 " Comments and directives {{{1
 syn cluster r7rsComs add=gaucheShebang,gaucheDirective,gaucheDebug
 
+" Comments {{{2
+
+" Comment out incomplete/interpolated string
+syn region r7rsComDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
+
 " Directives {{{2
 syn match gaucheShebang /\%^#![\/ ].*$/
 syn match gaucheDirective /#!\(gauche-legacy\|r[67]rs\)/
