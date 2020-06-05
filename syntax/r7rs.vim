@@ -483,22 +483,19 @@ syn keyword r7rsImportSyn contained import
 syn keyword r7rsImportAux contained only except prefix rename
 syn cluster r7rsImportSets contains=r7rsLibName,r7rsImportOEP,r7rsImportR
 syn region r7rsImportOEP matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*\%(only\|except\|prefix\)/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsImportAux,@r7rsImportSets,r7rsId
-syn region r7rsImportR matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*rename/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsImportAux,@r7rsImportSets,r7rsImportRList
-syn region r7rsImportRList matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*(/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsImportRPair
-syn region r7rsImportRPair matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsId
+syn region r7rsImportR matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*rename/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsImportAux,@r7rsImportSets,r7rsImportList
+syn region r7rsImportList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsId,r7rsImportList
   syn region r7rsImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import/ end=/\]/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@r7rsImportSets
 if b:r7rs_brackets_as_parens
   syn region r7rsImportOEP matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*\%(only\|except\|prefix\)/ end=/\]/ contained contains=r7rsErr,@r7rsComs,r7rsImportAux,@r7rsImportSets,r7rsId
-  syn region r7rsImportR matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*rename/ end=/\]/ contained contains=r7rsErr,@r7rsComs,r7rsImportAux,@r7rsImportSets,r7rsImportRList
-  syn region r7rsImportRList matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*(/ end=/\]/ contained contains=r7rsErr,@r7rsComs,r7rsImportRPair
-  syn region r7rsImportRPair matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComs,r7rsId
+  syn region r7rsImportR matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*rename/ end=/\]/ contained contains=r7rsErr,@r7rsComs,r7rsImportAux,@r7rsImportSets,r7rsImportList
+  syn region r7rsImportList matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComs,r7rsId,r7rsImportList
 endif
   syn region r7rsImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import/ end=/}/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@r7rsImportSets
 if b:r7rs_braces_as_parens
   syn region r7rsImportOEP matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*\%(only\|except\|prefix\)/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsImportAux,@r7rsImportSets,r7rsId
-  syn region r7rsImportR matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*rename/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsImportAux,@r7rsImportSets,r7rsImportRList
-  syn region r7rsImportRList matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*(/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsImportRPair
-  syn region r7rsImportRPair matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsId
+  syn region r7rsImportR matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*rename/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsImportAux,@r7rsImportSets,r7rsImportList
+  syn region r7rsImportList matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsId,r7rsImportList
 endif
 
 " Highlights {{{1
