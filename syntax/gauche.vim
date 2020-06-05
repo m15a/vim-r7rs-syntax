@@ -17,6 +17,9 @@ syn cluster r7rsComs add=gaucheShebang,gaucheDirective,gaucheDebug
 " Comment out character set (':]' is contained in POSIX character set)
 syn region r7rsComDatum start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheComDatumPOSIX
 syn region gaucheComDatumPOSIX start=/\\\@<!\[:/ end=/:\]/ contained
+" Comment out regular expression ('/' is contained in character set)
+syn region r7rsComDatum start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contained contains=gaucheComDatumCS
+syn region gaucheComDatumCS start=/\\\@<!\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheComDatumPOSIX
 " Comment out incomplete/interpolated string
 syn region r7rsComDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
 
@@ -29,7 +32,7 @@ syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsDataSimple remove=r7rsBVec
-syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gaucheStrI,gaucheStrQQ,gaucheUVec
+syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gaucheRegExp,gaucheStrI,gaucheStrQQ,gaucheUVec
 
 " Keyword symbols {{{2
 syn match gaucheKey /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -216,6 +219,24 @@ syn match gaucheCSEscLiteral /\\[\\\-^\[\]]/ contained
 syn match gaucheCSEscPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
 syn match gaucheCSEscPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
+" Regular expression {{{2
+syn region gaucheRegExp matchgroup=r7rsDelim start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheRESyntax
+syn cluster gaucheRESyntax contains=gaucheRECapture,gaucheREPattern,@gaucheREEscChars,gaucheCSSpec
+syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRESyntax
+syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRESyntax
+syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRESyntax
+syn region gaucheREPattern matchgroup=gaucheREEscMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRESyntax
+
+" Escaped characters (embedded in #/regular expression/) {{{2
+syn cluster gaucheREEscChars contains=gaucheREEscMeta,r7rsEscHex,gaucheREEscMnemonic,gaucheREEscLiteral
+" FIXME: ^ should be highlighted only after #/, (?=, etc. $ is more complex, hmm.
+syn match gaucheREEscMeta /\\\@<![*+?.|^$]/ contained
+syn match gaucheREEscMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
+syn match gaucheREEscMeta /\\\d\+/ contained
+syn match gaucheREEscMeta /\\k<\(\\>\|[^>]\)*>/ contained
+syn match gaucheREEscMnemonic /\\[sSdDwWbB]/ contained
+syn match gaucheREEscLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
+
 " Incomplete string {{{2
 syn region gaucheStrI matchgroup=r7rsDelim start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
 
@@ -238,6 +259,7 @@ syn region gaucheUVec matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ c
 " Highlights {{{1
 
 hi def link gaucheComDatumPOSIX r7rsCom
+hi def link gaucheComDatumCS r7rsCom
 hi def link gaucheShebang r7rsCom
 hi def link gaucheDirective r7rsDirective
 hi def link gaucheDebug r7rsCom
@@ -250,6 +272,12 @@ hi def link gaucheCSEscMeta r7rsCharM
 hi def link gaucheCSEscMnemonic r7rsEscMnemonic
 hi def link gaucheCSEscLiteral r7rsEscLiteral
 hi def link gaucheCSEscPOSIX r7rsCharM
+hi def link gaucheRegExp r7rsStr
+hi def link gaucheRECapture r7rsStr
+hi def link gaucheREPattern r7rsStr
+hi def link gaucheREEscMeta r7rsCharM
+hi def link gaucheREEscMnemonic r7rsEscMnemonic
+hi def link gaucheREEscLiteral r7rsEscLiteral
 hi def link gaucheStrI r7rsStr
 hi def link gaucheStrQQ r7rsStr
 hi def link gaucheStrQQU r7rsU
