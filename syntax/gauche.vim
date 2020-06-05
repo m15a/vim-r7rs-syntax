@@ -266,11 +266,9 @@ syn match gaucheClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 " Special expressions {{{1
 
 " Hybrid 'import' {{{2
-syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@r7rsImportSets,@gaucheImportSets
-syn cluster gaucheImportSets contains=r7rsId,gaucheImportOE,gaucheImportR,gaucheImportP
-syn region gaucheImportOE matchgroup=gaucheKey start=/:\(only\|except\)/ end=/\ze[[:space:]\n]*[:)]/ contained contains=r7rsErr,@r7rsComs,gaucheImportOEList
-syn region gaucheImportOEList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsId
-syn region gaucheImportR matchgroup=gaucheKey start=/:rename/ end=/\ze[[:space:]\n]*[:)]/ contained contains=r7rsErr,@r7rsComs,r7rsImportRList
+syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@gaucheImportSets
+syn cluster gaucheImportSets contains=r7rsId,gaucheImportOER,gaucheImportP
+syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)]/ contained contains=r7rsErr,@r7rsComs,r7rsImportList
 syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)]/ contained contains=r7rsErr,@r7rsComs,r7rsId
 
 " 'use' {{{2
