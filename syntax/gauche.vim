@@ -268,12 +268,24 @@ syn match gaucheClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 " Hybrid 'import' {{{2
 syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@gaucheImportSets
 syn cluster gaucheImportSets contains=r7rsId,gaucheImportOER,gaucheImportP
-syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)]/ contained contains=r7rsErr,@r7rsComs,r7rsImportList
-syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)]/ contained contains=r7rsErr,@r7rsComs,r7rsId
+syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComs,r7rsImportList
+syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComs,r7rsId
+if b:r7rs_brackets_as_parens
+  syn region gaucheImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@gaucheImportSets
+endif
+if b:r7rs_braces_as_parens
+  syn region gaucheImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@gaucheImportSets
+endif
 
 " 'use' {{{2
 syn region gaucheUse matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
 syn keyword gaucheUseSyn use
+if b:r7rs_brackets_as_parens
+  syn region gaucheUse matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
+endif
+if b:r7rs_braces_as_parens
+  syn region gaucheUse matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
+endif
 
 " 'export' can be used outside 'define-library' {{{2
 syn match gaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibExport
