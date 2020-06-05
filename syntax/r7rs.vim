@@ -261,8 +261,8 @@ endif
 syn region r7rsVecQQ matchgroup=r7rsDelim start=/#(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsDataQQ,r7rsU
 
 " Quoted simple data (any identifier, |identifier|, \"string\", or #-syntax other than '#(') {{{2
-syn match r7rsQ /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=r7rsDataSimple
-syn match r7rsQ /'\ze#[^(]/ nextgroup=r7rsDataSimple
+syn match r7rsQ /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
+syn match r7rsQ /'\ze#[^(]/ nextgroup=@r7rsDataSimple
 
 " Quoted lists and vector {{{2
 syn match r7rsQ /'\ze(/ nextgroup=r7rsQList
@@ -284,8 +284,8 @@ syn match r7rsQ /'\ze`/ nextgroup=r7rsQQ
 syn match r7rsQ /'\ze,@\?/ nextgroup=r7rsU
 
 " Quasiquoted simple data (any identifier, |idenfitier|, \"string\", or #-syntax other than '#(') {{{2
-syn match r7rsQQ /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=r7rsDataSimple
-syn match r7rsQQ /`\ze#[^(]/ nextgroup=r7rsDataSimple
+syn match r7rsQQ /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
+syn match r7rsQQ /`\ze#[^(]/ nextgroup=@r7rsDataSimple
 
 " Quasiquoted lists and vector {{{2
 syn match r7rsQQ /`\ze(/ nextgroup=r7rsQQList
