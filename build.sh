@@ -36,7 +36,6 @@ main() {
         | class \
         | syntax \
         | ftplugin \
-        | timestamp \
         )
             cmd="$1"
             shift
@@ -360,29 +359,6 @@ EOF
             | sed -E 's/(.*)/setl lispwords+=\1/'
     } > "$tmp"
     cp "$tmp" "$path"
-}
-
-build_timestamp() {
-    if [[ -z "${1+defined}" ]]; then
-        cat >&2 <<EOF
-Usage: $0 timestamp [FILE...]
-
-Update timestamps in the files.
-
-Args:
-    FILE...     files to be updated
-EOF
-        exit 1
-    fi
-
-    local file tmp
-    for file in "$@"; do
-        tmp="$TMPD/$file"
-        mkdir -p "$(dirname "$tmp")"
-        update_timestamp < "$file" > "$tmp"
-        cp "$tmp" "$file"
-        rm -f "$tmp"
-    done
 }
 
 update_timestamp() {
