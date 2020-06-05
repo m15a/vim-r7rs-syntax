@@ -14,6 +14,9 @@ syn cluster r7rsComs add=gaucheShebang,gaucheDirective,gaucheDebug
 
 " Comments {{{2
 
+" Comment out character set (':]' is contained in POSIX character set)
+syn region r7rsComDatum start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheComDatumPOSIX
+syn region gaucheComDatumPOSIX start=/\\\@<!\[:/ end=/:\]/ contained
 " Comment out incomplete/interpolated string
 syn region r7rsComDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
 
@@ -26,7 +29,7 @@ syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsDataSimple remove=r7rsBVec
-syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheStrI,gaucheStrQQ,gaucheUVec
+syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gaucheStrI,gaucheStrQQ,gaucheUVec
 
 " Keyword symbols {{{2
 syn match gaucheKey /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -200,6 +203,19 @@ syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+
 syn match gaucheChar /\c#\\\%(alarm\|backspace\|del\%(ete\)\?\|esc\%(ape\)\?\|newline\|null\|return\|space\|tab\)/
 syn match gaucheChar /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
 
+" Character set {{{2
+syn match gaucheCharSet /#\ze\[/ nextgroup=gaucheCSSpec
+syn region gaucheCSSpec matchgroup=r7rsDelim start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@gaucheCSEscChars
+
+" Escaped characters (embedded in #[character set]) {{{2
+syn cluster gaucheCSEscChars contains=gaucheCSEscMeta,r7rsEscHex,gaucheCSEscMnemonic,gaucheCSEscLiteral,gaucheCSEscPOSIX
+syn match gaucheCSEscMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
+syn match gaucheCSEscMeta /\v%(\\@<!\[)@<=\^/ contained
+syn match gaucheCSEscMnemonic /\\[sSdDwW]/ contained
+syn match gaucheCSEscLiteral /\\[\\\-^\[\]]/ contained
+syn match gaucheCSEscPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
+syn match gaucheCSEscPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
+
 " Incomplete string {{{2
 syn region gaucheStrI matchgroup=r7rsDelim start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
 
@@ -221,12 +237,19 @@ syn region gaucheUVec matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ c
 
 " Highlights {{{1
 
+hi def link gaucheComDatumPOSIX r7rsCom
 hi def link gaucheShebang r7rsCom
 hi def link gaucheDirective r7rsDirective
 hi def link gaucheDebug r7rsCom
 hi def link gaucheKey Special
 hi def link gaucheNum r7rsNum
 hi def link gaucheChar r7rsChar
+hi def link gaucheCharSet r7rsDelim
+hi def link gaucheCSSpec r7rsStr
+hi def link gaucheCSEscMeta r7rsCharM
+hi def link gaucheCSEscMnemonic r7rsEscMnemonic
+hi def link gaucheCSEscLiteral r7rsEscLiteral
+hi def link gaucheCSEscPOSIX r7rsCharM
 hi def link gaucheStrI r7rsStr
 hi def link gaucheStrQQ r7rsStr
 hi def link gaucheStrQQU r7rsU
