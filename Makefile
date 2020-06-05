@@ -2,10 +2,10 @@ BUILD := _build
 
 VIM_NAMES := \
 	macro \
-	specialform \
-	function \
-	variable \
-	constant
+	specialform
+	# function \
+	# variable \
+	# constant
 	# module
 	# class
 VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))

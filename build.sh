@@ -169,20 +169,20 @@ EOF
     gawk -F '\t' '$2 ~ /^@defspecx?$/ { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i "$LIB" '{ print_with_at_expanded($0) }' \
-        | find_undefined_keywords_in 'scheme\w*Syntax' \
+        | find_undefined_keywords_in 'r7rs\w*SynM?' \
         | gawk '{ switch ($0) {
                   case "import":
-                      # skip it as it is handled in schemeImport
+                      # skip it as it is handled in (r7rs|gauche)Import
                       break
-                  case /^(require|define-(constant|in-module|inline))$/:
-                      # Can be defined only on toplevel (except define-inline)
-                      print "syn keyword schemeSpecialSyntax", $0
+                  case /^((define|select)-module|export-all|require)$/:
+                      print "syn keyword gaucheLibSyn", $0
                       break
-                  case /^((define|select)-module|export-all)$/:
-                      print "syn keyword schemeLibrarySyntax", $0
+                  case /^define-/:
+                      # Use special color
+                      print "syn keyword gaucheSynM", $0
                       break
                   default:
-                      print "syn keyword schemeSyntax", $0
+                      print "syn keyword gaucheSyn", $0
                       break
                   }
                 }'
@@ -347,6 +347,7 @@ EOF
             | gawk '/^let\/cc$/ ||
                     /^while$/ ||
                     /^until$/ ||
+                    /^receive$/ ||
                     /^parse-options$/ ||
                     /(^|-)define(-|$)/ ||
                     /-lambda\*?$/

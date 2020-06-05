@@ -24,7 +24,7 @@
 - [ ] Highlight `format` keywords?
 - [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
-    - [ ] `@defspecx?`
+    - [x] `@defspecx?`
     - [ ] `@defunx?`
     - [ ] `@deffnx?`
         - [ ] `{cise expression}`

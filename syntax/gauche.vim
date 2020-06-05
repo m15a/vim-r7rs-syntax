@@ -267,7 +267,15 @@ syn cluster r7rsExprs add=gaucheSyn,gaucheSynM
 
 " Common expressions {{{1
 
+syn keyword gaucheLibSyn define-module
+syn keyword gaucheLibSyn export-all
+syn keyword gaucheLibSyn require
+syn keyword gaucheLibSyn select-module
 syn keyword gaucheSyn $
+syn keyword gaucheSyn %macroexpand
+syn keyword gaucheSyn %macroexpand-1
+syn keyword gaucheSyn ^
+syn keyword gaucheSyn add-load-path
 syn keyword gaucheSyn address-family
 syn keyword gaucheSyn address-info
 syn keyword gaucheSyn and-let*
@@ -283,6 +291,7 @@ syn keyword gaucheSyn cgen-with-cpp-condition
 syn keyword gaucheSyn chibi-test
 syn keyword gaucheSyn cond-list
 syn keyword gaucheSyn condition
+syn keyword gaucheSyn current-module
 syn keyword gaucheSyn cut
 syn keyword gaucheSyn cute
 syn keyword gaucheSyn debug-funcall
@@ -294,6 +303,7 @@ syn keyword gaucheSyn dotimes
 syn keyword gaucheSyn dynamic-lambda
 syn keyword gaucheSyn ecase
 syn keyword gaucheSyn endianness
+syn keyword gaucheSyn er-macro-transformer
 syn keyword gaucheSyn every?-ec
 syn keyword gaucheSyn extend
 syn keyword gaucheSyn first-ec
@@ -308,9 +318,13 @@ syn keyword gaucheSyn if-let1
 syn keyword gaucheSyn if-not=?
 syn keyword gaucheSyn if3
 syn keyword gaucheSyn if<=?
+syn keyword gaucheSyn if<?
+syn keyword gaucheSyn if=?
 syn keyword gaucheSyn if>=?
+syn keyword gaucheSyn if>?
 syn keyword gaucheSyn ip-protocol
 syn keyword gaucheSyn last-ec
+syn keyword gaucheSyn lazy
 syn keyword gaucheSyn lcons
 syn keyword gaucheSyn lcons*
 syn keyword gaucheSyn let-args
@@ -338,6 +352,7 @@ syn keyword gaucheSyn parse-options
 syn keyword gaucheSyn product-ec
 syn keyword gaucheSyn quasirename
 syn keyword gaucheSyn rec
+syn keyword gaucheSyn receive
 syn keyword gaucheSyn require-extension
 syn keyword gaucheSyn reset
 syn keyword gaucheSyn rlet1
@@ -366,6 +381,8 @@ syn keyword gaucheSyn sum-ec
 syn keyword gaucheSyn syntax-errorf
 syn keyword gaucheSyn test*
 syn keyword gaucheSyn time
+syn keyword gaucheSyn unquote
+syn keyword gaucheSyn unquote-splicing
 syn keyword gaucheSyn until
 syn keyword gaucheSyn unwind-protect
 syn keyword gaucheSyn values->list
@@ -374,7 +391,9 @@ syn keyword gaucheSyn vector-ec
 syn keyword gaucheSyn vector-of-length-ec
 syn keyword gaucheSyn while
 syn keyword gaucheSyn with-builder
+syn keyword gaucheSyn with-cf-subst
 syn keyword gaucheSyn with-iterator
+syn keyword gaucheSyn with-module
 syn keyword gaucheSyn with-signal-handlers
 syn keyword gaucheSyn with-time-counter
 syn keyword gaucheSyn xml-token-head
@@ -386,8 +405,12 @@ syn keyword gaucheSynM define-cise-stmt
 syn keyword gaucheSynM define-cise-toplevel
 syn keyword gaucheSynM define-class
 syn keyword gaucheSynM define-condition-type
+syn keyword gaucheSynM define-constant
 syn keyword gaucheSynM define-dict-interface
 syn keyword gaucheSynM define-generic
+syn keyword gaucheSynM define-in-module
+syn keyword gaucheSynM define-inline
+syn keyword gaucheSynM define-macro
 syn keyword gaucheSynM define-method
 syn keyword gaucheSynM define-stream
 syn keyword gaucheSynM inc!
@@ -452,6 +475,7 @@ hi def link gaucheStrQQU r7rsU
 hi def link gaucheEscHex r7rsEscHex
 hi def link gaucheEscMnemonic r7rsEscMnemonic
 hi def link gaucheClass Type
+hi def link gaucheLibSyn r7rsLibSyn
 hi def link gaucheUseSyn r7rsSynM
 hi def link gaucheSyn r7rsSyn
 hi def link gaucheSynM r7rsSynM
