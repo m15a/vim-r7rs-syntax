@@ -392,9 +392,9 @@ find_undefined_lispwords() {
     done
 }
 
-# Escape meta characters in BASIC regular expressions
+# Escape meta characters in EXTENDED regular expressions
 esc() {
-    echo "$1" | sed -E 's@(\*|\.|\^|\$)@\\\1@g'
+    echo "$1" | sed -E 's@(\*|\.|\^|\$|\+|\?)@\\\1@g'
 }
 
 cat > "$LIB" <<'EOF'
