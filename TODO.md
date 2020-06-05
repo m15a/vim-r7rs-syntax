@@ -61,7 +61,7 @@
         - [ ] `{subprocess argument}` DSL in `gauche.process`
     - ~~`@defivarx?`~~ instance variables
     - ~~`@defcodeindex`~~ generating texinfo index, can be skipped
-- [ ] Add ftplugin
+- [x] Add ftplugin
     - [x] Add `let`-related words to `lispwords`
     - [x] Add `define`-related words to `lispwords`
     - [x] Add `match`-related words to `lispwords`
@@ -69,6 +69,6 @@
     - [x] Add `lambda`-related words to `lispwords`
     - [x] Add `set!`-related words to `lispwords`
     - [x] Add `do`-related words to `lispwords`
-    - [ ] Add `call-with-*` to `lispwords`
-    - [ ] Add `with-*` to `lispwords`
-    - [ ] ~~Add `for-each*` to `lispwords`~~
+    - ~~Add `call-with-*` to `lispwords`~~ they are functions
+    - [x] Add `with-*` to `lispwords`
+    - ~~Add `for-each*` to `lispwords`~~ function

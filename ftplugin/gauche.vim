@@ -13,6 +13,7 @@ endif
 
 setl lispwords+=and-let*
 setl lispwords+=and-let1
+setl lispwords+=cgen-with-cpp-condition
 setl lispwords+=define-cise-expr
 setl lispwords+=define-cise-macro
 setl lispwords+=define-cise-stmt
@@ -23,7 +24,6 @@ setl lispwords+=define-dict-interface
 setl lispwords+=define-generic
 setl lispwords+=define-method
 setl lispwords+=define-stream
-setl lispwords+=do-ec
 setl lispwords+=do-generator
 setl lispwords+=dolist
 setl lispwords+=dotimes
@@ -46,6 +46,7 @@ setl lispwords+=match-let
 setl lispwords+=match-let*
 setl lispwords+=match-let1
 setl lispwords+=match-letrec
+setl lispwords+=parse-options
 setl lispwords+=rlet1
 setl lispwords+=rxmatch-case
 setl lispwords+=rxmatch-let
@@ -53,6 +54,12 @@ setl lispwords+=set!-values
 setl lispwords+=stream-lambda
 setl lispwords+=stream-let
 setl lispwords+=stream-match
+setl lispwords+=until
+setl lispwords+=while
+setl lispwords+=with-builder
+setl lispwords+=with-iterator
+setl lispwords+=with-signal-handlers
+setl lispwords+=with-time-counter
 
 " }}}
 

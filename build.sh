@@ -341,19 +341,22 @@ EOF
         sed -n '1, /^" lispwords {{{$/ p' "$path" | update_timestamp
         echo
         gawk '{ print $4 }' "$@" \
-            | gawk '/^(|r|g)let((|rec)(|1|\*)($|-)|\/)/ ||
-                    /-let(rec)?[1*]?$/ ||
-                    /^define(-|$)/ ||
-                    /-define$/ ||
-                    (/^match(-|$)/ && $0 !~ /match-lambda/ ) ||
-                    /-match$/ ||
-                    /^e?case(-|$)/ ||
-                    (/-e?case$/ && $0 !~ /(lower|upper|title)-case$/) ||
-                    /^lambda(-|$)/ ||
-                    (/-lambda\*?$/ && $0 !~ /^(case|match)-lambda/) ||
-                    /^set!(-|$)/ ||
-                    (/-set!$/ && $0 !~ /char-set!$/) ||
-                    /^do(-|times|list)/' \
+            | gawk '$0 !~ /-ec$/ &&
+                    $0 !~ /^(case|match)-lambda\*?$/ &&
+                    $0 !~ /(lower|upper|title)-case$/' \
+            | gawk '/^let\/cc$/ ||
+                    /^while$/ ||
+                    /^until$/ ||
+                    /^parse-options$/ ||
+                    /(^|-)define(-|$)/ ||
+                    /-lambda\*?$/
+                    /(^|-)[rg]?let(rec)?[1\*]?($|-)/
+                    /(^|-)match$/ ||
+                    /^do(-|times$|list$)/ ||
+                    /(^|-)e?case$/ ||
+                    /^with-/ ||
+                    /^cgen-with-/ ||
+                    /^set!(-|$)/' \
             | sort | uniq \
             | find_undefined_lispwords \
             | sed -E 's/(.*)/setl lispwords+=\1/'
