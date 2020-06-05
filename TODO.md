@@ -8,52 +8,51 @@
     - [ ] `#,`
     - [x] `#/`
     - [x] `#0`...`#9`
-    - ~~`#:`~~ it's ok to colorize this as ordinal symbol
-    - [x] `#;` implemented in `syntax/scheme.vim` (extended)
+    - [x] `#:` it's ok to colorize this as ordinal symbol
+    - [x] `#;`
     - ~~`#<`~~ unreadable object, no need
     - [x] `#?`
     - [x] `#b`, `#d`, `#o`, `#x`, `#e`, `#i`
-    - [x] `#t`, `#f` implemented in `syntax/scheme.vim`
-    - [x] `#u`, `#s`, `#f` implemented in `syntax/scheme.vim` (refined)
-    - [x] `#c`
+    - [x] `#t`, `#f`
+    - [x] `#u`, `#s`, `#f`, `#c`
     - [x] `#[`
-    - [x] `#\` implemented in `syntax/scheme.vim` (refined)
-    - [x] `#|` implemented in `syntax/scheme.vim` (refined)
+    - [x] `#\`
+    - [x] `#|`
 - [x] Highlight `use` like `import`
 - [x] Highlight keywords (`:key` ~~and `#:key`~~)
 - [x] Add numeric literals (including `#\d[rR]...`)
 - [ ] Highlight `format` keywords?
 - [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
-    - [x] `@defspecx?`
-    - [x] `@defunx?`
+    - [ ] `@defspecx?`
+    - [ ] `@defunx?`
     - [ ] `@deffnx?`
         - [ ] `{cise expression}`
         - [ ] `{cise statement}`
         - [ ] `{cise type}`
         - [ ] `{configuration language}` in `srfi-7`
         - [ ] `{ec qualifier}`
-        - [x] `{function}`
-        - [x] `{generic function}`
+        - [ ] `{function}`
+        - [ ] `{generic function}`
         - ~~`{generic application}`~~ no need
         - ~~`{method}`~~ included in `{generic function}`
         - [ ] `{next method}`
         - [ ] `{parameter}`
         - [ ] `{program clause}` in `srfi-7`
         - [ ] `{stub form}`
-    - [x] `@defvarx?`
-    - [x] `@defvrx?`
+    - [ ] `@defvarx?`
+    - [ ] `@defvrx?`
         - [x] `{comparator}`
         - [x] `{constant}`
     - [ ] `@deftpx?`
-        - [x] `{builtin class}` regex match
-        - [x] `{builtin module}`
-        - [x] `{class}` regex match
-        - [x] `{condition type}` regex match
+        - [ ] `{builtin class}` regex match
+        - [ ] `{builtin module}`
+        - [ ] `{class}` regex match
+        - [ ] `{condition type}` regex match
         - ~~`{environment variable}`~~ no need
-        - [x] `{function}`
-        - [x] `{metaclass}` regex match
-        - [x] `{module}`
+        - [ ] `{function}`
+        - [ ] `{metaclass}` regex match
+        - [ ] `{module}`
         - [ ] `{parameter}`
         - ~~`{reader syntax}`~~ no need
         - ~~`{record type}`~~ they are class
