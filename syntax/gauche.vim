@@ -260,6 +260,26 @@ syn region gaucheUVec matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ c
 syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
 syn match gaucheClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 
+" Common expressions {{{1
+
+
+" Special expressions {{{1
+
+" Hybrid 'import' {{{2
+syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@r7rsImportSets,@gaucheImportSets
+syn cluster gaucheImportSets contains=r7rsId,gaucheImportOE,gaucheImportR,gaucheImportP
+syn region gaucheImportOE matchgroup=gaucheKey start=/:\(only\|except\)/ end=/\ze[[:space:]\n]*[:)]/ contained contains=r7rsErr,@r7rsComs,gaucheImportOEList
+syn region gaucheImportOEList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,r7rsId
+syn region gaucheImportR matchgroup=gaucheKey start=/:rename/ end=/\ze[[:space:]\n]*[:)]/ contained contains=r7rsErr,@r7rsComs,r7rsImportRList
+syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)]/ contained contains=r7rsErr,@r7rsComs,r7rsId
+
+" 'use' {{{2
+syn region gaucheUse matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
+syn keyword gaucheUseSyn use
+
+" 'export' can be used outside 'define-library' {{{2
+syn match gaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibExport
+
 " Highlights {{{1
 
 hi def link gaucheComDatumPOSIX r7rsCom
@@ -288,6 +308,7 @@ hi def link gaucheStrQQU r7rsU
 hi def link gaucheEscHex r7rsEscHex
 hi def link gaucheEscMnemonic r7rsEscMnemonic
 hi def link gaucheClass Type
+hi def link gaucheUseSyn r7rsSynM
 
 " }}}
 
