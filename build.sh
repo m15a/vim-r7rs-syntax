@@ -15,11 +15,6 @@ main() {
         exit 1
     fi
 
-    if [[ -z "${VIM_SRC+defined}" ]]; then
-        echo "Please set VIM_SRC to vim source path" >&2
-        exit 1
-    fi
-
     if [[ -z "${1+defined}" ]]; then
         usage
     fi
@@ -135,20 +130,24 @@ EOF
     gawk -F '\t' '$2 ~ /^@defmacx?$/ { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i "$LIB" '{ print_with_at_expanded($0) }' \
-        | find_undefined_keywords_in 'scheme\w*Syntax' \
+        | find_undefined_keywords_in 'r7rs\w*SynM?' \
         | gawk '{ switch ($0) {
                   case "use":
-                      # skip it as it is handled in schemeImport
+                      # skip it as it is handled in gaucheUse
                       break
-                  case "define-class":
-                      # Can be defined only on toplevel
-                      print "syn keyword schemeSpecialSyntax", $0
+                  case /^define-/:
+                      # Use special color
+                      print "syn keyword gaucheSynM", $0
+                      break
+                  case /!/:
+                      # Use special color
+                      print "syn keyword gaucheSynM", $0
                       break
                   case "^c":
-                      print "syn match schemeSyntax /\\^[_a-z]/"
+                      print "syn match gaucheSyn /\\^[_a-z]/"
                       break
                   default:
-                      print "syn keyword schemeSyntax", $0
+                      print "syn keyword gaucheSyn", $0
                       break
                   }
                 }'
@@ -311,10 +310,11 @@ EOF
 
     local tmp="$TMPD/syntax.vim"
     {
-        sed -n '1, /^" Keywords {{{1$/ p' "$path" | update_timestamp
+        sed -n '1, /^" Common expressions {{{1$/ p' "$path" | update_timestamp
+        echo
         cat "$@" | sort | uniq
         echo
-        echo '" vim: fdm=marker'
+        sed -n '/^" Special expressions {{{1$/, $ p' "$path"
     } > "$tmp"
     cp "$tmp" "$path"
 }
@@ -338,38 +338,40 @@ EOF
 
     local tmp="$TMPD/ftplugin.vim"
     {
-        sed -n '1, /^" lispwords {{{1$/ p' "$path" | update_timestamp
+        sed -n '1, /^" lispwords {{{$/ p' "$path" | update_timestamp
         echo
         gawk '{ print $4 }' "$@" \
             | gawk '/^(|r|g)let((|rec)(|1|\*)($|-)|\/)/ ||
-                    /-let(|rec)(|1|\*)$/ ||
-                    /^define($|-)/ ||
+                    /-let(rec)?[1*]?$/ ||
+                    /^define(-|$)/ ||
                     /-define$/ ||
-                    /^match($|-)/ ||
+                    (/^match(-|$)/ && $0 !~ /match-lambda/ ) ||
                     /-match$/ ||
-                    /^(|e)case($|-)/ ||
-                    (/-(|e)case$/ && $0 !~ /(lower|upper|title)-case$/) ||
-                    /^lambda($|-)/ ||
-                    (/-lambda(|\*)$/ && $0 !~ /^scheme\.case-lambda$/) ||
-                    /^set!($|-)/ ||
+                    /^e?case(-|$)/ ||
+                    (/-e?case$/ && $0 !~ /(lower|upper|title)-case$/) ||
+                    /^lambda(-|$)/ ||
+                    (/-lambda\*?$/ && $0 !~ /^(case|match)-lambda/) ||
+                    /^set!(-|$)/ ||
                     (/-set!$/ && $0 !~ /char-set!$/) ||
                     /^do(-|times|list)/' \
             | sort | uniq \
             | find_undefined_lispwords \
             | sed -E 's/(.*)/setl lispwords+=\1/'
+        echo
+        sed -n '/^" }}}$/, $ p' "$path"
     } > "$tmp"
     cp "$tmp" "$path"
 }
 
 update_timestamp() {
-    sed -E 's/^(.*Last change: )[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$(date +%Y-%m-%d)/"
+    sed -E 's/^(.*Last Change: )[0-9]{4}-[0-9]{2}-[0-9]{2}$/\1'"$(date +%Y-%m-%d)/"
 }
 
 find_undefined_keywords_in() {
     local groupname="$1" keyword
     while read -r keyword; do
-        if ! grep "^syn keyword $groupname $(esc "$keyword")$" \
-               "$VIM_SRC"/runtime/syntax/scheme.vim > /dev/null 2>&1
+        if ! grep -E "syn keyword $groupname (.+ )?$(esc "$keyword")( |$)" \
+               ./syntax/r7rs.vim > /dev/null 2>&1
         then
             echo "$keyword"
         fi
@@ -379,8 +381,8 @@ find_undefined_keywords_in() {
 find_undefined_lispwords() {
     local lispword
     while read -r lispword; do
-        if ! grep "^setl lispwords+=$(esc "$lispword")$" \
-               "$VIM_SRC"/runtime/ftplugin/scheme.vim > /dev/null 2>&1
+        if ! grep -E "setl lispwords\+=(.+,)?$(esc "$lispword")(,|$)" \
+               ./ftplugin/r7rs.vim > /dev/null 2>&1
         then
             echo "$lispword"
         fi

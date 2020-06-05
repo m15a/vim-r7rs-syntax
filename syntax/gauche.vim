@@ -260,8 +260,142 @@ syn region gaucheUVec matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ c
 syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
 syn match gaucheClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 
+" }}} }}}
+
+" Expressions
+syn cluster r7rsExprs add=gaucheSyn,gaucheSynM
+
 " Common expressions {{{1
 
+syn keyword gaucheSyn $
+syn keyword gaucheSyn address-family
+syn keyword gaucheSyn address-info
+syn keyword gaucheSyn and-let*
+syn keyword gaucheSyn and-let1
+syn keyword gaucheSyn any?-ec
+syn keyword gaucheSyn append-ec
+syn keyword gaucheSyn apropos
+syn keyword gaucheSyn assume
+syn keyword gaucheSyn assume-type
+syn keyword gaucheSyn autoload
+syn keyword gaucheSyn begin0
+syn keyword gaucheSyn cgen-with-cpp-condition
+syn keyword gaucheSyn chibi-test
+syn keyword gaucheSyn cond-list
+syn keyword gaucheSyn condition
+syn keyword gaucheSyn cut
+syn keyword gaucheSyn cute
+syn keyword gaucheSyn debug-funcall
+syn keyword gaucheSyn debug-print
+syn keyword gaucheSyn do-ec
+syn keyword gaucheSyn do-generator
+syn keyword gaucheSyn dolist
+syn keyword gaucheSyn dotimes
+syn keyword gaucheSyn dynamic-lambda
+syn keyword gaucheSyn ecase
+syn keyword gaucheSyn endianness
+syn keyword gaucheSyn every?-ec
+syn keyword gaucheSyn extend
+syn keyword gaucheSyn first-ec
+syn keyword gaucheSyn fluid-let
+syn keyword gaucheSyn fold-ec
+syn keyword gaucheSyn fold3-ec
+syn keyword gaucheSyn get-keyword*
+syn keyword gaucheSyn get-optional
+syn keyword gaucheSyn glet*
+syn keyword gaucheSyn glet1
+syn keyword gaucheSyn if-let1
+syn keyword gaucheSyn if-not=?
+syn keyword gaucheSyn if3
+syn keyword gaucheSyn if<=?
+syn keyword gaucheSyn if>=?
+syn keyword gaucheSyn ip-protocol
+syn keyword gaucheSyn last-ec
+syn keyword gaucheSyn lcons
+syn keyword gaucheSyn lcons*
+syn keyword gaucheSyn let-args
+syn keyword gaucheSyn let-keywords
+syn keyword gaucheSyn let-keywords*
+syn keyword gaucheSyn let-optionals*
+syn keyword gaucheSyn let-string-start+end
+syn keyword gaucheSyn let/cc
+syn keyword gaucheSyn let1
+syn keyword gaucheSyn list-ec
+syn keyword gaucheSyn llist*
+syn keyword gaucheSyn make-option-parser
+syn keyword gaucheSyn match
+syn keyword gaucheSyn match-define
+syn keyword gaucheSyn match-lambda
+syn keyword gaucheSyn match-lambda*
+syn keyword gaucheSyn match-let
+syn keyword gaucheSyn match-let*
+syn keyword gaucheSyn match-let1
+syn keyword gaucheSyn match-letrec
+syn keyword gaucheSyn max-ec
+syn keyword gaucheSyn message-type
+syn keyword gaucheSyn min-ec
+syn keyword gaucheSyn parse-options
+syn keyword gaucheSyn product-ec
+syn keyword gaucheSyn quasirename
+syn keyword gaucheSyn rec
+syn keyword gaucheSyn require-extension
+syn keyword gaucheSyn reset
+syn keyword gaucheSyn rlet1
+syn keyword gaucheSyn rx
+syn keyword gaucheSyn rxmatch-case
+syn keyword gaucheSyn rxmatch-cond
+syn keyword gaucheSyn rxmatch-if
+syn keyword gaucheSyn rxmatch-let
+syn keyword gaucheSyn shift
+syn keyword gaucheSyn shutdown-method
+syn keyword gaucheSyn socket-domain
+syn keyword gaucheSyn ssax:make-elem-parser
+syn keyword gaucheSyn ssax:make-parser
+syn keyword gaucheSyn ssax:make-pi-parser
+syn keyword gaucheSyn stream
+syn keyword gaucheSyn stream+
+syn keyword gaucheSyn stream-cons
+syn keyword gaucheSyn stream-delay
+syn keyword gaucheSyn stream-lambda
+syn keyword gaucheSyn stream-let
+syn keyword gaucheSyn stream-match
+syn keyword gaucheSyn stream-of
+syn keyword gaucheSyn string-append-ec
+syn keyword gaucheSyn string-ec
+syn keyword gaucheSyn sum-ec
+syn keyword gaucheSyn syntax-errorf
+syn keyword gaucheSyn test*
+syn keyword gaucheSyn time
+syn keyword gaucheSyn until
+syn keyword gaucheSyn unwind-protect
+syn keyword gaucheSyn values->list
+syn keyword gaucheSyn values-ref
+syn keyword gaucheSyn vector-ec
+syn keyword gaucheSyn vector-of-length-ec
+syn keyword gaucheSyn while
+syn keyword gaucheSyn with-builder
+syn keyword gaucheSyn with-iterator
+syn keyword gaucheSyn with-signal-handlers
+syn keyword gaucheSyn with-time-counter
+syn keyword gaucheSyn xml-token-head
+syn keyword gaucheSyn xml-token-kind
+syn keyword gaucheSynM dec!
+syn keyword gaucheSynM define-cise-expr
+syn keyword gaucheSynM define-cise-macro
+syn keyword gaucheSynM define-cise-stmt
+syn keyword gaucheSynM define-cise-toplevel
+syn keyword gaucheSynM define-class
+syn keyword gaucheSynM define-condition-type
+syn keyword gaucheSynM define-dict-interface
+syn keyword gaucheSynM define-generic
+syn keyword gaucheSynM define-method
+syn keyword gaucheSynM define-stream
+syn keyword gaucheSynM inc!
+syn keyword gaucheSynM pop!
+syn keyword gaucheSynM push!
+syn keyword gaucheSynM set!-values
+syn keyword gaucheSynM update!
+syn match gaucheSyn /\^[_a-z]/
 
 " Special expressions {{{1
 
@@ -319,6 +453,8 @@ hi def link gaucheEscHex r7rsEscHex
 hi def link gaucheEscMnemonic r7rsEscMnemonic
 hi def link gaucheClass Type
 hi def link gaucheUseSyn r7rsSynM
+hi def link gaucheSyn r7rsSyn
+hi def link gaucheSynM r7rsSynM
 
 " }}}
 
