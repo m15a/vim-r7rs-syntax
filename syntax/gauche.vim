@@ -32,7 +32,7 @@ syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsDataSimple remove=r7rsBVec
-syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gaucheRegExp,gaucheStrI,gaucheStrQQ,gaucheUVec
+syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gaucheRegExp,gaucheStrI,gaucheStrQQ,gaucheUVec,gaucheClass
 
 " Keyword symbols {{{2
 syn match gaucheKey /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -256,6 +256,10 @@ syn region gaucheUVec matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=
 syn region gaucheUVec matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
 syn region gaucheUVec matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
 
+" Class and condition type {{{2
+syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
+syn match gaucheClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
+
 " Highlights {{{1
 
 hi def link gaucheComDatumPOSIX r7rsCom
@@ -283,6 +287,7 @@ hi def link gaucheStrQQ r7rsStr
 hi def link gaucheStrQQU r7rsU
 hi def link gaucheEscHex r7rsEscHex
 hi def link gaucheEscMnemonic r7rsEscMnemonic
+hi def link gaucheClass Type
 
 " }}}
 
