@@ -2,8 +2,8 @@ BUILD := _build
 
 VIM_NAMES := \
 	macro \
-	specialform
-	# function \
+	specialform \
+	function
 	# variable \
 	# constant
 	# module

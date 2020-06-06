@@ -25,15 +25,15 @@
 - [ ] Build syntax file from texinfo tags
     - [x] `@defmacx?`
     - [x] `@defspecx?`
-    - [ ] `@defunx?`
+    - [x] `@defunx?`
     - [ ] `@deffnx?`
         - [ ] `{cise expression}`
         - [ ] `{cise statement}`
         - [ ] `{cise type}`
         - [ ] `{configuration language}` in `srfi-7`
         - [ ] `{ec qualifier}`
-        - [ ] `{function}`
-        - [ ] `{generic function}`
+        - [x] `{function}`
+        - [x] `{generic function}`
         - ~~`{generic application}`~~ no need
         - ~~`{method}`~~ included in `{generic function}`
         - [ ] `{next method}`
@@ -50,7 +50,7 @@
         - [ ] `{class}` regex match
         - [ ] `{condition type}` regex match
         - ~~`{environment variable}`~~ no need
-        - [ ] `{function}`
+        - [x] `{function}`
         - [ ] `{metaclass}` regex match
         - [ ] `{module}`
         - [ ] `{parameter}`

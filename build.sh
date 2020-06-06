@@ -234,8 +234,17 @@ EOF
          ($2 ~ /^@def(fn|tp)x?$/ && $3 ~ /^{(generic )?function}$/) { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | find_undefined_keywords_in 'schemeFunction' \
-        | gawk '{ print "syn keyword schemeFunction", $0 }'
+        | find_undefined_keywords_in 'r7rsProcM?' \
+        | gawk '{ switch ($0) {
+                  case /!/:
+                      # Use special color
+                      print "syn keyword gaucheProcM", $0
+                      break
+                  default:
+                      print "syn keyword gaucheProc", $0
+                      break
+                  }
+                }'
 }
 
 build_variable() {
