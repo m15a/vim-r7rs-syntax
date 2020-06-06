@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-05
+" Last Change: 2020-06-06
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: MIT
@@ -8,6 +8,20 @@
 if !exists('b:did_r7rs_syntax')
   finish
 endif
+
+" Options {{{1
+
+if get(b:, 'r7rs_strict', get(g:, 'r7rs_strict', 0))
+  let s:brackets_as_parens = 0
+  let s:braces_as_parens = 0
+else
+  let s:more_parens = get(b:, 'r7rs_more_parens', get(g:, 'r7rs_more_parens', ']'))
+  let s:brackets_as_parens = match(s:more_parens, '[\[\]]') > -1
+  let s:braces_as_parens = match(s:more_parens, '[{}]') > -1
+  unlet s:more_parens
+endif
+
+" }}}
 
 " Comments and directives {{{1
 syn cluster r7rsComs add=gaucheShebang,gaucheDirective,gaucheDebug
@@ -427,20 +441,20 @@ syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:s
 syn cluster gaucheImportSets contains=r7rsId,gaucheImportOER,gaucheImportP
 syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComs,r7rsImportList
 syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComs,r7rsId
-if b:r7rs_brackets_as_parens
+if s:brackets_as_parens
   syn region gaucheImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@gaucheImportSets
 endif
-if b:r7rs_braces_as_parens
+if s:braces_as_parens
   syn region gaucheImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@gaucheImportSets
 endif
 
 " 'use' {{{2
 syn region gaucheUse matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
 syn keyword gaucheUseSyn use
-if b:r7rs_brackets_as_parens
+if s:brackets_as_parens
   syn region gaucheUse matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
 endif
-if b:r7rs_braces_as_parens
+if s:braces_as_parens
   syn region gaucheUse matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
 endif
 
@@ -482,4 +496,4 @@ hi def link gaucheSynM r7rsSynM
 
 " }}}
 
-" vim: et sw=2 sts=-1 tw=150 fdm=marker
+" vim: et sw=2 sts=-1 tw=100 fdm=marker
