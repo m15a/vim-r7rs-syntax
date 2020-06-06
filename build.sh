@@ -231,11 +231,15 @@ EOF
 
     gawk -F'\t' \
         '$2 ~ /^@defunx?$/ ||
-         ($2 ~ /^@def(fn|tp)x?$/ && $3 ~ /^{(generic )?function}$/) { print $4 }' "$1" \
+         ($2 ~ /^@def(fn|tp)x?$/ && $3 ~ /^{(\w+ )?(function|method)}$/) { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'r7rsProcM?' \
         | gawk '{ switch ($0) {
+                  case "next-method":
+                      # Use special color
+                      print "syn keyword gaucheProcM", $0
+                      break
                   case /!/:
                       # Use special color
                       print "syn keyword gaucheProcM", $0

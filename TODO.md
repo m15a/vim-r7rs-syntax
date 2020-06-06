@@ -35,8 +35,8 @@
         - [x] `{function}`
         - [x] `{generic function}`
         - ~~`{generic application}`~~ no need
-        - ~~`{method}`~~ included in `{generic function}`
-        - [ ] `{next method}`
+        - [x] `{method}`
+        - [x] `{next method}`
         - [ ] `{parameter}`
         - [ ] `{program clause}` in `srfi-7`
         - [ ] `{stub form}`
