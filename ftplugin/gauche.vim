@@ -18,7 +18,6 @@ setl lispwords+=and-let1
 setl lispwords+=assume
 setl lispwords+=autoload
 setl lispwords+=cgen-with-cpp-condition
-setl lispwords+=cond-expand
 setl lispwords+=define-cise-macro
 setl lispwords+=define-class
 setl lispwords+=define-condition-type

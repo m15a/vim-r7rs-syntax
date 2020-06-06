@@ -84,10 +84,12 @@ EOF
         | gawk -i"$LIB" \
               'BEGIN { FS = " " }
                { $1 = basename($1)
-                 # Join fields surrounded by {}
+                 # Join fields surrounded by {}, (), or []
                  for (i = 3; i <= NF; i++) {
                      j = i
-                     while ($i ~ /^{/ && $j !~ /}$/) {
+                     while (($i ~ /^{/ && $j !~ /}$/) ||
+                            ($i ~ /^\(/ && $j !~ /\)$/) ||
+                            ($i ~ /^\[/ && $j !~ /\]$/)) {
                          j++
                          if (j > NF) break
                      }
