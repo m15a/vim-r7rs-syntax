@@ -40,22 +40,22 @@
         - [ ] `{parameter}`
         - [ ] `{program clause}` in `srfi-7`
         - [ ] `{stub form}`
-    - [ ] `@defvarx?`
-    - [ ] `@defvrx?`
+    - [x] `@defvarx?`
+    - [x] `@defvrx?`
         - [x] `{comparator}`
         - [x] `{constant}`
     - [ ] `@deftpx?`
-        - [ ] `{builtin class}` regex match
-        - [ ] `{builtin module}`
-        - [ ] `{class}` regex match
+        - [x] `{builtin class}` regex match
+        - [x] `{builtin module}`
+        - [x] `{class}` regex match
         - [ ] `{condition type}` regex match
         - ~~`{environment variable}`~~ no need
         - [x] `{function}`
-        - [ ] `{metaclass}` regex match
-        - [ ] `{module}`
+        - [x] `{metaclass}` regex match
+        - [x] `{module}`
         - [ ] `{parameter}`
         - ~~`{reader syntax}`~~ no need
-        - ~~`{record type}`~~ they are class
+        - ~~`{record type}`~~ `job` in `control.job` only, omit it
         - ~~`{record}`~~ ditto
         - [ ] `{subprocess argument}` DSL in `gauche.process`
     - ~~`@defivarx?`~~ instance variables
