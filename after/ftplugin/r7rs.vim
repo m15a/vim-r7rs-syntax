@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-06
+" Last Change: 2020-06-07
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: MIT
@@ -9,7 +9,7 @@ if !exists('b:did_ftplugin')
   finish
 endif
 
-if !get(b:, 'r7rs_use_gauche', get(g:, 'r7rs_use_gauche', 0))
+if !r7rs#get('use_gauche', 0)
   finish
 endif
 

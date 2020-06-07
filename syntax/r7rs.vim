@@ -15,18 +15,18 @@ set cpo&vim
 " Options {{{1
 
 " If (b|g):r7rs_strict is true, the following options are set to obey strict R7RS.
-if get(b:, 'r7rs_strict', get(g:, 'r7rs_strict', 0))
+if r7rs#get('strict', 0)
   " Gauche allows [] and even {} to be parentheses, whereas R7RS does not.
   let s:brackets_as_parens = 0
   let s:braces_as_parens = 0
   " Gauche allows identifiers to begin with '.', [+-], or [0-9], whereas R7RS has some restriction.
   let s:strict_identifier = 1
 else
-  let s:more_parens = get(b:, 'r7rs_more_parens', get(g:, 'r7rs_more_parens', ']'))
+  let s:more_parens = r7rs#get('more_parens', ']')
   let s:brackets_as_parens = match(s:more_parens, '[\[\]]') > -1
   let s:braces_as_parens = match(s:more_parens, '[{}]') > -1
   unlet s:more_parens
-  let s:strict_identifier = get(b:, 'r7rs_strict_identifier', get(g:, 'r7rs_strict_identifier', 0))
+  let s:strict_identifier = r7rs#get('strict_identifier', 0)
 endif
 
 " }}}

@@ -11,11 +11,11 @@ endif
 
 " Options {{{1
 
-if get(b:, 'r7rs_strict', get(g:, 'r7rs_strict', 0))
+if r7rs#get('strict', 0)
   let s:brackets_as_parens = 0
   let s:braces_as_parens = 0
 else
-  let s:more_parens = get(b:, 'r7rs_more_parens', get(g:, 'r7rs_more_parens', ']'))
+  let s:more_parens = r7rs#get('more_parens', ']')
   let s:brackets_as_parens = match(s:more_parens, '[\[\]]') > -1
   let s:braces_as_parens = match(s:more_parens, '[{}]') > -1
   unlet s:more_parens
