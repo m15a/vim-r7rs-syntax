@@ -2,7 +2,7 @@
 " Language: Scheme (Gauche)
 " Last Change: 2020-06-07
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
-" URL: https://github.com/mnacamura/vim-gauche-syntax
+" URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
 
 if !exists('b:current_syntax')
@@ -22,7 +22,7 @@ fun! s:check_conflict(option)
   endif
   let l:value = eval(a:option)
   if l:value
-    echoe "gauche-syntax: '" . a:option . " = " . l:value ."' is not compatible with Gauche"
+    echoe "r7rs-syntax: '" . a:option . " = " . l:value ."' is not compatible with Gauche"
   endif
 endfun
 call s:check_conflict('b:r7rs_strict')

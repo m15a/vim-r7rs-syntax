@@ -1,7 +1,7 @@
-" Helper functions for gauche-syntax plugin
+" Helper functions for r7rs-syntax plugin
 " Last Change: 2020-06-07
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
-" URL: https://github.com/mnacamura/vim-gauche-syntax
+" URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
 
 fun! r7rs#get(varname, default) abort

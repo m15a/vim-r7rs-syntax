@@ -1,4 +1,4 @@
-# vim-gauche-syntax
+# vim-r7rs-syntax
 
 Syntax highlight for Gauche and R7RS Scheme.
 

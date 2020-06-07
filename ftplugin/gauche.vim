@@ -2,7 +2,7 @@
 " Language: Scheme (Gauche)
 " Last Change: 2020-06-06
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
-" URL: https://github.com/mnacamura/vim-gauche-syntax
+" URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
 
 if !exists('b:did_r7rs_ftplugin')
