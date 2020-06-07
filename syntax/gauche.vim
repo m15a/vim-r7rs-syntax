@@ -28,6 +28,8 @@ syn cluster r7rsComs add=gaucheShebang,gaucheDirective,gaucheDebug
 
 " Comments {{{2
 
+" Comment out enclosed keyword symbol
+syn region r7rsComDatum start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contained
 " Comment out character set (':]' is contained in POSIX character set)
 syn region r7rsComDatum start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheComDatumPOSIX
 syn region gaucheComDatumPOSIX start=/\\\@<!\[:/ end=/:\]/ contained
@@ -50,6 +52,7 @@ syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gauc
 
 " Keyword symbols {{{2
 syn match gaucheKey /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
+syn region gaucheKey matchgroup=r7rsDelim start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
 
 " Number {{{2
 syn clear r7rsNum
