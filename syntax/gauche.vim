@@ -2211,7 +2211,6 @@ syn keyword gaucheProc make-overflow-doubler
 syn keyword gaucheProc make-packer
 syn keyword gaucheProc make-pair-comparator
 syn keyword gaucheProc make-process-connection
-syn keyword gaucheProc make-promise
 syn keyword gaucheProc make-queue
 syn keyword gaucheProc make-random-source
 syn keyword gaucheProc make-range-generator

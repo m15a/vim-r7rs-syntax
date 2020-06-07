@@ -308,104 +308,136 @@ syn keyword r7rsDot . contained containedin=r7rsList,r7rsListQ,r7rsListQQ,r7rsQL
 syn match r7rsLabel /#\d\+#/
 syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
 
-" Common expressions (cf. R7RS, sec. 4) {{{1
+" Expressions (cf. R7RS, sec. 4) {{{1
 syn cluster r7rsExprs contains=r7rsSyn,r7rsSynM,r7rsAux,r7rsProc,r7rsProcM,r7rsCondExpand,r7rsImport
 
-" R7RS, sec. 4.1 {{{2
+" Primitive expression types (cf. R7RS, sec. 4.1) {{{2
 syn keyword r7rsSyn quote lambda if
 syn keyword r7rsSynM set! include include-ci
 
-" R7RS, sec. 4.2.1 - 4.2.4 {{{2
+" Derived expression types (cf. R7RS, sec. 4.2) {{{2
 
-syn keyword r7rsSyn cond case and or when unless let let* letrec letrec* let-values let*-values begin do
-syn keyword r7rsAux else =>
-
-" R7RS, sec. 4.2.5 - 4.2.9 {{{2
-
-syn keyword r7rsSyn delay delay-force parameterize guard quasiquote case-lambda
-syn keyword r7rsProc force promise? make-promiss make-parameter
-syn keyword r7rsAux unquote unquote-splicing
-
-" R7RS, sec. 4.3 {{{2
-
+syn keyword r7rsSyn cond case and or when unless let let* letrec letrec* let-values let*-values
+syn keyword r7rsSyn begin do parameterize guard quasiquote
 syn keyword r7rsSynM let-syntax letrec-syntax syntax-rules syntax-error
-syn keyword r7rsAux _ ...
+" NOTE: cond-expand is defined below
+syn keyword r7rsAux else => unquote unquote-splicing _ ...
+syn keyword r7rsProc make-parameter
 
-" R7RS, sec. 5.1 - 5.5 {{{2
+" (scheme lazy)
+syn keyword r7rsSyn delay delay-force
+syn keyword r7rsProc force promise? make-promise
+
+" (scheme case-lambda)
+syn keyword r7rsSyn case-lambda
+
+" Program structure (cf. R7RS, sec. 5) {{{2
 
 syn keyword r7rsSynM define define-values define-syntax define-record-type
+" NOTE: import and define-library is defined below
 
-" R7RS, sec. 6.1 {{{2
+" Standard procedures (cf. R7RS, sec. 6) {{{2
+
 syn keyword r7rsProc eqv? eq? equal?
 
-" R7RS, sec. 6.2 {{{2
-syn keyword r7rsProc number? complex? real? rational? integer? exact? inexact? exact-integer? finite? infinite? nan? = < > <= >= zero? positive?
-syn keyword r7rsProc negative? odd? even? max min + * - / abs floor/ floor-quotient floor-remainder truncate/ truncate-quotient truncate-remainder
-syn keyword r7rsProc quotient remainder modulo gcd lcm numerator denominator floor ceiling truncate round rationalize exp log sin cos tan asin acos
-syn keyword r7rsProc atan square sqrt exact-integer-sqrt expt make-rectangular make-polar real-part imag-part magnitude angle inexact exact
+syn keyword r7rsProc number? complex? real? rational? integer? exact? inexact? exact-integer?
+syn keyword r7rsProc = < > <= >= zero? positive? negative? odd? even? max min + * - / abs floor/
+syn keyword r7rsProc floor-quotient floor-remainder truncate/ truncate-quotient truncate-remainder
+syn keyword r7rsProc quotient remainder modulo gcd lcm numerator denominator floor ceiling truncate
+syn keyword r7rsProc round rationalize square exact-integer-sqrt expt inexact exact
 syn keyword r7rsProc number->string string->number
 
-" R7RS, sec. 6.3 {{{2
 syn keyword r7rsProc not boolean? boolean=?
 
-" R7RS, sec. 6.4 {{{2
-syn keyword r7rsProc pair? cons car cdr caar cdar cadr cddr caaar cdaar cadar cddar caadr cdadr caddr cdddr
-syn keyword r7rsProc caaaar cdaaar cadaar cddaar caadar cdadar caddar cdddar caaadr cdaadr cadadr cddadr caaddr cdaddr cadddr cddddr
-syn keyword r7rsProc null? list? make-list list length append reverse list-tail list-ref memq memv member assq assv assoc list-copy
+syn keyword r7rsProc pair? cons car cdr caar cdar cadr cddr null? list? make-list list length
+syn keyword r7rsProc append reverse list-tail list-ref memq memv member assq assv assoc list-copy
 syn keyword r7rsProcM set-car! set-cdr! list-set!
 
-" R7RS, sec. 6.5 {{{2
 syn keyword r7rsProc symbol? symbol=? symbol->string string->symbol
 
-" R7RS, sec. 6.6 {{{2
-syn keyword r7rsProc char? char=? char<? char>? char<=? char>=? char-ci=? char-ci<? char-ci>? char-ci<=? char-ci>=?
-syn keyword r7rsProc char-alphabetic? char-numeric? char-whitespace? char-upper-case? char-lower-case? digit-value char->integer integer->char
-syn keyword r7rsProc char-upcase char-downcase char-foldcase
+syn keyword r7rsProc char? char=? char<? char>? char<=? char>=? char->integer integer->char
 
-" R7RS, sec. 6.7 {{{2
 syn keyword r7rsProc string? make-string string string-length string-ref
-syn keyword r7rsProc string=? string-ci=? string<? string-ci<? string>? string-ci>? string<=? string-ci<=? string>=? string-ci>=?
-syn keyword r7rsProc string-upcase string-downcase string-foldcase
+syn keyword r7rsProc string=? string<? string>? string<=? string>=?
 syn keyword r7rsProc substring string-append string->list list->string string-copy
 syn keyword r7rsProcM string-set! string-copy! string-fill!
 
-" R7RS, sec. 6.8 {{{2
-syn keyword r7rsProc vector? make-vector vector vector-length vector-ref vector->list list->vector vector->string string->vector vector-copy
-syn keyword r7rsProc vector-append
+syn keyword r7rsProc vector? make-vector vector vector-length vector-ref vector->list list->vector
+syn keyword r7rsProc vector->string string->vector vector-copy vector-append
 syn keyword r7rsProcM vector-set! vector-copy! vector-fill!
 
-" R7RS, sec. 6.9 {{{2
-syn keyword r7rsProc bytevector? make-bytevector bytevector bytevector-length bytevector-u8-ref bytevector-copy bytevector-append utf8->string
-syn keyword r7rsProc string->utf8
+syn keyword r7rsProc bytevector? make-bytevector bytevector bytevector-length bytevector-u8-ref
+syn keyword r7rsProc bytevector-copy bytevector-append utf8->string string->utf8
 syn keyword r7rsProcM bytevector-u8-set! bytevector-copy!
 
-" R7RS, sec. 6.10 {{{2
-syn keyword r7rsProc procedure? apply map string-map vector-map for-each string-for-each vector-for-each
-syn keyword r7rsProc call-with-current-continuation call/cc values call-with-values dynamic-wind
+syn keyword r7rsProc procedure? apply map string-map vector-map for-each string-for-each
+syn keyword r7rsProc vector-for-each call-with-current-continuation call/cc values call-with-values
+syn keyword r7rsProc dynamic-wind
 
-" R7RS, sec. 6.11 {{{2
-syn keyword r7rsProc with-exception-handler raise raise-continuable error error-object? error-object-message error-object-irritants
-syn keyword r7rsProc read-error? file-error?
+syn keyword r7rsProc with-exception-handler raise raise-continuable error error-object?
+syn keyword r7rsProc error-object-message error-object-irritants read-error? file-error?
 
-" R7RS, sec. 6.12 {{{2
-syn keyword r7rsProc environment scheme-report-environment null-environment interaction-environment eval
+syn keyword r7rsProc call-with-port input-port? output-port? textual-port? binary-port?
+syn keyword r7rsProc port? input-port-open? output-port-open? current-input-port current-output-port
+syn keyword r7rsProc current-error-port close-port close-input-port close-output-port
+syn keyword r7rsProc open-input-string open-output-string get-output-string open-input-bytevector
+syn keyword r7rsProc open-output-bytevector get-output-bytevector
 
-" R7RS, sec. 6.13 {{{2
-syn keyword r7rsProc call-with-port call-with-input-file call-with-output-file
-syn keyword r7rsProc input-port? output-port? textual-port? binary-port? port? input-port-open? output-port-open?
-syn keyword r7rsProc current-input-port current-output-port current-error-port
-syn keyword r7rsProc with-input-from-file with-output-to-file open-input-file open-binary-input-file open-output-file open-binary-output-file
-syn keyword r7rsProc close-port close-input-port close-output-port
-syn keyword r7rsProc open-input-string open-output-string get-output-string open-input-bytevector open-output-bytevector get-output-bytevector
-syn keyword r7rsProc read read-char peek-char read-line eof-object? eof-object char-ready? read-string read-u8 peek-u8 u8-ready?
-syn keyword r7rsProc read-bytevector
-syn keyword r7rsProc write write-shared write-simple display newline write-char write-string write-u8 write-bytevector flush-output-port
+syn keyword r7rsProc read-char peek-char read-line eof-object? eof-object char-ready? read-string
+syn keyword r7rsProc read-u8 peek-u8 u8-ready? read-bytevector
 syn keyword r7rsProcM read-bytevector!
 
-" R7RS, sec. 6.14 {{{2
-syn keyword r7rsProc file-exists? delete-file command-line exit emergency-exit get-environment-variable get-environment-variables
-syn keyword r7rsProc current-second current-jiffy jiffies-per-second features
+syn keyword r7rsProc newline write-char write-string write-u8 write-bytevector flush-output-port
+
+syn keyword r7rsProc features
+
+" (scheme inexact)
+syn keyword r7rsProc finite? infinite? nan? exp log sin cos tan asin acos atan sqrt
+
+" (scheme complex)
+syn keyword r7rsProc make-rectangular make-polar real-part imag-part magnitude angle
+
+" (scheme cxr)
+syn keyword r7rsProc caaar cdaar cadar cddar caadr cdadr caddr cdddr
+syn keyword r7rsProc caaaar cdaaar cadaar cddaar caadar cdadar caddar cdddar
+syn keyword r7rsProc caaadr cdaadr cadadr cddadr caaddr cdaddr cadddr cddddr
+
+" (scheme char)
+syn keyword r7rsProc char-ci=? char-ci<? char-ci>? char-ci<=? char-ci>=? char-alphabetic?
+syn keyword r7rsProc char-numeric? char-whitespace? char-upper-case? char-lower-case?
+syn keyword r7rsProc digit-value char-upcase char-downcase char-foldcase
+syn keyword r7rsProc string-ci=? string-ci<? string-ci>? string-ci<=? string-ci>=?
+syn keyword r7rsProc string-upcase string-downcase string-foldcase
+
+" (scheme eval)
+syn keyword r7rsProc environment eval
+
+" (scheme r5rs)
+syn keyword r7rsProc scheme-report-environment null-environment
+
+" (scheme repl)
+syn keyword r7rsProc interaction-environment
+
+" (scheme file)
+syn keyword r7rsProc call-with-input-file call-with-output-file with-input-from-file
+syn keyword r7rsProc with-output-to-file open-input-file open-binary-input-file open-output-file
+syn keyword r7rsProc open-binary-output-file file-exists? delete-file
+
+" (scheme read)
+syn keyword r7rsProc read
+
+" (scheme write)
+syn keyword r7rsProc write write-shared write-simple display
+
+" (scheme load)
 syn keyword r7rsProcM load
+
+" (scheme process-context)
+syn keyword r7rsProc command-line exit emergency-exit get-environment-variable
+syn keyword r7rsProc get-environment-variables
+
+" (scheme time)
+syn keyword r7rsProc current-second current-jiffy jiffies-per-second
 
 " Library declaration (cf. R7RS, sec. 5.6) {{{1
 syn region r7rsLib matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*define-library/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsLibSyn,r7rsLibName,@r7rsLibDecls
