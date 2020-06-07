@@ -4580,9 +4580,11 @@ hi def link gaucheEscHex r7rsEscHex
 hi def link gaucheEscMnemonic r7rsEscMnemonic
 hi def link gaucheClass Type
 hi def link gaucheLibSyn r7rsLibSyn
-hi def link gaucheUseSyn r7rsSynM
+hi def link gaucheUseSyn r7rsLibSyn
 hi def link gaucheSyn r7rsSyn
 hi def link gaucheSynM r7rsSynM
+hi def link gaucheProc r7rsProc
+hi def link gaucheProcM r7rsProcM
 
 " }}}
 

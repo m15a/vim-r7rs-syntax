@@ -255,9 +255,7 @@ EOF
         exit 1
     fi
 
-    gawk -F'\t' \
-        '$2 ~ /^@defunx?$/ ||
-         ($2 ~ /^@def(fn|tp)x?$/ && $3 ~ /^{(\w+ )?(function|method)}$/) { print $4 }' "$1" \
+    gawk -F'\t' '$2 ~ /^@defunx?$/ || ($3 ~ /^{(\w+ )?(function|method)}$/) { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
         | find_undefined_keywords_in 'r7rsProcM?' \
