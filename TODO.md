@@ -26,11 +26,10 @@
     - [x] `@defmacx?`
     - [x] `@defspecx?`
     - [x] `@defunx?`
-    - [ ] `@deffnx?`
+    - [x] `@deffnx?`
         - [x] `{cise expression}`
         - [x] `{cise statement}`
         - [x] `{cise type}`
-        - [ ] `{configuration language}` in `srfi-7`
         - [x] `{ec qualifier}`
         - [x] `{function}`
         - [x] `{generic function}`
@@ -38,13 +37,15 @@
         - [x] `{method}`
         - [x] `{next method}`
         - [x] `{parameter}`
-        - [ ] `{program clause}` in `srfi-7`
         - [x] `{stub form}`
+    - [ ] SRFI-7
+        - [ ] `{configuration language}`
+        - [ ] `{program clause}`
     - [x] `@defvarx?`
     - [x] `@defvrx?`
         - [x] `{comparator}`
         - [x] `{constant}`
-    - [ ] `@deftpx?`
+    - [x] `@deftpx?`
         - [x] `{builtin class}` regex match
         - [x] `{builtin module}`
         - [x] `{class}` regex match
@@ -57,7 +58,8 @@
         - ~~`{reader syntax}`~~ no need
         - ~~`{record type}`~~ `job` in `control.job` only, omit it
         - ~~`{record}`~~ ditto
-        - [ ] `{subprocess argument}` DSL in `gauche.process`
+    - [ ] `{subprocess argument}` DSL in `gauche.process`. `:redirects` have operators like `<`,
+          `>>`, and `>&`. Highlight them specially?
     - ~~`@defivarx?`~~ instance variables
     - ~~`@defcodeindex`~~ generating texinfo index, can be skipped
 - [x] Add ftplugin
