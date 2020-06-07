@@ -37,7 +37,7 @@
         - ~~`{generic application}`~~ no need
         - [x] `{method}`
         - [x] `{next method}`
-        - [ ] `{parameter}`
+        - [x] `{parameter}`
         - [ ] `{program clause}` in `srfi-7`
         - [ ] `{stub form}`
     - [x] `@defvarx?`
@@ -53,7 +53,7 @@
         - [x] `{function}`
         - [x] `{metaclass}` regex match
         - [x] `{module}`
-        - [ ] `{parameter}`
+        - [x] `{parameter}`
         - ~~`{reader syntax}`~~ no need
         - ~~`{record type}`~~ `job` in `control.job` only, omit it
         - ~~`{record}`~~ ditto

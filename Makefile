@@ -5,6 +5,7 @@ VIM_NAMES := \
 	specialform \
 	qualifier \
 	function \
+	parameter \
 	variable \
 	constant
 	# module
@@ -44,6 +45,9 @@ $(BUILD)/qualifier.vim: $(BUILD)/atdef.tsv
 
 $(BUILD)/function.vim: $(BUILD)/atdef.tsv
 	./build.sh function $< > $@
+
+$(BUILD)/parameter.vim: $(BUILD)/atdef.tsv
+	./build.sh parameter $< > $@
 
 $(BUILD)/variable.vim: $(BUILD)/atdef.tsv
 	./build.sh variable $< > $@

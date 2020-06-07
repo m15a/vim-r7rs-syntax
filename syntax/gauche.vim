@@ -393,6 +393,37 @@ syn keyword gaucheLibSyn define-module
 syn keyword gaucheLibSyn export-all
 syn keyword gaucheLibSyn require
 syn keyword gaucheLibSyn select-module
+syn keyword gaucheParam cf-lang
+syn keyword gaucheParam cgen-current-unit
+syn keyword gaucheParam cgi-metavariables
+syn keyword gaucheParam cgi-output-character-encoding
+syn keyword gaucheParam cgi-temporary-files
+syn keyword gaucheParam cise-ambient
+syn keyword gaucheParam cise-emit-source-line
+syn keyword gaucheParam command-line
+syn keyword gaucheParam current-country
+syn keyword gaucheParam current-error-port
+syn keyword gaucheParam current-input-port
+syn keyword gaucheParam current-language
+syn keyword gaucheParam current-locale-details
+syn keyword gaucheParam current-output-port
+syn keyword gaucheParam debug-print-width
+syn keyword gaucheParam default-endian
+syn keyword gaucheParam default-sizer
+syn keyword gaucheParam default-tls-class
+syn keyword gaucheParam http-default-redirect-handler
+syn keyword gaucheParam http-proxy
+syn keyword gaucheParam http-user-agent
+syn keyword gaucheParam json-array-handler
+syn keyword gaucheParam json-object-handler
+syn keyword gaucheParam json-special-handler
+syn keyword gaucheParam log-default-drain
+syn keyword gaucheParam reader-lexical-mode
+syn keyword gaucheParam standard-error-port
+syn keyword gaucheParam standard-input-port
+syn keyword gaucheParam standard-output-port
+syn keyword gaucheParam temporary-directory
+syn keyword gaucheParam tls-ca-bundle-path
 syn keyword gaucheProc *.
 syn keyword gaucheProc +.
 syn keyword gaucheProc -.
@@ -4883,6 +4914,7 @@ hi def link gaucheSyn r7rsSyn
 hi def link gaucheSynM r7rsSynM
 hi def link gaucheProc r7rsProc
 hi def link gaucheProcM r7rsProcM
+hi def link gaucheParam Identifier
 hi def link gaucheVar Identifier
 hi def link gaucheConst Constant
 
