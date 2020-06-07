@@ -389,10 +389,6 @@ syn keyword gaucheConst time-process
 syn keyword gaucheConst time-tai
 syn keyword gaucheConst time-thread
 syn keyword gaucheConst time-utc
-syn keyword gaucheLibSyn define-module
-syn keyword gaucheLibSyn export-all
-syn keyword gaucheLibSyn require
-syn keyword gaucheLibSyn select-module
 syn keyword gaucheParam cf-lang
 syn keyword gaucheParam cgen-current-unit
 syn keyword gaucheParam cgi-metavariables
@@ -4655,10 +4651,14 @@ syn keyword gaucheSynM define-in-module
 syn keyword gaucheSynM define-inline
 syn keyword gaucheSynM define-macro
 syn keyword gaucheSynM define-method
+syn keyword gaucheSynM define-module
 syn keyword gaucheSynM define-stream
+syn keyword gaucheSynM export-all
 syn keyword gaucheSynM inc!
 syn keyword gaucheSynM pop!
 syn keyword gaucheSynM push!
+syn keyword gaucheSynM require
+syn keyword gaucheSynM select-module
 syn keyword gaucheSynM set!-values
 syn keyword gaucheSynM update!
 syn keyword gaucheVar *argv*
@@ -4908,7 +4908,6 @@ hi def link gaucheStrQQU r7rsU
 hi def link gaucheEscHex r7rsEscHex
 hi def link gaucheEscMnemonic r7rsEscMnemonic
 hi def link gaucheClass Type
-hi def link gaucheLibSyn r7rsLibSyn
 hi def link gaucheUseSyn r7rsLibSyn
 hi def link gaucheSyn r7rsSyn
 hi def link gaucheSynM r7rsSynM

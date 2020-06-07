@@ -230,7 +230,7 @@ EOF
                       # skip it as it is handled in (r7rs|gauche)Import
                       break
                   case /^((define|select)-module|export-all|require)$/:
-                      print "syn keyword gaucheLibSyn", $0
+                      print "syn keyword gaucheSynM", $0
                       break
                   case /^define-/:
                       # Use special color
