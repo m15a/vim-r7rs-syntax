@@ -7,7 +7,8 @@ VIM_NAMES := \
 	function \
 	parameter \
 	variable \
-	constant
+	constant \
+	cise
 	# module
 	# class
 VIM_FILES = $(addprefix $(BUILD)/, $(addsuffix .vim, $(VIM_NAMES)))
@@ -54,6 +55,9 @@ $(BUILD)/variable.vim: $(BUILD)/atdef.tsv
 
 $(BUILD)/constant.vim: $(BUILD)/atdef.tsv
 	./build.sh constant $< > $@
+
+$(BUILD)/cise.vim: $(BUILD)/atdef.tsv
+	./build.sh cise $< > $@
 
 $(BUILD)/module.vim: $(BUILD)/atdef.tsv
 	./build.sh module $< > $@

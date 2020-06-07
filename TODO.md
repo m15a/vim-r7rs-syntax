@@ -27,9 +27,9 @@
     - [x] `@defspecx?`
     - [x] `@defunx?`
     - [ ] `@deffnx?`
-        - [ ] `{cise expression}`
-        - [ ] `{cise statement}`
-        - [ ] `{cise type}`
+        - [x] `{cise expression}`
+        - [x] `{cise statement}`
+        - [x] `{cise type}`
         - [ ] `{configuration language}` in `srfi-7`
         - [x] `{ec qualifier}`
         - [x] `{function}`
@@ -39,7 +39,7 @@
         - [x] `{next method}`
         - [x] `{parameter}`
         - [ ] `{program clause}` in `srfi-7`
-        - [ ] `{stub form}`
+        - [x] `{stub form}`
     - [x] `@defvarx?`
     - [x] `@defvrx?`
         - [x] `{comparator}`

@@ -278,9 +278,87 @@ syn match gaucheClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 
 " Expressions
 syn cluster r7rsExprs add=gaucheSyn,gaucheSynM,gaucheProc,gaucheProcM
+syn cluster r7rsExprs add=gaucheCiSEType,gaucheCiSESyn,gaucheCiSESynM,gaucheCiSEProc,gaucheCiSEProcM
 
 " Common expressions {{{1
 
+syn keyword gaucheCiSEProc !=
+syn keyword gaucheCiSEProc %
+syn keyword gaucheCiSEProc %=
+syn keyword gaucheCiSEProc &
+syn keyword gaucheCiSEProc *=
+syn keyword gaucheCiSEProc +=
+syn keyword gaucheCiSEProc -=
+syn keyword gaucheCiSEProc ->
+syn keyword gaucheCiSEProc .type
+syn keyword gaucheCiSEProc /=
+syn keyword gaucheCiSEProc <<
+syn keyword gaucheCiSEProc <<=
+syn keyword gaucheCiSEProc ==
+syn keyword gaucheCiSEProc >>
+syn keyword gaucheCiSEProc >>=
+syn keyword gaucheCiSEProc ?:
+syn keyword gaucheCiSEProc aref
+syn keyword gaucheCiSEProc cast
+syn keyword gaucheCiSEProc logand
+syn keyword gaucheCiSEProc logand=
+syn keyword gaucheCiSEProc logior
+syn keyword gaucheCiSEProc logior=
+syn keyword gaucheCiSEProc lognot
+syn keyword gaucheCiSEProc logxor
+syn keyword gaucheCiSEProc logxor=
+syn keyword gaucheCiSEProc post++
+syn keyword gaucheCiSEProc post--
+syn keyword gaucheCiSEProc pre++
+syn keyword gaucheCiSEProc pre--
+syn keyword gaucheCiSEProc ref
+syn keyword gaucheCiSESyn .cond
+syn keyword gaucheCiSESyn .if
+syn keyword gaucheCiSESyn .include
+syn keyword gaucheCiSESyn .raw-c-code
+syn keyword gaucheCiSESyn .undef
+syn keyword gaucheCiSESyn .unless
+syn keyword gaucheCiSESyn .when
+syn keyword gaucheCiSESyn break
+syn keyword gaucheCiSESyn case/fallthrough
+syn keyword gaucheCiSESyn continue
+syn keyword gaucheCiSESyn dolist
+syn keyword gaucheCiSESyn dopairs
+syn keyword gaucheCiSESyn dotimes
+syn keyword gaucheCiSESyn for
+syn keyword gaucheCiSESyn for-each
+syn keyword gaucheCiSESyn goto
+syn keyword gaucheCiSESyn initcode
+syn keyword gaucheCiSESyn label
+syn keyword gaucheCiSESyn loop
+syn keyword gaucheCiSESyn pair-for-each
+syn keyword gaucheCiSESyn return
+syn keyword gaucheCiSESyn while
+syn keyword gaucheCiSESynM .define
+syn keyword gaucheCiSESynM .static-decls
+syn keyword gaucheCiSESynM declare-cfn
+syn keyword gaucheCiSESynM declare-cvar
+syn keyword gaucheCiSESynM declcode
+syn keyword gaucheCiSESynM define-cclass
+syn keyword gaucheCiSESynM define-cfn
+syn keyword gaucheCiSESynM define-cgeneric
+syn keyword gaucheCiSESynM define-cise-expr
+syn keyword gaucheCiSESynM define-cise-stmt
+syn keyword gaucheCiSESynM define-cmethod
+syn keyword gaucheCiSESynM define-constant
+syn keyword gaucheCiSESynM define-cproc
+syn keyword gaucheCiSESynM define-cptr
+syn keyword gaucheCiSESynM define-ctype
+syn keyword gaucheCiSESynM define-cvar
+syn keyword gaucheCiSESynM define-enum
+syn keyword gaucheCiSESynM define-enum-conditionally
+syn keyword gaucheCiSESynM define-symbol
+syn keyword gaucheCiSESynM define-type
+syn keyword gaucheCiSESynM define-variable
+syn keyword gaucheCiSEType .array
+syn keyword gaucheCiSEType .function
+syn keyword gaucheCiSEType .struct
+syn keyword gaucheCiSEType .union
 syn keyword gaucheConst *rfc2396-unreserved-char-set*
 syn keyword gaucheConst *rfc3986-unreserved-char-set*
 syn keyword gaucheConst *rfc822-atext-chars*
@@ -4916,6 +4994,11 @@ hi def link gaucheProcM r7rsProcM
 hi def link gaucheParam Identifier
 hi def link gaucheVar Identifier
 hi def link gaucheConst Constant
+hi def link gaucheCiSEType Type
+hi def link gaucheCiSESyn gaucheSyn
+hi def link gaucheCiSESynM gaucheSynM
+hi def link gaucheCiSEProc gaucheProc
+hi def link gaucheCiSEProcM gaucheProcM
 
 " }}}
 
