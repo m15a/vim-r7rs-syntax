@@ -48,7 +48,7 @@
         - [x] `{builtin class}` regex match
         - [x] `{builtin module}`
         - [x] `{class}` regex match
-        - [ ] `{condition type}` regex match
+        - [x] `{condition type}` regex match
         - ~~`{environment variable}`~~ no need
         - [x] `{function}`
         - [x] `{metaclass}` regex match
