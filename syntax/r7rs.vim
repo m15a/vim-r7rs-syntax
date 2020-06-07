@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS-small)
-" Last Change: 2020-06-06
+" Last Change: 2020-06-07
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: MIT
@@ -309,7 +309,7 @@ syn match r7rsLabel /#\d\+#/
 syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
 
 " Common expressions (cf. R7RS, sec. 4) {{{1
-syn cluster r7rsExprs contains=r7rsSyn,r7rsSynM,r7rsAux,r7rsProc,r7rsCondExpand,r7rsImport
+syn cluster r7rsExprs contains=r7rsSyn,r7rsSynM,r7rsAux,r7rsProc,r7rsProcM,r7rsCondExpand,r7rsImport
 
 " R7RS, sec. 4.1 {{{2
 syn keyword r7rsSyn quote lambda if
