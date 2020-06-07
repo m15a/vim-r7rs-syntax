@@ -31,7 +31,7 @@
         - [ ] `{cise statement}`
         - [ ] `{cise type}`
         - [ ] `{configuration language}` in `srfi-7`
-        - [ ] `{ec qualifier}`
+        - [x] `{ec qualifier}`
         - [x] `{function}`
         - [x] `{generic function}`
         - ~~`{generic application}`~~ no need

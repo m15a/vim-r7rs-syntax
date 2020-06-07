@@ -3,6 +3,7 @@ BUILD := _build
 VIM_NAMES := \
 	macro \
 	specialform \
+	qualifier \
 	function
 	# variable \
 	# constant
@@ -37,6 +38,9 @@ $(BUILD)/macro.vim: $(BUILD)/atdef.tsv
 
 $(BUILD)/specialform.vim: $(BUILD)/atdef.tsv
 	./build.sh specialform $< > $@
+
+$(BUILD)/qualifier.vim: $(BUILD)/atdef.tsv
+	./build.sh qualifier $< > $@
 
 $(BUILD)/function.vim: $(BUILD)/atdef.tsv
 	./build.sh function $< > $@

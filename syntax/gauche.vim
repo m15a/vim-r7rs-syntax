@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-06
+" Last Change: 2020-06-07
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-gauche-syntax
 " License: MIT
@@ -4451,6 +4451,7 @@ syn keyword gaucheSyn match-letrec
 syn keyword gaucheSyn max-ec
 syn keyword gaucheSyn message-type
 syn keyword gaucheSyn min-ec
+syn keyword gaucheSyn nested
 syn keyword gaucheSyn parse-options
 syn keyword gaucheSyn product-ec
 syn keyword gaucheSyn quasirename
