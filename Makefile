@@ -4,8 +4,8 @@ VIM_NAMES := \
 	macro \
 	specialform \
 	qualifier \
-	function
-	# variable \
+	function \
+	variable
 	# constant
 	# module
 	# class
