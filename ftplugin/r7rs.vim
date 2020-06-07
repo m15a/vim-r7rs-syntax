@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (R7RS-small)
-" Last Change: 2020-06-04
+" Last Change: 2020-06-08
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -20,7 +20,7 @@ setl lisp
 
 " lispwords {{{
 
-setl lispwords+=lambda,set!,case,when,unless,let,let*,letrec,letrec*,let-values,let*-values
+setl lispwords=lambda,set!,case,when,unless,let,let*,letrec,letrec*,let-values,let*-values
 setl lispwords+=parameterize,guard,let-syntax,letrec-syntax,syntax-rules,define,define-values
 setl lispwords+=define-syntax,define-record-type,define-library
 

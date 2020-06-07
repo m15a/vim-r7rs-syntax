@@ -507,7 +507,7 @@ find_undefined_keywords_in() {
 find_undefined_lispwords() {
     local lispword
     while read -r lispword; do
-        if ! grep -E "setl lispwords\+=(.+,)?$(esc "$lispword")(,|$)" \
+        if ! grep -E "setl lispwords\+?=(.+,)?$(esc "$lispword")(,|$)" \
                ./ftplugin/r7rs.vim > /dev/null 2>&1
         then
             echo "$lispword"
