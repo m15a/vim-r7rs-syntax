@@ -20,8 +20,8 @@ setl lisp
 
 " lispwords {{{
 
-setl lispwords=lambda,set!,case,when,unless,let,let*,letrec,letrec*,let-values,let*-values
-setl lispwords+=parameterize,guard,let-syntax,letrec-syntax,syntax-rules,define,define-values
+setl lispwords=lambda,case,when,unless,let,let*,letrec,letrec*,let-values,let*-values,do
+setl lispwords+=parameterize,guard,let-syntax,letrec-syntax,syntax-rules,syntax-error,define
 setl lispwords+=define-syntax,define-record-type,define-library
 
 " }}}

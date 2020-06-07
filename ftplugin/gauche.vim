@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-06
+" Last Change: 2020-06-08
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -29,7 +29,6 @@ setl lispwords+=define-macro
 setl lispwords+=define-method
 setl lispwords+=define-module
 setl lispwords+=define-stream
-setl lispwords+=do
 setl lispwords+=do-generator
 setl lispwords+=dolist
 setl lispwords+=dotimes
@@ -61,7 +60,6 @@ setl lispwords+=stream-lambda
 setl lispwords+=stream-let
 setl lispwords+=stream-match
 setl lispwords+=stream-of
-setl lispwords+=syntax-error
 setl lispwords+=syntax-errorf
 setl lispwords+=until
 setl lispwords+=unwind-protect
