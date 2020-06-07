@@ -1,9 +1,9 @@
-# TODO
+# TODO for Gauche syntax highlight
 
 - [ ] Add sharp syntax
     - [x] `#!`
     - [x] `#"`
-    - [x] `#(` implemented in `syntax/scheme.vim` (refined)
+    - [x] `#(`
     - [x] `#*`
     - [ ] `#,`
     - [x] `#/`
