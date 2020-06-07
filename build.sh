@@ -308,11 +308,10 @@ EOF
         exit 1
     fi
 
-    gawk -F'\t' '$2 ~ /^@defvrx?$/ && $3 ~ /^{constant}$/ { print $4 }' "$1" \
+    gawk -F'\t' '$3 ~ /^{constant}$/ { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | find_undefined_keywords_in 'schemeConstant' \
-        | gawk '{ print "syn keyword schemeConstant", $0 }'
+        | gawk '{ print "syn keyword gaucheConst", $0 }'
 }
 
 build_module() {
