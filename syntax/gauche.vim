@@ -507,12 +507,7 @@ syn keyword gaucheProc -.
 syn keyword gaucheProc ->char-set
 syn keyword gaucheProc .$
 syn keyword gaucheProc /.
-syn keyword gaucheProc <=?
-syn keyword gaucheProc <?
 syn keyword gaucheProc <gauche-package-description>
-syn keyword gaucheProc =?
-syn keyword gaucheProc >=?
-syn keyword gaucheProc >?
 syn keyword gaucheProc abandoned-mutex-exception?
 syn keyword gaucheProc absolute-path?
 syn keyword gaucheProc acons
@@ -714,7 +709,6 @@ syn keyword gaucheProc blob-uint-ref
 syn keyword gaucheProc blob=?
 syn keyword gaucheProc blob?
 syn keyword gaucheProc boolean
-syn keyword gaucheProc boolean-hash
 syn keyword gaucheProc booleans
 syn keyword gaucheProc booleans->integer
 syn keyword gaucheProc bpsw-prime?
@@ -892,10 +886,8 @@ syn keyword gaucheProc cgi-test-environment-ref
 syn keyword gaucheProc change-class
 syn keyword gaucheProc change-object-class
 syn keyword gaucheProc char->ucs
-syn keyword gaucheProc char-ci-hash
 syn keyword gaucheProc char-east-asian-width
 syn keyword gaucheProc char-general-category
-syn keyword gaucheProc char-hash
 syn keyword gaucheProc char-set
 syn keyword gaucheProc char-set->list
 syn keyword gaucheProc char-set->sre
@@ -973,25 +965,16 @@ syn keyword gaucheProc combinations-of
 syn keyword gaucheProc combine-hash-value
 syn keyword gaucheProc common-prefix
 syn keyword gaucheProc common-prefix-to
-syn keyword gaucheProc comparator-check-type
 syn keyword gaucheProc comparator-compare
 syn keyword gaucheProc comparator-comparison-procedure
 syn keyword gaucheProc comparator-comparison-procedure?
 syn keyword gaucheProc comparator-equal?
-syn keyword gaucheProc comparator-equality-predicate
 syn keyword gaucheProc comparator-flavor
-syn keyword gaucheProc comparator-hash
-syn keyword gaucheProc comparator-hash-function
 syn keyword gaucheProc comparator-hash-function?
-syn keyword gaucheProc comparator-hashable?
 syn keyword gaucheProc comparator-max
 syn keyword gaucheProc comparator-min
 syn keyword gaucheProc comparator-min-in-list
-syn keyword gaucheProc comparator-ordered?
-syn keyword gaucheProc comparator-ordering-predicate
-syn keyword gaucheProc comparator-test-type
 syn keyword gaucheProc comparator-type-test-procedure
-syn keyword gaucheProc comparator?
 syn keyword gaucheProc compare
 syn keyword gaucheProc complement
 syn keyword gaucheProc complete-sexp?
@@ -1103,7 +1086,6 @@ syn keyword gaucheProc debug-label
 syn keyword gaucheProc debug-source-info
 syn keyword gaucheProc decode-float
 syn keyword gaucheProc decompose-path
-syn keyword gaucheProc default-hash
 syn keyword gaucheProc define-reader-ctor
 syn keyword gaucheProc deflate-string
 syn keyword gaucheProc deflating-port-full-flush
@@ -1585,9 +1567,7 @@ syn keyword gaucheProc gzip-encode-string
 syn keyword gaucheProc has-setter?
 syn keyword gaucheProc has-windows-console?
 syn keyword gaucheProc hash
-syn keyword gaucheProc hash-bound
 syn keyword gaucheProc hash-by-identity
-syn keyword gaucheProc hash-salt
 syn keyword gaucheProc hash-table
 syn keyword gaucheProc hash-table->alist
 syn keyword gaucheProc hash-table-comparator
@@ -2020,7 +2000,6 @@ syn keyword gaucheProc make-c32vector
 syn keyword gaucheProc make-car-comparator
 syn keyword gaucheProc make-cdr-comparator
 syn keyword gaucheProc make-client-socket
-syn keyword gaucheProc make-comparator
 syn keyword gaucheProc make-comparator/compare
 syn keyword gaucheProc make-comparison<
 syn keyword gaucheProc make-comparison<=
@@ -2039,14 +2018,11 @@ syn keyword gaucheProc make-csv-record-parser
 syn keyword gaucheProc make-csv-writer
 syn keyword gaucheProc make-date
 syn keyword gaucheProc make-debug-comparator
-syn keyword gaucheProc make-default-comparator
 syn keyword gaucheProc make-default-console
 syn keyword gaucheProc make-directory*
 syn keyword gaucheProc make-edn-object
 syn keyword gaucheProc make-empty-attlist
 syn keyword gaucheProc make-ephemeron
-syn keyword gaucheProc make-eq-comparator
-syn keyword gaucheProc make-eqv-comparator
 syn keyword gaucheProc make-f16vector
 syn keyword gaucheProc make-f32array
 syn keyword gaucheProc make-f64array
@@ -2070,7 +2046,6 @@ syn keyword gaucheProc make-iota-generator
 syn keyword gaucheProc make-key-comparator
 syn keyword gaucheProc make-keyword
 syn keyword gaucheProc make-kmp-restart-vector
-syn keyword gaucheProc make-list-comparator
 syn keyword gaucheProc make-list-queue
 syn keyword gaucheProc make-listwise-comparator
 syn keyword gaucheProc make-lru-cache
@@ -2080,7 +2055,6 @@ syn keyword gaucheProc make-mtqueue
 syn keyword gaucheProc make-mutex
 syn keyword gaucheProc make-overflow-doubler
 syn keyword gaucheProc make-packer
-syn keyword gaucheProc make-pair-comparator
 syn keyword gaucheProc make-process-connection
 syn keyword gaucheProc make-queue
 syn keyword gaucheProc make-random-source
@@ -2114,7 +2088,6 @@ syn keyword gaucheProc make-tuple-comparator
 syn keyword gaucheProc make-u8array
 syn keyword gaucheProc make-unfold-generator
 syn keyword gaucheProc make-uvector
-syn keyword gaucheProc make-vector-comparator
 syn keyword gaucheProc make-vectorwise-comparator
 syn keyword gaucheProc make-weak-vector
 syn keyword gaucheProc make-word-breaker
@@ -2285,7 +2258,6 @@ syn keyword gaucheProc ntype-namespace-id??
 syn keyword gaucheProc ntype??
 syn keyword gaucheProc null-device
 syn keyword gaucheProc null-generator
-syn keyword gaucheProc number-hash
 syn keyword gaucheProc object-apply
 syn keyword gaucheProc object-compare
 syn keyword gaucheProc object-equal?
@@ -2937,7 +2909,6 @@ syn keyword gaucheProc string-any
 syn keyword gaucheProc string-append/shared
 syn keyword gaucheProc string-break
 syn keyword gaucheProc string-byte-ref
-syn keyword gaucheProc string-ci-hash
 syn keyword gaucheProc string-ci<
 syn keyword gaucheProc string-ci<=
 syn keyword gaucheProc string-ci<>
@@ -2964,7 +2935,6 @@ syn keyword gaucheProc string-filter
 syn keyword gaucheProc string-fold
 syn keyword gaucheProc string-fold-right
 syn keyword gaucheProc string-for-each-index
-syn keyword gaucheProc string-hash
 syn keyword gaucheProc string-hash-ci
 syn keyword gaucheProc string-immutable?
 syn keyword gaucheProc string-incomplete->complete
@@ -3108,7 +3078,6 @@ syn keyword gaucheProc sxml:sxml->html
 syn keyword gaucheProc sxml:sxml->xml
 syn keyword gaucheProc sxpath
 syn keyword gaucheProc symbol-append
-syn keyword gaucheProc symbol-hash
 syn keyword gaucheProc symbol-interned?
 syn keyword gaucheProc symbol-sans-prefix
 syn keyword gaucheProc sys-abort
@@ -3742,7 +3711,6 @@ syn keyword gaucheProcM char-set-union!
 syn keyword gaucheProcM char-set-xor!
 syn keyword gaucheProcM cise-register-macro!
 syn keyword gaucheProcM class-slot-set!
-syn keyword gaucheProcM comparator-register-default!
 syn keyword gaucheProcM condition-variable-broadcast!
 syn keyword gaucheProcM condition-variable-signal!
 syn keyword gaucheProcM condition-variable-specific-set!

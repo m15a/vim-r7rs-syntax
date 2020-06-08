@@ -767,6 +767,21 @@ syn keyword r7rsProcM vector-find-median! vector-select! vector-separate!
 syn keyword r7rsProc box box? unbox
 syn keyword r7rsProcM set-box!
 
+" (scheme comparator) SRFI-128 {{{1
+syn keyword r7rsSyn comparator-if<=>
+syn keyword r7rsProc comparator? comparator-ordered? comparator-hashable?
+syn keyword r7rsProc make-comparator make-pair-comparator make-list-comparator
+syn keyword r7rsProc make-vector-comparator make-eq-comparator make-eqv-comparator
+syn keyword r7rsProc make-equal-comparator
+syn keyword r7rsProc boolean-hash char-hash char-ci-hash string-hash string-ci-hash symbol-hash
+syn keyword r7rsProc number-hash hash-bound hash-salt
+syn keyword r7rsProc make-default-comparator default-hash
+syn keyword r7rsProc comparator-type-test-predicate comparator-equality-predicate
+syn keyword r7rsProc comparator-ordering-predicate comparator-hash-function comparator-test-type
+syn keyword r7rsProc comparator-check-type comparator-hash
+syn keyword r7rsProc =? <? >? <=? >=?
+syn keyword r7rsProcM comparator-register-default!
+
 " }}}
 
 " vim: et sw=2 sts=-1 tw=100 fdm=marker
