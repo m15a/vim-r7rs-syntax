@@ -349,8 +349,9 @@ EOF
     gawk -F'\t' \
         '$3 ~ /^{parameter}$/ { print $4 }' "$1" \
         | sort | uniq \
+        | find_undefined_keywords_in 'r7rsProc' \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | gawk '{ print "syn keyword gaucheParam", $0 }'
+        | gawk '{ print "syn keyword gaucheProc", $0 }'
 }
 
 build_variable() {
