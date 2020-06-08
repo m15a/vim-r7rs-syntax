@@ -763,6 +763,10 @@ syn keyword r7rsProcM list-sort! list-stable-sort! vector-sort! vector-stable-so
 syn keyword r7rsProcM list-merge! vector-merge! list-delete-neighbor-dups! vector-delete-neighbor-dups!
 syn keyword r7rsProcM vector-find-median! vector-select! vector-separate!
 
+" (scheme box) SRFI-111 {{{1
+syn keyword r7rsProc box box? unbox
+syn keyword r7rsProcM set-box!
+
 " }}}
 
 " vim: et sw=2 sts=-1 tw=100 fdm=marker

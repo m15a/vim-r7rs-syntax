@@ -717,8 +717,6 @@ syn keyword gaucheProc boolean
 syn keyword gaucheProc boolean-hash
 syn keyword gaucheProc booleans
 syn keyword gaucheProc booleans->integer
-syn keyword gaucheProc box
-syn keyword gaucheProc box?
 syn keyword gaucheProc bpsw-prime?
 syn keyword gaucheProc break-list-by-sequence
 syn keyword gaucheProc build-binary-heap
@@ -3502,7 +3500,6 @@ syn keyword gaucheProc uint16s
 syn keyword gaucheProc uint32s
 syn keyword gaucheProc uint64s
 syn keyword gaucheProc uint8s
-syn keyword gaucheProc unbox
 syn keyword gaucheProc uncaught-exception-reason
 syn keyword gaucheProc uncaught-exception?
 syn keyword gaucheProc undefined
@@ -4000,7 +3997,6 @@ syn keyword gaucheProcM selector-add!
 syn keyword gaucheProcM selector-delete!
 syn keyword gaucheProcM set->bag!
 syn keyword gaucheProcM set-adjoin!
-syn keyword gaucheProcM set-box!
 syn keyword gaucheProcM set-delete!
 syn keyword gaucheProcM set-delete-all!
 syn keyword gaucheProcM set-difference!
