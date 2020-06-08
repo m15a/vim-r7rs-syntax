@@ -11,6 +11,7 @@ Yet another syntax highlight for R7RS Scheme and Gauche.
     - [x] `(scheme vector @)`
     - [x] `(scheme sort)`
     - [x] `(scheme set)`
+    - [x] `(scheme charset)`
     - [x] `(scheme box)`
     - [x] `(scheme comparator)`
 - [ ] SRFI

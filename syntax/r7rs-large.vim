@@ -797,6 +797,27 @@ syn keyword r7rsProc bag->set set->bag bag->alist alist->bag
 syn keyword r7rsProcM set->bag!
 syn keyword r7rsVar set-comparator bag-comparator
 
+" (scheme charset) SRFI-14 {{{1
+syn keyword r7rsProc char-set? char-set= char-set<= char-set-hash
+syn keyword r7rsProc char-set-cursor char-set-ref char-set-cursor-next end-of-char-set? 
+syn keyword r7rsProc char-set-fold char-set-unfold char-set-for-each char-set-map
+syn keyword r7rsProcM char-set-unfold!
+syn keyword r7rsProc char-set-copy char-set ->char-set
+syn keyword r7rsProc list->char-set string->char-set char-set-filter ucs-range->char-set
+syn keyword r7rsProcM list->char-set! string->char-set! char-set-filter! ucs-range->char-set!
+syn keyword r7rsProc char-set->list char-set->string char-set-size char-set-count char-set-contains?
+syn keyword r7rsProc char-set-every char-set-any
+syn keyword r7rsProc char-set-adjoin char-set-delete char-set-complement char-set-union
+syn keyword r7rsProcM char-set-adjoin! char-set-delete! char-set-complement! char-set-union!
+syn keyword r7rsProc char-set-intersection char-set-difference char-set-xor
+syn keyword r7rsProcM char-set-intersection! char-set-difference! char-set-xor!
+syn keyword r7rsProc char-set-diff+intersection
+syn keyword r7rsProcM char-set-diff+intersection!
+syn keyword r7rsVar char-set:lower-case char-set:upper-case char-set:title-case char-set:letter
+syn keyword r7rsVar char-set:digit char-set:letter+digit char-set:graphic char-set:printing
+syn keyword r7rsVar char-set:whitespace char-set:iso-control char-set:punctuation char-set:symbol
+syn keyword r7rsVar char-set:hex-digit char-set:blank char-set:ascii char-set:empty char-set:full
+
 " (scheme box) SRFI-111 {{{1
 syn keyword r7rsProc box box? unbox
 syn keyword r7rsProcM set-box!
