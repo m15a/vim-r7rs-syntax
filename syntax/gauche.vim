@@ -4347,7 +4347,7 @@ hi def link gaucheSynM r7rsSynM
 hi def link gaucheProc r7rsProc
 hi def link gaucheProcM r7rsProcM
 hi def link gaucheParam Identifier
-hi def link gaucheVar Identifier
+hi def link gaucheVar r7rsVar
 hi def link gaucheConst Constant
 hi def link gaucheCiSEType Type
 hi def link gaucheCiSESyn gaucheSyn

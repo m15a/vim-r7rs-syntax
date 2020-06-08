@@ -837,6 +837,10 @@ syn keyword r7rsProc comparator-check-type comparator-hash
 syn keyword r7rsProc =? <? >? <=? >=?
 syn keyword r7rsProcM comparator-register-default!
 
+" Highlights {{{1
+
+hi def link r7rsVar Identifier
+
 " }}}
 
 " vim: et sw=2 sts=-1 tw=100 fdm=marker
