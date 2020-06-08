@@ -1,5 +1,5 @@
 " Vim syntax file
-" Language: Scheme (R7RS-small)
+" Language: Scheme (R7RS)
 " Last Change: 2020-06-08
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
@@ -520,6 +520,7 @@ if s:braces_as_parens
   syn region r7rsImportList matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsId,r7rsImportList
 endif
 
+
 " Highlights {{{1
 
 hi def link r7rsErr Error
@@ -563,6 +564,14 @@ hi def link r7rsImportAux r7rsLibAux
 " }}}
 
 let b:current_syntax = 'r7rs'
+
+" R7RS-large {{{
+
+let b:did_r7rs_syntax = 1
+runtime! syntax/r7rs-large.vim
+unlet b:did_r7rs_syntax
+
+" }}}
 
 let &cpo = s:cpo
 unlet s:cpo

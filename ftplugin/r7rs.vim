@@ -1,5 +1,5 @@
 " Vim filetype plugin file
-" Language: Scheme (R7RS-small)
+" Language: Scheme (R7RS)
 " Last Change: 2020-06-08
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax

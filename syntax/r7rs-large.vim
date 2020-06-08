@@ -1,19 +1,13 @@
-" Vim indent file
+" Vim syntax file
 " Language: Scheme (R7RS)
 " Last Change: 2020-06-08
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
 
-if exists("b:did_indent")
+if !exists('b:did_r7rs_syntax')
   finish
 endif
 
-setl autoindent
-setl nosmartindent
-
-let b:undo_indent = "setl ai< si<"
-
-let b:did_indent = 1
 
 " vim: et sw=2 sts=-1 tw=100 fdm=marker
