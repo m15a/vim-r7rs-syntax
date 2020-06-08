@@ -9,6 +9,26 @@ if !exists('b:did_r7rs_syntax')
   finish
 endif
 
+" (scheme list) SRFI-1 {{{1
+syn keyword r7rsProc xcons cons* list-tabulate circular-list iota
+syn keyword r7rsProc proper-list? circular-list? dotted-list? not-pair? null-list? list=
+syn keyword r7rsProc first second third fourth fifth sixth seventh eighth ninth tenth
+syn keyword r7rsProc car+cdr take drop take-right drop-right split-at
+syn keyword r7rsProc last last-pair length+ concatenate append-reverse
+syn keyword r7rsProc zip unzip1 unzip2 unzip3 unzip4 unzip5 count
+syn keyword r7rsProc fold unfold pair-fold reduce fold-right unfold-right pair-fold-right
+syn keyword r7rsProc reduce-right append-map pair-for-each filter-map map-in-order
+syn keyword r7rsProc filter partition remove find find-tail any every list-index
+syn keyword r7rsProc take-while drop-while span break delete delete-duplicates
+syn keyword r7rsProc alist-cons alist-copy alist-delete
+syn keyword r7rsProc lset<= lset= lset-adjoin lset-union lset-intersection lset-difference
+syn keyword r7rsProc lset-xor lset-diff+intersection
+syn keyword r7rsProcM take! drop-right! split-at! append! concatenate! reverse! append-reverse!
+syn keyword r7rsProcM append-map! map! filter! partition! remove! take-while! span! break!
+syn keyword r7rsProcM delete! delete-duplicates! alist-delete!
+syn keyword r7rsProcM lset-union! lset-intersection! lset-difference! lset-xor!
+syn keyword r7rsProcM lset-diff+intersection!
+
 " (scheme vector @) SRFI-160 {{{1
 syn clear r7rsVecB
 syn cluster r7rsDataSimple remove=r7rsVecB add=r7rsVecU

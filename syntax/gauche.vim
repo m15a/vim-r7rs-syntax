@@ -526,19 +526,13 @@ syn keyword gaucheProc alist->imap
 syn keyword gaucheProc alist->mapping
 syn keyword gaucheProc alist->mapping/ordered
 syn keyword gaucheProc alist->tree-map
-syn keyword gaucheProc alist-cons
-syn keyword gaucheProc alist-copy
-syn keyword gaucheProc alist-delete
 syn keyword gaucheProc all-modules
 syn keyword gaucheProc allocate-instance
-syn keyword gaucheProc any
 syn keyword gaucheProc any$
 syn keyword gaucheProc any-bit-set?
 syn keyword gaucheProc any-bits-set?
 syn keyword gaucheProc any-in-queue
 syn keyword gaucheProc any-pred
-syn keyword gaucheProc append-map
-syn keyword gaucheProc append-reverse
 syn keyword gaucheProc applicable?
 syn keyword gaucheProc apply$
 syn keyword gaucheProc apply-generic
@@ -726,7 +720,6 @@ syn keyword gaucheProc booleans->integer
 syn keyword gaucheProc box
 syn keyword gaucheProc box?
 syn keyword gaucheProc bpsw-prime?
-syn keyword gaucheProc break
 syn keyword gaucheProc break-list-by-sequence
 syn keyword gaucheProc build-binary-heap
 syn keyword gaucheProc build-path
@@ -808,7 +801,6 @@ syn keyword gaucheProc call-with-string-io
 syn keyword gaucheProc call-with-temporary-directory
 syn keyword gaucheProc call-with-temporary-file
 syn keyword gaucheProc call/pc
-syn keyword gaucheProc car+cdr
 syn keyword gaucheProc car-sxpath
 syn keyword gaucheProc cartesian-product
 syn keyword gaucheProc cartesian-product-right
@@ -943,8 +935,6 @@ syn keyword gaucheProc check-directory-tree
 syn keyword gaucheProc check-substring-spec
 syn keyword gaucheProc chready?
 syn keyword gaucheProc circular-generator
-syn keyword gaucheProc circular-list
-syn keyword gaucheProc circular-list?
 syn keyword gaucheProc cise-ambient-copy
 syn keyword gaucheProc cise-ambient-decl-strings
 syn keyword gaucheProc cise-default-ambient
@@ -1012,7 +1002,6 @@ syn keyword gaucheProc compute-cpl
 syn keyword gaucheProc compute-get-n-set
 syn keyword gaucheProc compute-slot-accessor
 syn keyword gaucheProc compute-slots
-syn keyword gaucheProc concatenate
 syn keyword gaucheProc condition-has-type?
 syn keyword gaucheProc condition-ref
 syn keyword gaucheProc condition-type?
@@ -1027,7 +1016,6 @@ syn keyword gaucheProc connection-output-port
 syn keyword gaucheProc connection-peer-address
 syn keyword gaucheProc connection-self-address
 syn keyword gaucheProc connection-shutdown
-syn keyword gaucheProc cons*
 syn keyword gaucheProc console-device
 syn keyword gaucheProc construct-cookie-string
 syn keyword gaucheProc construct-css
@@ -1044,7 +1032,6 @@ syn keyword gaucheProc copy-port
 syn keyword gaucheProc copy-queue
 syn keyword gaucheProc copy-time
 syn keyword gaucheProc cosh
-syn keyword gaucheProc count
 syn keyword gaucheProc count$
 syn keyword gaucheProc count-accumulator
 syn keyword gaucheProc cpu-architecture
@@ -1122,10 +1109,8 @@ syn keyword gaucheProc default-hash
 syn keyword gaucheProc define-reader-ctor
 syn keyword gaucheProc deflate-string
 syn keyword gaucheProc deflating-port-full-flush
-syn keyword gaucheProc delete
 syn keyword gaucheProc delete$
 syn keyword gaucheProc delete-directory*
-syn keyword gaucheProc delete-duplicates
 syn keyword gaucheProc delete-files
 syn keyword gaucheProc delete-keyword
 syn keyword gaucheProc delete-keywords
@@ -1161,12 +1146,8 @@ syn keyword gaucheProc dl-distance
 syn keyword gaucheProc dl-distances
 syn keyword gaucheProc do-pipeline
 syn keyword gaucheProc do-process
-syn keyword gaucheProc dotted-list?
-syn keyword gaucheProc drop
 syn keyword gaucheProc drop*
-syn keyword gaucheProc drop-right
 syn keyword gaucheProc drop-right*
-syn keyword gaucheProc drop-while
 syn keyword gaucheProc dynamic-extent?
 syn keyword gaucheProc dynamic-load
 syn keyword gaucheProc eager
@@ -1182,7 +1163,6 @@ syn keyword gaucheProc edn-symbol-basename
 syn keyword gaucheProc edn-symbol-prefix
 syn keyword gaucheProc edn-valid-symbol-name?
 syn keyword gaucheProc edn-write
-syn keyword gaucheProc eighth
 syn keyword gaucheProc encode-float
 syn keyword gaucheProc end-of-char-set?
 syn keyword gaucheProc ephemeron-broken?
@@ -1196,7 +1176,6 @@ syn keyword gaucheProc errorf
 syn keyword gaucheProc euclidean-quotient
 syn keyword gaucheProc euclidean-remainder
 syn keyword gaucheProc euclidean/
-syn keyword gaucheProc every
 syn keyword gaucheProc every$
 syn keyword gaucheProc every-bit-set?
 syn keyword gaucheProc every-in-queue
@@ -1262,7 +1241,6 @@ syn keyword gaucheProc f64vector-range-check
 syn keyword gaucheProc f64vector-sub
 syn keyword gaucheProc f64vector-xor
 syn keyword gaucheProc f64vector=?
-syn keyword gaucheProc fifth
 syn keyword gaucheProc file->byte-generator
 syn keyword gaucheProc file->char-generator
 syn keyword gaucheProc file->generator
@@ -1305,11 +1283,8 @@ syn keyword gaucheProc file-rdev
 syn keyword gaucheProc file-size
 syn keyword gaucheProc file-type
 syn keyword gaucheProc file-uid
-syn keyword gaucheProc filter
 syn keyword gaucheProc filter$
-syn keyword gaucheProc filter-map
 syn keyword gaucheProc filter-to
-syn keyword gaucheProc find
 syn keyword gaucheProc find$
 syn keyword gaucheProc find-file-in-paths
 syn keyword gaucheProc find-gauche-package-description
@@ -1320,10 +1295,8 @@ syn keyword gaucheProc find-min
 syn keyword gaucheProc find-min&max
 syn keyword gaucheProc find-module
 syn keyword gaucheProc find-string-from-port?
-syn keyword gaucheProc find-tail
 syn keyword gaucheProc find-tail$
 syn keyword gaucheProc find-with-index
-syn keyword gaucheProc first
 syn keyword gaucheProc first-set-bit
 syn keyword gaucheProc fixnum-width
 syn keyword gaucheProc fixnum?
@@ -1410,10 +1383,8 @@ syn keyword gaucheProc flush
 syn keyword gaucheProc flush-all-ports
 syn keyword gaucheProc flzero?
 syn keyword gaucheProc fmod
-syn keyword gaucheProc fold
 syn keyword gaucheProc fold$
 syn keyword gaucheProc fold-left
-syn keyword gaucheProc fold-right
 syn keyword gaucheProc fold-right$
 syn keyword gaucheProc fold-with-index
 syn keyword gaucheProc fold2
@@ -1421,7 +1392,6 @@ syn keyword gaucheProc fold3
 syn keyword gaucheProc for-each$
 syn keyword gaucheProc for-each-with-index
 syn keyword gaucheProc format
-syn keyword gaucheProc fourth
 syn keyword gaucheProc frexp
 syn keyword gaucheProc ftp-chdir
 syn keyword gaucheProc ftp-current-directory
@@ -1902,7 +1872,6 @@ syn keyword gaucheProc integers-between$
 syn keyword gaucheProc integers-geometric$
 syn keyword gaucheProc integers-poisson$
 syn keyword gaucheProc intersperse
-syn keyword gaucheProc iota
 syn keyword gaucheProc ip-destination-address
 syn keyword gaucheProc ip-header-length
 syn keyword gaucheProc ip-protocol
@@ -1931,8 +1900,6 @@ syn keyword gaucheProc l-distance
 syn keyword gaucheProc l-distances
 syn keyword gaucheProc lappend
 syn keyword gaucheProc lappend-map
-syn keyword gaucheProc last
-syn keyword gaucheProc last-pair
 syn keyword gaucheProc lazy-size-of
 syn keyword gaucheProc lconcatenate
 syn keyword gaucheProc lcs
@@ -1942,7 +1909,6 @@ syn keyword gaucheProc lcs-with-positions
 syn keyword gaucheProc ldexp
 syn keyword gaucheProc least-fixnum
 syn keyword gaucheProc legacy-hash
-syn keyword gaucheProc length+
 syn keyword gaucheProc length<=?
 syn keyword gaucheProc length<?
 syn keyword gaucheProc length=?
@@ -1975,7 +1941,6 @@ syn keyword gaucheProc list->stream
 syn keyword gaucheProc list->sys-fdset
 syn keyword gaucheProc list-accumulator
 syn keyword gaucheProc list-delete-neighbor-dups
-syn keyword gaucheProc list-index
 syn keyword gaucheProc list-merge
 syn keyword gaucheProc list-queue
 syn keyword gaucheProc list-queue-append
@@ -1994,8 +1959,6 @@ syn keyword gaucheProc list-queue?
 syn keyword gaucheProc list-sort
 syn keyword gaucheProc list-sorted?
 syn keyword gaucheProc list-stable-sort
-syn keyword gaucheProc list-tabulate
-syn keyword gaucheProc list=
 syn keyword gaucheProc listener-read-handler
 syn keyword gaucheProc listener-show-prompt
 syn keyword gaucheProc lists-of
@@ -2042,14 +2005,6 @@ syn keyword gaucheProc lseq-take-while
 syn keyword gaucheProc lseq-zip
 syn keyword gaucheProc lseq=?
 syn keyword gaucheProc lseq?
-syn keyword gaucheProc lset-adjoin
-syn keyword gaucheProc lset-diff+intersection
-syn keyword gaucheProc lset-difference
-syn keyword gaucheProc lset-intersection
-syn keyword gaucheProc lset-union
-syn keyword gaucheProc lset-xor
-syn keyword gaucheProc lset<=
-syn keyword gaucheProc lset=
 syn keyword gaucheProc lslices
 syn keyword gaucheProc lstate-filter
 syn keyword gaucheProc ltake
@@ -2181,7 +2136,6 @@ syn keyword gaucheProc make>?
 syn keyword gaucheProc map$
 syn keyword gaucheProc map*
 syn keyword gaucheProc map-accum
-syn keyword gaucheProc map-in-order
 syn keyword gaucheProc map-to
 syn keyword gaucheProc map-to-with-index
 syn keyword gaucheProc map-union
@@ -2322,7 +2276,6 @@ syn keyword gaucheProc ndbm-store
 syn keyword gaucheProc next-token
 syn keyword gaucheProc next-token-of
 syn keyword gaucheProc ngettext
-syn keyword gaucheProc ninth
 syn keyword gaucheProc node-closure
 syn keyword gaucheProc node-eq?
 syn keyword gaucheProc node-equal?
@@ -2334,13 +2287,11 @@ syn keyword gaucheProc node-reverse
 syn keyword gaucheProc node-self
 syn keyword gaucheProc node-trace
 syn keyword gaucheProc nodeset?
-syn keyword gaucheProc not-pair?
 syn keyword gaucheProc ntype-names??
 syn keyword gaucheProc ntype-namespace-id??
 syn keyword gaucheProc ntype??
 syn keyword gaucheProc null-device
 syn keyword gaucheProc null-generator
-syn keyword gaucheProc null-list?
 syn keyword gaucheProc number-hash
 syn keyword gaucheProc object-apply
 syn keyword gaucheProc object-compare
@@ -2379,9 +2330,6 @@ syn keyword gaucheProc os-name
 syn keyword gaucheProc os-version
 syn keyword gaucheProc pa$
 syn keyword gaucheProc pack
-syn keyword gaucheProc pair-fold
-syn keyword gaucheProc pair-fold-right
-syn keyword gaucheProc pair-for-each
 syn keyword gaucheProc pairs-of
 syn keyword gaucheProc parameter-post-observers
 syn keyword gaucheProc parameter-pre-observers
@@ -2395,7 +2343,6 @@ syn keyword gaucheProc parse-edn-string
 syn keyword gaucheProc parse-json
 syn keyword gaucheProc parse-json*
 syn keyword gaucheProc parse-json-string
-syn keyword gaucheProc partition
 syn keyword gaucheProc partition$
 syn keyword gaucheProc partition-to
 syn keyword gaucheProc path->gauche-package-description
@@ -2471,7 +2418,6 @@ syn keyword gaucheProc profiler-reset
 syn keyword gaucheProc profiler-show
 syn keyword gaucheProc profiler-start
 syn keyword gaucheProc profiler-stop
-syn keyword gaucheProc proper-list?
 syn keyword gaucheProc provide
 syn keyword gaucheProc provided?
 syn keyword gaucheProc pseudo-rtd
@@ -2539,9 +2485,7 @@ syn keyword gaucheProc record-modifier
 syn keyword gaucheProc record-predicate
 syn keyword gaucheProc record-rtd
 syn keyword gaucheProc record?
-syn keyword gaucheProc reduce
 syn keyword gaucheProc reduce$
-syn keyword gaucheProc reduce-right
 syn keyword gaucheProc reduce-right$
 syn keyword gaucheProc ref
 syn keyword gaucheProc reference-barrier
@@ -2597,7 +2541,6 @@ syn keyword gaucheProc relnum-compare
 syn keyword gaucheProc reload
 syn keyword gaucheProc reload-modified-modules
 syn keyword gaucheProc reload-verbose
-syn keyword gaucheProc remove
 syn keyword gaucheProc remove$
 syn keyword gaucheProc remove-directory*
 syn keyword gaucheProc remove-file
@@ -2724,7 +2667,6 @@ syn keyword gaucheProc s8vector-xor
 syn keyword gaucheProc s8vector=?
 syn keyword gaucheProc samples$
 syn keyword gaucheProc samples-from
-syn keyword gaucheProc second
 syn keyword gaucheProc seconds->time
 syn keyword gaucheProc select-kids
 syn keyword gaucheProc selector-select
@@ -2768,7 +2710,6 @@ syn keyword gaucheProc set=?
 syn keyword gaucheProc set>=?
 syn keyword gaucheProc set>?
 syn keyword gaucheProc setter
-syn keyword gaucheProc seventh
 syn keyword gaucheProc sexp-list->file
 syn keyword gaucheProc sha1-digest
 syn keyword gaucheProc sha1-digest-string
@@ -2791,7 +2732,6 @@ syn keyword gaucheProc shuffle-to
 syn keyword gaucheProc simplify-path
 syn keyword gaucheProc sinh
 syn keyword gaucheProc sint-list->blob
-syn keyword gaucheProc sixth
 syn keyword gaucheProc size-of
 syn keyword gaucheProc skip-until
 syn keyword gaucheProc skip-while
@@ -2847,7 +2787,6 @@ syn keyword gaucheProc sort-by
 syn keyword gaucheProc sorted?
 syn keyword gaucheProc source-code
 syn keyword gaucheProc source-location
-syn keyword gaucheProc span
 syn keyword gaucheProc sparse-matrix-copy
 syn keyword gaucheProc sparse-matrix-exists?
 syn keyword gaucheProc sparse-matrix-fold
@@ -2877,7 +2816,6 @@ syn keyword gaucheProc sparse-vector-max-index-bits
 syn keyword gaucheProc sparse-vector-num-entries
 syn keyword gaucheProc sparse-vector-ref
 syn keyword gaucheProc sparse-vector-values
-syn keyword gaucheProc split-at
 syn keyword gaucheProc split-at*
 syn keyword gaucheProc sql-tokenize
 syn keyword gaucheProc srl:display-sxml
@@ -3388,15 +3326,11 @@ syn keyword gaucheProc sys-win-process?
 syn keyword gaucheProc sys-write-console
 syn keyword gaucheProc sys-write-console-output-character
 syn keyword gaucheProc tabulate-array
-syn keyword gaucheProc take
 syn keyword gaucheProc take*
 syn keyword gaucheProc take-after
-syn keyword gaucheProc take-right
 syn keyword gaucheProc take-right*
 syn keyword gaucheProc take-until
-syn keyword gaucheProc take-while
 syn keyword gaucheProc tanh
-syn keyword gaucheProc tenth
 syn keyword gaucheProc terminated-thread-exception?
 syn keyword gaucheProc test
 syn keyword gaucheProc test-check
@@ -3412,7 +3346,6 @@ syn keyword gaucheProc test-section
 syn keyword gaucheProc test-start
 syn keyword gaucheProc test-summary-check
 syn keyword gaucheProc textdomain
-syn keyword gaucheProc third
 syn keyword gaucheProc thread-name
 syn keyword gaucheProc thread-pool-results
 syn keyword gaucheProc thread-pool-shut-down?
@@ -3581,19 +3514,12 @@ syn keyword gaucheProc uncaught-exception-reason
 syn keyword gaucheProc uncaught-exception?
 syn keyword gaucheProc undefined
 syn keyword gaucheProc undefined?
-syn keyword gaucheProc unfold
-syn keyword gaucheProc unfold-right
 syn keyword gaucheProc unify
 syn keyword gaucheProc unify-merge
 syn keyword gaucheProc unpack
 syn keyword gaucheProc unpack-skip
 syn keyword gaucheProc untrace-macro
 syn keyword gaucheProc unwrap-syntax
-syn keyword gaucheProc unzip1
-syn keyword gaucheProc unzip2
-syn keyword gaucheProc unzip3
-syn keyword gaucheProc unzip4
-syn keyword gaucheProc unzip5
 syn keyword gaucheProc uri-compose
 syn keyword gaucheProc uri-compose-data
 syn keyword gaucheProc uri-decode
@@ -3722,10 +3648,8 @@ syn keyword gaucheProc x->integer
 syn keyword gaucheProc x->lseq
 syn keyword gaucheProc x->number
 syn keyword gaucheProc x->string
-syn keyword gaucheProc xcons
 syn keyword gaucheProc xml-token?
 syn keyword gaucheProc xsubstring
-syn keyword gaucheProc zip
 syn keyword gaucheProc zlib-version
 syn keyword gaucheProc zstream-adler32
 syn keyword gaucheProc zstream-data-type
@@ -3739,10 +3663,6 @@ syn keyword gaucheProcM add-job!
 syn keyword gaucheProcM alist->hashmap!
 syn keyword gaucheProcM alist->mapping!
 syn keyword gaucheProcM alist->mapping/ordered!
-syn keyword gaucheProcM alist-delete!
-syn keyword gaucheProcM append!
-syn keyword gaucheProcM append-map!
-syn keyword gaucheProcM append-reverse!
 syn keyword gaucheProcM array-add-elements!
 syn keyword gaucheProcM array-div-elements!
 syn keyword gaucheProcM array-flip!
@@ -3801,7 +3721,6 @@ syn keyword gaucheProcM blob-u64-native-set!
 syn keyword gaucheProcM blob-u64-set!
 syn keyword gaucheProcM blob-u8-set!
 syn keyword gaucheProcM blob-uint-set!
-syn keyword gaucheProcM break!
 syn keyword gaucheProcM break-list-by-sequence!
 syn keyword gaucheProcM bytevector-accumulator!
 syn keyword gaucheProcM c128vector-add!
@@ -3859,15 +3778,12 @@ syn keyword gaucheProcM char-set-xor!
 syn keyword gaucheProcM cise-register-macro!
 syn keyword gaucheProcM class-slot-set!
 syn keyword gaucheProcM comparator-register-default!
-syn keyword gaucheProcM concatenate!
 syn keyword gaucheProcM condition-variable-broadcast!
 syn keyword gaucheProcM condition-variable-signal!
 syn keyword gaucheProcM condition-variable-specific-set!
 syn keyword gaucheProcM dbm-delete!
 syn keyword gaucheProcM dbm-put!
 syn keyword gaucheProcM declare-bundle!
-syn keyword gaucheProcM delete!
-syn keyword gaucheProcM delete-duplicates!
 syn keyword gaucheProcM delete-hook!
 syn keyword gaucheProcM delete-keyword!
 syn keyword gaucheProcM delete-keywords!
@@ -3886,7 +3802,6 @@ syn keyword gaucheProcM dict-update!
 syn keyword gaucheProcM digest-final!
 syn keyword gaucheProcM digest-update!
 syn keyword gaucheProcM do-process!
-syn keyword gaucheProcM drop-right!
 syn keyword gaucheProcM enqueue!
 syn keyword gaucheProcM enqueue-unique!
 syn keyword gaucheProcM enqueue/wait!
@@ -3921,7 +3836,6 @@ syn keyword gaucheProcM f64vector-mul!
 syn keyword gaucheProcM f64vector-multi-copy!
 syn keyword gaucheProcM f64vector-sub!
 syn keyword gaucheProcM f64vector-xor!
-syn keyword gaucheProcM filter!
 syn keyword gaucheProcM generator->bytevector!
 syn keyword gaucheProcM generator->uvector!
 syn keyword gaucheProcM generator->vector!
@@ -3989,12 +3903,6 @@ syn keyword gaucheProcM list-queue-set-list!
 syn keyword gaucheProcM list-sort!
 syn keyword gaucheProcM list-stable-sort!
 syn keyword gaucheProcM load-bundle!
-syn keyword gaucheProcM lset-diff+intersection!
-syn keyword gaucheProcM lset-difference!
-syn keyword gaucheProcM lset-intersection!
-syn keyword gaucheProcM lset-union!
-syn keyword gaucheProcM lset-xor!
-syn keyword gaucheProcM map!
 syn keyword gaucheProcM mapping-adjoin!
 syn keyword gaucheProcM mapping-catenate!
 syn keyword gaucheProcM mapping-delete!
@@ -4032,7 +3940,6 @@ syn keyword gaucheProcM mutex-unlock!
 syn keyword gaucheProcM next-method
 syn keyword gaucheProcM parameter-observer-add!
 syn keyword gaucheProcM parameter-observer-delete!
-syn keyword gaucheProcM partition!
 syn keyword gaucheProcM permute!
 syn keyword gaucheProcM port-fd-dup!
 syn keyword gaucheProcM put-f16!
@@ -4080,11 +3987,9 @@ syn keyword gaucheProcM register-edn-object-handler!
 syn keyword gaucheProcM relation-delete!
 syn keyword gaucheProcM relation-insert!
 syn keyword gaucheProcM relation-set!
-syn keyword gaucheProcM remove!
 syn keyword gaucheProcM remove-from-queue!
 syn keyword gaucheProcM remove-hook!
 syn keyword gaucheProcM reset-hook!
-syn keyword gaucheProcM reverse!
 syn keyword gaucheProcM ring-buffer-add-back!
 syn keyword gaucheProcM ring-buffer-add-front!
 syn keyword gaucheProcM ring-buffer-remove-back!
@@ -4158,7 +4063,6 @@ syn keyword gaucheProcM socket-recv!
 syn keyword gaucheProcM socket-recvfrom!
 syn keyword gaucheProcM sort!
 syn keyword gaucheProcM sort-by!
-syn keyword gaucheProcM span!
 syn keyword gaucheProcM sparse-matrix-clear!
 syn keyword gaucheProcM sparse-matrix-delete!
 syn keyword gaucheProcM sparse-matrix-inc!
@@ -4179,7 +4083,6 @@ syn keyword gaucheProcM sparse-vector-pop!
 syn keyword gaucheProcM sparse-vector-push!
 syn keyword gaucheProcM sparse-vector-set!
 syn keyword gaucheProcM sparse-vector-update!
-syn keyword gaucheProcM split-at!
 syn keyword gaucheProcM stable-sort!
 syn keyword gaucheProcM stable-sort-by!
 syn keyword gaucheProcM string->char-set!
@@ -4213,8 +4116,6 @@ syn keyword gaucheProcM sys-sigset-add!
 syn keyword gaucheProcM sys-sigset-delete!
 syn keyword gaucheProcM sys-sigset-empty!
 syn keyword gaucheProcM sys-sigset-fill!
-syn keyword gaucheProcM take!
-syn keyword gaucheProcM take-while!
 syn keyword gaucheProcM terminate-all!
 syn keyword gaucheProcM thread-cont!
 syn keyword gaucheProcM thread-join!
