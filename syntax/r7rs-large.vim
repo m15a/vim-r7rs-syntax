@@ -818,6 +818,20 @@ syn keyword r7rsVar char-set:digit char-set:letter+digit char-set:graphic char-s
 syn keyword r7rsVar char-set:whitespace char-set:iso-control char-set:punctuation char-set:symbol
 syn keyword r7rsVar char-set:hex-digit char-set:blank char-set:ascii char-set:empty char-set:full
 
+" (scheme hash-table) SRFI-125 {{{1
+syn keyword r7rsProc make-hash-table hash-table hash-table-unfold alist->hash-table hash-table?
+syn keyword r7rsProc hash-table-contains? hash-table-empty? hash-table=? hash-table-mutable?
+syn keyword r7rsProc hash-table-ref hash-table-ref/default
+syn keyword r7rsProcM hash-table-set! hash-table-delete! hash-table-intern! hash-table-update!
+syn keyword r7rsProcM hash-table-update!/default hash-table-pop! hash-table-clear! 
+syn keyword r7rsProc hash-table-size hash-table-keys hash-table-values hash-table-entries
+syn keyword r7rsProc hash-table-find hash-table-count 
+syn keyword r7rsProc hash-table-map hash-table-for-each hash-table-map->list hash-table-fold
+syn keyword r7rsProcM hash-table-map! hash-table-prune! 
+syn keyword r7rsProc hash-table-copy hash-table-empty-copy hash-table->alist 
+syn keyword r7rsProcM hash-table-union! hash-table-intersection! hash-table-difference!
+syn keyword r7rsProcM hash-table-xor!
+
 " (scheme box) SRFI-111 {{{1
 syn keyword r7rsProc box box? unbox
 syn keyword r7rsProcM set-box!
