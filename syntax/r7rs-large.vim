@@ -763,6 +763,40 @@ syn keyword r7rsProcM list-sort! list-stable-sort! vector-sort! vector-stable-so
 syn keyword r7rsProcM list-merge! vector-merge! list-delete-neighbor-dups! vector-delete-neighbor-dups!
 syn keyword r7rsProcM vector-find-median! vector-select! vector-separate!
 
+" (scheme set) SRFI-113 {{{1
+syn keyword r7rsProc set set-unfold
+syn keyword r7rsProc bag bag-unfold
+syn keyword r7rsProc set? set-contains? set-empty? set-disjoint?
+syn keyword r7rsProc bag? bag-contains? bag-empty? bag-disjoint?
+syn keyword r7rsProc set-member set-element-comparator
+syn keyword r7rsProc bag-member bag-element-comparator
+syn keyword r7rsProc set-adjoin set-replace set-delete set-delete-all
+syn keyword r7rsProc bag-adjoin bag-replace bag-delete bag-delete-all
+syn keyword r7rsProcM set-adjoin! set-replace! set-delete! set-delete-all! set-search!
+syn keyword r7rsProcM bag-adjoin! bag-replace! bag-delete! bag-delete-all! bag-search!
+syn keyword r7rsProc set-size set-find set-count set-any? set-every?
+syn keyword r7rsProc bag-size bag-find bag-count bag-any? bag-every?
+syn keyword r7rsProc set-map set-for-each set-fold set-filter set-remove set-partition
+syn keyword r7rsProc bag-map bag-for-each bag-fold bag-filter bag-remove bag-partition
+syn keyword r7rsProcM set-filter! set-remove! set-partition!
+syn keyword r7rsProcM bag-filter! bag-remove! bag-partition!
+syn keyword r7rsProc set-copy set->list list->set
+syn keyword r7rsProc bag-copy bag->list list->bag
+syn keyword r7rsProcM list->set!
+syn keyword r7rsProcM list->bag!
+syn keyword r7rsProc set=? set<? set>? set<=? set>=?
+syn keyword r7rsProc bag=? bag<? bag>? bag<=? bag>=?
+syn keyword r7rsProc set-union set-intersection set-difference set-xor
+syn keyword r7rsProc bag-union bag-intersection bag-difference bag-xor
+syn keyword r7rsProcM set-union! set-intersection! set-difference! set-xor!
+syn keyword r7rsProcM bag-union! bag-intersection! bag-difference! bag-xor!
+syn keyword r7rsProc bag-sum bag-product
+syn keyword r7rsProcM bag-sum! bag-product! bag-increment! bag-decrement!
+syn keyword r7rsProc bag-unique-size bag-element-count bag-for-each-unique bag-fold-unique
+syn keyword r7rsProc bag->set set->bag bag->alist alist->bag
+syn keyword r7rsProcM set->bag!
+syn keyword r7rsVar set-comparator bag-comparator
+
 " (scheme box) SRFI-111 {{{1
 syn keyword r7rsProc box box? unbox
 syn keyword r7rsProcM set-box!
