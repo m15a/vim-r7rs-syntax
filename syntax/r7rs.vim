@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS-small)
-" Last Change: 2020-06-07
+" Last Change: 2020-06-08
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -469,9 +469,7 @@ if s:braces_as_parens
   syn region r7rsLibInclude matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsLibSyn,r7rsStr
 endif
 
-" Special expressions that override general ones {{{1
-
-" cond-expand (cf. R7RS, p. 15) {{{2
+" cond-expand (cf. R7RS, p. 15) {{{1
 syn region r7rsCondExpand matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*cond-expand/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsCESyn,r7rsCEClause
 syn keyword r7rsCESyn contained cond-expand and or not
 syn keyword r7rsCEAux contained library
@@ -501,7 +499,7 @@ if s:braces_as_parens
   syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsCESyn,@r7rsCEFeatures
 endif
 
-" import (cf. R7RS, sec. 5.2) {{{2
+" import (cf. R7RS, sec. 5.2) {{{1
 syn region r7rsImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@r7rsImportSets
 syn keyword r7rsImportSyn contained import
 syn keyword r7rsImportAux contained only except prefix rename
