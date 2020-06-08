@@ -497,7 +497,7 @@ find_undefined_keywords_in() {
     local groupname="$1" keyword
     while read -r keyword; do
         if ! grep -E "syn keyword $groupname (.+ )?$(esc "$keyword")( |$)" \
-               ./syntax/r7rs.vim > /dev/null 2>&1
+               ./syntax/r7rs{,-large}.vim > /dev/null 2>&1
         then
             echo "$keyword"
         fi
