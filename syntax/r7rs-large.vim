@@ -47,712 +47,220 @@ syn region r7rsVecU matchgroup=r7rsDelim start=/#f\%(32\|64\)(/ end=/)/ contains
 syn region r7rsVecU matchgroup=r7rsDelim start=/#c\%(64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsNum
 
 " s8 {{{2
-syn keyword r7rsProc make-s8vector
-syn keyword r7rsProc s8vector
-syn keyword r7rsProc s8vector-unfold
-syn keyword r7rsProc s8vector-unfold-right
-syn keyword r7rsProc s8vector-copy
-syn keyword r7rsProc s8vector-reverse-copy
-syn keyword r7rsProc s8vector-append
-syn keyword r7rsProc s8vector-concatenate
-syn keyword r7rsProc s8vector-append-subvectors
-syn keyword r7rsProc s8?
-syn keyword r7rsProc s8vector?
-syn keyword r7rsProc s8vector-empty?
-syn keyword r7rsProc s8vector=
-syn keyword r7rsProc s8vector-ref
-syn keyword r7rsProc s8vector-length
-syn keyword r7rsProc s8vector-take
-syn keyword r7rsProc s8vector-take-right
-syn keyword r7rsProc s8vector-drop
-syn keyword r7rsProc s8vector-drop-right
-syn keyword r7rsProc s8vector-segment
-syn keyword r7rsProc s8vector-fold
-syn keyword r7rsProc s8vector-fold-right
-syn keyword r7rsProc s8vector-map
-syn keyword r7rsProcM s8vector-map!
-syn keyword r7rsProc s8vector-for-each
-syn keyword r7rsProc s8vector-count
-syn keyword r7rsProc s8vector-cumulate
-syn keyword r7rsProc s8vector-take-while
-syn keyword r7rsProc s8vector-take-while-right
-syn keyword r7rsProc s8vector-drop-while
-syn keyword r7rsProc s8vector-drop-while-right
-syn keyword r7rsProc s8vector-index
-syn keyword r7rsProc s8vector-index-right
-syn keyword r7rsProc s8vector-skip
-syn keyword r7rsProc s8vector-skip-right
-syn keyword r7rsProc s8vector-any
-syn keyword r7rsProc s8vector-every
-syn keyword r7rsProc s8vector-partition
-syn keyword r7rsProc s8vector-filter
-syn keyword r7rsProc s8vector-remove
-syn keyword r7rsProcM s8vector-set!
-syn keyword r7rsProcM s8vector-swap!
-syn keyword r7rsProcM s8vector-fill!
-syn keyword r7rsProcM s8vector-reverse!
-syn keyword r7rsProcM s8vector-copy!
-syn keyword r7rsProcM s8vector-reverse-copy!
-syn keyword r7rsProcM s8vector-unfold!
-syn keyword r7rsProcM s8vector-unfold-right!
-syn keyword r7rsProc s8vector->list
-syn keyword r7rsProc reverse-s8vector->list
-syn keyword r7rsProc list->s8vector
-syn keyword r7rsProc reverse-list->s8vector
-syn keyword r7rsProc s8vector->vector
-syn keyword r7rsProc vector->s8vector
-syn keyword r7rsProc make-s8vector-generator
-syn keyword r7rsProc s8vector-comparator
-syn keyword r7rsProc write-s8vector
+syn keyword r7rsProc make-s8vector s8vector s8vector-unfold s8vector-unfold-right
+syn keyword r7rsProc s8vector-copy s8vector-reverse-copy s8vector-append
+syn keyword r7rsProc s8vector-concatenate s8vector-append-subvectors s8? s8vector?
+syn keyword r7rsProc s8vector-empty? s8vector= s8vector-ref s8vector-length s8vector-take
+syn keyword r7rsProc s8vector-take-right s8vector-drop s8vector-drop-right s8vector-segment
+syn keyword r7rsProc s8vector-fold s8vector-fold-right s8vector-map s8vector-for-each
+syn keyword r7rsProc s8vector-count s8vector-cumulate s8vector-take-while
+syn keyword r7rsProc s8vector-take-while-right s8vector-drop-while s8vector-drop-while-right
+syn keyword r7rsProc s8vector-index s8vector-index-right s8vector-skip s8vector-skip-right
+syn keyword r7rsProc s8vector-any s8vector-every s8vector-partition s8vector-filter
+syn keyword r7rsProc s8vector-remove s8vector->list reverse-s8vector->list list->s8vector
+syn keyword r7rsProc reverse-list->s8vector s8vector->vector vector->s8vector
+syn keyword r7rsProc make-s8vector-generator s8vector-comparator write-s8vector
+syn keyword r7rsProcM s8vector-map! s8vector-set! s8vector-swap! s8vector-fill!
+syn keyword r7rsProcM s8vector-reverse! s8vector-copy! s8vector-reverse-copy!
+syn keyword r7rsProcM s8vector-unfold! s8vector-unfold-right!
 
 " u8 {{{2
-syn keyword r7rsProc make-u8vector
-syn keyword r7rsProc u8vector
-syn keyword r7rsProc u8vector-unfold
-syn keyword r7rsProc u8vector-unfold-right
-syn keyword r7rsProc u8vector-copy
-syn keyword r7rsProc u8vector-reverse-copy
-syn keyword r7rsProc u8vector-append
-syn keyword r7rsProc u8vector-concatenate
-syn keyword r7rsProc u8vector-append-subvectors
-syn keyword r7rsProc u8?
-syn keyword r7rsProc u8vector?
-syn keyword r7rsProc u8vector-empty?
-syn keyword r7rsProc u8vector=
-syn keyword r7rsProc u8vector-ref
-syn keyword r7rsProc u8vector-length
-syn keyword r7rsProc u8vector-take
-syn keyword r7rsProc u8vector-take-right
-syn keyword r7rsProc u8vector-drop
-syn keyword r7rsProc u8vector-drop-right
-syn keyword r7rsProc u8vector-segment
-syn keyword r7rsProc u8vector-fold
-syn keyword r7rsProc u8vector-fold-right
-syn keyword r7rsProc u8vector-map
-syn keyword r7rsProcM u8vector-map!
-syn keyword r7rsProc u8vector-for-each
-syn keyword r7rsProc u8vector-count
-syn keyword r7rsProc u8vector-cumulate
-syn keyword r7rsProc u8vector-take-while
-syn keyword r7rsProc u8vector-take-while-right
-syn keyword r7rsProc u8vector-drop-while
-syn keyword r7rsProc u8vector-drop-while-right
-syn keyword r7rsProc u8vector-index
-syn keyword r7rsProc u8vector-index-right
-syn keyword r7rsProc u8vector-skip
-syn keyword r7rsProc u8vector-skip-right
-syn keyword r7rsProc u8vector-any
-syn keyword r7rsProc u8vector-every
-syn keyword r7rsProc u8vector-partition
-syn keyword r7rsProc u8vector-filter
-syn keyword r7rsProc u8vector-remove
-syn keyword r7rsProcM u8vector-set!
-syn keyword r7rsProcM u8vector-swap!
-syn keyword r7rsProcM u8vector-fill!
-syn keyword r7rsProcM u8vector-reverse!
-syn keyword r7rsProcM u8vector-copy!
-syn keyword r7rsProcM u8vector-reverse-copy!
-syn keyword r7rsProcM u8vector-unfold!
-syn keyword r7rsProcM u8vector-unfold-right!
-syn keyword r7rsProc u8vector->list
-syn keyword r7rsProc reverse-u8vector->list
-syn keyword r7rsProc list->u8vector
-syn keyword r7rsProc reverse-list->u8vector
-syn keyword r7rsProc u8vector->vector
-syn keyword r7rsProc vector->u8vector
-syn keyword r7rsProc make-u8vector-generator
-syn keyword r7rsProc u8vector-comparator
-syn keyword r7rsProc write-u8vector
+syn keyword r7rsProc make-u8vector u8vector u8vector-unfold u8vector-unfold-right
+syn keyword r7rsProc u8vector-copy u8vector-reverse-copy u8vector-append
+syn keyword r7rsProc u8vector-concatenate u8vector-append-subvectors u8? u8vector?
+syn keyword r7rsProc u8vector-empty? u8vector= u8vector-ref u8vector-length u8vector-take
+syn keyword r7rsProc u8vector-take-right u8vector-drop u8vector-drop-right u8vector-segment
+syn keyword r7rsProc u8vector-fold u8vector-fold-right u8vector-map u8vector-for-each
+syn keyword r7rsProc u8vector-count u8vector-cumulate u8vector-take-while
+syn keyword r7rsProc u8vector-take-while-right u8vector-drop-while u8vector-drop-while-right
+syn keyword r7rsProc u8vector-index u8vector-index-right u8vector-skip u8vector-skip-right
+syn keyword r7rsProc u8vector-any u8vector-every u8vector-partition u8vector-filter
+syn keyword r7rsProc u8vector-remove u8vector->list reverse-u8vector->list list->u8vector
+syn keyword r7rsProc reverse-list->u8vector u8vector->vector vector->u8vector
+syn keyword r7rsProc make-u8vector-generator u8vector-comparator write-u8vector
+syn keyword r7rsProcM u8vector-map! u8vector-set! u8vector-swap! u8vector-fill!
+syn keyword r7rsProcM u8vector-reverse! u8vector-copy! u8vector-reverse-copy!
+syn keyword r7rsProcM u8vector-unfold! u8vector-unfold-right!
 
 " s16 {{{2
-syn keyword r7rsProc make-s16vector
-syn keyword r7rsProc s16vector
-syn keyword r7rsProc s16vector-unfold
-syn keyword r7rsProc s16vector-unfold-right
-syn keyword r7rsProc s16vector-copy
-syn keyword r7rsProc s16vector-reverse-copy
-syn keyword r7rsProc s16vector-append
-syn keyword r7rsProc s16vector-concatenate
-syn keyword r7rsProc s16vector-append-subvectors
-syn keyword r7rsProc s16?
-syn keyword r7rsProc s16vector?
-syn keyword r7rsProc s16vector-empty?
-syn keyword r7rsProc s16vector=
-syn keyword r7rsProc s16vector-ref
-syn keyword r7rsProc s16vector-length
-syn keyword r7rsProc s16vector-take
-syn keyword r7rsProc s16vector-take-right
-syn keyword r7rsProc s16vector-drop
-syn keyword r7rsProc s16vector-drop-right
-syn keyword r7rsProc s16vector-segment
-syn keyword r7rsProc s16vector-fold
-syn keyword r7rsProc s16vector-fold-right
-syn keyword r7rsProc s16vector-map
-syn keyword r7rsProcM s16vector-map!
-syn keyword r7rsProc s16vector-for-each
-syn keyword r7rsProc s16vector-count
-syn keyword r7rsProc s16vector-cumulate
-syn keyword r7rsProc s16vector-take-while
-syn keyword r7rsProc s16vector-take-while-right
-syn keyword r7rsProc s16vector-drop-while
-syn keyword r7rsProc s16vector-drop-while-right
-syn keyword r7rsProc s16vector-index
-syn keyword r7rsProc s16vector-index-right
-syn keyword r7rsProc s16vector-skip
-syn keyword r7rsProc s16vector-skip-right
-syn keyword r7rsProc s16vector-any
-syn keyword r7rsProc s16vector-every
-syn keyword r7rsProc s16vector-partition
-syn keyword r7rsProc s16vector-filter
-syn keyword r7rsProc s16vector-remove
-syn keyword r7rsProcM s16vector-set!
-syn keyword r7rsProcM s16vector-swap!
-syn keyword r7rsProcM s16vector-fill!
-syn keyword r7rsProcM s16vector-reverse!
-syn keyword r7rsProcM s16vector-copy!
-syn keyword r7rsProcM s16vector-reverse-copy!
-syn keyword r7rsProcM s16vector-unfold!
-syn keyword r7rsProcM s16vector-unfold-right!
-syn keyword r7rsProc s16vector->list
-syn keyword r7rsProc reverse-s16vector->list
-syn keyword r7rsProc list->s16vector
-syn keyword r7rsProc reverse-list->s16vector
-syn keyword r7rsProc s16vector->vector
-syn keyword r7rsProc vector->s16vector
-syn keyword r7rsProc make-s16vector-generator
-syn keyword r7rsProc s16vector-comparator
-syn keyword r7rsProc write-s16vector
+syn keyword r7rsProc make-s16vector s16vector s16vector-unfold s16vector-unfold-right
+syn keyword r7rsProc s16vector-copy s16vector-reverse-copy s16vector-append
+syn keyword r7rsProc s16vector-concatenate s16vector-append-subvectors s16? s16vector?
+syn keyword r7rsProc s16vector-empty? s16vector= s16vector-ref s16vector-length s16vector-take
+syn keyword r7rsProc s16vector-take-right s16vector-drop s16vector-drop-right s16vector-segment
+syn keyword r7rsProc s16vector-fold s16vector-fold-right s16vector-map s16vector-for-each
+syn keyword r7rsProc s16vector-count s16vector-cumulate s16vector-take-while
+syn keyword r7rsProc s16vector-take-while-right s16vector-drop-while s16vector-drop-while-right
+syn keyword r7rsProc s16vector-index s16vector-index-right s16vector-skip s16vector-skip-right
+syn keyword r7rsProc s16vector-any s16vector-every s16vector-partition s16vector-filter
+syn keyword r7rsProc s16vector-remove s16vector->list reverse-s16vector->list list->s16vector
+syn keyword r7rsProc reverse-list->s16vector s16vector->vector vector->s16vector
+syn keyword r7rsProc make-s16vector-generator s16vector-comparator write-s16vector
+syn keyword r7rsProcM s16vector-map! s16vector-set! s16vector-swap! s16vector-fill!
+syn keyword r7rsProcM s16vector-reverse! s16vector-copy! s16vector-reverse-copy!
+syn keyword r7rsProcM s16vector-unfold! s16vector-unfold-right!
 
 " u16 {{{2
-syn keyword r7rsProc make-u16vector
-syn keyword r7rsProc u16vector
-syn keyword r7rsProc u16vector-unfold
-syn keyword r7rsProc u16vector-unfold-right
-syn keyword r7rsProc u16vector-copy
-syn keyword r7rsProc u16vector-reverse-copy
-syn keyword r7rsProc u16vector-append
-syn keyword r7rsProc u16vector-concatenate
-syn keyword r7rsProc u16vector-append-subvectors
-syn keyword r7rsProc u16?
-syn keyword r7rsProc u16vector?
-syn keyword r7rsProc u16vector-empty?
-syn keyword r7rsProc u16vector=
-syn keyword r7rsProc u16vector-ref
-syn keyword r7rsProc u16vector-length
-syn keyword r7rsProc u16vector-take
-syn keyword r7rsProc u16vector-take-right
-syn keyword r7rsProc u16vector-drop
-syn keyword r7rsProc u16vector-drop-right
-syn keyword r7rsProc u16vector-segment
-syn keyword r7rsProc u16vector-fold
-syn keyword r7rsProc u16vector-fold-right
-syn keyword r7rsProc u16vector-map
-syn keyword r7rsProcM u16vector-map!
-syn keyword r7rsProc u16vector-for-each
-syn keyword r7rsProc u16vector-count
-syn keyword r7rsProc u16vector-cumulate
-syn keyword r7rsProc u16vector-take-while
-syn keyword r7rsProc u16vector-take-while-right
-syn keyword r7rsProc u16vector-drop-while
-syn keyword r7rsProc u16vector-drop-while-right
-syn keyword r7rsProc u16vector-index
-syn keyword r7rsProc u16vector-index-right
-syn keyword r7rsProc u16vector-skip
-syn keyword r7rsProc u16vector-skip-right
-syn keyword r7rsProc u16vector-any
-syn keyword r7rsProc u16vector-every
-syn keyword r7rsProc u16vector-partition
-syn keyword r7rsProc u16vector-filter
-syn keyword r7rsProc u16vector-remove
-syn keyword r7rsProcM u16vector-set!
-syn keyword r7rsProcM u16vector-swap!
-syn keyword r7rsProcM u16vector-fill!
-syn keyword r7rsProcM u16vector-reverse!
-syn keyword r7rsProcM u16vector-copy!
-syn keyword r7rsProcM u16vector-reverse-copy!
-syn keyword r7rsProcM u16vector-unfold!
-syn keyword r7rsProcM u16vector-unfold-right!
-syn keyword r7rsProc u16vector->list
-syn keyword r7rsProc reverse-u16vector->list
-syn keyword r7rsProc list->u16vector
-syn keyword r7rsProc reverse-list->u16vector
-syn keyword r7rsProc u16vector->vector
-syn keyword r7rsProc vector->u16vector
-syn keyword r7rsProc make-u16vector-generator
-syn keyword r7rsProc u16vector-comparator
-syn keyword r7rsProc write-u16vector
+syn keyword r7rsProc make-u16vector u16vector u16vector-unfold u16vector-unfold-right
+syn keyword r7rsProc u16vector-copy u16vector-reverse-copy u16vector-append
+syn keyword r7rsProc u16vector-concatenate u16vector-append-subvectors u16? u16vector?
+syn keyword r7rsProc u16vector-empty? u16vector= u16vector-ref u16vector-length u16vector-take
+syn keyword r7rsProc u16vector-take-right u16vector-drop u16vector-drop-right u16vector-segment
+syn keyword r7rsProc u16vector-fold u16vector-fold-right u16vector-map u16vector-for-each
+syn keyword r7rsProc u16vector-count u16vector-cumulate u16vector-take-while
+syn keyword r7rsProc u16vector-take-while-right u16vector-drop-while u16vector-drop-while-right
+syn keyword r7rsProc u16vector-index u16vector-index-right u16vector-skip u16vector-skip-right
+syn keyword r7rsProc u16vector-any u16vector-every u16vector-partition u16vector-filter
+syn keyword r7rsProc u16vector-remove u16vector->list reverse-u16vector->list list->u16vector
+syn keyword r7rsProc reverse-list->u16vector u16vector->vector vector->u16vector
+syn keyword r7rsProc make-u16vector-generator u16vector-comparator write-u16vector
+syn keyword r7rsProcM u16vector-map! u16vector-set! u16vector-swap! u16vector-fill!
+syn keyword r7rsProcM u16vector-reverse! u16vector-copy! u16vector-reverse-copy!
+syn keyword r7rsProcM u16vector-unfold! u16vector-unfold-right!
 
 " s32 {{{2
-syn keyword r7rsProc make-s32vector
-syn keyword r7rsProc s32vector
-syn keyword r7rsProc s32vector-unfold
-syn keyword r7rsProc s32vector-unfold-right
-syn keyword r7rsProc s32vector-copy
-syn keyword r7rsProc s32vector-reverse-copy
-syn keyword r7rsProc s32vector-append
-syn keyword r7rsProc s32vector-concatenate
-syn keyword r7rsProc s32vector-append-subvectors
-syn keyword r7rsProc s32?
-syn keyword r7rsProc s32vector?
-syn keyword r7rsProc s32vector-empty?
-syn keyword r7rsProc s32vector=
-syn keyword r7rsProc s32vector-ref
-syn keyword r7rsProc s32vector-length
-syn keyword r7rsProc s32vector-take
-syn keyword r7rsProc s32vector-take-right
-syn keyword r7rsProc s32vector-drop
-syn keyword r7rsProc s32vector-drop-right
-syn keyword r7rsProc s32vector-segment
-syn keyword r7rsProc s32vector-fold
-syn keyword r7rsProc s32vector-fold-right
-syn keyword r7rsProc s32vector-map
-syn keyword r7rsProcM s32vector-map!
-syn keyword r7rsProc s32vector-for-each
-syn keyword r7rsProc s32vector-count
-syn keyword r7rsProc s32vector-cumulate
-syn keyword r7rsProc s32vector-take-while
-syn keyword r7rsProc s32vector-take-while-right
-syn keyword r7rsProc s32vector-drop-while
-syn keyword r7rsProc s32vector-drop-while-right
-syn keyword r7rsProc s32vector-index
-syn keyword r7rsProc s32vector-index-right
-syn keyword r7rsProc s32vector-skip
-syn keyword r7rsProc s32vector-skip-right
-syn keyword r7rsProc s32vector-any
-syn keyword r7rsProc s32vector-every
-syn keyword r7rsProc s32vector-partition
-syn keyword r7rsProc s32vector-filter
-syn keyword r7rsProc s32vector-remove
-syn keyword r7rsProcM s32vector-set!
-syn keyword r7rsProcM s32vector-swap!
-syn keyword r7rsProcM s32vector-fill!
-syn keyword r7rsProcM s32vector-reverse!
-syn keyword r7rsProcM s32vector-copy!
-syn keyword r7rsProcM s32vector-reverse-copy!
-syn keyword r7rsProcM s32vector-unfold!
-syn keyword r7rsProcM s32vector-unfold-right!
-syn keyword r7rsProc s32vector->list
-syn keyword r7rsProc reverse-s32vector->list
-syn keyword r7rsProc list->s32vector
-syn keyword r7rsProc reverse-list->s32vector
-syn keyword r7rsProc s32vector->vector
-syn keyword r7rsProc vector->s32vector
-syn keyword r7rsProc make-s32vector-generator
-syn keyword r7rsProc s32vector-comparator
-syn keyword r7rsProc write-s32vector
+syn keyword r7rsProc make-s32vector s32vector s32vector-unfold s32vector-unfold-right
+syn keyword r7rsProc s32vector-copy s32vector-reverse-copy s32vector-append
+syn keyword r7rsProc s32vector-concatenate s32vector-append-subvectors s32? s32vector?
+syn keyword r7rsProc s32vector-empty? s32vector= s32vector-ref s32vector-length s32vector-take
+syn keyword r7rsProc s32vector-take-right s32vector-drop s32vector-drop-right s32vector-segment
+syn keyword r7rsProc s32vector-fold s32vector-fold-right s32vector-map s32vector-for-each
+syn keyword r7rsProc s32vector-count s32vector-cumulate s32vector-take-while
+syn keyword r7rsProc s32vector-take-while-right s32vector-drop-while s32vector-drop-while-right
+syn keyword r7rsProc s32vector-index s32vector-index-right s32vector-skip s32vector-skip-right
+syn keyword r7rsProc s32vector-any s32vector-every s32vector-partition s32vector-filter
+syn keyword r7rsProc s32vector-remove s32vector->list reverse-s32vector->list list->s32vector
+syn keyword r7rsProc reverse-list->s32vector s32vector->vector vector->s32vector
+syn keyword r7rsProc make-s32vector-generator s32vector-comparator write-s32vector
+syn keyword r7rsProcM s32vector-map! s32vector-set! s32vector-swap! s32vector-fill!
+syn keyword r7rsProcM s32vector-reverse! s32vector-copy! s32vector-reverse-copy!
+syn keyword r7rsProcM s32vector-unfold! s32vector-unfold-right!
 
 " u32 {{{2
-syn keyword r7rsProc make-u32vector
-syn keyword r7rsProc u32vector
-syn keyword r7rsProc u32vector-unfold
-syn keyword r7rsProc u32vector-unfold-right
-syn keyword r7rsProc u32vector-copy
-syn keyword r7rsProc u32vector-reverse-copy
-syn keyword r7rsProc u32vector-append
-syn keyword r7rsProc u32vector-concatenate
-syn keyword r7rsProc u32vector-append-subvectors
-syn keyword r7rsProc u32?
-syn keyword r7rsProc u32vector?
-syn keyword r7rsProc u32vector-empty?
-syn keyword r7rsProc u32vector=
-syn keyword r7rsProc u32vector-ref
-syn keyword r7rsProc u32vector-length
-syn keyword r7rsProc u32vector-take
-syn keyword r7rsProc u32vector-take-right
-syn keyword r7rsProc u32vector-drop
-syn keyword r7rsProc u32vector-drop-right
-syn keyword r7rsProc u32vector-segment
-syn keyword r7rsProc u32vector-fold
-syn keyword r7rsProc u32vector-fold-right
-syn keyword r7rsProc u32vector-map
-syn keyword r7rsProcM u32vector-map!
-syn keyword r7rsProc u32vector-for-each
-syn keyword r7rsProc u32vector-count
-syn keyword r7rsProc u32vector-cumulate
-syn keyword r7rsProc u32vector-take-while
-syn keyword r7rsProc u32vector-take-while-right
-syn keyword r7rsProc u32vector-drop-while
-syn keyword r7rsProc u32vector-drop-while-right
-syn keyword r7rsProc u32vector-index
-syn keyword r7rsProc u32vector-index-right
-syn keyword r7rsProc u32vector-skip
-syn keyword r7rsProc u32vector-skip-right
-syn keyword r7rsProc u32vector-any
-syn keyword r7rsProc u32vector-every
-syn keyword r7rsProc u32vector-partition
-syn keyword r7rsProc u32vector-filter
-syn keyword r7rsProc u32vector-remove
-syn keyword r7rsProcM u32vector-set!
-syn keyword r7rsProcM u32vector-swap!
-syn keyword r7rsProcM u32vector-fill!
-syn keyword r7rsProcM u32vector-reverse!
-syn keyword r7rsProcM u32vector-copy!
-syn keyword r7rsProcM u32vector-reverse-copy!
-syn keyword r7rsProcM u32vector-unfold!
-syn keyword r7rsProcM u32vector-unfold-right!
-syn keyword r7rsProc u32vector->list
-syn keyword r7rsProc reverse-u32vector->list
-syn keyword r7rsProc list->u32vector
-syn keyword r7rsProc reverse-list->u32vector
-syn keyword r7rsProc u32vector->vector
-syn keyword r7rsProc vector->u32vector
-syn keyword r7rsProc make-u32vector-generator
-syn keyword r7rsProc u32vector-comparator
-syn keyword r7rsProc write-u32vector
+syn keyword r7rsProc make-u32vector u32vector u32vector-unfold u32vector-unfold-right
+syn keyword r7rsProc u32vector-copy u32vector-reverse-copy u32vector-append
+syn keyword r7rsProc u32vector-concatenate u32vector-append-subvectors u32? u32vector?
+syn keyword r7rsProc u32vector-empty? u32vector= u32vector-ref u32vector-length u32vector-take
+syn keyword r7rsProc u32vector-take-right u32vector-drop u32vector-drop-right u32vector-segment
+syn keyword r7rsProc u32vector-fold u32vector-fold-right u32vector-map u32vector-for-each
+syn keyword r7rsProc u32vector-count u32vector-cumulate u32vector-take-while
+syn keyword r7rsProc u32vector-take-while-right u32vector-drop-while u32vector-drop-while-right
+syn keyword r7rsProc u32vector-index u32vector-index-right u32vector-skip u32vector-skip-right
+syn keyword r7rsProc u32vector-any u32vector-every u32vector-partition u32vector-filter
+syn keyword r7rsProc u32vector-remove u32vector->list reverse-u32vector->list list->u32vector
+syn keyword r7rsProc reverse-list->u32vector u32vector->vector vector->u32vector
+syn keyword r7rsProc make-u32vector-generator u32vector-comparator write-u32vector
+syn keyword r7rsProcM u32vector-map! u32vector-set! u32vector-swap! u32vector-fill!
+syn keyword r7rsProcM u32vector-reverse! u32vector-copy! u32vector-reverse-copy!
+syn keyword r7rsProcM u32vector-unfold! u32vector-unfold-right!
 
 " s64 {{{2
-syn keyword r7rsProc make-s64vector
-syn keyword r7rsProc s64vector
-syn keyword r7rsProc s64vector-unfold
-syn keyword r7rsProc s64vector-unfold-right
-syn keyword r7rsProc s64vector-copy
-syn keyword r7rsProc s64vector-reverse-copy
-syn keyword r7rsProc s64vector-append
-syn keyword r7rsProc s64vector-concatenate
-syn keyword r7rsProc s64vector-append-subvectors
-syn keyword r7rsProc s64?
-syn keyword r7rsProc s64vector?
-syn keyword r7rsProc s64vector-empty?
-syn keyword r7rsProc s64vector=
-syn keyword r7rsProc s64vector-ref
-syn keyword r7rsProc s64vector-length
-syn keyword r7rsProc s64vector-take
-syn keyword r7rsProc s64vector-take-right
-syn keyword r7rsProc s64vector-drop
-syn keyword r7rsProc s64vector-drop-right
-syn keyword r7rsProc s64vector-segment
-syn keyword r7rsProc s64vector-fold
-syn keyword r7rsProc s64vector-fold-right
-syn keyword r7rsProc s64vector-map
-syn keyword r7rsProcM s64vector-map!
-syn keyword r7rsProc s64vector-for-each
-syn keyword r7rsProc s64vector-count
-syn keyword r7rsProc s64vector-cumulate
-syn keyword r7rsProc s64vector-take-while
-syn keyword r7rsProc s64vector-take-while-right
-syn keyword r7rsProc s64vector-drop-while
-syn keyword r7rsProc s64vector-drop-while-right
-syn keyword r7rsProc s64vector-index
-syn keyword r7rsProc s64vector-index-right
-syn keyword r7rsProc s64vector-skip
-syn keyword r7rsProc s64vector-skip-right
-syn keyword r7rsProc s64vector-any
-syn keyword r7rsProc s64vector-every
-syn keyword r7rsProc s64vector-partition
-syn keyword r7rsProc s64vector-filter
-syn keyword r7rsProc s64vector-remove
-syn keyword r7rsProcM s64vector-set!
-syn keyword r7rsProcM s64vector-swap!
-syn keyword r7rsProcM s64vector-fill!
-syn keyword r7rsProcM s64vector-reverse!
-syn keyword r7rsProcM s64vector-copy!
-syn keyword r7rsProcM s64vector-reverse-copy!
-syn keyword r7rsProcM s64vector-unfold!
-syn keyword r7rsProcM s64vector-unfold-right!
-syn keyword r7rsProc s64vector->list
-syn keyword r7rsProc reverse-s64vector->list
-syn keyword r7rsProc list->s64vector
-syn keyword r7rsProc reverse-list->s64vector
-syn keyword r7rsProc s64vector->vector
-syn keyword r7rsProc vector->s64vector
-syn keyword r7rsProc make-s64vector-generator
-syn keyword r7rsProc s64vector-comparator
-syn keyword r7rsProc write-s64vector
+syn keyword r7rsProc make-s64vector s64vector s64vector-unfold s64vector-unfold-right
+syn keyword r7rsProc s64vector-copy s64vector-reverse-copy s64vector-append
+syn keyword r7rsProc s64vector-concatenate s64vector-append-subvectors s64? s64vector?
+syn keyword r7rsProc s64vector-empty? s64vector= s64vector-ref s64vector-length s64vector-take
+syn keyword r7rsProc s64vector-take-right s64vector-drop s64vector-drop-right s64vector-segment
+syn keyword r7rsProc s64vector-fold s64vector-fold-right s64vector-map s64vector-for-each
+syn keyword r7rsProc s64vector-count s64vector-cumulate s64vector-take-while
+syn keyword r7rsProc s64vector-take-while-right s64vector-drop-while s64vector-drop-while-right
+syn keyword r7rsProc s64vector-index s64vector-index-right s64vector-skip s64vector-skip-right
+syn keyword r7rsProc s64vector-any s64vector-every s64vector-partition s64vector-filter
+syn keyword r7rsProc s64vector-remove s64vector->list reverse-s64vector->list list->s64vector
+syn keyword r7rsProc reverse-list->s64vector s64vector->vector vector->s64vector
+syn keyword r7rsProc make-s64vector-generator s64vector-comparator write-s64vector
+syn keyword r7rsProcM s64vector-map! s64vector-set! s64vector-swap! s64vector-fill!
+syn keyword r7rsProcM s64vector-reverse! s64vector-copy! s64vector-reverse-copy!
+syn keyword r7rsProcM s64vector-unfold! s64vector-unfold-right!
 
 " u64 {{{2
-syn keyword r7rsProc make-u64vector
-syn keyword r7rsProc u64vector
-syn keyword r7rsProc u64vector-unfold
-syn keyword r7rsProc u64vector-unfold-right
-syn keyword r7rsProc u64vector-copy
-syn keyword r7rsProc u64vector-reverse-copy
-syn keyword r7rsProc u64vector-append
-syn keyword r7rsProc u64vector-concatenate
-syn keyword r7rsProc u64vector-append-subvectors
-syn keyword r7rsProc u64?
-syn keyword r7rsProc u64vector?
-syn keyword r7rsProc u64vector-empty?
-syn keyword r7rsProc u64vector=
-syn keyword r7rsProc u64vector-ref
-syn keyword r7rsProc u64vector-length
-syn keyword r7rsProc u64vector-take
-syn keyword r7rsProc u64vector-take-right
-syn keyword r7rsProc u64vector-drop
-syn keyword r7rsProc u64vector-drop-right
-syn keyword r7rsProc u64vector-segment
-syn keyword r7rsProc u64vector-fold
-syn keyword r7rsProc u64vector-fold-right
-syn keyword r7rsProc u64vector-map
-syn keyword r7rsProcM u64vector-map!
-syn keyword r7rsProc u64vector-for-each
-syn keyword r7rsProc u64vector-count
-syn keyword r7rsProc u64vector-cumulate
-syn keyword r7rsProc u64vector-take-while
-syn keyword r7rsProc u64vector-take-while-right
-syn keyword r7rsProc u64vector-drop-while
-syn keyword r7rsProc u64vector-drop-while-right
-syn keyword r7rsProc u64vector-index
-syn keyword r7rsProc u64vector-index-right
-syn keyword r7rsProc u64vector-skip
-syn keyword r7rsProc u64vector-skip-right
-syn keyword r7rsProc u64vector-any
-syn keyword r7rsProc u64vector-every
-syn keyword r7rsProc u64vector-partition
-syn keyword r7rsProc u64vector-filter
-syn keyword r7rsProc u64vector-remove
-syn keyword r7rsProcM u64vector-set!
-syn keyword r7rsProcM u64vector-swap!
-syn keyword r7rsProcM u64vector-fill!
-syn keyword r7rsProcM u64vector-reverse!
-syn keyword r7rsProcM u64vector-copy!
-syn keyword r7rsProcM u64vector-reverse-copy!
-syn keyword r7rsProcM u64vector-unfold!
-syn keyword r7rsProcM u64vector-unfold-right!
-syn keyword r7rsProc u64vector->list
-syn keyword r7rsProc reverse-u64vector->list
-syn keyword r7rsProc list->u64vector
-syn keyword r7rsProc reverse-list->u64vector
-syn keyword r7rsProc u64vector->vector
-syn keyword r7rsProc vector->u64vector
-syn keyword r7rsProc make-u64vector-generator
-syn keyword r7rsProc u64vector-comparator
-syn keyword r7rsProc write-u64vector
+syn keyword r7rsProc make-u64vector u64vector u64vector-unfold u64vector-unfold-right
+syn keyword r7rsProc u64vector-copy u64vector-reverse-copy u64vector-append
+syn keyword r7rsProc u64vector-concatenate u64vector-append-subvectors u64? u64vector?
+syn keyword r7rsProc u64vector-empty? u64vector= u64vector-ref u64vector-length u64vector-take
+syn keyword r7rsProc u64vector-take-right u64vector-drop u64vector-drop-right u64vector-segment
+syn keyword r7rsProc u64vector-fold u64vector-fold-right u64vector-map u64vector-for-each
+syn keyword r7rsProc u64vector-count u64vector-cumulate u64vector-take-while
+syn keyword r7rsProc u64vector-take-while-right u64vector-drop-while u64vector-drop-while-right
+syn keyword r7rsProc u64vector-index u64vector-index-right u64vector-skip u64vector-skip-right
+syn keyword r7rsProc u64vector-any u64vector-every u64vector-partition u64vector-filter
+syn keyword r7rsProc u64vector-remove u64vector->list reverse-u64vector->list list->u64vector
+syn keyword r7rsProc reverse-list->u64vector u64vector->vector vector->u64vector
+syn keyword r7rsProc make-u64vector-generator u64vector-comparator write-u64vector
+syn keyword r7rsProcM u64vector-map! u64vector-set! u64vector-swap! u64vector-fill!
+syn keyword r7rsProcM u64vector-reverse! u64vector-copy! u64vector-reverse-copy!
+syn keyword r7rsProcM u64vector-unfold! u64vector-unfold-right!
 
 " f32 {{{2
-syn keyword r7rsProc make-f32vector
-syn keyword r7rsProc f32vector
-syn keyword r7rsProc f32vector-unfold
-syn keyword r7rsProc f32vector-unfold-right
-syn keyword r7rsProc f32vector-copy
-syn keyword r7rsProc f32vector-reverse-copy
-syn keyword r7rsProc f32vector-append
-syn keyword r7rsProc f32vector-concatenate
-syn keyword r7rsProc f32vector-append-subvectors
-syn keyword r7rsProc f32?
-syn keyword r7rsProc f32vector?
-syn keyword r7rsProc f32vector-empty?
-syn keyword r7rsProc f32vector=
-syn keyword r7rsProc f32vector-ref
-syn keyword r7rsProc f32vector-length
-syn keyword r7rsProc f32vector-take
-syn keyword r7rsProc f32vector-take-right
-syn keyword r7rsProc f32vector-drop
-syn keyword r7rsProc f32vector-drop-right
-syn keyword r7rsProc f32vector-segment
-syn keyword r7rsProc f32vector-fold
-syn keyword r7rsProc f32vector-fold-right
-syn keyword r7rsProc f32vector-map
-syn keyword r7rsProcM f32vector-map!
-syn keyword r7rsProc f32vector-for-each
-syn keyword r7rsProc f32vector-count
-syn keyword r7rsProc f32vector-cumulate
-syn keyword r7rsProc f32vector-take-while
-syn keyword r7rsProc f32vector-take-while-right
-syn keyword r7rsProc f32vector-drop-while
-syn keyword r7rsProc f32vector-drop-while-right
-syn keyword r7rsProc f32vector-index
-syn keyword r7rsProc f32vector-index-right
-syn keyword r7rsProc f32vector-skip
-syn keyword r7rsProc f32vector-skip-right
-syn keyword r7rsProc f32vector-any
-syn keyword r7rsProc f32vector-every
-syn keyword r7rsProc f32vector-partition
-syn keyword r7rsProc f32vector-filter
-syn keyword r7rsProc f32vector-remove
-syn keyword r7rsProcM f32vector-set!
-syn keyword r7rsProcM f32vector-swap!
-syn keyword r7rsProcM f32vector-fill!
-syn keyword r7rsProcM f32vector-reverse!
-syn keyword r7rsProcM f32vector-copy!
-syn keyword r7rsProcM f32vector-reverse-copy!
-syn keyword r7rsProcM f32vector-unfold!
-syn keyword r7rsProcM f32vector-unfold-right!
-syn keyword r7rsProc f32vector->list
-syn keyword r7rsProc reverse-f32vector->list
-syn keyword r7rsProc list->f32vector
-syn keyword r7rsProc reverse-list->f32vector
-syn keyword r7rsProc f32vector->vector
-syn keyword r7rsProc vector->f32vector
-syn keyword r7rsProc make-f32vector-generator
-syn keyword r7rsProc f32vector-comparator
-syn keyword r7rsProc write-f32vector
+syn keyword r7rsProc make-f32vector f32vector f32vector-unfold f32vector-unfold-right
+syn keyword r7rsProc f32vector-copy f32vector-reverse-copy f32vector-append
+syn keyword r7rsProc f32vector-concatenate f32vector-append-subvectors f32? f32vector?
+syn keyword r7rsProc f32vector-empty? f32vector= f32vector-ref f32vector-length f32vector-take
+syn keyword r7rsProc f32vector-take-right f32vector-drop f32vector-drop-right f32vector-segment
+syn keyword r7rsProc f32vector-fold f32vector-fold-right f32vector-map f32vector-for-each
+syn keyword r7rsProc f32vector-count f32vector-cumulate f32vector-take-while
+syn keyword r7rsProc f32vector-take-while-right f32vector-drop-while f32vector-drop-while-right
+syn keyword r7rsProc f32vector-index f32vector-index-right f32vector-skip f32vector-skip-right
+syn keyword r7rsProc f32vector-any f32vector-every f32vector-partition f32vector-filter
+syn keyword r7rsProc f32vector-remove f32vector->list reverse-f32vector->list list->f32vector
+syn keyword r7rsProc reverse-list->f32vector f32vector->vector vector->f32vector
+syn keyword r7rsProc make-f32vector-generator f32vector-comparator write-f32vector
+syn keyword r7rsProcM f32vector-map! f32vector-set! f32vector-swap! f32vector-fill!
+syn keyword r7rsProcM f32vector-reverse! f32vector-copy! f32vector-reverse-copy!
+syn keyword r7rsProcM f32vector-unfold! f32vector-unfold-right!
 
 " f64 {{{2
-syn keyword r7rsProc make-f64vector
-syn keyword r7rsProc f64vector
-syn keyword r7rsProc f64vector-unfold
-syn keyword r7rsProc f64vector-unfold-right
-syn keyword r7rsProc f64vector-copy
-syn keyword r7rsProc f64vector-reverse-copy
-syn keyword r7rsProc f64vector-append
-syn keyword r7rsProc f64vector-concatenate
-syn keyword r7rsProc f64vector-append-subvectors
-syn keyword r7rsProc f64?
-syn keyword r7rsProc f64vector?
-syn keyword r7rsProc f64vector-empty?
-syn keyword r7rsProc f64vector=
-syn keyword r7rsProc f64vector-ref
-syn keyword r7rsProc f64vector-length
-syn keyword r7rsProc f64vector-take
-syn keyword r7rsProc f64vector-take-right
-syn keyword r7rsProc f64vector-drop
-syn keyword r7rsProc f64vector-drop-right
-syn keyword r7rsProc f64vector-segment
-syn keyword r7rsProc f64vector-fold
-syn keyword r7rsProc f64vector-fold-right
-syn keyword r7rsProc f64vector-map
-syn keyword r7rsProcM f64vector-map!
-syn keyword r7rsProc f64vector-for-each
-syn keyword r7rsProc f64vector-count
-syn keyword r7rsProc f64vector-cumulate
-syn keyword r7rsProc f64vector-take-while
-syn keyword r7rsProc f64vector-take-while-right
-syn keyword r7rsProc f64vector-drop-while
-syn keyword r7rsProc f64vector-drop-while-right
-syn keyword r7rsProc f64vector-index
-syn keyword r7rsProc f64vector-index-right
-syn keyword r7rsProc f64vector-skip
-syn keyword r7rsProc f64vector-skip-right
-syn keyword r7rsProc f64vector-any
-syn keyword r7rsProc f64vector-every
-syn keyword r7rsProc f64vector-partition
-syn keyword r7rsProc f64vector-filter
-syn keyword r7rsProc f64vector-remove
-syn keyword r7rsProcM f64vector-set!
-syn keyword r7rsProcM f64vector-swap!
-syn keyword r7rsProcM f64vector-fill!
-syn keyword r7rsProcM f64vector-reverse!
-syn keyword r7rsProcM f64vector-copy!
-syn keyword r7rsProcM f64vector-reverse-copy!
-syn keyword r7rsProcM f64vector-unfold!
-syn keyword r7rsProcM f64vector-unfold-right!
-syn keyword r7rsProc f64vector->list
-syn keyword r7rsProc reverse-f64vector->list
-syn keyword r7rsProc list->f64vector
-syn keyword r7rsProc reverse-list->f64vector
-syn keyword r7rsProc f64vector->vector
-syn keyword r7rsProc vector->f64vector
-syn keyword r7rsProc make-f64vector-generator
-syn keyword r7rsProc f64vector-comparator
-syn keyword r7rsProc write-f64vector
+syn keyword r7rsProc make-f64vector f64vector f64vector-unfold f64vector-unfold-right
+syn keyword r7rsProc f64vector-copy f64vector-reverse-copy f64vector-append
+syn keyword r7rsProc f64vector-concatenate f64vector-append-subvectors f64? f64vector?
+syn keyword r7rsProc f64vector-empty? f64vector= f64vector-ref f64vector-length f64vector-take
+syn keyword r7rsProc f64vector-take-right f64vector-drop f64vector-drop-right f64vector-segment
+syn keyword r7rsProc f64vector-fold f64vector-fold-right f64vector-map f64vector-for-each
+syn keyword r7rsProc f64vector-count f64vector-cumulate f64vector-take-while
+syn keyword r7rsProc f64vector-take-while-right f64vector-drop-while f64vector-drop-while-right
+syn keyword r7rsProc f64vector-index f64vector-index-right f64vector-skip f64vector-skip-right
+syn keyword r7rsProc f64vector-any f64vector-every f64vector-partition f64vector-filter
+syn keyword r7rsProc f64vector-remove f64vector->list reverse-f64vector->list list->f64vector
+syn keyword r7rsProc reverse-list->f64vector f64vector->vector vector->f64vector
+syn keyword r7rsProc make-f64vector-generator f64vector-comparator write-f64vector
+syn keyword r7rsProcM f64vector-map! f64vector-set! f64vector-swap! f64vector-fill!
+syn keyword r7rsProcM f64vector-reverse! f64vector-copy! f64vector-reverse-copy!
+syn keyword r7rsProcM f64vector-unfold! f64vector-unfold-right!
 
 " c64 {{{2
-syn keyword r7rsProc make-c64vector
-syn keyword r7rsProc c64vector
-syn keyword r7rsProc c64vector-unfold
-syn keyword r7rsProc c64vector-unfold-right
-syn keyword r7rsProc c64vector-copy
-syn keyword r7rsProc c64vector-reverse-copy
-syn keyword r7rsProc c64vector-append
-syn keyword r7rsProc c64vector-concatenate
-syn keyword r7rsProc c64vector-append-subvectors
-syn keyword r7rsProc c64?
-syn keyword r7rsProc c64vector?
-syn keyword r7rsProc c64vector-empty?
-syn keyword r7rsProc c64vector=
-syn keyword r7rsProc c64vector-ref
-syn keyword r7rsProc c64vector-length
-syn keyword r7rsProc c64vector-take
-syn keyword r7rsProc c64vector-take-right
-syn keyword r7rsProc c64vector-drop
-syn keyword r7rsProc c64vector-drop-right
-syn keyword r7rsProc c64vector-segment
-syn keyword r7rsProc c64vector-fold
-syn keyword r7rsProc c64vector-fold-right
-syn keyword r7rsProc c64vector-map
-syn keyword r7rsProcM c64vector-map!
-syn keyword r7rsProc c64vector-for-each
-syn keyword r7rsProc c64vector-count
-syn keyword r7rsProc c64vector-cumulate
-syn keyword r7rsProc c64vector-take-while
-syn keyword r7rsProc c64vector-take-while-right
-syn keyword r7rsProc c64vector-drop-while
-syn keyword r7rsProc c64vector-drop-while-right
-syn keyword r7rsProc c64vector-index
-syn keyword r7rsProc c64vector-index-right
-syn keyword r7rsProc c64vector-skip
-syn keyword r7rsProc c64vector-skip-right
-syn keyword r7rsProc c64vector-any
-syn keyword r7rsProc c64vector-every
-syn keyword r7rsProc c64vector-partition
-syn keyword r7rsProc c64vector-filter
-syn keyword r7rsProc c64vector-remove
-syn keyword r7rsProcM c64vector-set!
-syn keyword r7rsProcM c64vector-swap!
-syn keyword r7rsProcM c64vector-fill!
-syn keyword r7rsProcM c64vector-reverse!
-syn keyword r7rsProcM c64vector-copy!
-syn keyword r7rsProcM c64vector-reverse-copy!
-syn keyword r7rsProcM c64vector-unfold!
-syn keyword r7rsProcM c64vector-unfold-right!
-syn keyword r7rsProc c64vector->list
-syn keyword r7rsProc reverse-c64vector->list
-syn keyword r7rsProc list->c64vector
-syn keyword r7rsProc reverse-list->c64vector
-syn keyword r7rsProc c64vector->vector
-syn keyword r7rsProc vector->c64vector
-syn keyword r7rsProc make-c64vector-generator
-syn keyword r7rsProc c64vector-comparator
-syn keyword r7rsProc write-c64vector
+syn keyword r7rsProc make-c64vector c64vector c64vector-unfold c64vector-unfold-right
+syn keyword r7rsProc c64vector-copy c64vector-reverse-copy c64vector-append
+syn keyword r7rsProc c64vector-concatenate c64vector-append-subvectors c64? c64vector?
+syn keyword r7rsProc c64vector-empty? c64vector= c64vector-ref c64vector-length c64vector-take
+syn keyword r7rsProc c64vector-take-right c64vector-drop c64vector-drop-right c64vector-segment
+syn keyword r7rsProc c64vector-fold c64vector-fold-right c64vector-map c64vector-for-each
+syn keyword r7rsProc c64vector-count c64vector-cumulate c64vector-take-while
+syn keyword r7rsProc c64vector-take-while-right c64vector-drop-while c64vector-drop-while-right
+syn keyword r7rsProc c64vector-index c64vector-index-right c64vector-skip c64vector-skip-right
+syn keyword r7rsProc c64vector-any c64vector-every c64vector-partition c64vector-filter
+syn keyword r7rsProc c64vector-remove c64vector->list reverse-c64vector->list list->c64vector
+syn keyword r7rsProc reverse-list->c64vector c64vector->vector vector->c64vector
+syn keyword r7rsProc make-c64vector-generator c64vector-comparator write-c64vector
+syn keyword r7rsProcM c64vector-map! c64vector-set! c64vector-swap! c64vector-fill!
+syn keyword r7rsProcM c64vector-reverse! c64vector-copy! c64vector-reverse-copy!
+syn keyword r7rsProcM c64vector-unfold! c64vector-unfold-right!
 
 " c128 {{{2
-syn keyword r7rsProc make-c128vector
-syn keyword r7rsProc c128vector
-syn keyword r7rsProc c128vector-unfold
-syn keyword r7rsProc c128vector-unfold-right
-syn keyword r7rsProc c128vector-copy
-syn keyword r7rsProc c128vector-reverse-copy
-syn keyword r7rsProc c128vector-append
-syn keyword r7rsProc c128vector-concatenate
-syn keyword r7rsProc c128vector-append-subvectors
-syn keyword r7rsProc c128?
-syn keyword r7rsProc c128vector?
-syn keyword r7rsProc c128vector-empty?
-syn keyword r7rsProc c128vector=
-syn keyword r7rsProc c128vector-ref
-syn keyword r7rsProc c128vector-length
-syn keyword r7rsProc c128vector-take
-syn keyword r7rsProc c128vector-take-right
-syn keyword r7rsProc c128vector-drop
-syn keyword r7rsProc c128vector-drop-right
-syn keyword r7rsProc c128vector-segment
-syn keyword r7rsProc c128vector-fold
-syn keyword r7rsProc c128vector-fold-right
-syn keyword r7rsProc c128vector-map
-syn keyword r7rsProcM c128vector-map!
-syn keyword r7rsProc c128vector-for-each
-syn keyword r7rsProc c128vector-count
-syn keyword r7rsProc c128vector-cumulate
-syn keyword r7rsProc c128vector-take-while
-syn keyword r7rsProc c128vector-take-while-right
-syn keyword r7rsProc c128vector-drop-while
-syn keyword r7rsProc c128vector-drop-while-right
-syn keyword r7rsProc c128vector-index
-syn keyword r7rsProc c128vector-index-right
-syn keyword r7rsProc c128vector-skip
-syn keyword r7rsProc c128vector-skip-right
-syn keyword r7rsProc c128vector-any
-syn keyword r7rsProc c128vector-every
-syn keyword r7rsProc c128vector-partition
-syn keyword r7rsProc c128vector-filter
-syn keyword r7rsProc c128vector-remove
-syn keyword r7rsProcM c128vector-set!
-syn keyword r7rsProcM c128vector-swap!
-syn keyword r7rsProcM c128vector-fill!
-syn keyword r7rsProcM c128vector-reverse!
-syn keyword r7rsProcM c128vector-copy!
-syn keyword r7rsProcM c128vector-reverse-copy!
-syn keyword r7rsProcM c128vector-unfold!
-syn keyword r7rsProcM c128vector-unfold-right!
-syn keyword r7rsProc c128vector->list
-syn keyword r7rsProc reverse-c128vector->list
-syn keyword r7rsProc list->c128vector
-syn keyword r7rsProc reverse-list->c128vector
-syn keyword r7rsProc c128vector->vector
-syn keyword r7rsProc vector->c128vector
-syn keyword r7rsProc make-c128vector-generator
-syn keyword r7rsProc c128vector-comparator
-syn keyword r7rsProc write-c128vector
+syn keyword r7rsProc make-c128vector c128vector c128vector-unfold c128vector-unfold-right
+syn keyword r7rsProc c128vector-copy c128vector-reverse-copy c128vector-append
+syn keyword r7rsProc c128vector-concatenate c128vector-append-subvectors c128? c128vector?
+syn keyword r7rsProc c128vector-empty? c128vector= c128vector-ref c128vector-length c128vector-take
+syn keyword r7rsProc c128vector-take-right c128vector-drop c128vector-drop-right c128vector-segment
+syn keyword r7rsProc c128vector-fold c128vector-fold-right c128vector-map c128vector-for-each
+syn keyword r7rsProc c128vector-count c128vector-cumulate c128vector-take-while
+syn keyword r7rsProc c128vector-take-while-right c128vector-drop-while c128vector-drop-while-right
+syn keyword r7rsProc c128vector-index c128vector-index-right c128vector-skip c128vector-skip-right
+syn keyword r7rsProc c128vector-any c128vector-every c128vector-partition c128vector-filter
+syn keyword r7rsProc c128vector-remove c128vector->list reverse-c128vector->list list->c128vector
+syn keyword r7rsProc reverse-list->c128vector c128vector->vector vector->c128vector
+syn keyword r7rsProc make-c128vector-generator c128vector-comparator write-c128vector
+syn keyword r7rsProcM c128vector-map! c128vector-set! c128vector-swap! c128vector-fill!
+syn keyword r7rsProcM c128vector-reverse! c128vector-copy! c128vector-reverse-copy!
+syn keyword r7rsProcM c128vector-unfold! c128vector-unfold-right!
 
 " (scheme sort) SRFI-132 {{{1
 syn keyword r7rsProc list-sorted? vector-sorted?
