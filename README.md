@@ -7,6 +7,7 @@ Yet another syntax highlight for R7RS Scheme and Gauche.
 - [x] R7RS-small 
 - [ ] R7RS-large
     - [x] `(scheme list)`
+    - [x] `(scheme vector)`
     - [x] `(scheme vector @)`
 - [ ] SRFI
 - [ ] Gauche (mostly implemented. See [TODO](TODO.md))

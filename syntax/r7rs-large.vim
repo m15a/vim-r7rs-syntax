@@ -29,6 +29,16 @@ syn keyword r7rsProcM delete! delete-duplicates! alist-delete!
 syn keyword r7rsProcM lset-union! lset-intersection! lset-difference! lset-xor!
 syn keyword r7rsProcM lset-diff+intersection!
 
+" (scheme vector) SRFI-133 {{{1
+syn keyword r7rsProc vector-unfold vector-unfold-right vector-reverse-copy vector-concatenate
+syn keyword r7rsProc vector-append-subvectors vector-empty? vector=
+syn keyword r7rsProc vector-fold vector-fold-right vector-map! vector-count vector-cumulate
+syn keyword r7rsProc vector-index vector-index-right vector-skip vector-skip-right
+syn keyword r7rsProc vector-binary-search vector-any vector-every vector-partition
+syn keyword r7rsProc reverse-vector->list reverse-list->vector
+syn keyword r7rsProcM vector-swap! vector-reverse! vector-reverse-copy! vector-unfold!
+syn keyword r7rsProcM vector-unfold-right!
+
 " (scheme vector @) SRFI-160 {{{1
 syn clear r7rsVecB
 syn cluster r7rsDataSimple remove=r7rsVecB add=r7rsVecU
