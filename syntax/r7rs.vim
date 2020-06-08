@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-08
+" Last Change: 2020-06-09
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -123,9 +123,9 @@ endif
 " | [+-](inf|nan)\.0          " inf or nan
 " )
 " Other radixes are analogous to the above binary case.
-syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/
+exec 'syn match r7rsNum /' . r7rs#num#real('[01]') . '/'
+exec 'syn match r7rsNum /' . r7rs#num#real('\o') . '/'
+exec 'syn match r7rsNum /' . r7rs#num#real('\x') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -133,18 +133,18 @@ syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.
 " [+-]
 " ( [01]+(\/[01]+)? | (inf|nan)\.0 )?
 " i
-syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)?[+-]%([01]+%(\/[01]+)?|%(inf|nan)\.0)?i>/
-syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)?[+-]%(\o+%(\/\o+)?|%(inf|nan)\.0)?i>/
-syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)?[+-]%(\x+%(\/\x+)?|%(inf|nan)\.0)?i>/
+exec 'syn match r7rsNum /' . r7rs#num#rect('[01]') . '/'
+exec 'syn match r7rsNum /' . r7rs#num#rect('\o') . '/'
+exec 'syn match r7rsNum /' . r7rs#num#rect('\x') . '/'
 
 " Complex number in polar notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
 " ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )
 " \@
 " ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )
-syn match r7rsNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[01]+%(\/[01]+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)\@%([+-]?\o+%(\/\o+)?|[+-]%(inf|nan)\.0)>/
-syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)\@%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.0)>/
+exec 'syn match r7rsNum /' . r7rs#num#polar('[01]') . '/'
+exec 'syn match r7rsNum /' . r7rs#num#polar('\o') . '/'
+exec 'syn match r7rsNum /' . r7rs#num#polar('\x') . '/'
 
 " Decimal number {{{3
 
@@ -159,7 +159,7 @@ syn match r7rsNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?\x+%(\/\x+)?|[+-]%(inf|nan)\.
 "         )
 " | [+-](inf|nan)\.0
 " )
-syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/
+exec 'syn match r7rsNum /' . r7rs#num#real('\d') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )?
@@ -175,7 +175,7 @@ syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\
 " | (inf|nan)\.0
 " )?
 " i
-syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|%(inf|nan)\.0)?i>/
+exec 'syn match r7rsNum /' . r7rs#num#rect('\d') . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )?
@@ -190,7 +190,7 @@ syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\
 "         )
 " | [+-](inf|nan)\.0
 " )
-syn match r7rsNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])?%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/
+exec 'syn match r7rsNum /' . r7rs#num#polar('\d') . '/'
 
 " Boolean {{{2
 syn match r7rsBool /#t\%(rue\)\?/
