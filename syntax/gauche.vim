@@ -1940,8 +1940,6 @@ syn keyword gaucheProc list->set
 syn keyword gaucheProc list->stream
 syn keyword gaucheProc list->sys-fdset
 syn keyword gaucheProc list-accumulator
-syn keyword gaucheProc list-delete-neighbor-dups
-syn keyword gaucheProc list-merge
 syn keyword gaucheProc list-queue
 syn keyword gaucheProc list-queue-append
 syn keyword gaucheProc list-queue-back
@@ -1956,9 +1954,6 @@ syn keyword gaucheProc list-queue-map
 syn keyword gaucheProc list-queue-unfold
 syn keyword gaucheProc list-queue-unfold-right
 syn keyword gaucheProc list-queue?
-syn keyword gaucheProc list-sort
-syn keyword gaucheProc list-sorted?
-syn keyword gaucheProc list-stable-sort
 syn keyword gaucheProc listener-read-handler
 syn keyword gaucheProc listener-show-prompt
 syn keyword gaucheProc lists-of
@@ -3553,14 +3548,8 @@ syn keyword gaucheProc vector->c32vector
 syn keyword gaucheProc vector->f16vector
 syn keyword gaucheProc vector->generator
 syn keyword gaucheProc vector-accumulator
-syn keyword gaucheProc vector-delete-neighbor-dups
-syn keyword gaucheProc vector-find-median
 syn keyword gaucheProc vector-for-each-with-index
 syn keyword gaucheProc vector-map-with-index
-syn keyword gaucheProc vector-merge
-syn keyword gaucheProc vector-sort
-syn keyword gaucheProc vector-sorted?
-syn keyword gaucheProc vector-stable-sort
 syn keyword gaucheProc vector-tabulate
 syn keyword gaucheProc vectors-of
 syn keyword gaucheProc version-compare
@@ -3869,8 +3858,6 @@ syn keyword gaucheProcM list->bag!
 syn keyword gaucheProcM list->char-set!
 syn keyword gaucheProcM list->hook!
 syn keyword gaucheProcM list->set!
-syn keyword gaucheProcM list-delete-neighbor-dups!
-syn keyword gaucheProcM list-merge!
 syn keyword gaucheProcM list-queue-add-back!
 syn keyword gaucheProcM list-queue-add-front!
 syn keyword gaucheProcM list-queue-append!
@@ -3879,8 +3866,6 @@ syn keyword gaucheProcM list-queue-remove-all!
 syn keyword gaucheProcM list-queue-remove-back!
 syn keyword gaucheProcM list-queue-remove-front!
 syn keyword gaucheProcM list-queue-set-list!
-syn keyword gaucheProcM list-sort!
-syn keyword gaucheProcM list-stable-sort!
 syn keyword gaucheProcM load-bundle!
 syn keyword gaucheProcM mapping-adjoin!
 syn keyword gaucheProcM mapping-catenate!
@@ -4165,14 +4150,7 @@ syn keyword gaucheProcM ucs-range->char-set!
 syn keyword gaucheProcM uvector-copy!
 syn keyword gaucheProcM uvector-set!
 syn keyword gaucheProcM vector-accumulator!
-syn keyword gaucheProcM vector-delete-neighbor-dups!
-syn keyword gaucheProcM vector-find-median!
 syn keyword gaucheProcM vector-map-with-index!
-syn keyword gaucheProcM vector-merge!
-syn keyword gaucheProcM vector-select!
-syn keyword gaucheProcM vector-separate!
-syn keyword gaucheProcM vector-sort!
-syn keyword gaucheProcM vector-stable-sort!
 syn keyword gaucheProcM weak-vector-set!
 syn keyword gaucheProcM zstream-params-set!
 syn keyword gaucheSyn $

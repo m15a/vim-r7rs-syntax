@@ -9,6 +9,7 @@ Yet another syntax highlight for R7RS Scheme and Gauche.
     - [x] `(scheme list)`
     - [x] `(scheme vector)`
     - [x] `(scheme vector @)`
+    - [x] `(scheme sort)`
 - [ ] SRFI
 - [ ] Gauche (mostly implemented. See [TODO](TODO.md))
 

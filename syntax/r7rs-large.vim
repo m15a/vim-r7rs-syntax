@@ -754,6 +754,15 @@ syn keyword r7rsProc make-c128vector-generator
 syn keyword r7rsProc c128vector-comparator
 syn keyword r7rsProc write-c128vector
 
+" (scheme sort) SRFI-132 {{{1
+syn keyword r7rsProc list-sorted? vector-sorted?
+syn keyword r7rsProc list-sort list-stable-sort vector-sort vector-stable-sort
+syn keyword r7rsProc list-merge vector-merge list-delete-neighbor-dups vector-delete-neighbor-dups
+syn keyword r7rsProc vector-find-median 
+syn keyword r7rsProcM list-sort! list-stable-sort! vector-sort! vector-stable-sort!
+syn keyword r7rsProcM list-merge! vector-merge! list-delete-neighbor-dups! vector-delete-neighbor-dups!
+syn keyword r7rsProcM vector-find-median! vector-select! vector-separate!
+
 " }}}
 
 " vim: et sw=2 sts=-1 tw=100 fdm=marker
