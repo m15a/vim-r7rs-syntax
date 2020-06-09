@@ -1,16 +1,23 @@
-# TODO for Gauche syntax highlight
+# TODO
 
-- [ ] Add sharp syntax
+## SRFI
+- [ ] SRFI-7
+    - [ ] `{configuration language}`
+    - [ ] `{program clause}`
+- [ ] SRFI-10 (`#,`)
+
+## Gauche
+
+- [x] Add sharp-syntaxes
     - [x] `#!`
     - [x] `#"`
     - [x] `#(`
     - [x] `#*`
-    - [ ] `#,`
     - [x] `#/`
     - [x] `#0`...`#9`
     - [x] `#:` it's ok to colorize this as ordinal symbol
     - [x] `#;`
-    - ~~`#<`~~ unreadable object, no need
+    - [-] ~~`#<`~~ unreadable object, no need
     - [x] `#?`
     - [x] `#b`, `#d`, `#o`, `#x`, `#e`, `#i`
     - [x] `#t`, `#f`
@@ -38,9 +45,6 @@
         - [x] `{next method}`
         - [x] `{parameter}`
         - [x] `{stub form}`
-    - [ ] SRFI-7
-        - [ ] `{configuration language}`
-        - [ ] `{program clause}`
     - [x] `@defvarx?`
     - [x] `@defvrx?`
         - [x] `{comparator}`
@@ -55,21 +59,12 @@
         - [x] `{metaclass}` regex match
         - [x] `{module}`
         - [x] `{parameter}`
-        - ~~`{reader syntax}`~~ no need
-        - ~~`{record type}`~~ `job` in `control.job` only, omit it
-        - ~~`{record}`~~ ditto
+        - [-] ~~`{reader syntax}`~~ no need
+        - [-] ~~`{record type}`~~ `job` in `control.job` only, omit it
+        - [-] ~~`{record}`~~ ditto
     - [ ] `{subprocess argument}` DSL in `gauche.process`. `:redirects` have operators like `<`,
           `>>`, and `>&`. Highlight them specially?
-    - ~~`@defivarx?`~~ instance variables
-    - ~~`@defcodeindex`~~ generating texinfo index, can be skipped
-- [x] Add ftplugin
-    - [x] Add `let`-related words to `lispwords`
-    - [x] Add `define`-related words to `lispwords`
-    - [x] Add `match`-related words to `lispwords`
-    - [x] Add `case`-related words to `lispwords`
-    - [x] Add `lambda`-related words to `lispwords`
-    - [x] Add `set!`-related words to `lispwords`
-    - [x] Add `do`-related words to `lispwords`
-    - ~~Add `call-with-*` to `lispwords`~~ they are functions
-    - [x] Add `with-*` to `lispwords`
-    - ~~Add `for-each*` to `lispwords`~~ function
+    - [-] ~~`@defivarx?`~~ instance variables
+    - [-] ~~`@defcodeindex`~~ generating texinfo index, can be skipped
+- [x] Add `lispword`s
+    - `@def(spec|mac)x?` of form `(syntax-name at-least-one-arg ... body-ish ...)`
