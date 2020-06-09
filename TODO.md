@@ -17,7 +17,7 @@
     - [x] `#0`...`#9`
     - [x] `#:` it's ok to colorize this as ordinal symbol
     - [x] `#;`
-    - [-] ~~`#<`~~ unreadable object, no need
+    - ~~`#<`~~ unreadable object, no need
     - [x] `#?`
     - [x] `#b`, `#d`, `#o`, `#x`, `#e`, `#i`
     - [x] `#t`, `#f`
@@ -59,12 +59,12 @@
         - [x] `{metaclass}` regex match
         - [x] `{module}`
         - [x] `{parameter}`
-        - [-] ~~`{reader syntax}`~~ no need
-        - [-] ~~`{record type}`~~ `job` in `control.job` only, omit it
-        - [-] ~~`{record}`~~ ditto
+        - ~~`{reader syntax}`~~ no need
+        - ~~`{record type}`~~ `job` in `control.job` only, omit it
+        - ~~`{record}`~~ ditto
     - [ ] `{subprocess argument}` DSL in `gauche.process`. `:redirects` have operators like `<`,
           `>>`, and `>&`. Highlight them specially?
-    - [-] ~~`@defivarx?`~~ instance variables
-    - [-] ~~`@defcodeindex`~~ generating texinfo index, can be skipped
+    - ~~`@defivarx?`~~ instance variables
+    - ~~`@defcodeindex`~~ generating texinfo index, can be skipped
 - [x] Add `lispword`s
     - `@def(spec|mac)x?` of form `(syntax-name at-least-one-arg ... body-ish ...)`
