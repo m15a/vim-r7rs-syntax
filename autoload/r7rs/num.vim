@@ -10,7 +10,7 @@ fun! r7rs#num#real(digit) abort
   let l:prefix = s:prefix(l:radix) . (l:radix ==# 'd' ? '\?' : '')
   let l:ureal = s:ureal(a:digit, l:radix)
   let l:real = s:with_infnan('[+-]\?' . l:ureal)
-  return '\c\<' . l:prefix . l:real . '\>'
+  return s:bless(l:prefix . l:real)
 endfun
 
 " Build regexp of complex number (rectangular notation)
@@ -20,7 +20,7 @@ fun! r7rs#num#rect(digit) abort
   let l:ureal = s:ureal(a:digit, l:radix)
   let l:real = s:with_infnan('[+-]\?' . l:ureal) . '\?'
   let l:imag = s:with_infnan('[+-]' . l:ureal) . '\?'
-  return '\c\<' . l:prefix . l:real . l:imag . 'i\>'
+  return s:bless(l:prefix . l:real . l:imag . 'i')
 endfun
 
 " Build regexp of complex number (polar notation)
@@ -30,7 +30,7 @@ fun! r7rs#num#polar(digit) abort
   let l:ureal = s:ureal(a:digit, l:radix)
   let l:real = s:with_infnan('[+-]\?' . l:ureal)
   let l:imag = l:real
-  return '\c\<' . l:prefix . l:real . '@' . l:imag . '\>'
+  return s:bless(l:prefix . l:real . '@' . l:imag)
 endfun
 
 " Radix letter for the digit
@@ -99,4 +99,9 @@ fun! s:with_infnan(wrapped) abort
   else
     return '[+-]\%(' . substitute(a:wrapped, '^\[+-\]', '', '') . '\|\%(inf\|nan\)\.0\)'
   endif
+endfun
+
+" Finalize building regexp of number
+fun! s:bless(blessed) abort
+  return '\c\<' . a:blessed . '\>'
 endfun
