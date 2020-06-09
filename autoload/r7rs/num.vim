@@ -103,15 +103,16 @@ fun! s:with_frac10(wrapped) abort
   return '\%(' . a:wrapped . '\|\%(\d\+\|\.\d\+\|\d\+\.\d*\)\%([esfdl][+-]\d\+\)\?\)'
 endfun
 
-" Wrap any number regexp with regexp of inf/nan
+" Wrap any signed number regexp with regexp of inf/nan
 " Example:
 "   s:with_infnan('[+-]\?NUMBER') ==> '\%([+-]\?NUMBER\|[+-]\%(inf\|nan\)\.0\)'
 "   s:with_infnan('[+-]NUMBER')   ==> '[+-]\%(NUMBER\|\%(inf\|nan\)\.0\)'
-fun! s:with_infnan(wrapped) abort
-  if match(a:wrapped, '^\[+-\]\%(\*\|\\+\|\\?\|\\{\)') != -1
-    return '\%(' . a:wrapped . '\|[+-]\%(inf\|nan\)\.0\)'
+" a:signed is assumed to start with either '[+-]\?' or '[+-]'
+fun! s:with_infnan(signed) abort
+  if match(a:signed, '^\[+-\]\\?') != -1
+    return '\%(' . a:signed . '\|[+-]\%(inf\|nan\)\.0\)'
   else
-    return '[+-]\%(' . substitute(a:wrapped, '^\[+-\]', '', '') . '\|\%(inf\|nan\)\.0\)'
+    return '[+-]\%(' . substitute(a:signed, '^\[+-\]', '', '') . '\|\%(inf\|nan\)\.0\)'
   endif
 endfun
 
