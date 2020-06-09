@@ -7,7 +7,7 @@
 " Build regexp of real number
 fun! r7rs#num#real(digit) abort
   let l:radix = s:radix(a:digit)
-  let l:prefix = s:prefix(l:radix) . (l:radix ==# 'd' ? '\?' : '')
+  let l:prefix = l:radix ==# 'd' ? s:maybe_prefix(l:radix) : s:prefix(l:radix)
   let l:ureal = s:ureal(a:digit, l:radix)
   let l:real = s:with_infnan('[+-]\?' . l:ureal)
   return s:bless(l:prefix . l:real)
@@ -16,7 +16,7 @@ endfun
 " Build regexp of complex number (rectangular notation)
 fun! r7rs#num#rect(digit) abort
   let l:radix = s:radix(a:digit)
-  let l:prefix = s:prefix(l:radix) . (l:radix ==# 'd' ? '\?' : '')
+  let l:prefix = l:radix ==# 'd' ? s:maybe_prefix(l:radix) : s:prefix(l:radix)
   let l:ureal = s:ureal(a:digit, l:radix)
   let l:real = s:with_infnan('[+-]\?' . l:ureal) . '\?'
   let l:imag = s:with_infnan('[+-]' . l:ureal) . '\?'
@@ -26,7 +26,7 @@ endfun
 " Build regexp of complex number (polar notation)
 fun! r7rs#num#polar(digit) abort
   let l:radix = s:radix(a:digit)
-  let l:prefix = s:prefix(l:radix) . (l:radix ==# 'd' ? '\?' : '')
+  let l:prefix = l:radix ==# 'd' ? s:maybe_prefix(l:radix) : s:prefix(l:radix)
   let l:ureal = s:ureal(a:digit, l:radix)
   let l:real = s:with_infnan('[+-]\?' . l:ureal)
   let l:imag = l:real
@@ -53,7 +53,7 @@ fun! s:radix(digit) abort
   endif
 endfun
 
-" Regexp of number prefix
+" Regexp of number prefix, must be
 " Example:
 "   s:prefix('b') ==> '\%(#b\|#[ei]#b\|#b#[ei]\)'
 fun! s:prefix(radix) abort
@@ -62,6 +62,20 @@ fun! s:prefix(radix) abort
   else
     return '\%(#' . a:radix . '\|#[ei]#' . a:radix . '\|#' . a:radix . '#[ei]\)'
   endif
+endfun
+
+" Regexp of number prefix, maybe
+" Example:
+"   s:maybe_prefix('b') ==> '\%(#b\|#[ei]#b\|#b#[ei]\)\?'
+fun! s:maybe_prefix(radix) abort
+  return s:prefix(a:radix) . '\?'
+endfun
+
+" Regexp of number prefix, no need
+" Example:
+"   s:no_prefix('b') ==> '\%(#b\|#[ei]#b\|#b#[ei]\)\@<!'
+fun! s:no_prefix(radix) abort
+  return s:prefix(a:radix) . '\@<!'
 endfun
 
 " Regexp of unsigned real number
