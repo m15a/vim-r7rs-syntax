@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-09
+" Last Change: 2020-06-10
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -473,7 +473,7 @@ endif
 syn region r7rsCondExpand matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*cond-expand/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsCESyn,r7rsCEClause
 syn keyword r7rsCESyn contained cond-expand and or not
 syn keyword r7rsCEAux contained library
-syn region r7rsCEClause matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsCEFeatures,@r7rsData
+syn region r7rsCEClause matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComs,@r7rsCEFeatures,@r7rsData,@r7rsExprs
 syn cluster r7rsCEFeatures contains=r7rsCEFeatureId,r7rsCEFeatureLib,r7rsCEFeatureAON,r7rsCEFeatureElse
 syn keyword r7rsCEFeatureId r7rs exact-closed exact-complex ieee-float full-unicode ratios contained
 syn keyword r7rsCEFeatureId posix windows dos unix darwin gnu-linux bsd freebsd solaris contained
@@ -488,13 +488,13 @@ syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*\%(and
 syn keyword r7rsCEFeatureElse contained else
 if s:brackets_as_parens
   syn region r7rsCondExpand matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*cond-expand/ end=/\]/ contains=r7rsErr,@r7rsComs,r7rsCESyn,r7rsCEClause
-  syn region r7rsCEClause matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComs,@r7rsCEFeatures,@r7rsData
+  syn region r7rsCEClause matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComs,@r7rsCEFeatures,@r7rsData,@r7rsExprs
   syn region r7rsCEFeatureLib matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*library/ end=/\]/ contained contains=r7rsErr,@r7rsComs,r7rsCEAux,r7rsLibName
   syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/\]/ contained contains=r7rsErr,@r7rsComs,r7rsCESyn,@r7rsCEFeatures
 endif
 if s:braces_as_parens
   syn region r7rsCondExpand matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*cond-expand/ end=/}/ contains=r7rsErr,@r7rsComs,r7rsCESyn,r7rsCEClause
-  syn region r7rsCEClause matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComs,@r7rsCEFeatures,@r7rsData
+  syn region r7rsCEClause matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComs,@r7rsCEFeatures,@r7rsData,@r7rsExprs
   syn region r7rsCEFeatureLib matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*library/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsCEAux,r7rsLibName
   syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsCESyn,@r7rsCEFeatures
 endif
