@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-08
+" Last Change: 2020-06-09
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -70,9 +70,9 @@ syn clear r7rsNum
 " | [+-](inf|nan)\.0          " inf or nan
 " )
 " Other radixes are analogous to the above binary case.
-syn match gaucheNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[_01]+%(\/[_01]+)?|[+-]%(inf|nan)\.0)>/
-syn match gaucheNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?[_0-7]+%(\/[_0-7]+)?|[+-]%(inf|nan)\.0)>/
-syn match gaucheNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?[_[:xdigit:]]+%(\/[_[:xdigit:]]+)?|[+-]%(inf|nan)\.0)>/
+exec 'syn match gaucheNum /' . r7rs#num#real('[_01]') . '/'
+exec 'syn match gaucheNum /' . r7rs#num#real('[_0-7]') . '/'
+exec 'syn match gaucheNum /' . r7rs#num#real('[_[:xdigit:]]') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -80,9 +80,9 @@ syn match gaucheNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?[_[:xdigit:]]+%(\/[_[:xdigi
 " [+-]
 " ( [_01]+(\/[_01]+)? | (inf|nan)\.0 )?
 " i
-syn match gaucheNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[_01]+%(\/[_01]+)?|[+-]%(inf|nan)\.0)?[+-]%([_01]+%(\/[_01]+)?|%(inf|nan)\.0)?i>/
-syn match gaucheNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?[_0-7]+%(\/[_0-7]+)?|[+-]%(inf|nan)\.0)?[+-]%([_0-7]+%(\/[_0-7]+)?|%(inf|nan)\.0)?i>/
-syn match gaucheNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?[_[:xdigit:]]+%(\/[_[:xdigit:]]+)?|[+-]%(inf|nan)\.0)?[+-]%([_[:xdigit:]]+%(\/[_[:xdigit:]]+)?|%(inf|nan)\.0)?i>/
+exec 'syn match gaucheNum /' . r7rs#num#rect('[_01]') . '/'
+exec 'syn match gaucheNum /' . r7rs#num#rect('[_0-7]') . '/'
+exec 'syn match gaucheNum /' . r7rs#num#rect('[_[:xdigit:]]') . '/'
 
 " Complex number in polar notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -90,9 +90,9 @@ syn match gaucheNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?[_[:xdigit:]]+%(\/[_[:xdigi
 " \@
 " ( [+-]?[_01]+(\/[_01]+)? | [+-](inf|nan)\.0 )
 " (pi)?
-syn match gaucheNum /\v\c%(#b|#[ei]#b|#b#[ei])%([+-]?[_01]+%(\/[_01]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[_01]+%(\/[_01]+)?|[+-]%(inf|nan)\.0)(pi)?>/
-syn match gaucheNum /\v\c%(#o|#[ei]#o|#o#[ei])%([+-]?[_0-7]+%(\/[_0-7]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[_0-7]+%(\/[_0-7]+)?|[+-]%(inf|nan)\.0)(pi)?>/
-syn match gaucheNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?[_[:xdigit:]]+%(\/[_[:xdigit:]]+)?|[+-]%(inf|nan)\.0)\@%([+-]?[_[:xdigit:]]+%(\/[_[:xdigit:]]+)?|[+-]%(inf|nan)\.0)(pi)?>/
+exec 'syn match gaucheNum /' . r7rs#num#polar('[_01]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match gaucheNum /' . r7rs#num#polar('[_0-7]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match gaucheNum /' . r7rs#num#polar('[_[:xdigit:]]', { 'suffix_pi': 1 }) . '/'
 
 " Common-Lisp-y radix prefixed notation {{{3
 
@@ -104,7 +104,7 @@ syn match gaucheNum /\v\c%(#x|#[ei]#x|#x#[ei])%([+-]?[_[:xdigit:]]+%(\/[_[:xdigi
 " | [+-](inf|nan)\.0
 " )
 " Other radixes are analogous to the above binary case.
-syn match gaucheNum /\v\c%(#\d{1,2}r|#[ei]#\d{1,2}r|#\d{1,2}r#[ei])%([+-]?\w+%(\/\w+)?|[+-]%(inf|nan)\.0)>/
+exec 'syn match gaucheNum /' . r7rs#num#real('\w') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #\d{1,2}r | #[ei]#\d{1,2}r | #\d{1,2}r#[ei] )
@@ -112,7 +112,7 @@ syn match gaucheNum /\v\c%(#\d{1,2}r|#[ei]#\d{1,2}r|#\d{1,2}r#[ei])%([+-]?\w+%(\
 " [+-]
 " ( \w+(\/\w+)? | (inf|nan)\.0 )?
 " i
-syn match gaucheNum /\v\c%(#\d{1,2}r|#[ei]#\d{1,2}r|#\d{1,2}r#[ei])%([+-]?\w+%(\/\w+)?|[+-]%(inf|nan)\.0)?[+-]%(\w+%(\/\w+)?|%(inf|nan)\.0)?i>/
+exec 'syn match gaucheNum /' . r7rs#num#rect('\w') . '/'
 
 " Complex number in polar notation {{{4
 " ( #\d{1,2}r | #[ei]#\d{1,2}r | #\d{1,2}r#[ei] )
@@ -120,7 +120,7 @@ syn match gaucheNum /\v\c%(#\d{1,2}r|#[ei]#\d{1,2}r|#\d{1,2}r#[ei])%([+-]?\w+%(\
 " \@
 " ( [+-]?\w+(\/\w+)? | [+-](inf|nan)\.0 )
 " (pi)?
-syn match gaucheNum /\v\c%(#\d{1,2}r|#[ei]#\d{1,2}r|#\d{1,2}r#[ei])%([+-]?\w+%(\/\w+)?|[+-]%(inf|nan)\.0)\@%([+-]?\w+%(\/\w+)?|[+-]%(inf|nan)\.0)(pi)?>/
+exec 'syn match gaucheNum /' . r7rs#num#polar('\w', { 'suffix_pi': 1 }) . '/'
 
 " Decimal number (prefixed) {{{3
 
@@ -135,7 +135,7 @@ syn match gaucheNum /\v\c%(#\d{1,2}r|#[ei]#\d{1,2}r|#\d{1,2}r#[ei])%([+-]?\w+%(\
 "         )
 " | [+-](inf|nan)\.0
 " )
-syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])%([+-]?%([_0-9]+%(\/[_0-9]+)?|%([_0-9]+|\.[_0-9]+|[_0-9]+\.[_0-9]*)%([esfdl][+-][_0-9]+)?)|[+-]%(inf|nan)\.0)>/
+exec 'syn match gaucheNum /' . r7rs#num#real('[_0-9]', { 'prefix_req': 1 }) . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )
@@ -151,7 +151,7 @@ syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])%([+-]?%([_0-9]+%(\/[_0-9]+)?|
 " | (inf|nan)\.0
 " )?
 " i
-syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])%([+-]?%([_0-9]+%(\/[_0-9]+)?|%([_0-9]+|\.[_0-9]+|[_0-9]+\.[_0-9]*)%([esfdl][+-][_0-9]+)?)|[+-]%(inf|nan)\.0)?[+-]%(%([_0-9]+%(\/[_0-9]+)?|%([_0-9]+|\.[_0-9]+|[_0-9]+\.[_0-9]*)%([esfdl][+-][_0-9]+)?)|%(inf|nan)\.0)?i>/
+exec 'syn match gaucheNum /' . r7rs#num#rect('[_0-9]', { 'prefix_req': 1 }) . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )
@@ -167,7 +167,7 @@ syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])%([+-]?%([_0-9]+%(\/[_0-9]+)?|
 " | [+-](inf|nan)\.0
 " )
 " (pi)?
-syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])%([+-]?%([_0-9]+%(\/[_0-9]+)?|%([_0-9]+|\.[_0-9]+|[_0-9]+\.[_0-9]*)%([esfdl][+-][_0-9]+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%([_0-9]+%(\/[_0-9]+)?|%([_0-9]+|\.[_0-9]+|[_0-9]+\.[_0-9]*)%([esfdl][+-][_0-9]+)?)|[+-]%(inf|nan)\.0)(pi)?>/
+exec 'syn match gaucheNum /' . r7rs#num#polar('[_0-9]', { 'prefix_req': 1, 'suffix_pi': 1 }) . '/'
 
 " Decimal number (no prefix) {{{3
 
@@ -182,7 +182,7 @@ syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])%([+-]?%([_0-9]+%(\/[_0-9]+)?|
 "         )
 " | [+-](inf|nan)\.0
 " )
-syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)>/
+exec 'syn match gaucheNum /' . r7rs#num#real('\d', { 'prefix_req': -1 }) . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )@<!
@@ -198,7 +198,7 @@ syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+
 " | (inf|nan)\.0
 " )?
 " i
-syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)?[+-]%(%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|%(inf|nan)\.0)?i>/
+exec 'syn match gaucheNum /' . r7rs#num#rect('\d', { 'prefix_req': -1 }) . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )@<!
@@ -214,7 +214,7 @@ syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+
 " | [+-](inf|nan)\.0
 " )
 " (pi)?
-syn match gaucheNum /\v\c%(#[dei]|#[ei]#d|#d#[ei])@<!%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)\@%([+-]?%(\d+%(\/\d+)?|%(\d+|\.\d+|\d+\.\d*)%([esfdl][+-]\d+)?)|[+-]%(inf|nan)\.0)(pi)?>/
+exec 'syn match gaucheNum /' . r7rs#num#polar('\d', { 'prefix_req': -1, 'suffix_pi': 1 }) . '/'
 
 " Character {{{2
 

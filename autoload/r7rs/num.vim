@@ -5,18 +5,26 @@
 " License: MIT
 
 " Build regexp of real number
-fun! r7rs#num#real(digit) abort
+fun! r7rs#num#real(digit, ...) abort
+  " Optional arguments:
+  let l:optionals = get(a:000, 0, {})
+  " Determines requirement for prefix; see s:prefix() below.
+  let l:prefix_req = get(l:optionals, 'prefix_req')
+
   let l:radix = s:radix(a:digit)
-  let l:prefix = l:radix ==# 'd' ? s:maybe_prefix(l:radix) : s:prefix(l:radix)
+  let l:prefix = s:prefix(l:radix, l:prefix_req)
   let l:ureal = s:ureal(a:digit, l:radix)
   let l:real = s:with_infnan('[+-]\?' . l:ureal)
   return s:bless(l:prefix . l:real)
 endfun
 
 " Build regexp of complex number (rectangular notation)
-fun! r7rs#num#rect(digit) abort
+fun! r7rs#num#rect(digit, ...) abort
+  let l:optionals = get(a:000, 0, {})
+  let l:prefix_req = get(l:optionals, 'prefix_req')
+
   let l:radix = s:radix(a:digit)
-  let l:prefix = l:radix ==# 'd' ? s:maybe_prefix(l:radix) : s:prefix(l:radix)
+  let l:prefix = s:prefix(l:radix, l:prefix_req)
   let l:ureal = s:ureal(a:digit, l:radix)
   let l:real = s:with_infnan('[+-]\?' . l:ureal) . '\?'
   let l:imag = s:with_infnan('[+-]' . l:ureal) . '\?'
@@ -24,13 +32,19 @@ fun! r7rs#num#rect(digit) abort
 endfun
 
 " Build regexp of complex number (polar notation)
-fun! r7rs#num#polar(digit) abort
+fun! r7rs#num#polar(digit, ...) abort
+  let l:optionals = get(a:000, 0, {})
+  let l:prefix_req = get(l:optionals, 'prefix_req')
+  " Enables pi-suffix extention in Gauche
+  let l:suffix_pi = get(l:optionals, 'suffix_pi')
+
   let l:radix = s:radix(a:digit)
-  let l:prefix = l:radix ==# 'd' ? s:maybe_prefix(l:radix) : s:prefix(l:radix)
+  let l:prefix = s:prefix(l:radix, l:prefix_req)
   let l:ureal = s:ureal(a:digit, l:radix)
   let l:real = s:with_infnan('[+-]\?' . l:ureal)
   let l:imag = l:real
-  return s:bless(l:prefix . l:real . '@' . l:imag)
+  let l:pi = l:suffix_pi ? '\%(pi\)\?' : ''
+  return s:bless(l:prefix . l:real . '@' . l:imag . l:pi)
 endfun
 
 " Radix letter for the digit
@@ -38,44 +52,48 @@ endfun
 "   s:radix('[0-9]') ==> 'd'
 "   s:radix('[_0-9]') ==> 'd'
 "   s:radix('\x') ==> 'x'
-"   s:radix('\w') ==> '\d\{1,2}'
+"   s:radix('\w') ==> '\d\{1,2}r'
 fun! s:radix(digit) abort
-  if match(a:digit, '\[01\]') != -1
+  if match(a:digit, '\[_\?01_\?\]') != -1
     return 'b'
-  elseif match(a:digit, '\\o') != -1 || match(a:digit, '\[0-7\]') != -1
+  elseif match(a:digit, '\%(\\o\|\[_\?0-7_\?\]\)') != -1
     return 'o'
-  elseif match(a:digit, '\\d') != -1 || match(a:digit, '\[0-9\]') != -1
+  elseif match(a:digit, '\%(\\d\|\[_\?0-9_\?\]\)') != -1
     return 'd'
-  elseif match(a:digit, '\\x') != -1 || match(a:digit, '\[0-9a-fA-F\]') != -1
+  elseif match(a:digit, '\%(\\x\|\[_\?\%(0-9a-fA-F\|\[:xdigit:\]\)_\?\]\)') != -1
     return 'x'
+  elseif match(a:digit, '\%(\\w\|\[_\?\%(0-9a-zA-Z\|\[:alnum:\]\)_\?\]\)') != -1
+    return '\d\{1,2}r'
   else
     echoe 'no such radix'
   endif
 endfun
 
-" Regexp of number prefix, must be
+" Regexp of number prefix
 " Example:
-"   s:prefix('b') ==> '\%(#b\|#[ei]#b\|#b#[ei]\)'
-fun! s:prefix(radix) abort
+"   s:prefix('b', 0)  ==> '\%(#b\|#[ei]#b\|#b#[ei]\)'
+"   s:prefix('d', 0)  ==> '\%(#d\|#[ei]#d\|#d#[ei]\)\?'
+"   s:prefix('d', 1)  ==> '\%(#d\|#[ei]#d\|#d#[ei]\)'
+"   s:prefix('d', -1) ==> '\%(#d\|#[ei]#d\|#d#[ei]\)\@<!'
+" If a:required > 0, it requires prefix to present even for decimal number;
+" if a:required == 0, it permits omitting prefix in decimal number;
+" and if a:required < 0, it rejects prefix (works only with decimal number).
+fun! s:prefix(radix, required) abort
   if a:radix ==# 'd'
-    return '\%(#[eid]\|#[ei]#d\|#d#[ei]\)'
+    let l:prefix = '\%(#[eid]\|#[ei]#d\|#d#[ei]\)'
   else
-    return '\%(#' . a:radix . '\|#[ei]#' . a:radix . '\|#' . a:radix . '#[ei]\)'
+    let l:prefix = '\%(#' . a:radix . '\|#[ei]#' . a:radix . '\|#' . a:radix . '#[ei]\)'
   endif
-endfun
-
-" Regexp of number prefix, maybe
-" Example:
-"   s:maybe_prefix('b') ==> '\%(#b\|#[ei]#b\|#b#[ei]\)\?'
-fun! s:maybe_prefix(radix) abort
-  return s:prefix(a:radix) . '\?'
-endfun
-
-" Regexp of number prefix, no need
-" Example:
-"   s:no_prefix('b') ==> '\%(#b\|#[ei]#b\|#b#[ei]\)\@<!'
-fun! s:no_prefix(radix) abort
-  return s:prefix(a:radix) . '\@<!'
+  if a:required > 0
+    return l:prefix
+  endif
+  if a:required < 0
+    return l:prefix . '\@<!'
+  endif
+  if a:radix ==# 'd'
+    return l:prefix . '\?'
+  endif
+  return l:prefix
 endfun
 
 " Regexp of unsigned real number
