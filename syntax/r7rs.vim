@@ -520,7 +520,6 @@ if s:braces_as_parens
   syn region r7rsImportList matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComs,r7rsId,r7rsImportList
 endif
 
-
 " Highlights {{{1
 
 hi def link r7rsErr Error

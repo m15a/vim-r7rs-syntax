@@ -42,8 +42,6 @@ syn region r7rsComDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
 " Directives {{{2
 syn match gaucheShebang /\%^#![\/ ].*$/
 syn match gaucheDirective /#!\(gauche-legacy\|r[67]rs\)/
-
-" Debug directive {{{2
 syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
