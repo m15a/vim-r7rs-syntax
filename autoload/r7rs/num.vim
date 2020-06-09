@@ -80,7 +80,7 @@ endfun
 
 " Regexp of unsigned real number
 fun! s:ureal(digit, ...) abort
-  let l:radix = get(a:000, 1, s:radix(a:digit))
+  let l:radix = get(a:000, 0, s:radix(a:digit))
   let l:ureal = s:int_or_rat(a:digit)
   if l:radix ==# 'd'
     let l:ureal = s:with_frac10(l:ureal)
