@@ -69,9 +69,10 @@ For more details, see [R7RS][1], sec. 7.1.1 (p. 62) and [the errata][2], 7.
 
 ### r7rs_use_gauche
 
-This option enables highlight for Gauche's extended reader syntax (e.g.,
-`#/`), numeric literal (e.g., `#e123_456@789pi`), extra functions, objects
-(`<class>`), etc.
+This option enables highlight for Gauche's extended reader syntaxes
+(`#/regexp/`, `#[charset]`, `#"~(interpolated) string"`, ...), numeric
+literals (`#12r34_56@78pi`), `:keywords`, `<objects>`, and a bunch of extra
+syntaxes/procedures.
 ```vim
     let g:r7rs_use_gauche = 1  " default: 0
 ```
@@ -83,3 +84,5 @@ Enjoy Gauche!
 ## License
 
 [MIT](LICENSE)
+
+<!-- vim: set tw=78 spell: -->
