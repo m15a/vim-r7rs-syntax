@@ -45,7 +45,7 @@ syn match gaucheDirective /#!\(gauche-legacy\|r[67]rs\)/
 syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsDataSimple remove=r7rsVecN
+syn cluster r7rsDataSimple remove=r7rsNumericVector
 syn cluster r7rsDataSimple add=gaucheKeyword,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheVecU,gaucheClass
 
 " Keyword symbols {{{2
@@ -266,7 +266,7 @@ syn match gaucheEscHex /\\U\x\{8}/ contained
 syn match gaucheEscMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
-syn clear r7rsVecN
+syn clear r7rsNumericVector
 syn region gaucheVecU matchgroup=r7rsDelimiter start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
 syn region gaucheVecU matchgroup=r7rsDelimiter start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
 syn region gaucheVecU matchgroup=r7rsDelimiter start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
