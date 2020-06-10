@@ -50,7 +50,7 @@ syn cluster r7rsDataSimple add=gaucheKeyword,gaucheNumber,gaucheCharacter,gauche
 
 " Keyword symbols {{{2
 syn match gaucheKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
-syn region gaucheKeyword matchgroup=r7rsDelim start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
+syn region gaucheKeyword matchgroup=r7rsDelimiter start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
 
 " Number {{{2
 syn clear r7rsNumber
@@ -223,7 +223,7 @@ syn match gaucheCharacter /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
 
 " Character set {{{2
 syn match gaucheCharSet /#\ze\[/ nextgroup=gaucheCSSpec
-syn region gaucheCSSpec matchgroup=r7rsDelim start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@gaucheCSEscChars
+syn region gaucheCSSpec matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@gaucheCSEscChars
 
 " Escaped characters (embedded in #[character set]) {{{2
 syn cluster gaucheCSEscChars contains=gaucheCSEscMeta,r7rsEscHex,gaucheCSEscMnemonic,gaucheCSEscLiteral,gaucheCSEscPOSIX
@@ -235,7 +235,7 @@ syn match gaucheCSEscPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|low
 syn match gaucheCSEscPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
 " Regular expression {{{2
-syn region gaucheRegExp matchgroup=r7rsDelim start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheREItems
+syn region gaucheRegExp matchgroup=r7rsDelimiter start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheREItems
 syn cluster gaucheREItems contains=gaucheRECapture,gaucheREPattern,@gaucheREEscChars,gaucheCSSpec
 syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
 syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
@@ -253,10 +253,10 @@ syn match gaucheREEscMnemonic /\\[sSdDwWbB]/ contained
 syn match gaucheREEscLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
-syn region gaucheStringI matchgroup=r7rsDelim start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
+syn region gaucheStringI matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
 
 " Interpolated string {{{2
-syn region gaucheStringQQ matchgroup=r7rsDelim start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheStringQQU
+syn region gaucheStringQQ matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheStringQQU
 syn region gaucheStringQQU start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Escaped characters (embedded in \"strings\" and |identifiers|) {{{2
@@ -267,9 +267,9 @@ syn match gaucheEscMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
 syn clear r7rsVecN
-syn region gaucheVecU matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
-syn region gaucheVecU matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
-syn region gaucheVecU matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
+syn region gaucheVecU matchgroup=r7rsDelimiter start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
+syn region gaucheVecU matchgroup=r7rsDelimiter start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
+syn region gaucheVecU matchgroup=r7rsDelimiter start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
 
 " Class and condition type {{{2
 syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
@@ -4248,25 +4248,25 @@ syn match gaucheSyntax /\^[_a-z]/
 " Special expressions {{{1
 
 " Hybrid 'import' {{{2
-syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
+syn region gaucheImport matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 syn cluster gaucheImportSets contains=r7rsIdentifier,gaucheImportOER,gaucheImportP
 syn region gaucheImportOER matchgroup=gaucheKeyword start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsImportList
 syn region gaucheImportP matchgroup=gaucheKeyword start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsIdentifier
 if s:brackets_as_parens
-  syn region gaucheImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
+  syn region gaucheImport matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
+  syn region gaucheImport matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 endif
 
 " 'use' {{{2
-syn region gaucheUse matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
+syn region gaucheUse matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
 syn keyword gaucheUseSyntax use
 if s:brackets_as_parens
-  syn region gaucheUse matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheUse matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
 endif
 
 " 'export' can be used outside 'define-library' {{{2
@@ -4282,7 +4282,7 @@ hi def link gaucheDebug r7rsComment
 hi def link gaucheKeyword Special
 hi def link gaucheNumber r7rsNumber
 hi def link gaucheCharacter r7rsCharacter
-hi def link gaucheCharSet r7rsDelim
+hi def link gaucheCharSet r7rsDelimiter
 hi def link gaucheCSSpec r7rsString
 hi def link gaucheCSEscMeta r7rsSpecialChar
 hi def link gaucheCSEscMnemonic r7rsEscMnemonic
