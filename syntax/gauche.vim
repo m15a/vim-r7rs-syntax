@@ -4249,9 +4249,9 @@ syn match gaucheSyntax /\^[_a-z]/
 
 " Hybrid 'import' {{{2
 syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
-syn cluster gaucheImportSets contains=r7rsId,gaucheImportOER,gaucheImportP
+syn cluster gaucheImportSets contains=r7rsIdentifier,gaucheImportOER,gaucheImportP
 syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComments,r7rsImportList
-syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComments,r7rsId
+syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComments,r7rsIdentifier
 if s:brackets_as_parens
   syn region gaucheImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsErr,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 endif
