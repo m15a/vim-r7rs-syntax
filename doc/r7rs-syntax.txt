@@ -1,4 +1,4 @@
-*r7rs-syntax.txt*	*vim-r7rs-syntax*	Last Change: 2020-06-09
+*r7rs-syntax.txt*	*vim-r7rs-syntax*	Last Change: 2020-06-11
 
                                         *r7rs-syntax* *ft-r7rs-syntax*
 
@@ -58,5 +58,8 @@ syntaxes/procedures.
     let g:r7rs_use_gauche = 1  " default: 0
 <
 Enjoy Gauche!
+
+NOTE: If |g:use_gauche| is set, |g:strict_identifier| is ignored since
+identifiers in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
  vim:tw=78:ts=8:noet:ft=help:norl:

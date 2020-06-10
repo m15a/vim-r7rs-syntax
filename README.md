@@ -78,6 +78,9 @@ syntaxes/procedures.
 ```
 Enjoy Gauche!
 
+NOTE: If `g:use_gauche` is set, `g:strict_identifier` is ignored since
+identifiers in Gauche are not strict (e.g., `1/pi` in `math.const` module).
+
 [1]: https://small.r7rs.org/
 [2]: https://small.r7rs.org/wiki/R7RSSmallErrata/
 

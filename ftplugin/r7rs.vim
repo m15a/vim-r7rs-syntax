@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-08
+" Last Change: 2020-06-11
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -11,6 +11,16 @@ endif
 
 let s:cpo = &cpo
 set cpo&vim
+
+" Options {{{1
+
+if r7rs#get('strict', 0)
+  let s:use_gauche = 0
+else
+  let s:use_gauche = r7rs#get('use_gauche', 0)
+endif
+
+" }}}
 
 setl comments=:;;;;,:;;;,:;;,:;
 setl commentstring=;\ %s
@@ -29,6 +39,13 @@ setl lispwords+=define-syntax,define-record-type,define-library
 let b:undo_ftplugin = 'setl com< cms< def< isk< lisp< lw<'
 
 let b:did_ftplugin = 1
+
+let b:did_r7rs_ftplugin = 1
+if s:use_gauche
+  runtime! ftplugin/gauche.vim
+endif
+unlet b:did_r7rs_ftplugin
+
 let &cpo = s:cpo
 unlet s:cpo
 
