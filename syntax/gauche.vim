@@ -4305,7 +4305,6 @@ hi def link gaucheSyntax r7rsSyntax
 hi def link gaucheSyntaxM r7rsSyntaxM
 hi def link gaucheFunction r7rsFunction
 hi def link gaucheFunctionM r7rsFunctionM
-hi def link gaucheParam Identifier
 hi def link gaucheVar r7rsVar
 hi def link gaucheConst Constant
 hi def link gaucheCiSEType Type
