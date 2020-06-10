@@ -253,10 +253,10 @@ syn match gaucheREEscapedMnemonic /\\[sSdDwWbB]/ contained
 syn match gaucheREEscapedLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
-syn region gaucheIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedWrap
+syn region gaucheIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline
 
 " Interpolated string {{{2
-syn region gaucheInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedWrap,gaucheInterpolatedStringUnquote
+syn region gaucheInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline,gaucheInterpolatedStringUnquote
 syn region gaucheInterpolatedStringUnquote start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2

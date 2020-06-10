@@ -202,7 +202,7 @@ syn match r7rsCharacter /#\\x\x\+/
 syn match r7rsCharacter /#\\\%(alarm\|backspace\|delete\|escape\|newline\|null\|return\|space\|tab\)/
 
 " String {{{2
-syn region r7rsString matchgroup=r7rsDelimiter start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedWrap
+syn region r7rsString matchgroup=r7rsDelimiter start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline
 
 " Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2
 syn cluster r7rsEscapedChars contains=r7rsEscapedLiteral,r7rsEscapedHex,r7rsEscapedMnemonic
@@ -211,7 +211,7 @@ syn match r7rsEscapedHex /\\x\x\+;/ contained
 syn match r7rsEscapedMnemonic /\\[abtnr]/ contained
 
 " This can be contained in strings but identifiers
-syn match r7rsEscapedWrap /\\[[:space:]]*$/ contained
+syn match r7rsEscapedNewline /\\[[:space:]]*$/ contained
 
 " Bytevectors {{{2
 syn region r7rsBytevector matchgroup=r7rsDelimiter start=/#u8(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
@@ -540,7 +540,7 @@ hi def link r7rsString String
 hi def link r7rsEscapedLiteral r7rsCharacter
 hi def link r7rsEscapedHex r7rsCharacter
 hi def link r7rsEscapedMnemonic r7rsSpecialChar
-hi def link r7rsEscapedWrap r7rsSpecialChar
+hi def link r7rsEscapedNewline r7rsSpecialChar
 hi def link r7rsQuote r7rsSyntax
 hi def link r7rsQuasiQuote r7rsSyntax
 hi def link r7rsUnquote r7rsSyntaxA
