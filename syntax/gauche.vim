@@ -46,7 +46,7 @@ syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsDataSimple remove=r7rsVecN
-syn cluster r7rsDataSimple add=gaucheKey,gaucheNumber,gaucheChar,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheVecU,gaucheClass
+syn cluster r7rsDataSimple add=gaucheKey,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheVecU,gaucheClass
 
 " Keyword symbols {{{2
 syn match gaucheKey /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -218,8 +218,8 @@ exec 'syn match gaucheNumber /' . r7rs#number#polar('\d', { 'prefix_req': -1, 's
 
 " Although R7RS character names are case sensitive, Gauche character names are
 " case insensitive (cf. Gauche ref, sec. 6.10).
-syn match gaucheChar /\c#\\\%(alarm\|backspace\|del\%(ete\)\?\|esc\%(ape\)\?\|newline\|null\|return\|space\|tab\)/
-syn match gaucheChar /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
+syn match gaucheCharacter /\c#\\\%(alarm\|backspace\|del\%(ete\)\?\|esc\%(ape\)\?\|newline\|null\|return\|space\|tab\)/
+syn match gaucheCharacter /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
 
 " Character set {{{2
 syn match gaucheCharSet /#\ze\[/ nextgroup=gaucheCSSpec
@@ -4281,7 +4281,7 @@ hi def link gaucheDirective r7rsDirective
 hi def link gaucheDebug r7rsComment
 hi def link gaucheKey Special
 hi def link gaucheNumber r7rsNumber
-hi def link gaucheChar r7rsChar
+hi def link gaucheCharacter r7rsCharacter
 hi def link gaucheCharSet r7rsDelim
 hi def link gaucheCSSpec r7rsString
 hi def link gaucheCSEscMeta r7rsCharM
