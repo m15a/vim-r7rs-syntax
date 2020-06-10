@@ -41,8 +41,8 @@ syn match r7rsError /[^[:space:]\n]/
 syn cluster r7rsComments contains=r7rsComment,r7rsCommentNested,r7rsCommentSharp,r7rsDirective
 
 " Comments {{{2
-syn region r7rsComment start=/#\@<!;/ end=/$/ contains=r7rsCommentTodo
-syn region r7rsCommentNested start=/#|/ end=/|#/ contains=r7rsCommentNested,r7rsCommentTodo
+syn region r7rsComment start=/#\@<!;/ end=/$/ contains=r7rsCommentTodo,@Spell
+syn region r7rsCommentNested start=/#|/ end=/|#/ contains=r7rsCommentNested,r7rsCommentTodo,@Spell
 " FIXME: highlight nested #;
 " In `#; #; hello hello R7RS!`, the two `hello`s should be commented out but not.
 syn region r7rsCommentSharp start=/#;/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=r7rsCommentDatum
