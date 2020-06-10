@@ -45,8 +45,8 @@ syn match gaucheDirective /#!\(gauche-legacy\|r[67]rs\)/
 syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsDataSimple remove=r7rsNumericVector
-syn cluster r7rsDataSimple add=gaucheKeyword,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheUniformVector,gaucheClass
+syn cluster r7rsSimpleData remove=r7rsNumericVector
+syn cluster r7rsSimpleData add=gaucheKeyword,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheUniformVector,gaucheClass
 
 " Keyword symbols {{{2
 syn match gaucheKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/

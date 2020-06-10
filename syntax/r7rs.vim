@@ -78,12 +78,12 @@ syn match r7rsDirective /#!\%(no-\)\?fold-case/
 " As the children may not be prefixed by ' or `, it is difficult to distinguish
 " between them from their look. To highlight them differently, preparing three
 " syntax groups is mandatory.
-syn cluster r7rsData contains=@r7rsDataSimple,@r7rsDataCompound,r7rsLabel
-syn cluster r7rsDataQ contains=@r7rsDataSimple,@r7rsDataCompoundQ,r7rsLabel
-syn cluster r7rsDataQQ contains=@r7rsDataSimple,@r7rsDataCompoundQQ,r7rsLabel
+syn cluster r7rsData contains=@r7rsSimpleData,@r7rsCompoundData,r7rsLabel
+syn cluster r7rsDataQ contains=@r7rsSimpleData,@r7rsCompoundDataQ,r7rsLabel
+syn cluster r7rsDataQQ contains=@r7rsSimpleData,@r7rsCompoundDataQQ,r7rsLabel
 
 " Simple data (cf. R7RS, sec. 7.1.2) {{{1
-syn cluster r7rsDataSimple contains=r7rsIdentifier,r7rsBoolean,r7rsNumber,r7rsCharacter,r7rsString,r7rsBytevector
+syn cluster r7rsSimpleData contains=r7rsIdentifier,r7rsBoolean,r7rsNumber,r7rsCharacter,r7rsString,r7rsBytevector
 
 " Identifiers (cf. R7RS, sec. 2.1 ,p. 62, and SmallErrata, 7) {{{2
 
@@ -217,9 +217,9 @@ syn match r7rsEscapedNewline /\\[[:space:]]*$/ contained
 syn region r7rsBytevector matchgroup=r7rsDelimiter start=/#u8(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
 
 " Compound data (cf. R7RS, sec. 7.1.2) {{{1
-syn cluster r7rsDataCompound contains=r7rsList,r7rsVector,r7rsQuote,r7rsQuasiQuote
-syn cluster r7rsDataCompoundQ contains=r7rsListQ,r7rsVectorQ,r7rsQuote,r7rsQuasiQuote
-syn cluster r7rsDataCompoundQQ contains=r7rsListQQ,r7rsVectorQQ,r7rsQuote,r7rsQuasiQuote
+syn cluster r7rsCompoundData contains=r7rsList,r7rsVector,r7rsQuote,r7rsQuasiQuote
+syn cluster r7rsCompoundDataQ contains=r7rsListQ,r7rsVectorQ,r7rsQuote,r7rsQuasiQuote
+syn cluster r7rsCompoundDataQQ contains=r7rsListQQ,r7rsVectorQQ,r7rsQuote,r7rsQuasiQuote
 
 " Unquoted lists and vector {{{2
 syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExpressions
@@ -252,8 +252,8 @@ endif
 syn region r7rsVectorQQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 
 " Quoted simple data (any identifier, |identifier|, \"string\", or #-syntax other than '#(') {{{2
-syn match r7rsQuote /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
-syn match r7rsQuote /'\ze#[^(]/ nextgroup=@r7rsDataSimple
+syn match r7rsQuote /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsSimpleData
+syn match r7rsQuote /'\ze#[^(]/ nextgroup=@r7rsSimpleData
 
 " Quoted lists and vector {{{2
 syn match r7rsQuote /'\ze(/ nextgroup=r7rsQuoteList
@@ -275,8 +275,8 @@ syn match r7rsQuote /'\ze`/ nextgroup=r7rsQuasiQuote
 syn match r7rsQuote /'\ze,@\?/ nextgroup=r7rsUnquote
 
 " Quasiquoted simple data (any identifier, |idenfitier|, \"string\", or #-syntax other than '#(') {{{2
-syn match r7rsQuasiQuote /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
-syn match r7rsQuasiQuote /`\ze#[^(]/ nextgroup=@r7rsDataSimple
+syn match r7rsQuasiQuote /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsSimpleData
+syn match r7rsQuasiQuote /`\ze#[^(]/ nextgroup=@r7rsSimpleData
 
 " Quasiquoted lists and vector {{{2
 syn match r7rsQuasiQuote /`\ze(/ nextgroup=r7rsQuasiQuoteList
