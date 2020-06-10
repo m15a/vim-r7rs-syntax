@@ -46,7 +46,7 @@ syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsDataSimple remove=r7rsVecN
-syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gaucheRegExp,gaucheStrI,gaucheStrQQ,gaucheVecU,gaucheClass
+syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheVecU,gaucheClass
 
 " Keyword symbols {{{2
 syn match gaucheKey /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -253,11 +253,11 @@ syn match gaucheREEscMnemonic /\\[sSdDwWbB]/ contained
 syn match gaucheREEscLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
-syn region gaucheStrI matchgroup=r7rsDelim start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
+syn region gaucheStringI matchgroup=r7rsDelim start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
 
 " Interpolated string {{{2
-syn region gaucheStrQQ matchgroup=r7rsDelim start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheStrQQU
-syn region gaucheStrQQU start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
+syn region gaucheStringQQ matchgroup=r7rsDelim start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheStringQQU
+syn region gaucheStringQQU start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
 
 " Escaped characters (embedded in \"strings\" and |identifiers|) {{{2
 syn cluster r7rsEscChars add=gaucheEscHex,gaucheEscMnemonic
@@ -4283,20 +4283,20 @@ hi def link gaucheKey Special
 hi def link gaucheNum r7rsNum
 hi def link gaucheChar r7rsChar
 hi def link gaucheCharSet r7rsDelim
-hi def link gaucheCSSpec r7rsStr
+hi def link gaucheCSSpec r7rsString
 hi def link gaucheCSEscMeta r7rsCharM
 hi def link gaucheCSEscMnemonic r7rsEscMnemonic
 hi def link gaucheCSEscLiteral r7rsEscLiteral
 hi def link gaucheCSEscPOSIX r7rsCharM
-hi def link gaucheRegExp r7rsStr
-hi def link gaucheRECapture r7rsStr
-hi def link gaucheREPattern r7rsStr
+hi def link gaucheRegExp r7rsString
+hi def link gaucheRECapture r7rsString
+hi def link gaucheREPattern r7rsString
 hi def link gaucheREEscMeta r7rsCharM
 hi def link gaucheREEscMnemonic r7rsEscMnemonic
 hi def link gaucheREEscLiteral r7rsEscLiteral
-hi def link gaucheStrI r7rsStr
-hi def link gaucheStrQQ r7rsStr
-hi def link gaucheStrQQU r7rsU
+hi def link gaucheStringI r7rsString
+hi def link gaucheStringQQ r7rsString
+hi def link gaucheStringQQU r7rsU
 hi def link gaucheEscHex r7rsEscHex
 hi def link gaucheEscMnemonic r7rsEscMnemonic
 hi def link gaucheClass Type
