@@ -278,7 +278,7 @@ syn match gaucheClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 " }}} }}}
 
 " Expressions
-syn cluster r7rsExpressions add=gaucheSyntax,gaucheSyntaxM,gaucheFunction,gaucheFunctionM
+syn cluster r7rsExpressions add=gaucheSyntax,gaucheSyntaxM,gaucheFunction,gaucheFunctionM,gaucheImport,gaucheUse,gaucheExport 
 syn cluster r7rsExpressions add=gaucheCiSEType,gaucheCiSESyntax,gaucheCiSESyntaxM,gaucheCiSEFunction,gaucheCiSEFunctionM
 
 " Common expressions {{{1
