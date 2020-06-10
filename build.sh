@@ -391,7 +391,7 @@ EOF
     gawk -F'\t' '$3 ~ /^{constant}$/ { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | gawk '{ print "syn keyword gaucheConst", $0 }'
+        | gawk '{ print "syn keyword gaucheConstant", $0 }'
 }
 
 build_module() {
