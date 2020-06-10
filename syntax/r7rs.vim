@@ -535,12 +535,12 @@ hi def link r7rsNumber Number
 hi def link r7rsUInt r7rsNumber
 hi def link r7rsBool Boolean
 hi def link r7rsCharacter Character
-hi def link r7rsCharM SpecialChar
+hi def link r7rsSpecialChar SpecialChar
 hi def link r7rsString String
 hi def link r7rsEscLiteral r7rsCharacter
 hi def link r7rsEscHex r7rsCharacter
-hi def link r7rsEscMnemonic r7rsCharM
-hi def link r7rsEscWrap r7rsCharM
+hi def link r7rsEscMnemonic r7rsSpecialChar
+hi def link r7rsEscWrap r7rsSpecialChar
 hi def link r7rsQ r7rsSyntax
 hi def link r7rsQQ r7rsSyntax
 hi def link r7rsU r7rsAux

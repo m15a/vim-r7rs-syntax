@@ -4284,14 +4284,14 @@ hi def link gaucheNumber r7rsNumber
 hi def link gaucheCharacter r7rsCharacter
 hi def link gaucheCharSet r7rsDelim
 hi def link gaucheCSSpec r7rsString
-hi def link gaucheCSEscMeta r7rsCharM
+hi def link gaucheCSEscMeta r7rsSpecialChar
 hi def link gaucheCSEscMnemonic r7rsEscMnemonic
 hi def link gaucheCSEscLiteral r7rsEscLiteral
-hi def link gaucheCSEscPOSIX r7rsCharM
+hi def link gaucheCSEscPOSIX r7rsSpecialChar
 hi def link gaucheRegExp r7rsString
 hi def link gaucheRECapture r7rsString
 hi def link gaucheREPattern r7rsString
-hi def link gaucheREEscMeta r7rsCharM
+hi def link gaucheREEscMeta r7rsSpecialChar
 hi def link gaucheREEscMnemonic r7rsEscMnemonic
 hi def link gaucheREEscLiteral r7rsEscLiteral
 hi def link gaucheStringI r7rsString
