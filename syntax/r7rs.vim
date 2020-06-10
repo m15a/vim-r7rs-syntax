@@ -299,7 +299,7 @@ syn match r7rsQuasiQuote /`\ze,@\?/ nextgroup=r7rsUnquote
 
 " Unquote {{{2
 " It allows comments before reaching any datum.
-syn region r7rsUnquote start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
+syn region r7rsUnquote start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData,@r7rsExpressions
 
 " Dot '.' {{{2
 syn keyword r7rsDot . contained containedin=r7rsList,r7rsListQ,r7rsListQQ,r7rsQuoteList,r7rsQuasiQuoteList
