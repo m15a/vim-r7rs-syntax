@@ -4270,7 +4270,7 @@ if s:braces_as_parens
 endif
 
 " 'export' can be used outside 'define-library' {{{2
-syn match gaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibExport
+syn match gaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibraryExport
 
 " Highlights {{{1
 
@@ -4300,7 +4300,7 @@ hi def link gaucheInterpolatedStringUnquote r7rsUnquote
 hi def link gaucheEscapedHex r7rsEscapedHex
 hi def link gaucheEscapedMnemonic r7rsEscapedMnemonic
 hi def link gaucheClass Type
-hi def link gaucheUseSyntax r7rsLibSyntax
+hi def link gaucheUseSyntax r7rsLibrarySyntax
 hi def link gaucheSyntax r7rsSyntax
 hi def link gaucheSyntaxM r7rsSyntaxM
 hi def link gaucheFunction r7rsFunction
