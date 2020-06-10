@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-09
+" Last Change: 2020-06-11
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -45,7 +45,7 @@ syn match gaucheDirective /#!\(gauche-legacy\|r[67]rs\)/
 syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsDataSimple remove=r7rsVecU
+syn cluster r7rsDataSimple remove=r7rsVecN
 syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gaucheRegExp,gaucheStrI,gaucheStrQQ,gaucheVecU,gaucheClass
 
 " Keyword symbols {{{2
@@ -266,7 +266,7 @@ syn match gaucheEscHex /\\U\x\{8}/ contained
 syn match gaucheEscMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
-syn clear r7rsVecU
+syn clear r7rsVecN
 syn region gaucheVecU matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
 syn region gaucheVecU matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
 syn region gaucheVecU matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
