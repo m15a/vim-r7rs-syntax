@@ -46,14 +46,14 @@ syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsDataSimple remove=r7rsVecN
-syn cluster r7rsDataSimple add=gaucheKey,gaucheNum,gaucheChar,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheVecU,gaucheClass
+syn cluster r7rsDataSimple add=gaucheKey,gaucheNumber,gaucheChar,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheVecU,gaucheClass
 
 " Keyword symbols {{{2
 syn match gaucheKey /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
 syn region gaucheKey matchgroup=r7rsDelim start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
 
 " Number {{{2
-syn clear r7rsNum
+syn clear r7rsNumber
 
 " Gauche extensions:
 " 1. Use of '_' in prefixed numeric literals
@@ -68,9 +68,9 @@ syn clear r7rsNum
 " | [+-](inf|nan)\.0          " inf or nan
 " )
 " Other radixes are analogous to the above binary case.
-exec 'syn match gaucheNum /' . r7rs#num#real('[_01]') . '/'
-exec 'syn match gaucheNum /' . r7rs#num#real('[_0-7]') . '/'
-exec 'syn match gaucheNum /' . r7rs#num#real('[_[:xdigit:]]') . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#real('[_01]') . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#real('[_0-7]') . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#real('[_[:xdigit:]]') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -78,9 +78,9 @@ exec 'syn match gaucheNum /' . r7rs#num#real('[_[:xdigit:]]') . '/'
 " [+-]
 " ( [_01]+(\/[_01]+)? | (inf|nan)\.0 )?
 " i
-exec 'syn match gaucheNum /' . r7rs#num#rect('[_01]') . '/'
-exec 'syn match gaucheNum /' . r7rs#num#rect('[_0-7]') . '/'
-exec 'syn match gaucheNum /' . r7rs#num#rect('[_[:xdigit:]]') . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#rect('[_01]') . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#rect('[_0-7]') . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#rect('[_[:xdigit:]]') . '/'
 
 " Complex number in polar notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -88,9 +88,9 @@ exec 'syn match gaucheNum /' . r7rs#num#rect('[_[:xdigit:]]') . '/'
 " \@
 " ( [+-]?[_01]+(\/[_01]+)? | [+-](inf|nan)\.0 )
 " (pi)?
-exec 'syn match gaucheNum /' . r7rs#num#polar('[_01]', { 'suffix_pi': 1 }) . '/'
-exec 'syn match gaucheNum /' . r7rs#num#polar('[_0-7]', { 'suffix_pi': 1 }) . '/'
-exec 'syn match gaucheNum /' . r7rs#num#polar('[_[:xdigit:]]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#polar('[_01]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#polar('[_0-7]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#polar('[_[:xdigit:]]', { 'suffix_pi': 1 }) . '/'
 
 " Common-Lisp-y radix prefixed notation {{{3
 
@@ -102,7 +102,7 @@ exec 'syn match gaucheNum /' . r7rs#num#polar('[_[:xdigit:]]', { 'suffix_pi': 1 
 " | [+-](inf|nan)\.0
 " )
 " Other radixes are analogous to the above binary case.
-exec 'syn match gaucheNum /' . r7rs#num#real('\w') . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#real('\w') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #\d{1,2}r | #[ei]#\d{1,2}r | #\d{1,2}r#[ei] )
@@ -110,7 +110,7 @@ exec 'syn match gaucheNum /' . r7rs#num#real('\w') . '/'
 " [+-]
 " ( \w+(\/\w+)? | (inf|nan)\.0 )?
 " i
-exec 'syn match gaucheNum /' . r7rs#num#rect('\w') . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#rect('\w') . '/'
 
 " Complex number in polar notation {{{4
 " ( #\d{1,2}r | #[ei]#\d{1,2}r | #\d{1,2}r#[ei] )
@@ -118,7 +118,7 @@ exec 'syn match gaucheNum /' . r7rs#num#rect('\w') . '/'
 " \@
 " ( [+-]?\w+(\/\w+)? | [+-](inf|nan)\.0 )
 " (pi)?
-exec 'syn match gaucheNum /' . r7rs#num#polar('\w', { 'suffix_pi': 1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#polar('\w', { 'suffix_pi': 1 }) . '/'
 
 " Decimal number (prefixed) {{{3
 
@@ -133,7 +133,7 @@ exec 'syn match gaucheNum /' . r7rs#num#polar('\w', { 'suffix_pi': 1 }) . '/'
 "         )
 " | [+-](inf|nan)\.0
 " )
-exec 'syn match gaucheNum /' . r7rs#num#real('[_0-9]', { 'prefix_req': 1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#real('[_0-9]', { 'prefix_req': 1 }) . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )
@@ -149,7 +149,7 @@ exec 'syn match gaucheNum /' . r7rs#num#real('[_0-9]', { 'prefix_req': 1 }) . '/
 " | (inf|nan)\.0
 " )?
 " i
-exec 'syn match gaucheNum /' . r7rs#num#rect('[_0-9]', { 'prefix_req': 1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#rect('[_0-9]', { 'prefix_req': 1 }) . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )
@@ -165,7 +165,7 @@ exec 'syn match gaucheNum /' . r7rs#num#rect('[_0-9]', { 'prefix_req': 1 }) . '/
 " | [+-](inf|nan)\.0
 " )
 " (pi)?
-exec 'syn match gaucheNum /' . r7rs#num#polar('[_0-9]', { 'prefix_req': 1, 'suffix_pi': 1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#polar('[_0-9]', { 'prefix_req': 1, 'suffix_pi': 1 }) . '/'
 
 " Decimal number (no prefix) {{{3
 
@@ -180,7 +180,7 @@ exec 'syn match gaucheNum /' . r7rs#num#polar('[_0-9]', { 'prefix_req': 1, 'suff
 "         )
 " | [+-](inf|nan)\.0
 " )
-exec 'syn match gaucheNum /' . r7rs#num#real('\d', { 'prefix_req': -1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#real('\d', { 'prefix_req': -1 }) . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )@<!
@@ -196,7 +196,7 @@ exec 'syn match gaucheNum /' . r7rs#num#real('\d', { 'prefix_req': -1 }) . '/'
 " | (inf|nan)\.0
 " )?
 " i
-exec 'syn match gaucheNum /' . r7rs#num#rect('\d', { 'prefix_req': -1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#rect('\d', { 'prefix_req': -1 }) . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )@<!
@@ -212,7 +212,7 @@ exec 'syn match gaucheNum /' . r7rs#num#rect('\d', { 'prefix_req': -1 }) . '/'
 " | [+-](inf|nan)\.0
 " )
 " (pi)?
-exec 'syn match gaucheNum /' . r7rs#num#polar('\d', { 'prefix_req': -1, 'suffix_pi': 1 }) . '/'
+exec 'syn match gaucheNumber /' . r7rs#number#polar('\d', { 'prefix_req': -1, 'suffix_pi': 1 }) . '/'
 
 " Character {{{2
 
@@ -267,9 +267,9 @@ syn match gaucheEscMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
 syn clear r7rsVecN
-syn region gaucheVecU matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNum
-syn region gaucheVecU matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNum
-syn region gaucheVecU matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNum
+syn region gaucheVecU matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNumber
+syn region gaucheVecU matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNumber
+syn region gaucheVecU matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNumber
 
 " Class and condition type {{{2
 syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
@@ -4280,7 +4280,7 @@ hi def link gaucheShebang r7rsComment
 hi def link gaucheDirective r7rsDirective
 hi def link gaucheDebug r7rsComment
 hi def link gaucheKey Special
-hi def link gaucheNum r7rsNum
+hi def link gaucheNumber r7rsNumber
 hi def link gaucheChar r7rsChar
 hi def link gaucheCharSet r7rsDelim
 hi def link gaucheCSSpec r7rsString

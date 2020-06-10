@@ -1,11 +1,11 @@
 " Helper functions for r7rs-syntax plugin
-" Last Change: 2020-06-09
+" Last Change: 2020-06-11
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
 
 " Build regexp of real number
-fun! r7rs#num#real(digit, ...) abort
+fun! r7rs#number#real(digit, ...) abort
   " Optional arguments:
   let l:optionals = get(a:000, 0, {})
   " Determines requirement for prefix; see s:prefix() below.
@@ -19,7 +19,7 @@ fun! r7rs#num#real(digit, ...) abort
 endfun
 
 " Build regexp of complex number (rectangular notation)
-fun! r7rs#num#rect(digit, ...) abort
+fun! r7rs#number#rect(digit, ...) abort
   let l:optionals = get(a:000, 0, {})
   let l:prefix_req = get(l:optionals, 'prefix_req')
 
@@ -32,7 +32,7 @@ fun! r7rs#num#rect(digit, ...) abort
 endfun
 
 " Build regexp of complex number (polar notation)
-fun! r7rs#num#polar(digit, ...) abort
+fun! r7rs#number#polar(digit, ...) abort
   let l:optionals = get(a:000, 0, {})
   let l:prefix_req = get(l:optionals, 'prefix_req')
   " Enables pi-suffix extention in Gauche

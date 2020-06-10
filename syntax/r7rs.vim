@@ -83,7 +83,7 @@ syn cluster r7rsDataQ contains=@r7rsDataSimple,@r7rsDataCompoundQ,r7rsLabel
 syn cluster r7rsDataQQ contains=@r7rsDataSimple,@r7rsDataCompoundQQ,r7rsLabel
 
 " Simple data (cf. R7RS, sec. 7.1.2) {{{1
-syn cluster r7rsDataSimple contains=r7rsId,r7rsBool,r7rsNum,r7rsChar,r7rsString,r7rsVecB
+syn cluster r7rsDataSimple contains=r7rsId,r7rsBool,r7rsNumber,r7rsChar,r7rsString,r7rsVecB
 
 " Identifiers (cf. R7RS, sec. 2.1 ,p. 62, and SmallErrata, 7) {{{2
 
@@ -123,9 +123,9 @@ endif
 " | [+-](inf|nan)\.0          " inf or nan
 " )
 " Other radixes are analogous to the above binary case.
-exec 'syn match r7rsNum /' . r7rs#num#real('[01]') . '/'
-exec 'syn match r7rsNum /' . r7rs#num#real('\o') . '/'
-exec 'syn match r7rsNum /' . r7rs#num#real('\x') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('[01]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('\o') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('\x') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -133,18 +133,18 @@ exec 'syn match r7rsNum /' . r7rs#num#real('\x') . '/'
 " [+-]
 " ( [01]+(\/[01]+)? | (inf|nan)\.0 )?
 " i
-exec 'syn match r7rsNum /' . r7rs#num#rect('[01]') . '/'
-exec 'syn match r7rsNum /' . r7rs#num#rect('\o') . '/'
-exec 'syn match r7rsNum /' . r7rs#num#rect('\x') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('[01]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('\o') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('\x') . '/'
 
 " Complex number in polar notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
 " ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )
 " \@
 " ( [+-]?[01]+(\/[01]+)? | [+-](inf|nan)\.0 )
-exec 'syn match r7rsNum /' . r7rs#num#polar('[01]') . '/'
-exec 'syn match r7rsNum /' . r7rs#num#polar('\o') . '/'
-exec 'syn match r7rsNum /' . r7rs#num#polar('\x') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('[01]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('\o') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('\x') . '/'
 
 " Decimal number {{{3
 
@@ -159,7 +159,7 @@ exec 'syn match r7rsNum /' . r7rs#num#polar('\x') . '/'
 "         )
 " | [+-](inf|nan)\.0
 " )
-exec 'syn match r7rsNum /' . r7rs#num#real('\d') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('\d') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )?
@@ -175,7 +175,7 @@ exec 'syn match r7rsNum /' . r7rs#num#real('\d') . '/'
 " | (inf|nan)\.0
 " )?
 " i
-exec 'syn match r7rsNum /' . r7rs#num#rect('\d') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('\d') . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )?
@@ -190,7 +190,7 @@ exec 'syn match r7rsNum /' . r7rs#num#rect('\d') . '/'
 "         )
 " | [+-](inf|nan)\.0
 " )
-exec 'syn match r7rsNum /' . r7rs#num#polar('\d') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('\d') . '/'
 
 " Boolean {{{2
 syn match r7rsBool /#t\%(rue\)\?/
@@ -214,7 +214,7 @@ syn match r7rsEscMnemonic /\\[abtnr]/ contained
 syn match r7rsEscWrap /\\[[:space:]]*$/ contained
 
 " Bytevectors {{{2
-syn region r7rsVecB matchgroup=r7rsDelim start=/#u8(/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsNum
+syn region r7rsVecB matchgroup=r7rsDelim start=/#u8(/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsNumber
 
 " Compound data (cf. R7RS, sec. 7.1.2) {{{1
 syn cluster r7rsDataCompound contains=r7rsList,r7rsVec,r7rsQ,r7rsQQ
@@ -531,8 +531,8 @@ hi def link r7rsCommentDatum r7rsComment
 hi def link r7rsCommentTodo TODO
 hi def link r7rsDirective Comment
 hi def link r7rsId Normal
-hi def link r7rsNum Number
-hi def link r7rsUInt r7rsNum
+hi def link r7rsNumber Number
+hi def link r7rsUInt r7rsNumber
 hi def link r7rsBool Boolean
 hi def link r7rsChar Character
 hi def link r7rsCharM SpecialChar
