@@ -46,11 +46,11 @@ syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsDataSimple remove=r7rsVecN
-syn cluster r7rsDataSimple add=gaucheKey,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheVecU,gaucheClass
+syn cluster r7rsDataSimple add=gaucheKeyword,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheVecU,gaucheClass
 
 " Keyword symbols {{{2
-syn match gaucheKey /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
-syn region gaucheKey matchgroup=r7rsDelim start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
+syn match gaucheKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
+syn region gaucheKeyword matchgroup=r7rsDelim start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
 
 " Number {{{2
 syn clear r7rsNumber
@@ -4250,8 +4250,8 @@ syn match gaucheSyntax /\^[_a-z]/
 " Hybrid 'import' {{{2
 syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 syn cluster gaucheImportSets contains=r7rsIdentifier,gaucheImportOER,gaucheImportP
-syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsImportList
-syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsIdentifier
+syn region gaucheImportOER matchgroup=gaucheKeyword start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsImportList
+syn region gaucheImportP matchgroup=gaucheKeyword start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsIdentifier
 if s:brackets_as_parens
   syn region gaucheImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 endif
@@ -4279,7 +4279,7 @@ hi def link gaucheCommentDatumCS r7rsComment
 hi def link gaucheShebang r7rsComment
 hi def link gaucheDirective r7rsDirective
 hi def link gaucheDebug r7rsComment
-hi def link gaucheKey Special
+hi def link gaucheKeyword Special
 hi def link gaucheNumber r7rsNumber
 hi def link gaucheCharacter r7rsCharacter
 hi def link gaucheCharSet r7rsDelim
