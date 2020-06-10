@@ -285,15 +285,15 @@ EOF
                 }'
     gawk -F'\t' '$3 ~ /^{cise expression}$/ { print $4 }' "$1" \
         | sort | uniq \
-        | find_undefined_keywords_in 'r7rs(\w*Syn|Proc)M?' \
+        | find_undefined_keywords_in 'r7rs(\w*Syn|Function)M?' \
         | gawk '{ switch ($0) {
                   # != contains ! but not mutator
                   case /!$/:
                       # Use special color
-                      print "syn keyword gaucheCiSEProcM", $0
+                      print "syn keyword gaucheCiSEFunctionM", $0
                       break
                   default:
-                      print "syn keyword gaucheCiSEProc", $0
+                      print "syn keyword gaucheCiSEFunction", $0
                       break
                   }
                 }'
@@ -316,18 +316,18 @@ EOF
     gawk -F'\t' '$2 ~ /^@defunx?$/ || ($3 ~ /^{(\w+ )?(function|method)}$/) { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | find_undefined_keywords_in 'r7rsProcM?' \
+        | find_undefined_keywords_in 'r7rsFunctionM?' \
         | gawk '{ switch ($0) {
                   case "next-method":
                       # Use special color
-                      print "syn keyword gaucheProcM", $0
+                      print "syn keyword gaucheFunctionM", $0
                       break
                   case /!/:
                       # Use special color
-                      print "syn keyword gaucheProcM", $0
+                      print "syn keyword gaucheFunctionM", $0
                       break
                   default:
-                      print "syn keyword gaucheProc", $0
+                      print "syn keyword gaucheFunction", $0
                       break
                   }
                 }'
@@ -349,9 +349,9 @@ EOF
     gawk -F'\t' \
         '$3 ~ /^{parameter}$/ { print $4 }' "$1" \
         | sort | uniq \
-        | find_undefined_keywords_in 'r7rsProc' \
+        | find_undefined_keywords_in 'r7rsFunction' \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | gawk '{ print "syn keyword gaucheProc", $0 }'
+        | gawk '{ print "syn keyword gaucheFunction", $0 }'
 }
 
 build_variable() {
