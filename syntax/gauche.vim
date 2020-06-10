@@ -50,7 +50,7 @@ syn cluster r7rsDataSimple add=gaucheKeyword,gaucheNumber,gaucheCharacter,gauche
 
 " Keyword symbols {{{2
 syn match gaucheKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
-syn region gaucheKeyword matchgroup=r7rsDelimiter start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
+syn region gaucheKeyword matchgroup=r7rsDelimiter start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapedChars
 
 " Number {{{2
 syn clear r7rsNumber
@@ -223,47 +223,47 @@ syn match gaucheCharacter /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
 
 " Character set {{{2
 syn match gaucheCharSet /#\ze\[/ nextgroup=gaucheCSSpec
-syn region gaucheCSSpec matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@gaucheCSEscChars
+syn region gaucheCSSpec matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@gaucheCSEscapedChars
 
-" Escaped characters (embedded in #[character set]) {{{2
-syn cluster gaucheCSEscChars contains=gaucheCSEscMeta,r7rsEscHex,gaucheCSEscMnemonic,gaucheCSEscLiteral,gaucheCSEscPOSIX
-syn match gaucheCSEscMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
-syn match gaucheCSEscMeta /\v%(\\@<!\[)@<=\^/ contained
-syn match gaucheCSEscMnemonic /\\[sSdDwW]/ contained
-syn match gaucheCSEscLiteral /\\[\\\-^\[\]]/ contained
-syn match gaucheCSEscPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
-syn match gaucheCSEscPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
+" Escapedaped characters (embedded in #[character set]) {{{2
+syn cluster gaucheCSEscapedChars contains=gaucheCSEscapedMeta,r7rsEscapedHex,gaucheCSEscapedMnemonic,gaucheCSEscapedLiteral,gaucheCSEscapedPOSIX
+syn match gaucheCSEscapedMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
+syn match gaucheCSEscapedMeta /\v%(\\@<!\[)@<=\^/ contained
+syn match gaucheCSEscapedMnemonic /\\[sSdDwW]/ contained
+syn match gaucheCSEscapedLiteral /\\[\\\-^\[\]]/ contained
+syn match gaucheCSEscapedPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
+syn match gaucheCSEscapedPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
 " Regular expression {{{2
 syn region gaucheRegExp matchgroup=r7rsDelimiter start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheREItems
-syn cluster gaucheREItems contains=gaucheRECapture,gaucheREPattern,@gaucheREEscChars,gaucheCSSpec
-syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
-syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
-syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
-syn region gaucheREPattern matchgroup=gaucheREEscMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
+syn cluster gaucheREItems contains=gaucheRECapture,gaucheREPattern,@gaucheREEscapedChars,gaucheCSSpec
+syn region gaucheRECapture matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
+syn region gaucheRECapture matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
+syn region gaucheRECapture matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
+syn region gaucheREPattern matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
 
-" Escaped characters (embedded in #/regular expression/) {{{2
-syn cluster gaucheREEscChars contains=gaucheREEscMeta,r7rsEscHex,gaucheREEscMnemonic,gaucheREEscLiteral
+" Escapedaped characters (embedded in #/regular expression/) {{{2
+syn cluster gaucheREEscapedChars contains=gaucheREEscapedMeta,r7rsEscapedHex,gaucheREEscapedMnemonic,gaucheREEscapedLiteral
 " FIXME: ^ should be highlighted only after #/, (?=, etc. $ is more complex, hmm.
-syn match gaucheREEscMeta /\\\@<![*+?.|^$]/ contained
-syn match gaucheREEscMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
-syn match gaucheREEscMeta /\\\d\+/ contained
-syn match gaucheREEscMeta /\\k<\(\\>\|[^>]\)*>/ contained
-syn match gaucheREEscMnemonic /\\[sSdDwWbB]/ contained
-syn match gaucheREEscLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
+syn match gaucheREEscapedMeta /\\\@<![*+?.|^$]/ contained
+syn match gaucheREEscapedMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
+syn match gaucheREEscapedMeta /\\\d\+/ contained
+syn match gaucheREEscapedMeta /\\k<\(\\>\|[^>]\)*>/ contained
+syn match gaucheREEscapedMnemonic /\\[sSdDwWbB]/ contained
+syn match gaucheREEscapedLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
-syn region gaucheIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
+syn region gaucheIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedWrap
 
 " Interpolated string {{{2
-syn region gaucheInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheInterpolatedStringUnquote
+syn region gaucheInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedWrap,gaucheInterpolatedStringUnquote
 syn region gaucheInterpolatedStringUnquote start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
-" Escaped characters (embedded in \"strings\" and |identifiers|) {{{2
-syn cluster r7rsEscChars add=gaucheEscHex,gaucheEscMnemonic
-syn match gaucheEscHex /\\u\x\{4}/ contained
-syn match gaucheEscHex /\\U\x\{8}/ contained
-syn match gaucheEscMnemonic /\\[f0]/ contained
+" Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2
+syn cluster r7rsEscapedChars add=gaucheEscapedHex,gaucheEscapedMnemonic
+syn match gaucheEscapedHex /\\u\x\{4}/ contained
+syn match gaucheEscapedHex /\\U\x\{8}/ contained
+syn match gaucheEscapedMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
 syn clear r7rsNumericVector
@@ -4284,21 +4284,21 @@ hi def link gaucheNumber r7rsNumber
 hi def link gaucheCharacter r7rsCharacter
 hi def link gaucheCharSet r7rsDelimiter
 hi def link gaucheCSSpec r7rsString
-hi def link gaucheCSEscMeta r7rsSpecialChar
-hi def link gaucheCSEscMnemonic r7rsEscMnemonic
-hi def link gaucheCSEscLiteral r7rsEscLiteral
-hi def link gaucheCSEscPOSIX r7rsSpecialChar
+hi def link gaucheCSEscapedMeta r7rsSpecialChar
+hi def link gaucheCSEscapedMnemonic r7rsEscapedMnemonic
+hi def link gaucheCSEscapedLiteral r7rsEscapedLiteral
+hi def link gaucheCSEscapedPOSIX r7rsSpecialChar
 hi def link gaucheRegExp r7rsString
 hi def link gaucheRECapture r7rsString
 hi def link gaucheREPattern r7rsString
-hi def link gaucheREEscMeta r7rsSpecialChar
-hi def link gaucheREEscMnemonic r7rsEscMnemonic
-hi def link gaucheREEscLiteral r7rsEscLiteral
+hi def link gaucheREEscapedMeta r7rsSpecialChar
+hi def link gaucheREEscapedMnemonic r7rsEscapedMnemonic
+hi def link gaucheREEscapedLiteral r7rsEscapedLiteral
 hi def link gaucheIncompleteString r7rsString
 hi def link gaucheInterpolatedString r7rsString
 hi def link gaucheInterpolatedStringUnquote r7rsUnquote
-hi def link gaucheEscHex r7rsEscHex
-hi def link gaucheEscMnemonic r7rsEscMnemonic
+hi def link gaucheEscapedHex r7rsEscapedHex
+hi def link gaucheEscapedMnemonic r7rsEscapedMnemonic
 hi def link gaucheClass Type
 hi def link gaucheUseSyntax r7rsLibSyntax
 hi def link gaucheSyntax r7rsSyntax

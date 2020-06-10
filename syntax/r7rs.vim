@@ -88,7 +88,7 @@ syn cluster r7rsDataSimple contains=r7rsIdentifier,r7rsBoolean,r7rsNumber,r7rsCh
 " Identifiers (cf. R7RS, sec. 2.1 ,p. 62, and SmallErrata, 7) {{{2
 
 " Those enclosed by |
-syn region r7rsIdentifier matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscChars
+syn region r7rsIdentifier matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapedChars
 
 if s:strict_identifier
   " <initial> <subsequent>*
@@ -202,16 +202,16 @@ syn match r7rsCharacter /#\\x\x\+/
 syn match r7rsCharacter /#\\\%(alarm\|backspace\|delete\|escape\|newline\|null\|return\|space\|tab\)/
 
 " String {{{2
-syn region r7rsString matchgroup=r7rsDelimiter start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
+syn region r7rsString matchgroup=r7rsDelimiter start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedWrap
 
-" Escaped characters (embedded in \"strings\" and |identifiers|) {{{2
-syn cluster r7rsEscChars contains=r7rsEscLiteral,r7rsEscHex,r7rsEscMnemonic
-syn match r7rsEscLiteral /\\[\\|"]/ contained
-syn match r7rsEscHex /\\x\x\+;/ contained
-syn match r7rsEscMnemonic /\\[abtnr]/ contained
+" Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2
+syn cluster r7rsEscapedChars contains=r7rsEscapedLiteral,r7rsEscapedHex,r7rsEscapedMnemonic
+syn match r7rsEscapedLiteral /\\[\\|"]/ contained
+syn match r7rsEscapedHex /\\x\x\+;/ contained
+syn match r7rsEscapedMnemonic /\\[abtnr]/ contained
 
 " This can be contained in strings but identifiers
-syn match r7rsEscWrap /\\[[:space:]]*$/ contained
+syn match r7rsEscapedWrap /\\[[:space:]]*$/ contained
 
 " Bytevectors {{{2
 syn region r7rsBytevector matchgroup=r7rsDelimiter start=/#u8(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
@@ -537,10 +537,10 @@ hi def link r7rsBoolean Boolean
 hi def link r7rsCharacter Character
 hi def link r7rsSpecialChar SpecialChar
 hi def link r7rsString String
-hi def link r7rsEscLiteral r7rsCharacter
-hi def link r7rsEscHex r7rsCharacter
-hi def link r7rsEscMnemonic r7rsSpecialChar
-hi def link r7rsEscWrap r7rsSpecialChar
+hi def link r7rsEscapedLiteral r7rsCharacter
+hi def link r7rsEscapedHex r7rsCharacter
+hi def link r7rsEscapedMnemonic r7rsSpecialChar
+hi def link r7rsEscapedWrap r7rsSpecialChar
 hi def link r7rsQuote r7rsSyntax
 hi def link r7rsQuasiQuote r7rsSyntax
 hi def link r7rsUnquote r7rsSyntaxA
