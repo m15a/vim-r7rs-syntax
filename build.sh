@@ -370,9 +370,9 @@ EOF
     gawk -F'\t' \
         '$2 ~ /^@defvarx?$/ || ($3 ~ /^{comparator}$/) { print $4 }' "$1" \
         | sort | uniq \
-        | find_undefined_keywords_in 'r7rsVar' \
+        | find_undefined_keywords_in 'r7rsVariable' \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | gawk '{ print "syn keyword gaucheVar", $0 }'
+        | gawk '{ print "syn keyword gaucheVariable", $0 }'
 }
 
 build_constant() {

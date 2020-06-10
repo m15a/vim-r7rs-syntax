@@ -303,7 +303,7 @@ syn keyword r7rsFunctionM bag-sum! bag-product! bag-increment! bag-decrement!
 syn keyword r7rsFunction bag-unique-size bag-element-count bag-for-each-unique bag-fold-unique
 syn keyword r7rsFunction bag->set set->bag bag->alist alist->bag
 syn keyword r7rsFunctionM set->bag!
-syn keyword r7rsVar set-comparator bag-comparator
+syn keyword r7rsVariable set-comparator bag-comparator
 
 " (scheme charset) SRFI-14 {{{1
 syn keyword r7rsFunction char-set? char-set= char-set<= char-set-hash
@@ -321,10 +321,10 @@ syn keyword r7rsFunction char-set-intersection char-set-difference char-set-xor
 syn keyword r7rsFunctionM char-set-intersection! char-set-difference! char-set-xor!
 syn keyword r7rsFunction char-set-diff+intersection
 syn keyword r7rsFunctionM char-set-diff+intersection!
-syn keyword r7rsVar char-set:lower-case char-set:upper-case char-set:title-case char-set:letter
-syn keyword r7rsVar char-set:digit char-set:letter+digit char-set:graphic char-set:printing
-syn keyword r7rsVar char-set:whitespace char-set:iso-control char-set:punctuation char-set:symbol
-syn keyword r7rsVar char-set:hex-digit char-set:blank char-set:ascii char-set:empty char-set:full
+syn keyword r7rsVariable char-set:lower-case char-set:upper-case char-set:title-case char-set:letter
+syn keyword r7rsVariable char-set:digit char-set:letter+digit char-set:graphic char-set:printing
+syn keyword r7rsVariable char-set:whitespace char-set:iso-control char-set:punctuation char-set:symbol
+syn keyword r7rsVariable char-set:hex-digit char-set:blank char-set:ascii char-set:empty char-set:full
 
 " (scheme hash-table) SRFI-125 {{{1
 syn keyword r7rsFunction make-hash-table hash-table hash-table-unfold alist->hash-table hash-table?
@@ -361,7 +361,7 @@ syn keyword r7rsFunctionM comparator-register-default!
 
 " Highlights {{{1
 
-hi def link r7rsVar Identifier
+hi def link r7rsVariable Identifier
 
 " }}}
 
