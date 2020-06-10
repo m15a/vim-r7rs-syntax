@@ -235,12 +235,12 @@ syn match gaucheCSEscPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|low
 syn match gaucheCSEscPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
 " Regular expression {{{2
-syn region gaucheRegExp matchgroup=r7rsDelim start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheRESyntax
-syn cluster gaucheRESyntax contains=gaucheRECapture,gaucheREPattern,@gaucheREEscChars,gaucheCSSpec
-syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRESyntax
-syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRESyntax
-syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRESyntax
-syn region gaucheREPattern matchgroup=gaucheREEscMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheRESyntax
+syn region gaucheRegExp matchgroup=r7rsDelim start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheREItems
+syn cluster gaucheREItems contains=gaucheRECapture,gaucheREPattern,@gaucheREEscChars,gaucheCSSpec
+syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
+syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
+syn region gaucheRECapture matchgroup=gaucheREEscMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
+syn region gaucheREPattern matchgroup=gaucheREEscMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
 
 " Escaped characters (embedded in #/regular expression/) {{{2
 syn cluster gaucheREEscChars contains=gaucheREEscMeta,r7rsEscHex,gaucheREEscMnemonic,gaucheREEscLiteral
