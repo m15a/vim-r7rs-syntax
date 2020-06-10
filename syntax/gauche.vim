@@ -267,9 +267,9 @@ syn match gaucheEscMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
 syn clear r7rsVecN
-syn region gaucheVecU matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNumber
-syn region gaucheVecU matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNumber
-syn region gaucheVecU matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNumber
+syn region gaucheVecU matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
+syn region gaucheVecU matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
+syn region gaucheVecU matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
 
 " Class and condition type {{{2
 syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
@@ -4248,25 +4248,25 @@ syn match gaucheSyntax /\^[_a-z]/
 " Special expressions {{{1
 
 " Hybrid 'import' {{{2
-syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
+syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 syn cluster gaucheImportSets contains=r7rsIdentifier,gaucheImportOER,gaucheImportP
-syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComments,r7rsImportList
-syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComments,r7rsIdentifier
+syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsImportList
+syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsIdentifier
 if s:brackets_as_parens
-  syn region gaucheImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsErr,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
+  syn region gaucheImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsErr,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
+  syn region gaucheImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 endif
 
 " 'use' {{{2
-syn region gaucheUse matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
+syn region gaucheUse matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
 syn keyword gaucheUseSyntax use
 if s:brackets_as_parens
-  syn region gaucheUse matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsErr,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheUse matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsErr,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
 endif
 
 " 'export' can be used outside 'define-library' {{{2
