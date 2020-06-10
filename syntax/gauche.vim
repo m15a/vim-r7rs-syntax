@@ -24,20 +24,20 @@ endif
 " }}}
 
 " Comments and directives {{{1
-syn cluster r7rsComs add=gaucheShebang,gaucheDirective,gaucheDebug
+syn cluster r7rsComments add=gaucheShebang,gaucheDirective,gaucheDebug
 
 " Comments {{{2
 
 " Comment out enclosed keyword symbol
-syn region r7rsComDatum start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contained
+syn region r7rsCommentDatum start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contained
 " Comment out character set (':]' is contained in POSIX character set)
-syn region r7rsComDatum start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheComDatumPOSIX
-syn region gaucheComDatumPOSIX start=/\\\@<!\[:/ end=/:\]/ contained
+syn region r7rsCommentDatum start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheCommentDatumPOSIX
+syn region gaucheCommentDatumPOSIX start=/\\\@<!\[:/ end=/:\]/ contained
 " Comment out regular expression ('/' is contained in character set)
-syn region r7rsComDatum start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contained contains=gaucheComDatumCS
-syn region gaucheComDatumCS start=/\\\@<!\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheComDatumPOSIX
+syn region r7rsCommentDatum start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contained contains=gaucheCommentDatumCS
+syn region gaucheCommentDatumCS start=/\\\@<!\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheCommentDatumPOSIX
 " Comment out incomplete/interpolated string
-syn region r7rsComDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
+syn region r7rsCommentDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
 
 " Directives {{{2
 syn match gaucheShebang /\%^#![\/ ].*$/
@@ -257,7 +257,7 @@ syn region gaucheStringI matchgroup=r7rsDelim start=/#\*"/ skip=/\\[\\"]/ end=/"
 
 " Interpolated string {{{2
 syn region gaucheStringQQ matchgroup=r7rsDelim start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheStringQQU
-syn region gaucheStringQQU start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComs skipwhite skipempty nextgroup=@r7rsData
+syn region gaucheStringQQU start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Escaped characters (embedded in \"strings\" and |identifiers|) {{{2
 syn cluster r7rsEscChars add=gaucheEscHex,gaucheEscMnemonic
@@ -267,9 +267,9 @@ syn match gaucheEscMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
 syn clear r7rsVecN
-syn region gaucheVecU matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
-syn region gaucheVecU matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
-syn region gaucheVecU matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheNum
+syn region gaucheVecU matchgroup=r7rsDelim start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNum
+syn region gaucheVecU matchgroup=r7rsDelim start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNum
+syn region gaucheVecU matchgroup=r7rsDelim start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheNum
 
 " Class and condition type {{{2
 syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
@@ -4248,25 +4248,25 @@ syn match gaucheSyn /\^[_a-z]/
 " Special expressions {{{1
 
 " Hybrid 'import' {{{2
-syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@gaucheImportSets
+syn region gaucheImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsImportSyn,@gaucheImportSets
 syn cluster gaucheImportSets contains=r7rsId,gaucheImportOER,gaucheImportP
-syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComs,r7rsImportList
-syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComs,r7rsId
+syn region gaucheImportOER matchgroup=gaucheKey start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComments,r7rsImportList
+syn region gaucheImportP matchgroup=gaucheKey start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsErr,@r7rsComments,r7rsId
 if s:brackets_as_parens
-  syn region gaucheImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@gaucheImportSets
+  syn region gaucheImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsErr,@r7rsComments,r7rsImportSyn,@gaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsErr,@r7rsComs,r7rsImportSyn,@gaucheImportSets
+  syn region gaucheImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsErr,@r7rsComments,r7rsImportSyn,@gaucheImportSets
 endif
 
 " 'use' {{{2
-syn region gaucheUse matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
+syn region gaucheUse matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsErr,@r7rsComments,gaucheUseSyn,@gaucheImportSets
 syn keyword gaucheUseSyn use
 if s:brackets_as_parens
-  syn region gaucheUse matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsErr,@r7rsComments,gaucheUseSyn,@gaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheUse matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsErr,@r7rsComs,gaucheUseSyn,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsErr,@r7rsComments,gaucheUseSyn,@gaucheImportSets
 endif
 
 " 'export' can be used outside 'define-library' {{{2
@@ -4274,11 +4274,11 @@ syn match gaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibExport
 
 " Highlights {{{1
 
-hi def link gaucheComDatumPOSIX r7rsCom
-hi def link gaucheComDatumCS r7rsCom
-hi def link gaucheShebang r7rsCom
+hi def link gaucheCommentDatumPOSIX r7rsComment
+hi def link gaucheCommentDatumCS r7rsComment
+hi def link gaucheShebang r7rsComment
 hi def link gaucheDirective r7rsDirective
-hi def link gaucheDebug r7rsCom
+hi def link gaucheDebug r7rsComment
 hi def link gaucheKey Special
 hi def link gaucheNum r7rsNum
 hi def link gaucheChar r7rsChar

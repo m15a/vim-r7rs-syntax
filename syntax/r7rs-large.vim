@@ -42,9 +42,9 @@ syn keyword r7rsProcM vector-unfold-right!
 " (scheme vector @) SRFI-160 {{{1
 syn clear r7rsVecB
 syn cluster r7rsDataSimple remove=r7rsVecB add=r7rsVecN
-syn region r7rsVecN matchgroup=r7rsDelim start=/#[su]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsNum
-syn region r7rsVecN matchgroup=r7rsDelim start=/#f\%(32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsNum
-syn region r7rsVecN matchgroup=r7rsDelim start=/#c\%(64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComs,r7rsNum
+syn region r7rsVecN matchgroup=r7rsDelim start=/#[su]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsNum
+syn region r7rsVecN matchgroup=r7rsDelim start=/#f\%(32\|64\)(/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsNum
+syn region r7rsVecN matchgroup=r7rsDelim start=/#c\%(64\|128\)(/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsNum
 
 " s8 {{{2
 syn keyword r7rsProc make-s8vector s8vector s8vector-unfold s8vector-unfold-right
