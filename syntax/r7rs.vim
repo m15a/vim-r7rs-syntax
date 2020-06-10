@@ -83,7 +83,7 @@ syn cluster r7rsDataQ contains=@r7rsDataSimple,@r7rsDataCompoundQ,r7rsLabel
 syn cluster r7rsDataQQ contains=@r7rsDataSimple,@r7rsDataCompoundQQ,r7rsLabel
 
 " Simple data (cf. R7RS, sec. 7.1.2) {{{1
-syn cluster r7rsDataSimple contains=r7rsIdentifier,r7rsBool,r7rsNumber,r7rsCharacter,r7rsString,r7rsBytevector
+syn cluster r7rsDataSimple contains=r7rsIdentifier,r7rsBoolean,r7rsNumber,r7rsCharacter,r7rsString,r7rsBytevector
 
 " Identifiers (cf. R7RS, sec. 2.1 ,p. 62, and SmallErrata, 7) {{{2
 
@@ -193,8 +193,8 @@ exec 'syn match r7rsNumber /' . r7rs#number#rect('\d') . '/'
 exec 'syn match r7rsNumber /' . r7rs#number#polar('\d') . '/'
 
 " Boolean {{{2
-syn match r7rsBool /#t\%(rue\)\?/
-syn match r7rsBool /#f\%(alse\)\?/
+syn match r7rsBoolean /#t\%(rue\)\?/
+syn match r7rsBoolean /#f\%(alse\)\?/
 
 " Character {{{2
 syn match r7rsCharacter /#\\./
@@ -533,7 +533,7 @@ hi def link r7rsDirective Comment
 hi def link r7rsIdentifier Normal
 hi def link r7rsNumber Number
 hi def link r7rsUInt r7rsNumber
-hi def link r7rsBool Boolean
+hi def link r7rsBoolean Boolean
 hi def link r7rsCharacter Character
 hi def link r7rsSpecialChar SpecialChar
 hi def link r7rsString String
