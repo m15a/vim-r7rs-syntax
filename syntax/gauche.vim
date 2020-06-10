@@ -46,7 +46,7 @@ syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsDataSimple remove=r7rsNumericVector
-syn cluster r7rsDataSimple add=gaucheKeyword,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheUniformVector,gaucheClass
+syn cluster r7rsDataSimple add=gaucheKeyword,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheUniformVector,gaucheClass
 
 " Keyword symbols {{{2
 syn match gaucheKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -253,11 +253,11 @@ syn match gaucheREEscMnemonic /\\[sSdDwWbB]/ contained
 syn match gaucheREEscLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
-syn region gaucheStringI matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
+syn region gaucheIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
 
 " Interpolated string {{{2
-syn region gaucheStringQQ matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheStringQQU
-syn region gaucheStringQQU start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
+syn region gaucheInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheInterpolatedStringU
+syn region gaucheInterpolatedStringU start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Escaped characters (embedded in \"strings\" and |identifiers|) {{{2
 syn cluster r7rsEscChars add=gaucheEscHex,gaucheEscMnemonic
@@ -4294,9 +4294,9 @@ hi def link gaucheREPattern r7rsString
 hi def link gaucheREEscMeta r7rsSpecialChar
 hi def link gaucheREEscMnemonic r7rsEscMnemonic
 hi def link gaucheREEscLiteral r7rsEscLiteral
-hi def link gaucheStringI r7rsString
-hi def link gaucheStringQQ r7rsString
-hi def link gaucheStringQQU r7rsU
+hi def link gaucheIncompleteString r7rsString
+hi def link gaucheInterpolatedString r7rsString
+hi def link gaucheInterpolatedStringU r7rsU
 hi def link gaucheEscHex r7rsEscHex
 hi def link gaucheEscMnemonic r7rsEscMnemonic
 hi def link gaucheClass Type
