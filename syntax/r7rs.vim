@@ -242,14 +242,14 @@ endif
 syn region r7rsVecQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
 
 " Apparently unquoted but quasiquoted lists and vector {{{2
-syn region r7rsListQQ matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsU
+syn region r7rsListQQ matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 if s:brackets_as_parens
-  syn region r7rsListQQ matchgroup=r7rsDelimiter start=/#\@<!\[/ end=/\]/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsU
+  syn region r7rsListQQ matchgroup=r7rsDelimiter start=/#\@<!\[/ end=/\]/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 endif
 if s:braces_as_parens
-  syn region r7rsListQQ matchgroup=r7rsDelimiter start=/#\@<!{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsU
+  syn region r7rsListQQ matchgroup=r7rsDelimiter start=/#\@<!{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 endif
-syn region r7rsVecQQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsU
+syn region r7rsVecQQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 
 " Quoted simple data (any identifier, |identifier|, \"string\", or #-syntax other than '#(') {{{2
 syn match r7rsQ /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
@@ -272,7 +272,7 @@ syn region r7rsQVec matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contai
 " Quoted quotes {{{2
 syn match r7rsQ /'\ze'/ nextgroup=r7rsQ
 syn match r7rsQ /'\ze`/ nextgroup=r7rsQQ
-syn match r7rsQ /'\ze,@\?/ nextgroup=r7rsU
+syn match r7rsQ /'\ze,@\?/ nextgroup=r7rsUnquote
 
 " Quasiquoted simple data (any identifier, |idenfitier|, \"string\", or #-syntax other than '#(') {{{2
 syn match r7rsQQ /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
@@ -280,26 +280,26 @@ syn match r7rsQQ /`\ze#[^(]/ nextgroup=@r7rsDataSimple
 
 " Quasiquoted lists and vector {{{2
 syn match r7rsQQ /`\ze(/ nextgroup=r7rsQQList
-syn region r7rsQQList matchgroup=r7rsDelimiter start=/(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsU
+syn region r7rsQQList matchgroup=r7rsDelimiter start=/(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 if s:brackets_as_parens
   syn match r7rsQQ /`\ze\[/ nextgroup=r7rsQQList
-  syn region r7rsQQList matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsU
+  syn region r7rsQQList matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 endif
 if s:braces_as_parens
   syn match r7rsQQ /`\ze{/ nextgroup=r7rsQQList
-  syn region r7rsQQList matchgroup=r7rsDelimiter start=/{/ end=/}/ contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsU
+  syn region r7rsQQList matchgroup=r7rsDelimiter start=/{/ end=/}/ contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 endif
 syn match r7rsQQ /`\ze#(/ nextgroup=r7rsQQVec
-syn region r7rsQQVec matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsU
+syn region r7rsQQVec matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 
 " Quasiquoted (un)quotes {{{2
 syn match r7rsQQ /`\ze'/ nextgroup=r7rsQ
 syn match r7rsQQ /`\ze`/ nextgroup=r7rsQQ
-syn match r7rsQQ /`\ze,@\?/ nextgroup=r7rsU
+syn match r7rsQQ /`\ze,@\?/ nextgroup=r7rsUnquote
 
 " Unquote {{{2
 " It allows comments before reaching any datum.
-syn region r7rsU start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
+syn region r7rsUnquote start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Dot '.' {{{2
 syn keyword r7rsDot . contained containedin=r7rsList,r7rsListQ,r7rsListQQ,r7rsQList,r7rsQQList
@@ -543,7 +543,7 @@ hi def link r7rsEscMnemonic r7rsSpecialChar
 hi def link r7rsEscWrap r7rsSpecialChar
 hi def link r7rsQ r7rsSyntax
 hi def link r7rsQQ r7rsSyntax
-hi def link r7rsU r7rsAux
+hi def link r7rsUnquote r7rsAux
 hi def link r7rsDot r7rsAux
 hi def link r7rsLabel Underlined
 hi def link r7rsSyntax Statement

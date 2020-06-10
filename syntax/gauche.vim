@@ -256,8 +256,8 @@ syn match gaucheREEscLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
 syn region gaucheIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap
 
 " Interpolated string {{{2
-syn region gaucheInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheInterpolatedStringU
-syn region gaucheInterpolatedStringU start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
+syn region gaucheInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscChars,r7rsEscWrap,gaucheInterpolatedStringUnquote
+syn region gaucheInterpolatedStringUnquote start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Escaped characters (embedded in \"strings\" and |identifiers|) {{{2
 syn cluster r7rsEscChars add=gaucheEscHex,gaucheEscMnemonic
@@ -4296,7 +4296,7 @@ hi def link gaucheREEscMnemonic r7rsEscMnemonic
 hi def link gaucheREEscLiteral r7rsEscLiteral
 hi def link gaucheIncompleteString r7rsString
 hi def link gaucheInterpolatedString r7rsString
-hi def link gaucheInterpolatedStringU r7rsU
+hi def link gaucheInterpolatedStringUnquote r7rsUnquote
 hi def link gaucheEscHex r7rsEscHex
 hi def link gaucheEscMnemonic r7rsEscMnemonic
 hi def link gaucheClass Type
