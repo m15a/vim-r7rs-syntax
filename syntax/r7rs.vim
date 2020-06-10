@@ -217,9 +217,9 @@ syn match r7rsEscWrap /\\[[:space:]]*$/ contained
 syn region r7rsBytevector matchgroup=r7rsDelimiter start=/#u8(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
 
 " Compound data (cf. R7RS, sec. 7.1.2) {{{1
-syn cluster r7rsDataCompound contains=r7rsList,r7rsVec,r7rsQuote,r7rsQuasiQuote
-syn cluster r7rsDataCompoundQ contains=r7rsListQ,r7rsVecQ,r7rsQuote,r7rsQuasiQuote
-syn cluster r7rsDataCompoundQQ contains=r7rsListQQ,r7rsVecQQ,r7rsQuote,r7rsQuasiQuote
+syn cluster r7rsDataCompound contains=r7rsList,r7rsVector,r7rsQuote,r7rsQuasiQuote
+syn cluster r7rsDataCompoundQ contains=r7rsListQ,r7rsVectorQ,r7rsQuote,r7rsQuasiQuote
+syn cluster r7rsDataCompoundQQ contains=r7rsListQQ,r7rsVectorQQ,r7rsQuote,r7rsQuasiQuote
 
 " Unquoted lists and vector {{{2
 syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExprs
@@ -229,7 +229,7 @@ endif
 if s:braces_as_parens
   syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!{/ end=/}/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExprs
 endif
-syn region r7rsVec matchgroup=r7rsDelimiter start=/#(/ end=/)/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExprs
+syn region r7rsVector matchgroup=r7rsDelimiter start=/#(/ end=/)/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExprs
 
 " Apparently unquoted but quoted lists and vector {{{2
 syn region r7rsListQ matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
@@ -239,7 +239,7 @@ endif
 if s:braces_as_parens
   syn region r7rsListQ matchgroup=r7rsDelimiter start=/#\@<!{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
 endif
-syn region r7rsVecQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
+syn region r7rsVectorQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
 
 " Apparently unquoted but quasiquoted lists and vector {{{2
 syn region r7rsListQQ matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
@@ -249,7 +249,7 @@ endif
 if s:braces_as_parens
   syn region r7rsListQQ matchgroup=r7rsDelimiter start=/#\@<!{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 endif
-syn region r7rsVecQQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
+syn region r7rsVectorQQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 
 " Quoted simple data (any identifier, |identifier|, \"string\", or #-syntax other than '#(') {{{2
 syn match r7rsQuote /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
@@ -289,8 +289,8 @@ if s:braces_as_parens
   syn match r7rsQuasiQuote /`\ze{/ nextgroup=r7rsQuasiQuoteList
   syn region r7rsQuasiQuoteList matchgroup=r7rsDelimiter start=/{/ end=/}/ contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 endif
-syn match r7rsQuasiQuote /`\ze#(/ nextgroup=r7rsQuasiQuoteVec
-syn region r7rsQuasiQuoteVec matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
+syn match r7rsQuasiQuote /`\ze#(/ nextgroup=r7rsQuasiQuoteVector
+syn region r7rsQuasiQuoteVector matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 
 " Quasiquoted (un)quotes {{{2
 syn match r7rsQuasiQuote /`\ze'/ nextgroup=r7rsQuote
