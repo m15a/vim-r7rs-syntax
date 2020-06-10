@@ -69,7 +69,7 @@ syn match r7rsCommentDatum /\(['`]\|,@\?\|#\([[:alpha:]]\d\+\)\?\ze(\)/ containe
 syntax match r7rsCommentTodo /\c\(FIXME\|TODO\|NOTE\):\?/ contained
 
 " Directives (cf. R7RS, sec. 2.1 (p. 8) last paragraph) {{{2
-syn match r7rsDirective /#!\%(no-\)\?fold-case/
+syn keyword r7rsDirective #!fold-case #!no-fold-case
 
 " }}} }}}
 
@@ -193,8 +193,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#rect('\d') . '/'
 exec 'syn match r7rsNumber /' . r7rs#number#polar('\d') . '/'
 
 " Boolean {{{2
-syn match r7rsBoolean /#t\%(rue\)\?/
-syn match r7rsBoolean /#f\%(alse\)\?/
+syn keyword r7rsBoolean #t #f #true #false
 
 " Character {{{2
 syn match r7rsCharacter /#\\./

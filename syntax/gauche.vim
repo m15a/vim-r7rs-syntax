@@ -41,7 +41,7 @@ syn region r7rsCommentDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
 
 " Directives {{{2
 syn match gaucheShebang /\%^#![\/ ].*$/
-syn match gaucheDirective /#!\(gauche-legacy\|r[67]rs\)/
+syn keyword gaucheDirective #!gauche-legacy #!r6rs #!r7rs
 syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
