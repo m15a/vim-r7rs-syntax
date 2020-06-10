@@ -217,9 +217,9 @@ syn match r7rsEscWrap /\\[[:space:]]*$/ contained
 syn region r7rsBytevector matchgroup=r7rsDelimiter start=/#u8(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
 
 " Compound data (cf. R7RS, sec. 7.1.2) {{{1
-syn cluster r7rsDataCompound contains=r7rsList,r7rsVec,r7rsQ,r7rsQQ
-syn cluster r7rsDataCompoundQ contains=r7rsListQ,r7rsVecQ,r7rsQ,r7rsQQ
-syn cluster r7rsDataCompoundQQ contains=r7rsListQQ,r7rsVecQQ,r7rsQ,r7rsQQ
+syn cluster r7rsDataCompound contains=r7rsList,r7rsVec,r7rsQuote,r7rsQQ
+syn cluster r7rsDataCompoundQ contains=r7rsListQ,r7rsVecQ,r7rsQuote,r7rsQQ
+syn cluster r7rsDataCompoundQQ contains=r7rsListQQ,r7rsVecQQ,r7rsQuote,r7rsQQ
 
 " Unquoted lists and vector {{{2
 syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExprs
@@ -252,27 +252,27 @@ endif
 syn region r7rsVecQQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 
 " Quoted simple data (any identifier, |identifier|, \"string\", or #-syntax other than '#(') {{{2
-syn match r7rsQ /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
-syn match r7rsQ /'\ze#[^(]/ nextgroup=@r7rsDataSimple
+syn match r7rsQuote /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
+syn match r7rsQuote /'\ze#[^(]/ nextgroup=@r7rsDataSimple
 
 " Quoted lists and vector {{{2
-syn match r7rsQ /'\ze(/ nextgroup=r7rsQList
-syn region r7rsQList matchgroup=r7rsDelimiter start=/(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
+syn match r7rsQuote /'\ze(/ nextgroup=r7rsQuoteList
+syn region r7rsQuoteList matchgroup=r7rsDelimiter start=/(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
 if s:brackets_as_parens
-  syn match r7rsQ /'\ze\[/ nextgroup=r7rsQList
-  syn region r7rsQList matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
+  syn match r7rsQuote /'\ze\[/ nextgroup=r7rsQuoteList
+  syn region r7rsQuoteList matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
 endif
 if s:braces_as_parens
-  syn match r7rsQ /'\ze{/ nextgroup=r7rsQList
-  syn region r7rsQList matchgroup=r7rsDelimiter start=/{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
+  syn match r7rsQuote /'\ze{/ nextgroup=r7rsQuoteList
+  syn region r7rsQuoteList matchgroup=r7rsDelimiter start=/{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
 endif
-syn match r7rsQ /'\ze#(/ nextgroup=r7rsQVec
-syn region r7rsQVec matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
+syn match r7rsQuote /'\ze#(/ nextgroup=r7rsQuoteVector
+syn region r7rsQuoteVector matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
 
 " Quoted quotes {{{2
-syn match r7rsQ /'\ze'/ nextgroup=r7rsQ
-syn match r7rsQ /'\ze`/ nextgroup=r7rsQQ
-syn match r7rsQ /'\ze,@\?/ nextgroup=r7rsUnquote
+syn match r7rsQuote /'\ze'/ nextgroup=r7rsQuote
+syn match r7rsQuote /'\ze`/ nextgroup=r7rsQQ
+syn match r7rsQuote /'\ze,@\?/ nextgroup=r7rsUnquote
 
 " Quasiquoted simple data (any identifier, |idenfitier|, \"string\", or #-syntax other than '#(') {{{2
 syn match r7rsQQ /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsDataSimple
@@ -293,7 +293,7 @@ syn match r7rsQQ /`\ze#(/ nextgroup=r7rsQQVec
 syn region r7rsQQVec matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 
 " Quasiquoted (un)quotes {{{2
-syn match r7rsQQ /`\ze'/ nextgroup=r7rsQ
+syn match r7rsQQ /`\ze'/ nextgroup=r7rsQuote
 syn match r7rsQQ /`\ze`/ nextgroup=r7rsQQ
 syn match r7rsQQ /`\ze,@\?/ nextgroup=r7rsUnquote
 
@@ -302,7 +302,7 @@ syn match r7rsQQ /`\ze,@\?/ nextgroup=r7rsUnquote
 syn region r7rsUnquote start=/,@\?/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Dot '.' {{{2
-syn keyword r7rsDot . contained containedin=r7rsList,r7rsListQ,r7rsListQQ,r7rsQList,r7rsQQList
+syn keyword r7rsDot . contained containedin=r7rsList,r7rsListQ,r7rsListQQ,r7rsQuoteList,r7rsQQList
 
 " Labels (cf. R7RS, sec. 2.4) {{{1
 syn match r7rsLabel /#\d\+#/
@@ -541,7 +541,7 @@ hi def link r7rsEscLiteral r7rsCharacter
 hi def link r7rsEscHex r7rsCharacter
 hi def link r7rsEscMnemonic r7rsSpecialChar
 hi def link r7rsEscWrap r7rsSpecialChar
-hi def link r7rsQ r7rsSyntax
+hi def link r7rsQuote r7rsSyntax
 hi def link r7rsQQ r7rsSyntax
 hi def link r7rsUnquote r7rsAux
 hi def link r7rsDot r7rsAux
