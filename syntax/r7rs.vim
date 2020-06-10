@@ -222,14 +222,14 @@ syn cluster r7rsDataCompoundQ contains=r7rsListQ,r7rsVectorQ,r7rsQuote,r7rsQuasi
 syn cluster r7rsDataCompoundQQ contains=r7rsListQQ,r7rsVectorQQ,r7rsQuote,r7rsQuasiQuote
 
 " Unquoted lists and vector {{{2
-syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExprs
+syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExpressions
 if s:brackets_as_parens
-  syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!\[/ end=/\]/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExprs
+  syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!\[/ end=/\]/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExpressions
 endif
 if s:braces_as_parens
-  syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!{/ end=/}/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExprs
+  syn region r7rsList matchgroup=r7rsDelimiter start=/#\@<!{/ end=/}/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExpressions
 endif
-syn region r7rsVector matchgroup=r7rsDelimiter start=/#(/ end=/)/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExprs
+syn region r7rsVector matchgroup=r7rsDelimiter start=/#(/ end=/)/ contains=r7rsError,@r7rsComments,@r7rsData,@r7rsExpressions
 
 " Apparently unquoted but quoted lists and vector {{{2
 syn region r7rsListQ matchgroup=r7rsDelimiter start=/#\@<!(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQ
@@ -309,7 +309,7 @@ syn match r7rsLabel /#\d\+#/
 syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Expressions (cf. R7RS, sec. 4) {{{1
-syn cluster r7rsExprs contains=r7rsSyntax,r7rsSyntaxM,r7rsSyntaxA,r7rsFunction,r7rsFunctionM,r7rsCondExpand,r7rsImport
+syn cluster r7rsExpressions contains=r7rsSyntax,r7rsSyntaxM,r7rsSyntaxA,r7rsFunction,r7rsFunctionM,r7rsCondExpand,r7rsImport
 
 " Primitive expression types (cf. R7RS, sec. 4.1) {{{2
 syn keyword r7rsSyntax quote lambda if
@@ -450,14 +450,14 @@ syn cluster r7rsLibDecls contains=r7rsLibExport,r7rsImport,r7rsLibBegin,r7rsLibI
 syn region r7rsLibExport matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*export/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,r7rsIdentifier,r7rsLibExportR
 syn region r7rsLibExportR matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*rename/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntaxA,r7rsIdentifier
 " This 'begin' is different from normal 'begin' (cf. R7RS, secs. 5.6.1 and 4.2.3)
-syn region r7rsLibBegin matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*begin/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,@r7rsData,@r7rsExprs
+syn region r7rsLibBegin matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*begin/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,@r7rsData,@r7rsExpressions
 syn region r7rsLibInclude matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,r7rsString
 if s:brackets_as_parens
   syn region r7rsLib matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*define-library/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsLibSyntax,r7rsLibName,@r7rsLibDecls
   syn region r7rsLibName matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contained contains=r7rsError,@r7rsComments,@r7rsLibNameParts
   syn region r7rsLibExport matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*export/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,r7rsIdentifier,r7rsLibExportR
   syn region r7rsLibExportR matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*rename/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntaxA,r7rsIdentifier
-  syn region r7rsLibBegin matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*begin/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,@r7rsData,@r7rsExprs
+  syn region r7rsLibBegin matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*begin/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,@r7rsData,@r7rsExpressions
   syn region r7rsLibInclude matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,r7rsString
 endif
 if s:braces_as_parens
@@ -465,7 +465,7 @@ if s:braces_as_parens
   syn region r7rsLibName matchgroup=r7rsDelimiter start=/{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsLibNameParts
   syn region r7rsLibExport matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*export/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,r7rsIdentifier,r7rsLibExportR
   syn region r7rsLibExportR matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*rename/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntaxA,r7rsIdentifier
-  syn region r7rsLibBegin matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*begin/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,@r7rsData,@r7rsExprs
+  syn region r7rsLibBegin matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*begin/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,@r7rsData,@r7rsExpressions
   syn region r7rsLibInclude matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsLibSyntax,r7rsString
 endif
 
@@ -473,7 +473,7 @@ endif
 syn region r7rsCondExpand matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*cond-expand/ end=/)/ contains=r7rsError,@r7rsComments,r7rsCESyntax,r7rsCEClause
 syn keyword r7rsCESyntax contained cond-expand and or not
 syn keyword r7rsCESyntaxA contained library
-syn region r7rsCEClause matchgroup=r7rsDelimiter start=/(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsCEFeatures,@r7rsData,@r7rsExprs
+syn region r7rsCEClause matchgroup=r7rsDelimiter start=/(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsCEFeatures,@r7rsData,@r7rsExpressions
 syn cluster r7rsCEFeatures contains=r7rsCEFeatureId,r7rsCEFeatureLib,r7rsCEFeatureAON,r7rsCEFeatureElse
 syn keyword r7rsCEFeatureId r7rs exact-closed exact-complex ieee-float full-unicode ratios contained
 syn keyword r7rsCEFeatureId posix windows dos unix darwin gnu-linux bsd freebsd solaris contained
@@ -488,13 +488,13 @@ syn region r7rsCEFeatureAON matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*\%
 syn keyword r7rsCEFeatureElse contained else
 if s:brackets_as_parens
   syn region r7rsCondExpand matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*cond-expand/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsCESyntax,r7rsCEClause
-  syn region r7rsCEClause matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contained contains=r7rsError,@r7rsComments,@r7rsCEFeatures,@r7rsData,@r7rsExprs
+  syn region r7rsCEClause matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contained contains=r7rsError,@r7rsComments,@r7rsCEFeatures,@r7rsData,@r7rsExpressions
   syn region r7rsCEFeatureLib matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*library/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsCESyntaxA,r7rsLibName
   syn region r7rsCEFeatureAON matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsCESyntax,@r7rsCEFeatures
 endif
 if s:braces_as_parens
   syn region r7rsCondExpand matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*cond-expand/ end=/}/ contains=r7rsError,@r7rsComments,r7rsCESyntax,r7rsCEClause
-  syn region r7rsCEClause matchgroup=r7rsDelimiter start=/{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsCEFeatures,@r7rsData,@r7rsExprs
+  syn region r7rsCEClause matchgroup=r7rsDelimiter start=/{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsCEFeatures,@r7rsData,@r7rsExpressions
   syn region r7rsCEFeatureLib matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*library/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsCESyntaxA,r7rsLibName
   syn region r7rsCEFeatureAON matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsCESyntax,@r7rsCEFeatures
 endif
