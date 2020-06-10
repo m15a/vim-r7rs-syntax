@@ -46,7 +46,7 @@ syn match gaucheDebug /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsDataSimple remove=r7rsNumericVector
-syn cluster r7rsDataSimple add=gaucheKeyword,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheVecU,gaucheClass
+syn cluster r7rsDataSimple add=gaucheKeyword,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheStringI,gaucheStringQQ,gaucheUniformVector,gaucheClass
 
 " Keyword symbols {{{2
 syn match gaucheKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -267,9 +267,9 @@ syn match gaucheEscMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
 syn clear r7rsNumericVector
-syn region gaucheVecU matchgroup=r7rsDelimiter start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
-syn region gaucheVecU matchgroup=r7rsDelimiter start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
-syn region gaucheVecU matchgroup=r7rsDelimiter start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
+syn region gaucheUniformVector matchgroup=r7rsDelimiter start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
+syn region gaucheUniformVector matchgroup=r7rsDelimiter start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
+syn region gaucheUniformVector matchgroup=r7rsDelimiter start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
 
 " Class and condition type {{{2
 syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
