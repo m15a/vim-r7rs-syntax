@@ -309,31 +309,31 @@ syn match r7rsLabel /#\d\+#/
 syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Expressions (cf. R7RS, sec. 4) {{{1
-syn cluster r7rsExprs contains=r7rsSyn,r7rsSynM,r7rsAux,r7rsFunction,r7rsFunctionM,r7rsCondExpand,r7rsImport
+syn cluster r7rsExprs contains=r7rsSyntax,r7rsSyntaxM,r7rsAux,r7rsFunction,r7rsFunctionM,r7rsCondExpand,r7rsImport
 
 " Primitive expression types (cf. R7RS, sec. 4.1) {{{2
-syn keyword r7rsSyn quote lambda if
-syn keyword r7rsSynM set! include include-ci
+syn keyword r7rsSyntax quote lambda if
+syn keyword r7rsSyntaxM set! include include-ci
 
 " Derived expression types (cf. R7RS, sec. 4.2) {{{2
 
-syn keyword r7rsSyn cond case and or when unless let let* letrec letrec* let-values let*-values
-syn keyword r7rsSyn begin do parameterize guard quasiquote
-syn keyword r7rsSynM let-syntax letrec-syntax syntax-rules syntax-error
+syn keyword r7rsSyntax cond case and or when unless let let* letrec letrec* let-values let*-values
+syn keyword r7rsSyntax begin do parameterize guard quasiquote
+syn keyword r7rsSyntaxM let-syntax letrec-syntax syntax-rules syntax-error
 " NOTE: cond-expand is defined below
 syn keyword r7rsAux else => unquote unquote-splicing _ ...
 syn keyword r7rsFunction make-parameter
 
 " (scheme lazy)
-syn keyword r7rsSyn delay delay-force
+syn keyword r7rsSyntax delay delay-force
 syn keyword r7rsFunction force promise? make-promise
 
 " (scheme case-lambda)
-syn keyword r7rsSyn case-lambda
+syn keyword r7rsSyntax case-lambda
 
 " Program structure (cf. R7RS, sec. 5) {{{2
 
-syn keyword r7rsSynM define define-values define-syntax define-record-type
+syn keyword r7rsSyntaxM define define-values define-syntax define-record-type
 " NOTE: import and define-library is defined below
 
 " Standard procedures (cf. R7RS, sec. 6) {{{2
@@ -440,38 +440,38 @@ syn keyword r7rsFunction get-environment-variables
 syn keyword r7rsFunction current-second current-jiffy jiffies-per-second
 
 " Library declaration (cf. R7RS, sec. 5.6) {{{1
-syn region r7rsLib matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*define-library/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsLibSyn,r7rsLibName,@r7rsLibDecls
-syn keyword r7rsLibSyn contained define-library export begin include include-ci include-library-declarations
+syn region r7rsLib matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*define-library/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsLibSyntax,r7rsLibName,@r7rsLibDecls
+syn keyword r7rsLibSyntax contained define-library export begin include include-ci include-library-declarations
 syn keyword r7rsLibAux contained rename
 syn region r7rsLibName matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsLibNameParts
 syn cluster r7rsLibNameParts contains=r7rsId,r7rsUInt
 syn match r7rsUInt /\d\+/ contained
 syn cluster r7rsLibDecls contains=r7rsLibExport,r7rsImport,r7rsLibBegin,r7rsLibInclude,r7rsCondExpand
-syn region r7rsLibExport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*export/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyn,r7rsId,r7rsLibExportR
+syn region r7rsLibExport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*export/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyntax,r7rsId,r7rsLibExportR
 syn region r7rsLibExportR matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*rename/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsLibAux,r7rsId
 " This 'begin' is different from normal 'begin' (cf. R7RS, secs. 5.6.1 and 4.2.3)
-syn region r7rsLibBegin matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*begin/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyn,@r7rsData,@r7rsExprs
-syn region r7rsLibInclude matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyn,r7rsString
+syn region r7rsLibBegin matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*begin/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyntax,@r7rsData,@r7rsExprs
+syn region r7rsLibInclude matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyntax,r7rsString
 if s:brackets_as_parens
-  syn region r7rsLib matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*define-library/ end=/\]/ contains=r7rsErr,@r7rsComments,r7rsLibSyn,r7rsLibName,@r7rsLibDecls
+  syn region r7rsLib matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*define-library/ end=/\]/ contains=r7rsErr,@r7rsComments,r7rsLibSyntax,r7rsLibName,@r7rsLibDecls
   syn region r7rsLibName matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComments,@r7rsLibNameParts
-  syn region r7rsLibExport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*export/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyn,r7rsId,r7rsLibExportR
+  syn region r7rsLibExport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*export/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyntax,r7rsId,r7rsLibExportR
   syn region r7rsLibExportR matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*rename/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsLibAux,r7rsId
-  syn region r7rsLibBegin matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*begin/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyn,@r7rsData,@r7rsExprs
-  syn region r7rsLibInclude matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyn,r7rsString
+  syn region r7rsLibBegin matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*begin/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyntax,@r7rsData,@r7rsExprs
+  syn region r7rsLibInclude matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyntax,r7rsString
 endif
 if s:braces_as_parens
-  syn region r7rsLib matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*define-library/ end=/}/ contains=r7rsErr,@r7rsComments,r7rsLibSyn,r7rsLibName,@r7rsLibDecls
+  syn region r7rsLib matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*define-library/ end=/}/ contains=r7rsErr,@r7rsComments,r7rsLibSyntax,r7rsLibName,@r7rsLibDecls
   syn region r7rsLibName matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComments,@r7rsLibNameParts
-  syn region r7rsLibExport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*export/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyn,r7rsId,r7rsLibExportR
+  syn region r7rsLibExport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*export/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyntax,r7rsId,r7rsLibExportR
   syn region r7rsLibExportR matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*rename/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsLibAux,r7rsId
-  syn region r7rsLibBegin matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*begin/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyn,@r7rsData,@r7rsExprs
-  syn region r7rsLibInclude matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyn,r7rsString
+  syn region r7rsLibBegin matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*begin/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyntax,@r7rsData,@r7rsExprs
+  syn region r7rsLibInclude matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*include\%(-ci\|-library-declarations\)\?/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsLibSyntax,r7rsString
 endif
 
 " cond-expand (cf. R7RS, p. 15) {{{1
-syn region r7rsCondExpand matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*cond-expand/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsCESyn,r7rsCEClause
-syn keyword r7rsCESyn contained cond-expand and or not
+syn region r7rsCondExpand matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*cond-expand/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsCESyntax,r7rsCEClause
+syn keyword r7rsCESyntax contained cond-expand and or not
 syn keyword r7rsCEAux contained library
 syn region r7rsCEClause matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComments,@r7rsCEFeatures,@r7rsData,@r7rsExprs
 syn cluster r7rsCEFeatures contains=r7rsCEFeatureId,r7rsCEFeatureLib,r7rsCEFeatureAON,r7rsCEFeatureElse
@@ -484,37 +484,37 @@ syn keyword r7rsCEFeatureId debug contained
 " Scheme implementations found in schemepunk codes
 syn keyword r7rsCEFeatureId chibi chicken gambit gauche gerbil kawa larceny sagittarius contained
 syn region r7rsCEFeatureLib matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*library/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsCEAux,r7rsLibName
-syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsCESyn,@r7rsCEFeatures
+syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsCESyntax,@r7rsCEFeatures
 syn keyword r7rsCEFeatureElse contained else
 if s:brackets_as_parens
-  syn region r7rsCondExpand matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*cond-expand/ end=/\]/ contains=r7rsErr,@r7rsComments,r7rsCESyn,r7rsCEClause
+  syn region r7rsCondExpand matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*cond-expand/ end=/\]/ contains=r7rsErr,@r7rsComments,r7rsCESyntax,r7rsCEClause
   syn region r7rsCEClause matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComments,@r7rsCEFeatures,@r7rsData,@r7rsExprs
   syn region r7rsCEFeatureLib matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*library/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsCEAux,r7rsLibName
-  syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsCESyn,@r7rsCEFeatures
+  syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsCESyntax,@r7rsCEFeatures
 endif
 if s:braces_as_parens
-  syn region r7rsCondExpand matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*cond-expand/ end=/}/ contains=r7rsErr,@r7rsComments,r7rsCESyn,r7rsCEClause
+  syn region r7rsCondExpand matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*cond-expand/ end=/}/ contains=r7rsErr,@r7rsComments,r7rsCESyntax,r7rsCEClause
   syn region r7rsCEClause matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComments,@r7rsCEFeatures,@r7rsData,@r7rsExprs
   syn region r7rsCEFeatureLib matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*library/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsCEAux,r7rsLibName
-  syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsCESyn,@r7rsCEFeatures
+  syn region r7rsCEFeatureAON matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsCESyntax,@r7rsCEFeatures
 endif
 
 " import (cf. R7RS, sec. 5.2) {{{1
-syn region r7rsImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsImportSyn,@r7rsImportSets
-syn keyword r7rsImportSyn contained import
+syn region r7rsImport matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*import/ end=/)/ contains=r7rsErr,@r7rsComments,r7rsImportSyntax,@r7rsImportSets
+syn keyword r7rsImportSyntax contained import
 syn keyword r7rsImportAux contained only except prefix rename
 syn cluster r7rsImportSets contains=r7rsLibName,r7rsImportOEP,r7rsImportR
 syn region r7rsImportOEP matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*\%(only\|except\|prefix\)/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsImportAux,@r7rsImportSets,r7rsId
 syn region r7rsImportR matchgroup=r7rsDelim start=/(\ze[[:space:]\n]*rename/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsImportAux,@r7rsImportSets,r7rsImportList
 syn region r7rsImportList matchgroup=r7rsDelim start=/(/ end=/)/ contained contains=r7rsErr,@r7rsComments,r7rsId,r7rsImportList
 if s:brackets_as_parens
-  syn region r7rsImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import/ end=/\]/ contains=r7rsErr,@r7rsComments,r7rsImportSyn,@r7rsImportSets
+  syn region r7rsImport matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*import/ end=/\]/ contains=r7rsErr,@r7rsComments,r7rsImportSyntax,@r7rsImportSets
   syn region r7rsImportOEP matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*\%(only\|except\|prefix\)/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsImportAux,@r7rsImportSets,r7rsId
   syn region r7rsImportR matchgroup=r7rsDelim start=/\[\ze[[:space:]\n]*rename/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsImportAux,@r7rsImportSets,r7rsImportList
   syn region r7rsImportList matchgroup=r7rsDelim start=/\[/ end=/\]/ contained contains=r7rsErr,@r7rsComments,r7rsId,r7rsImportList
 endif
 if s:braces_as_parens
-  syn region r7rsImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import/ end=/}/ contains=r7rsErr,@r7rsComments,r7rsImportSyn,@r7rsImportSets
+  syn region r7rsImport matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*import/ end=/}/ contains=r7rsErr,@r7rsComments,r7rsImportSyntax,@r7rsImportSets
   syn region r7rsImportOEP matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*\%(only\|except\|prefix\)/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsImportAux,@r7rsImportSets,r7rsId
   syn region r7rsImportR matchgroup=r7rsDelim start=/{\ze[[:space:]\n]*rename/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsImportAux,@r7rsImportSets,r7rsImportList
   syn region r7rsImportList matchgroup=r7rsDelim start=/{/ end=/}/ contained contains=r7rsErr,@r7rsComments,r7rsId,r7rsImportList
@@ -541,23 +541,23 @@ hi def link r7rsEscLiteral r7rsChar
 hi def link r7rsEscHex r7rsChar
 hi def link r7rsEscMnemonic r7rsCharM
 hi def link r7rsEscWrap r7rsCharM
-hi def link r7rsQ r7rsSyn
-hi def link r7rsQQ r7rsSyn
+hi def link r7rsQ r7rsSyntax
+hi def link r7rsQQ r7rsSyntax
 hi def link r7rsU r7rsAux
 hi def link r7rsDot r7rsAux
 hi def link r7rsLabel Underlined
-hi def link r7rsSyn Statement
-hi def link r7rsSynM PreProc
+hi def link r7rsSyntax Statement
+hi def link r7rsSyntaxM PreProc
 hi def link r7rsAux Special
 hi def link r7rsFunction Function
 hi def link r7rsFunctionM PreProc
-hi def link r7rsLibSyn r7rsSynM
+hi def link r7rsLibSyntax r7rsSyntaxM
 hi def link r7rsLibAux r7rsAux
-hi def link r7rsCESyn r7rsLibSyn
+hi def link r7rsCESyntax r7rsLibSyntax
 hi def link r7rsCEAux r7rsLibAux
 hi def link r7rsCEFeatureId Tag
 hi def link r7rsCEFeatureElse r7rsCEAux
-hi def link r7rsImportSyn r7rsLibSyn
+hi def link r7rsImportSyntax r7rsLibSyntax
 hi def link r7rsImportAux r7rsLibAux
 
 " }}}

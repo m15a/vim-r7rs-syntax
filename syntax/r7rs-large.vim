@@ -345,7 +345,7 @@ syn keyword r7rsFunction box box? unbox
 syn keyword r7rsFunctionM set-box!
 
 " (scheme comparator) SRFI-128 {{{1
-syn keyword r7rsSyn comparator-if<=>
+syn keyword r7rsSyntax comparator-if<=>
 syn keyword r7rsFunction comparator? comparator-ordered? comparator-hashable?
 syn keyword r7rsFunction make-comparator make-pair-comparator make-list-comparator
 syn keyword r7rsFunction make-vector-comparator make-eq-comparator make-eqv-comparator

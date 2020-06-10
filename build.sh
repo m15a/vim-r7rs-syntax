@@ -162,24 +162,24 @@ EOF
     gawk -F'\t' '$2 ~ /^@defmacx?$/ { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | find_undefined_keywords_in 'r7rs\w*SynM?' \
+        | find_undefined_keywords_in 'r7rs\w*SyntaxM?' \
         | gawk '{ switch ($0) {
                   case "use":
                       # skip it as it is handled in gaucheUse
                       break
                   case /^define-/:
                       # Use special color
-                      print "syn keyword gaucheSynM", $0
+                      print "syn keyword gaucheSyntaxM", $0
                       break
                   case /!/:
                       # Use special color
-                      print "syn keyword gaucheSynM", $0
+                      print "syn keyword gaucheSyntaxM", $0
                       break
                   case "^c":
-                      print "syn match gaucheSyn /\\^[_a-z]/"
+                      print "syn match gaucheSyntax /\\^[_a-z]/"
                       break
                   default:
-                      print "syn keyword gaucheSyn", $0
+                      print "syn keyword gaucheSyntax", $0
                       break
                   }
                 }'
@@ -200,10 +200,10 @@ EOF
 
     gawk -F'\t' '$3 ~ /^{ec qualifier}$/ && $4 !~ /^:/ { print $4 }' "$1" \
         | sort | uniq \
-        | find_undefined_keywords_in 'r7rs\w*SynM?' \
+        | find_undefined_keywords_in 'r7rs\w*SyntaxM?' \
         | gawk '{ switch ($0) {
                   default:
-                      print "syn keyword gaucheSyn", $0
+                      print "syn keyword gaucheSyntax", $0
                       break
                   }
                 }'
@@ -225,20 +225,20 @@ EOF
     gawk -F'\t' '$2 ~ /^@defspecx?$/ { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | find_undefined_keywords_in 'r7rs\w*SynM?' \
+        | find_undefined_keywords_in 'r7rs\w*SyntaxM?' \
         | gawk '{ switch ($0) {
                   case "import":
                       # skip it as it is handled in (r7rs|gauche)Import
                       break
                   case /^((define|select)-module|export-all|require)$/:
-                      print "syn keyword gaucheSynM", $0
+                      print "syn keyword gaucheSyntaxM", $0
                       break
                   case /^define-/:
                       # Use special color
-                      print "syn keyword gaucheSynM", $0
+                      print "syn keyword gaucheSyntaxM", $0
                       break
                   default:
-                      print "syn keyword gaucheSyn", $0
+                      print "syn keyword gaucheSyntax", $0
                       break
                   }
                 }'
@@ -267,25 +267,25 @@ EOF
                 }'
     gawk -F'\t' '$3 ~ /^{cise statement}$/ || $3 ~ /^{stub form}$/ { print $4 }' "$1" \
         | sort | uniq \
-        | find_undefined_keywords_in 'r7rs\w*SynM?' \
+        | find_undefined_keywords_in 'r7rs\w*SyntaxM?' \
         | gawk '{ switch ($0) {
                   case /(define|decl)/:
                       # Use special color
-                      print "syn keyword gaucheCiSESynM", $0
+                      print "syn keyword gaucheCiSESyntaxM", $0
                       break
                   # != contains ! but not mutator
                   case /!$/:
                       # Use special color
-                      print "syn keyword gaucheCiSESynM", $0
+                      print "syn keyword gaucheCiSESyntaxM", $0
                       break
                   default:
-                      print "syn keyword gaucheCiSESyn", $0
+                      print "syn keyword gaucheCiSESyntax", $0
                       break
                   }
                 }'
     gawk -F'\t' '$3 ~ /^{cise expression}$/ { print $4 }' "$1" \
         | sort | uniq \
-        | find_undefined_keywords_in 'r7rs(\w*Syn|Function)M?' \
+        | find_undefined_keywords_in 'r7rs(\w*Syntax|Function)M?' \
         | gawk '{ switch ($0) {
                   # != contains ! but not mutator
                   case /!$/:
