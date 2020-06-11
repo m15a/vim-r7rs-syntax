@@ -67,4 +67,4 @@ $(BUILD)/class.vim: $(BUILD)/atdef.tsv
 
 $(BUILD)/atdef.tsv:
 	mkdir -p $(BUILD)
-	./build.sh tsv $(TEXI_NAMES) > $@
+	./build.scm tsv $(TEXI_NAMES) > $@
