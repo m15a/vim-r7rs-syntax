@@ -24,7 +24,7 @@ endif
 " }}}
 
 " Comments and directives {{{1
-syn cluster r7rsComments add=gaucheShebang,gaucheDirective,gaucheDebug
+syn cluster r7rsComments add=r7rsShebang,gaucheDirective,gaucheDebug
 
 " Comments {{{2
 
@@ -40,7 +40,7 @@ syn region gaucheCommentDatumCS start=/\\\@<!\[/ skip=/\\[\\\]]/ end=/\]/ contai
 syn region r7rsCommentDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
 
 " Directives {{{2
-syn match gaucheShebang /\%^#![\/ ].*$/
+syn match r7rsShebang /\%^#![\/ ].*$/
 syn keyword gaucheDirective #!gauche-legacy #!r6rs #!r7rs
 syn match gaucheDebug /#?[,=]/
 
@@ -4276,7 +4276,7 @@ syn match gaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibraryEx
 
 hi def link gaucheCommentDatumPOSIX r7rsComment
 hi def link gaucheCommentDatumCS r7rsComment
-hi def link gaucheShebang r7rsComment
+hi def link r7rsShebang r7rsComment
 hi def link gaucheDirective r7rsDirective
 hi def link gaucheDebug r7rsComment
 hi def link gaucheKeyword Special
