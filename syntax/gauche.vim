@@ -274,7 +274,7 @@ syn match r7rsClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 " }}} }}}
 
 " Expressions
-syn cluster r7rsExpressions add=r7rsGaucheImport,r7rsGaucheUse,gaucheExport 
+syn cluster r7rsExpressions add=r7rsGaucheImport,r7rsGaucheUse,r7rsGaucheExport 
 syn cluster r7rsExpressions add=r7rsCiSEType,r7rsCiSESyntax,r7rsCiSESyntaxM,r7rsCiSEFunction,r7rsCiSEFunctionM
 
 " Common expressions {{{1
@@ -4266,7 +4266,7 @@ if s:braces_as_parens
 endif
 
 " 'export' can be used outside 'define-library' {{{2
-syn match gaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibraryExport
+syn match r7rsGaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibraryExport
 
 " Highlights {{{1
 
