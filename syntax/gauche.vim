@@ -31,11 +31,11 @@ syn cluster r7rsComments add=r7rsShebang,r7rsDebugDirective
 " Comment out enclosed keyword symbol
 syn region r7rsCommentDatum start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contained
 " Comment out character set (':]' is contained in POSIX character set)
-syn region r7rsCommentDatum start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheCommentDatumPOSIX
-syn region gaucheCommentDatumPOSIX start=/\\\@<!\[:/ end=/:\]/ contained
+syn region r7rsCommentDatum start=/#\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=r7rsCommentDatumPOSIX
+syn region r7rsCommentDatumPOSIX start=/\\\@<!\[:/ end=/:\]/ contained
 " Comment out regular expression ('/' is contained in character set)
-syn region r7rsCommentDatum start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contained contains=gaucheCommentDatumCS
-syn region gaucheCommentDatumCS start=/\\\@<!\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=gaucheCommentDatumPOSIX
+syn region r7rsCommentDatum start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contained contains=r7rsCommentDatumCS
+syn region r7rsCommentDatumCS start=/\\\@<!\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=r7rsCommentDatumPOSIX
 " Comment out incomplete/interpolated string
 syn region r7rsCommentDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
 
@@ -4274,8 +4274,8 @@ syn match gaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibraryEx
 
 " Highlights {{{1
 
-hi def link gaucheCommentDatumPOSIX r7rsComment
-hi def link gaucheCommentDatumCS r7rsComment
+hi def link r7rsCommentDatumPOSIX r7rsComment
+hi def link r7rsCommentDatumCS r7rsComment
 hi def link r7rsShebang r7rsComment
 hi def link r7rsDebugDirective r7rsComment
 hi def link gaucheKeyword Special
