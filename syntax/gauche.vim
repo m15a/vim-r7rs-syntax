@@ -45,7 +45,7 @@ syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
 syn match r7rsDebugDirective /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,r7rsRegExp,r7rsIncompleteString,r7rsInterpolatedString,gaucheClass
+syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,r7rsRegExp,r7rsIncompleteString,r7rsInterpolatedString,r7rsClass
 
 " Keyword symbols {{{2
 syn match r7rsKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -268,8 +268,8 @@ syn region r7rsNumericVector matchgroup=r7rsDelimiter start=/#f16(/ end=/)/ cont
 syn region r7rsNumericVector matchgroup=r7rsDelimiter start=/#c32(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
 
 " Class and condition type {{{2
-syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
-syn match gaucheClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
+syn match r7rsClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
+syn match r7rsClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 
 " }}} }}}
 
@@ -4290,7 +4290,7 @@ hi def link r7rsREEscapedLiteral r7rsEscapedLiteral
 hi def link r7rsIncompleteString r7rsString
 hi def link r7rsInterpolatedString r7rsString
 hi def link r7rsInterpolatedStringUnquote r7rsUnquote
-hi def link gaucheClass Type
+hi def link r7rsClass Type
 hi def link gaucheUseSyntax r7rsLibrarySyntax
 hi def link gaucheSyntax r7rsSyntax
 hi def link gaucheSyntaxM r7rsSyntaxM
