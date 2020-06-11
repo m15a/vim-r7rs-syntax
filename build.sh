@@ -169,17 +169,17 @@ EOF
                       break
                   case /^define-/:
                       # Use special color
-                      print "syn keyword gaucheSyntaxM", $0
+                      print "syn keyword r7rsSyntaxM", $0
                       break
                   case /!/:
                       # Use special color
-                      print "syn keyword gaucheSyntaxM", $0
+                      print "syn keyword r7rsSyntaxM", $0
                       break
                   case "^c":
-                      print "syn match gaucheSyntax /\\^[_a-z]/"
+                      print "syn match r7rsSyntax /\\^[_a-z]/"
                       break
                   default:
-                      print "syn keyword gaucheSyntax", $0
+                      print "syn keyword r7rsSyntax", $0
                       break
                   }
                 }'
@@ -203,7 +203,7 @@ EOF
         | find_undefined_keywords_in 'r7rs\w*SyntaxM?' \
         | gawk '{ switch ($0) {
                   default:
-                      print "syn keyword gaucheSyntax", $0
+                      print "syn keyword r7rsSyntax", $0
                       break
                   }
                 }'
@@ -231,14 +231,14 @@ EOF
                       # skip it as it is handled in (r7rs|gauche)Import
                       break
                   case /^((define|select)-module|export-all|require)$/:
-                      print "syn keyword gaucheSyntaxM", $0
+                      print "syn keyword r7rsSyntaxM", $0
                       break
                   case /^define-/:
                       # Use special color
-                      print "syn keyword gaucheSyntaxM", $0
+                      print "syn keyword r7rsSyntaxM", $0
                       break
                   default:
-                      print "syn keyword gaucheSyntax", $0
+                      print "syn keyword r7rsSyntax", $0
                       break
                   }
                 }'
@@ -271,15 +271,15 @@ EOF
         | gawk '{ switch ($0) {
                   case /(define|decl)/:
                       # Use special color
-                      print "syn keyword gaucheCiSESyntaxM", $0
+                      print "syn keyword r7rsCiSESyntaxM", $0
                       break
                   # != contains ! but not mutator
                   case /!$/:
                       # Use special color
-                      print "syn keyword gaucheCiSESyntaxM", $0
+                      print "syn keyword r7rsCiSESyntaxM", $0
                       break
                   default:
-                      print "syn keyword gaucheCiSESyntax", $0
+                      print "syn keyword r7rsCiSESyntax", $0
                       break
                   }
                 }'

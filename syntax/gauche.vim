@@ -274,8 +274,8 @@ syn match r7rsClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 " }}} }}}
 
 " Expressions
-syn cluster r7rsExpressions add=gaucheSyntax,gaucheSyntaxM,gaucheFunction,gaucheFunctionM,gaucheImport,gaucheUse,gaucheExport 
-syn cluster r7rsExpressions add=gaucheCiSEType,gaucheCiSESyntax,gaucheCiSESyntaxM,gaucheCiSEFunction,gaucheCiSEFunctionM
+syn cluster r7rsExpressions add=gaucheFunction,gaucheFunctionM,gaucheImport,gaucheUse,gaucheExport 
+syn cluster r7rsExpressions add=gaucheCiSEType,r7rsCiSESyntax,r7rsCiSESyntaxM,gaucheCiSEFunction,gaucheCiSEFunctionM
 
 " Common expressions {{{1
 
@@ -309,49 +309,49 @@ syn keyword gaucheCiSEFunction post--
 syn keyword gaucheCiSEFunction pre++
 syn keyword gaucheCiSEFunction pre--
 syn keyword gaucheCiSEFunction ref
-syn keyword gaucheCiSESyntax .cond
-syn keyword gaucheCiSESyntax .if
-syn keyword gaucheCiSESyntax .include
-syn keyword gaucheCiSESyntax .raw-c-code
-syn keyword gaucheCiSESyntax .undef
-syn keyword gaucheCiSESyntax .unless
-syn keyword gaucheCiSESyntax .when
-syn keyword gaucheCiSESyntax break
-syn keyword gaucheCiSESyntax case/fallthrough
-syn keyword gaucheCiSESyntax continue
-syn keyword gaucheCiSESyntax dolist
-syn keyword gaucheCiSESyntax dopairs
-syn keyword gaucheCiSESyntax dotimes
-syn keyword gaucheCiSESyntax for
-syn keyword gaucheCiSESyntax for-each
-syn keyword gaucheCiSESyntax goto
-syn keyword gaucheCiSESyntax initcode
-syn keyword gaucheCiSESyntax label
-syn keyword gaucheCiSESyntax loop
-syn keyword gaucheCiSESyntax pair-for-each
-syn keyword gaucheCiSESyntax return
-syn keyword gaucheCiSESyntax while
-syn keyword gaucheCiSESyntaxM .define
-syn keyword gaucheCiSESyntaxM .static-decls
-syn keyword gaucheCiSESyntaxM declare-cfn
-syn keyword gaucheCiSESyntaxM declare-cvar
-syn keyword gaucheCiSESyntaxM declcode
-syn keyword gaucheCiSESyntaxM define-cclass
-syn keyword gaucheCiSESyntaxM define-cfn
-syn keyword gaucheCiSESyntaxM define-cgeneric
-syn keyword gaucheCiSESyntaxM define-cise-expr
-syn keyword gaucheCiSESyntaxM define-cise-stmt
-syn keyword gaucheCiSESyntaxM define-cmethod
-syn keyword gaucheCiSESyntaxM define-constant
-syn keyword gaucheCiSESyntaxM define-cproc
-syn keyword gaucheCiSESyntaxM define-cptr
-syn keyword gaucheCiSESyntaxM define-ctype
-syn keyword gaucheCiSESyntaxM define-cvar
-syn keyword gaucheCiSESyntaxM define-enum
-syn keyword gaucheCiSESyntaxM define-enum-conditionally
-syn keyword gaucheCiSESyntaxM define-symbol
-syn keyword gaucheCiSESyntaxM define-type
-syn keyword gaucheCiSESyntaxM define-variable
+syn keyword r7rsCiSESyntax .cond
+syn keyword r7rsCiSESyntax .if
+syn keyword r7rsCiSESyntax .include
+syn keyword r7rsCiSESyntax .raw-c-code
+syn keyword r7rsCiSESyntax .undef
+syn keyword r7rsCiSESyntax .unless
+syn keyword r7rsCiSESyntax .when
+syn keyword r7rsCiSESyntax break
+syn keyword r7rsCiSESyntax case/fallthrough
+syn keyword r7rsCiSESyntax continue
+syn keyword r7rsCiSESyntax dolist
+syn keyword r7rsCiSESyntax dopairs
+syn keyword r7rsCiSESyntax dotimes
+syn keyword r7rsCiSESyntax for
+syn keyword r7rsCiSESyntax for-each
+syn keyword r7rsCiSESyntax goto
+syn keyword r7rsCiSESyntax initcode
+syn keyword r7rsCiSESyntax label
+syn keyword r7rsCiSESyntax loop
+syn keyword r7rsCiSESyntax pair-for-each
+syn keyword r7rsCiSESyntax return
+syn keyword r7rsCiSESyntax while
+syn keyword r7rsCiSESyntaxM .define
+syn keyword r7rsCiSESyntaxM .static-decls
+syn keyword r7rsCiSESyntaxM declare-cfn
+syn keyword r7rsCiSESyntaxM declare-cvar
+syn keyword r7rsCiSESyntaxM declcode
+syn keyword r7rsCiSESyntaxM define-cclass
+syn keyword r7rsCiSESyntaxM define-cfn
+syn keyword r7rsCiSESyntaxM define-cgeneric
+syn keyword r7rsCiSESyntaxM define-cise-expr
+syn keyword r7rsCiSESyntaxM define-cise-stmt
+syn keyword r7rsCiSESyntaxM define-cmethod
+syn keyword r7rsCiSESyntaxM define-constant
+syn keyword r7rsCiSESyntaxM define-cproc
+syn keyword r7rsCiSESyntaxM define-cptr
+syn keyword r7rsCiSESyntaxM define-ctype
+syn keyword r7rsCiSESyntaxM define-cvar
+syn keyword r7rsCiSESyntaxM define-enum
+syn keyword r7rsCiSESyntaxM define-enum-conditionally
+syn keyword r7rsCiSESyntaxM define-symbol
+syn keyword r7rsCiSESyntaxM define-type
+syn keyword r7rsCiSESyntaxM define-variable
 syn keyword gaucheCiSEType .array
 syn keyword gaucheCiSEType .function
 syn keyword gaucheCiSEType .struct
@@ -3916,158 +3916,158 @@ syn keyword gaucheFunctionM vector-accumulator!
 syn keyword gaucheFunctionM vector-map-with-index!
 syn keyword gaucheFunctionM weak-vector-set!
 syn keyword gaucheFunctionM zstream-params-set!
-syn keyword gaucheSyntax $
-syn keyword gaucheSyntax %macroexpand
-syn keyword gaucheSyntax %macroexpand-1
-syn keyword gaucheSyntax ^
-syn keyword gaucheSyntax add-load-path
-syn keyword gaucheSyntax address-family
-syn keyword gaucheSyntax address-info
-syn keyword gaucheSyntax and-let*
-syn keyword gaucheSyntax and-let1
-syn keyword gaucheSyntax any?-ec
-syn keyword gaucheSyntax append-ec
-syn keyword gaucheSyntax apropos
-syn keyword gaucheSyntax assume
-syn keyword gaucheSyntax assume-type
-syn keyword gaucheSyntax autoload
-syn keyword gaucheSyntax begin0
-syn keyword gaucheSyntax cgen-with-cpp-condition
-syn keyword gaucheSyntax chibi-test
-syn keyword gaucheSyntax cond-list
-syn keyword gaucheSyntax condition
-syn keyword gaucheSyntax current-module
-syn keyword gaucheSyntax cut
-syn keyword gaucheSyntax cute
-syn keyword gaucheSyntax debug-funcall
-syn keyword gaucheSyntax debug-print
-syn keyword gaucheSyntax do-ec
-syn keyword gaucheSyntax do-generator
-syn keyword gaucheSyntax dolist
-syn keyword gaucheSyntax dotimes
-syn keyword gaucheSyntax dynamic-lambda
-syn keyword gaucheSyntax ecase
-syn keyword gaucheSyntax endianness
-syn keyword gaucheSyntax er-macro-transformer
-syn keyword gaucheSyntax every?-ec
-syn keyword gaucheSyntax extend
-syn keyword gaucheSyntax first-ec
-syn keyword gaucheSyntax fluid-let
-syn keyword gaucheSyntax fold-ec
-syn keyword gaucheSyntax fold3-ec
-syn keyword gaucheSyntax get-keyword*
-syn keyword gaucheSyntax get-optional
-syn keyword gaucheSyntax glet*
-syn keyword gaucheSyntax glet1
-syn keyword gaucheSyntax if-let1
-syn keyword gaucheSyntax if-not=?
-syn keyword gaucheSyntax if3
-syn keyword gaucheSyntax if<=?
-syn keyword gaucheSyntax if<?
-syn keyword gaucheSyntax if=?
-syn keyword gaucheSyntax if>=?
-syn keyword gaucheSyntax if>?
-syn keyword gaucheSyntax ip-protocol
-syn keyword gaucheSyntax last-ec
-syn keyword gaucheSyntax lazy
-syn keyword gaucheSyntax lcons
-syn keyword gaucheSyntax lcons*
-syn keyword gaucheSyntax let-args
-syn keyword gaucheSyntax let-keywords
-syn keyword gaucheSyntax let-keywords*
-syn keyword gaucheSyntax let-optionals*
-syn keyword gaucheSyntax let-string-start+end
-syn keyword gaucheSyntax let/cc
-syn keyword gaucheSyntax let1
-syn keyword gaucheSyntax list-ec
-syn keyword gaucheSyntax llist*
-syn keyword gaucheSyntax make-option-parser
-syn keyword gaucheSyntax match
-syn keyword gaucheSyntax match-define
-syn keyword gaucheSyntax match-lambda
-syn keyword gaucheSyntax match-lambda*
-syn keyword gaucheSyntax match-let
-syn keyword gaucheSyntax match-let*
-syn keyword gaucheSyntax match-let1
-syn keyword gaucheSyntax match-letrec
-syn keyword gaucheSyntax max-ec
-syn keyword gaucheSyntax message-type
-syn keyword gaucheSyntax min-ec
-syn keyword gaucheSyntax nested
-syn keyword gaucheSyntax parse-options
-syn keyword gaucheSyntax product-ec
-syn keyword gaucheSyntax quasirename
-syn keyword gaucheSyntax rec
-syn keyword gaucheSyntax receive
-syn keyword gaucheSyntax require-extension
-syn keyword gaucheSyntax reset
-syn keyword gaucheSyntax rlet1
-syn keyword gaucheSyntax rx
-syn keyword gaucheSyntax rxmatch-case
-syn keyword gaucheSyntax rxmatch-cond
-syn keyword gaucheSyntax rxmatch-if
-syn keyword gaucheSyntax rxmatch-let
-syn keyword gaucheSyntax shift
-syn keyword gaucheSyntax shutdown-method
-syn keyword gaucheSyntax socket-domain
-syn keyword gaucheSyntax ssax:make-elem-parser
-syn keyword gaucheSyntax ssax:make-parser
-syn keyword gaucheSyntax ssax:make-pi-parser
-syn keyword gaucheSyntax stream
-syn keyword gaucheSyntax stream+
-syn keyword gaucheSyntax stream-cons
-syn keyword gaucheSyntax stream-delay
-syn keyword gaucheSyntax stream-lambda
-syn keyword gaucheSyntax stream-let
-syn keyword gaucheSyntax stream-match
-syn keyword gaucheSyntax stream-of
-syn keyword gaucheSyntax string-append-ec
-syn keyword gaucheSyntax string-ec
-syn keyword gaucheSyntax sum-ec
-syn keyword gaucheSyntax syntax-errorf
-syn keyword gaucheSyntax test*
-syn keyword gaucheSyntax time
-syn keyword gaucheSyntax unquote
-syn keyword gaucheSyntax unquote-splicing
-syn keyword gaucheSyntax until
-syn keyword gaucheSyntax unwind-protect
-syn keyword gaucheSyntax values->list
-syn keyword gaucheSyntax values-ref
-syn keyword gaucheSyntax vector-ec
-syn keyword gaucheSyntax vector-of-length-ec
-syn keyword gaucheSyntax while
-syn keyword gaucheSyntax with-builder
-syn keyword gaucheSyntax with-cf-subst
-syn keyword gaucheSyntax with-iterator
-syn keyword gaucheSyntax with-module
-syn keyword gaucheSyntax with-signal-handlers
-syn keyword gaucheSyntax with-time-counter
-syn keyword gaucheSyntax xml-token-head
-syn keyword gaucheSyntax xml-token-kind
-syn keyword gaucheSyntaxM dec!
-syn keyword gaucheSyntaxM define-cise-expr
-syn keyword gaucheSyntaxM define-cise-macro
-syn keyword gaucheSyntaxM define-cise-stmt
-syn keyword gaucheSyntaxM define-cise-toplevel
-syn keyword gaucheSyntaxM define-class
-syn keyword gaucheSyntaxM define-condition-type
-syn keyword gaucheSyntaxM define-constant
-syn keyword gaucheSyntaxM define-dict-interface
-syn keyword gaucheSyntaxM define-generic
-syn keyword gaucheSyntaxM define-in-module
-syn keyword gaucheSyntaxM define-inline
-syn keyword gaucheSyntaxM define-macro
-syn keyword gaucheSyntaxM define-method
-syn keyword gaucheSyntaxM define-module
-syn keyword gaucheSyntaxM define-stream
-syn keyword gaucheSyntaxM export-all
-syn keyword gaucheSyntaxM inc!
-syn keyword gaucheSyntaxM pop!
-syn keyword gaucheSyntaxM push!
-syn keyword gaucheSyntaxM require
-syn keyword gaucheSyntaxM select-module
-syn keyword gaucheSyntaxM set!-values
-syn keyword gaucheSyntaxM update!
+syn keyword r7rsSyntax $
+syn keyword r7rsSyntax %macroexpand
+syn keyword r7rsSyntax %macroexpand-1
+syn keyword r7rsSyntax ^
+syn keyword r7rsSyntax add-load-path
+syn keyword r7rsSyntax address-family
+syn keyword r7rsSyntax address-info
+syn keyword r7rsSyntax and-let*
+syn keyword r7rsSyntax and-let1
+syn keyword r7rsSyntax any?-ec
+syn keyword r7rsSyntax append-ec
+syn keyword r7rsSyntax apropos
+syn keyword r7rsSyntax assume
+syn keyword r7rsSyntax assume-type
+syn keyword r7rsSyntax autoload
+syn keyword r7rsSyntax begin0
+syn keyword r7rsSyntax cgen-with-cpp-condition
+syn keyword r7rsSyntax chibi-test
+syn keyword r7rsSyntax cond-list
+syn keyword r7rsSyntax condition
+syn keyword r7rsSyntax current-module
+syn keyword r7rsSyntax cut
+syn keyword r7rsSyntax cute
+syn keyword r7rsSyntax debug-funcall
+syn keyword r7rsSyntax debug-print
+syn keyword r7rsSyntax do-ec
+syn keyword r7rsSyntax do-generator
+syn keyword r7rsSyntax dolist
+syn keyword r7rsSyntax dotimes
+syn keyword r7rsSyntax dynamic-lambda
+syn keyword r7rsSyntax ecase
+syn keyword r7rsSyntax endianness
+syn keyword r7rsSyntax er-macro-transformer
+syn keyword r7rsSyntax every?-ec
+syn keyword r7rsSyntax extend
+syn keyword r7rsSyntax first-ec
+syn keyword r7rsSyntax fluid-let
+syn keyword r7rsSyntax fold-ec
+syn keyword r7rsSyntax fold3-ec
+syn keyword r7rsSyntax get-keyword*
+syn keyword r7rsSyntax get-optional
+syn keyword r7rsSyntax glet*
+syn keyword r7rsSyntax glet1
+syn keyword r7rsSyntax if-let1
+syn keyword r7rsSyntax if-not=?
+syn keyword r7rsSyntax if3
+syn keyword r7rsSyntax if<=?
+syn keyword r7rsSyntax if<?
+syn keyword r7rsSyntax if=?
+syn keyword r7rsSyntax if>=?
+syn keyword r7rsSyntax if>?
+syn keyword r7rsSyntax ip-protocol
+syn keyword r7rsSyntax last-ec
+syn keyword r7rsSyntax lazy
+syn keyword r7rsSyntax lcons
+syn keyword r7rsSyntax lcons*
+syn keyword r7rsSyntax let-args
+syn keyword r7rsSyntax let-keywords
+syn keyword r7rsSyntax let-keywords*
+syn keyword r7rsSyntax let-optionals*
+syn keyword r7rsSyntax let-string-start+end
+syn keyword r7rsSyntax let/cc
+syn keyword r7rsSyntax let1
+syn keyword r7rsSyntax list-ec
+syn keyword r7rsSyntax llist*
+syn keyword r7rsSyntax make-option-parser
+syn keyword r7rsSyntax match
+syn keyword r7rsSyntax match-define
+syn keyword r7rsSyntax match-lambda
+syn keyword r7rsSyntax match-lambda*
+syn keyword r7rsSyntax match-let
+syn keyword r7rsSyntax match-let*
+syn keyword r7rsSyntax match-let1
+syn keyword r7rsSyntax match-letrec
+syn keyword r7rsSyntax max-ec
+syn keyword r7rsSyntax message-type
+syn keyword r7rsSyntax min-ec
+syn keyword r7rsSyntax nested
+syn keyword r7rsSyntax parse-options
+syn keyword r7rsSyntax product-ec
+syn keyword r7rsSyntax quasirename
+syn keyword r7rsSyntax rec
+syn keyword r7rsSyntax receive
+syn keyword r7rsSyntax require-extension
+syn keyword r7rsSyntax reset
+syn keyword r7rsSyntax rlet1
+syn keyword r7rsSyntax rx
+syn keyword r7rsSyntax rxmatch-case
+syn keyword r7rsSyntax rxmatch-cond
+syn keyword r7rsSyntax rxmatch-if
+syn keyword r7rsSyntax rxmatch-let
+syn keyword r7rsSyntax shift
+syn keyword r7rsSyntax shutdown-method
+syn keyword r7rsSyntax socket-domain
+syn keyword r7rsSyntax ssax:make-elem-parser
+syn keyword r7rsSyntax ssax:make-parser
+syn keyword r7rsSyntax ssax:make-pi-parser
+syn keyword r7rsSyntax stream
+syn keyword r7rsSyntax stream+
+syn keyword r7rsSyntax stream-cons
+syn keyword r7rsSyntax stream-delay
+syn keyword r7rsSyntax stream-lambda
+syn keyword r7rsSyntax stream-let
+syn keyword r7rsSyntax stream-match
+syn keyword r7rsSyntax stream-of
+syn keyword r7rsSyntax string-append-ec
+syn keyword r7rsSyntax string-ec
+syn keyword r7rsSyntax sum-ec
+syn keyword r7rsSyntax syntax-errorf
+syn keyword r7rsSyntax test*
+syn keyword r7rsSyntax time
+syn keyword r7rsSyntax unquote
+syn keyword r7rsSyntax unquote-splicing
+syn keyword r7rsSyntax until
+syn keyword r7rsSyntax unwind-protect
+syn keyword r7rsSyntax values->list
+syn keyword r7rsSyntax values-ref
+syn keyword r7rsSyntax vector-ec
+syn keyword r7rsSyntax vector-of-length-ec
+syn keyword r7rsSyntax while
+syn keyword r7rsSyntax with-builder
+syn keyword r7rsSyntax with-cf-subst
+syn keyword r7rsSyntax with-iterator
+syn keyword r7rsSyntax with-module
+syn keyword r7rsSyntax with-signal-handlers
+syn keyword r7rsSyntax with-time-counter
+syn keyword r7rsSyntax xml-token-head
+syn keyword r7rsSyntax xml-token-kind
+syn keyword r7rsSyntaxM dec!
+syn keyword r7rsSyntaxM define-cise-expr
+syn keyword r7rsSyntaxM define-cise-macro
+syn keyword r7rsSyntaxM define-cise-stmt
+syn keyword r7rsSyntaxM define-cise-toplevel
+syn keyword r7rsSyntaxM define-class
+syn keyword r7rsSyntaxM define-condition-type
+syn keyword r7rsSyntaxM define-constant
+syn keyword r7rsSyntaxM define-dict-interface
+syn keyword r7rsSyntaxM define-generic
+syn keyword r7rsSyntaxM define-in-module
+syn keyword r7rsSyntaxM define-inline
+syn keyword r7rsSyntaxM define-macro
+syn keyword r7rsSyntaxM define-method
+syn keyword r7rsSyntaxM define-module
+syn keyword r7rsSyntaxM define-stream
+syn keyword r7rsSyntaxM export-all
+syn keyword r7rsSyntaxM inc!
+syn keyword r7rsSyntaxM pop!
+syn keyword r7rsSyntaxM push!
+syn keyword r7rsSyntaxM require
+syn keyword r7rsSyntaxM select-module
+syn keyword r7rsSyntaxM set!-values
+syn keyword r7rsSyntaxM update!
 syn keyword gaucheVariable *argv*
 syn keyword gaucheVariable *load-path*
 syn keyword gaucheVariable *primes*
@@ -4239,7 +4239,7 @@ syn keyword gaucheVariable u64vector-comparator
 syn keyword gaucheVariable u8vector-comparator
 syn keyword gaucheVariable uvector-comparator
 syn keyword gaucheVariable vector-comparator
-syn match gaucheSyntax /\^[_a-z]/
+syn match r7rsSyntax /\^[_a-z]/
 
 " Special expressions {{{1
 
@@ -4256,13 +4256,13 @@ if s:braces_as_parens
 endif
 
 " 'use' {{{2
-syn region gaucheUse matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
-syn keyword gaucheUseSyntax use
+syn region gaucheUse matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@gaucheImportSets
+syn keyword r7rsUseSyntax use
 if s:brackets_as_parens
-  syn region gaucheUse matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@gaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheUse matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsError,@r7rsComments,gaucheUseSyntax,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@gaucheImportSets
 endif
 
 " 'export' can be used outside 'define-library' {{{2
@@ -4291,16 +4291,14 @@ hi def link r7rsIncompleteString r7rsString
 hi def link r7rsInterpolatedString r7rsString
 hi def link r7rsInterpolatedStringUnquote r7rsUnquote
 hi def link r7rsClass Type
-hi def link gaucheUseSyntax r7rsLibrarySyntax
-hi def link gaucheSyntax r7rsSyntax
-hi def link gaucheSyntaxM r7rsSyntaxM
+hi def link r7rsUseSyntax r7rsLibrarySyntax
 hi def link gaucheFunction r7rsFunction
 hi def link gaucheFunctionM r7rsFunctionM
 hi def link gaucheVariable r7rsVariable
 hi def link gaucheConstant Constant
 hi def link gaucheCiSEType Type
-hi def link gaucheCiSESyntax gaucheSyntax
-hi def link gaucheCiSESyntaxM gaucheSyntaxM
+hi def link r7rsCiSESyntax r7rsSyntax
+hi def link r7rsCiSESyntaxM r7rsSyntaxM
 hi def link gaucheCiSEFunction gaucheFunction
 hi def link gaucheCiSEFunctionM gaucheFunctionM
 
