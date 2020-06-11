@@ -165,7 +165,7 @@ EOF
         | find_undefined_keywords_in 'r7rs\w*SyntaxM?' \
         | gawk '{ switch ($0) {
                   case "use":
-                      # skip it as it is handled in gaucheUse
+                      # skip it as it is handled in r7rsGaucheUse
                       break
                   case /^define-/:
                       # Use special color

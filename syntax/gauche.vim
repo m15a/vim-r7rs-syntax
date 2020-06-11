@@ -274,7 +274,7 @@ syn match r7rsClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 " }}} }}}
 
 " Expressions
-syn cluster r7rsExpressions add=r7rsGaucheImport,gaucheUse,gaucheExport 
+syn cluster r7rsExpressions add=r7rsGaucheImport,r7rsGaucheUse,gaucheExport 
 syn cluster r7rsExpressions add=r7rsCiSEType,r7rsCiSESyntax,r7rsCiSESyntaxM,r7rsCiSEFunction,r7rsCiSEFunctionM
 
 " Common expressions {{{1
@@ -4256,13 +4256,13 @@ if s:braces_as_parens
 endif
 
 " 'use' {{{2
-syn region gaucheUse matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@r7rsGaucheImportSets
+syn region r7rsGaucheUse matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@r7rsGaucheImportSets
 syn keyword r7rsUseSyntax use
 if s:brackets_as_parens
-  syn region gaucheUse matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@r7rsGaucheImportSets
+  syn region r7rsGaucheUse matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@r7rsGaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheUse matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@r7rsGaucheImportSets
+  syn region r7rsGaucheUse matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@r7rsGaucheImportSets
 endif
 
 " 'export' can be used outside 'define-library' {{{2
