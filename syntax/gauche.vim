@@ -45,7 +45,7 @@ syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
 syn match r7rsDebugDirective /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsSimpleData add=r7rsKeyword,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
+syn cluster r7rsSimpleData add=r7rsKeyword,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
 
 " Keyword symbols {{{2
 syn match r7rsKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -217,8 +217,8 @@ exec 'syn match r7rsNumber /' . r7rs#number#polar('\d', { 'prefix_req': -1, 'suf
 
 " Although R7RS character names are case sensitive, Gauche character names are
 " case insensitive (cf. Gauche ref, sec. 6.10).
-syn match gaucheCharacter /\c#\\\%(alarm\|backspace\|del\%(ete\)\?\|esc\%(ape\)\?\|newline\|null\|return\|space\|tab\)/
-syn match gaucheCharacter /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
+syn match r7rsCharacter /\c#\\\%(alarm\|backspace\|del\%(ete\)\?\|esc\%(ape\)\?\|newline\|null\|return\|space\|tab\)/
+syn match r7rsCharacter /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
 
 " Character set {{{2
 syn match gaucheCharSet /#\ze\[/ nextgroup=gaucheCSSpec
@@ -4276,7 +4276,6 @@ hi def link r7rsCommentDatumCS r7rsComment
 hi def link r7rsShebang r7rsComment
 hi def link r7rsDebugDirective r7rsComment
 hi def link r7rsKeyword Special
-hi def link gaucheCharacter r7rsCharacter
 hi def link gaucheCharSet r7rsDelimiter
 hi def link gaucheCSSpec r7rsString
 hi def link gaucheCSEscapedMeta r7rsSpecialChar
