@@ -45,11 +45,11 @@ syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
 syn match r7rsDebugDirective /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsSimpleData add=gaucheKeyword,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
+syn cluster r7rsSimpleData add=r7rsKeyword,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
 
 " Keyword symbols {{{2
-syn match gaucheKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
-syn region gaucheKeyword matchgroup=r7rsDelimiter start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapedChars
+syn match r7rsKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
+syn region r7rsKeyword matchgroup=r7rsDelimiter start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapedChars
 
 " Number {{{2
 syn clear r7rsNumber
@@ -4247,8 +4247,8 @@ syn match gaucheSyntax /\^[_a-z]/
 " Hybrid 'import' {{{2
 syn region gaucheImport matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 syn cluster gaucheImportSets contains=r7rsIdentifier,gaucheImportOER,gaucheImportP
-syn region gaucheImportOER matchgroup=gaucheKeyword start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsImportList
-syn region gaucheImportP matchgroup=gaucheKeyword start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsIdentifier
+syn region gaucheImportOER matchgroup=r7rsKeyword start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsImportList
+syn region gaucheImportP matchgroup=r7rsKeyword start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsIdentifier
 if s:brackets_as_parens
   syn region gaucheImport matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
 endif
@@ -4275,7 +4275,7 @@ hi def link r7rsCommentDatumPOSIX r7rsComment
 hi def link r7rsCommentDatumCS r7rsComment
 hi def link r7rsShebang r7rsComment
 hi def link r7rsDebugDirective r7rsComment
-hi def link gaucheKeyword Special
+hi def link r7rsKeyword Special
 hi def link gaucheCharacter r7rsCharacter
 hi def link gaucheCharSet r7rsDelimiter
 hi def link gaucheCSSpec r7rsString
