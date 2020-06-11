@@ -45,8 +45,7 @@ syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
 syn match r7rsDebugDirective /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsSimpleData remove=r7rsNumericVector
-syn cluster r7rsSimpleData add=gaucheKeyword,gaucheNumber,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheUniformVector,gaucheClass
+syn cluster r7rsSimpleData add=gaucheKeyword,gaucheCharacter,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
 
 " Keyword symbols {{{2
 syn match gaucheKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -68,9 +67,9 @@ syn clear r7rsNumber
 " | [+-](inf|nan)\.0          " inf or nan
 " )
 " Other radixes are analogous to the above binary case.
-exec 'syn match gaucheNumber /' . r7rs#number#real('[_01]') . '/'
-exec 'syn match gaucheNumber /' . r7rs#number#real('[_0-7]') . '/'
-exec 'syn match gaucheNumber /' . r7rs#number#real('[_[:xdigit:]]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('[_01]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('[_0-7]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('[_[:xdigit:]]') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -78,9 +77,9 @@ exec 'syn match gaucheNumber /' . r7rs#number#real('[_[:xdigit:]]') . '/'
 " [+-]
 " ( [_01]+(\/[_01]+)? | (inf|nan)\.0 )?
 " i
-exec 'syn match gaucheNumber /' . r7rs#number#rect('[_01]') . '/'
-exec 'syn match gaucheNumber /' . r7rs#number#rect('[_0-7]') . '/'
-exec 'syn match gaucheNumber /' . r7rs#number#rect('[_[:xdigit:]]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('[_01]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('[_0-7]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('[_[:xdigit:]]') . '/'
 
 " Complex number in polar notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -88,9 +87,9 @@ exec 'syn match gaucheNumber /' . r7rs#number#rect('[_[:xdigit:]]') . '/'
 " \@
 " ( [+-]?[_01]+(\/[_01]+)? | [+-](inf|nan)\.0 )
 " (pi)?
-exec 'syn match gaucheNumber /' . r7rs#number#polar('[_01]', { 'suffix_pi': 1 }) . '/'
-exec 'syn match gaucheNumber /' . r7rs#number#polar('[_0-7]', { 'suffix_pi': 1 }) . '/'
-exec 'syn match gaucheNumber /' . r7rs#number#polar('[_[:xdigit:]]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('[_01]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('[_0-7]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('[_[:xdigit:]]', { 'suffix_pi': 1 }) . '/'
 
 " Common-Lisp-y radix prefixed notation {{{3
 
@@ -102,7 +101,7 @@ exec 'syn match gaucheNumber /' . r7rs#number#polar('[_[:xdigit:]]', { 'suffix_p
 " | [+-](inf|nan)\.0
 " )
 " Other radixes are analogous to the above binary case.
-exec 'syn match gaucheNumber /' . r7rs#number#real('\w') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('\w') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #\d{1,2}r | #[ei]#\d{1,2}r | #\d{1,2}r#[ei] )
@@ -110,7 +109,7 @@ exec 'syn match gaucheNumber /' . r7rs#number#real('\w') . '/'
 " [+-]
 " ( \w+(\/\w+)? | (inf|nan)\.0 )?
 " i
-exec 'syn match gaucheNumber /' . r7rs#number#rect('\w') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('\w') . '/'
 
 " Complex number in polar notation {{{4
 " ( #\d{1,2}r | #[ei]#\d{1,2}r | #\d{1,2}r#[ei] )
@@ -118,7 +117,7 @@ exec 'syn match gaucheNumber /' . r7rs#number#rect('\w') . '/'
 " \@
 " ( [+-]?\w+(\/\w+)? | [+-](inf|nan)\.0 )
 " (pi)?
-exec 'syn match gaucheNumber /' . r7rs#number#polar('\w', { 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('\w', { 'suffix_pi': 1 }) . '/'
 
 " Decimal number (prefixed) {{{3
 
@@ -133,7 +132,7 @@ exec 'syn match gaucheNumber /' . r7rs#number#polar('\w', { 'suffix_pi': 1 }) . 
 "         )
 " | [+-](inf|nan)\.0
 " )
-exec 'syn match gaucheNumber /' . r7rs#number#real('[_0-9]', { 'prefix_req': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('[_0-9]', { 'prefix_req': 1 }) . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )
@@ -149,7 +148,7 @@ exec 'syn match gaucheNumber /' . r7rs#number#real('[_0-9]', { 'prefix_req': 1 }
 " | (inf|nan)\.0
 " )?
 " i
-exec 'syn match gaucheNumber /' . r7rs#number#rect('[_0-9]', { 'prefix_req': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('[_0-9]', { 'prefix_req': 1 }) . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )
@@ -165,7 +164,7 @@ exec 'syn match gaucheNumber /' . r7rs#number#rect('[_0-9]', { 'prefix_req': 1 }
 " | [+-](inf|nan)\.0
 " )
 " (pi)?
-exec 'syn match gaucheNumber /' . r7rs#number#polar('[_0-9]', { 'prefix_req': 1, 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('[_0-9]', { 'prefix_req': 1, 'suffix_pi': 1 }) . '/'
 
 " Decimal number (no prefix) {{{3
 
@@ -180,7 +179,7 @@ exec 'syn match gaucheNumber /' . r7rs#number#polar('[_0-9]', { 'prefix_req': 1,
 "         )
 " | [+-](inf|nan)\.0
 " )
-exec 'syn match gaucheNumber /' . r7rs#number#real('\d', { 'prefix_req': -1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#real('\d', { 'prefix_req': -1 }) . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )@<!
@@ -196,7 +195,7 @@ exec 'syn match gaucheNumber /' . r7rs#number#real('\d', { 'prefix_req': -1 }) .
 " | (inf|nan)\.0
 " )?
 " i
-exec 'syn match gaucheNumber /' . r7rs#number#rect('\d', { 'prefix_req': -1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#rect('\d', { 'prefix_req': -1 }) . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )@<!
@@ -212,7 +211,7 @@ exec 'syn match gaucheNumber /' . r7rs#number#rect('\d', { 'prefix_req': -1 }) .
 " | [+-](inf|nan)\.0
 " )
 " (pi)?
-exec 'syn match gaucheNumber /' . r7rs#number#polar('\d', { 'prefix_req': -1, 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#polar('\d', { 'prefix_req': -1, 'suffix_pi': 1 }) . '/'
 
 " Character {{{2
 
@@ -266,10 +265,8 @@ syn match gaucheEscapedHex /\\U\x\{8}/ contained
 syn match gaucheEscapedMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
-syn clear r7rsNumericVector
-syn region gaucheUniformVector matchgroup=r7rsDelimiter start=/#[us]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
-syn region gaucheUniformVector matchgroup=r7rsDelimiter start=/#f\%(16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
-syn region gaucheUniformVector matchgroup=r7rsDelimiter start=/#c\%(32\|64\|128\)(/ end=/)/ contains=r7rsError,@r7rsComments,gaucheNumber
+syn region r7rsNumericVector matchgroup=r7rsDelimiter start=/#f16(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
+syn region r7rsNumericVector matchgroup=r7rsDelimiter start=/#c32(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
 
 " Class and condition type {{{2
 syn match gaucheClass /<[^[:space:]\n|()";'`,\\#\[\]{}]\+>/
@@ -4279,7 +4276,6 @@ hi def link r7rsCommentDatumCS r7rsComment
 hi def link r7rsShebang r7rsComment
 hi def link r7rsDebugDirective r7rsComment
 hi def link gaucheKeyword Special
-hi def link gaucheNumber r7rsNumber
 hi def link gaucheCharacter r7rsCharacter
 hi def link gaucheCharSet r7rsDelimiter
 hi def link gaucheCSSpec r7rsString
