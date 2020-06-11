@@ -45,7 +45,7 @@ syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
 syn match r7rsDebugDirective /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsSimpleData add=r7rsKeyword,gaucheCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
+syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
 
 " Keyword symbols {{{2
 syn match r7rsKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -221,21 +221,21 @@ syn match r7rsCharacter /\c#\\\%(alarm\|backspace\|del\%(ete\)\?\|esc\%(ape\)\?\
 syn match r7rsCharacter /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
 
 " Character set {{{2
-syn match gaucheCharSet /#\ze\[/ nextgroup=gaucheCSSpec
-syn region gaucheCSSpec matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@gaucheCSEscapedChars
+syn match r7rsCharSet /#\ze\[/ nextgroup=r7rsCSSpec
+syn region r7rsCSSpec matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@r7rsCSEscapedChars
 
 " Escapedaped characters (embedded in #[character set]) {{{2
-syn cluster gaucheCSEscapedChars contains=gaucheCSEscapedMeta,r7rsEscapedHex,gaucheCSEscapedMnemonic,gaucheCSEscapedLiteral,gaucheCSEscapedPOSIX
-syn match gaucheCSEscapedMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
-syn match gaucheCSEscapedMeta /\v%(\\@<!\[)@<=\^/ contained
-syn match gaucheCSEscapedMnemonic /\\[sSdDwW]/ contained
-syn match gaucheCSEscapedLiteral /\\[\\\-^\[\]]/ contained
-syn match gaucheCSEscapedPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
-syn match gaucheCSEscapedPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
+syn cluster r7rsCSEscapedChars contains=r7rsCSEscapedMeta,r7rsEscapedHex,r7rsCSEscapedMnemonic,r7rsCSEscapedLiteral,r7rsCSEscapedPOSIX
+syn match r7rsCSEscapedMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
+syn match r7rsCSEscapedMeta /\v%(\\@<!\[)@<=\^/ contained
+syn match r7rsCSEscapedMnemonic /\\[sSdDwW]/ contained
+syn match r7rsCSEscapedLiteral /\\[\\\-^\[\]]/ contained
+syn match r7rsCSEscapedPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
+syn match r7rsCSEscapedPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
 " Regular expression {{{2
 syn region gaucheRegExp matchgroup=r7rsDelimiter start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheREItems
-syn cluster gaucheREItems contains=gaucheRECapture,gaucheREPattern,@gaucheREEscapedChars,gaucheCSSpec
+syn cluster gaucheREItems contains=gaucheRECapture,gaucheREPattern,@gaucheREEscapedChars,r7rsCSSpec
 syn region gaucheRECapture matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
 syn region gaucheRECapture matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
 syn region gaucheRECapture matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
@@ -4276,12 +4276,12 @@ hi def link r7rsCommentDatumCS r7rsComment
 hi def link r7rsShebang r7rsComment
 hi def link r7rsDebugDirective r7rsComment
 hi def link r7rsKeyword Special
-hi def link gaucheCharSet r7rsDelimiter
-hi def link gaucheCSSpec r7rsString
-hi def link gaucheCSEscapedMeta r7rsSpecialChar
-hi def link gaucheCSEscapedMnemonic r7rsEscapedMnemonic
-hi def link gaucheCSEscapedLiteral r7rsEscapedLiteral
-hi def link gaucheCSEscapedPOSIX r7rsSpecialChar
+hi def link r7rsCharSet r7rsDelimiter
+hi def link r7rsCSSpec r7rsString
+hi def link r7rsCSEscapedMeta r7rsSpecialChar
+hi def link r7rsCSEscapedMnemonic r7rsEscapedMnemonic
+hi def link r7rsCSEscapedLiteral r7rsEscapedLiteral
+hi def link r7rsCSEscapedPOSIX r7rsSpecialChar
 hi def link gaucheRegExp r7rsString
 hi def link gaucheRECapture r7rsString
 hi def link gaucheREPattern r7rsString
