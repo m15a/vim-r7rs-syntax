@@ -275,7 +275,7 @@ syn match r7rsClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 
 " Expressions
 syn cluster r7rsExpressions add=gaucheImport,gaucheUse,gaucheExport 
-syn cluster r7rsExpressions add=gaucheCiSEType,r7rsCiSESyntax,r7rsCiSESyntaxM,r7rsCiSEFunction,r7rsCiSEFunctionM
+syn cluster r7rsExpressions add=r7rsCiSEType,r7rsCiSESyntax,r7rsCiSESyntaxM,r7rsCiSEFunction,r7rsCiSEFunctionM
 
 " Common expressions {{{1
 
@@ -352,10 +352,10 @@ syn keyword r7rsCiSESyntaxM define-enum-conditionally
 syn keyword r7rsCiSESyntaxM define-symbol
 syn keyword r7rsCiSESyntaxM define-type
 syn keyword r7rsCiSESyntaxM define-variable
-syn keyword gaucheCiSEType .array
-syn keyword gaucheCiSEType .function
-syn keyword gaucheCiSEType .struct
-syn keyword gaucheCiSEType .union
+syn keyword r7rsCiSEType .array
+syn keyword r7rsCiSEType .function
+syn keyword r7rsCiSEType .struct
+syn keyword r7rsCiSEType .union
 syn keyword r7rsConstant *rfc2396-unreserved-char-set*
 syn keyword r7rsConstant *rfc3986-unreserved-char-set*
 syn keyword r7rsConstant *rfc822-atext-chars*
@@ -4293,7 +4293,7 @@ hi def link r7rsInterpolatedStringUnquote r7rsUnquote
 hi def link r7rsClass Type
 hi def link r7rsUseSyntax r7rsLibrarySyntax
 hi def link r7rsConstant Constant
-hi def link gaucheCiSEType Type
+hi def link r7rsCiSEType Type
 hi def link r7rsCiSESyntax r7rsSyntax
 hi def link r7rsCiSESyntaxM r7rsSyntaxM
 hi def link r7rsCiSEFunction r7rsFunction

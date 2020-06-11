@@ -261,7 +261,7 @@ EOF
         | sort | uniq \
         | gawk '{ switch ($0) {
                   default:
-                      print "syn keyword gaucheCiSEType", $0
+                      print "syn keyword r7rsCiSEType", $0
                       break
                   }
                 }'
