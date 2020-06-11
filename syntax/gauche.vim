@@ -274,7 +274,7 @@ syn match r7rsClass /&[^[:space:]\n|()";'`,\\#\[\]{}]\+/
 " }}} }}}
 
 " Expressions
-syn cluster r7rsExpressions add=gaucheImport,gaucheUse,gaucheExport 
+syn cluster r7rsExpressions add=r7rsGaucheImport,gaucheUse,gaucheExport 
 syn cluster r7rsExpressions add=r7rsCiSEType,r7rsCiSESyntax,r7rsCiSESyntaxM,r7rsCiSEFunction,r7rsCiSEFunctionM
 
 " Common expressions {{{1
@@ -4244,25 +4244,25 @@ syn match r7rsSyntax /\^[_a-z]/
 " Special expressions {{{1
 
 " Hybrid 'import' {{{2
-syn region gaucheImport matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
-syn cluster gaucheImportSets contains=r7rsIdentifier,gaucheImportOER,gaucheImportP
-syn region gaucheImportOER matchgroup=r7rsKeyword start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsImportList
-syn region gaucheImportP matchgroup=r7rsKeyword start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsIdentifier
+syn region r7rsGaucheImport matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@r7rsGaucheImportSets
+syn cluster r7rsGaucheImportSets contains=r7rsIdentifier,r7rsGaucheImportOER,r7rsGaucheImportP
+syn region r7rsGaucheImportOER matchgroup=r7rsKeyword start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsImportList
+syn region r7rsGaucheImportP matchgroup=r7rsKeyword start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsIdentifier
 if s:brackets_as_parens
-  syn region gaucheImport matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
+  syn region r7rsGaucheImport matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@r7rsGaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheImport matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@gaucheImportSets
+  syn region r7rsGaucheImport matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/}/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@r7rsGaucheImportSets
 endif
 
 " 'use' {{{2
-syn region gaucheUse matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@gaucheImportSets
+syn region gaucheUse matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*use/ end=/)/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@r7rsGaucheImportSets
 syn keyword r7rsUseSyntax use
 if s:brackets_as_parens
-  syn region gaucheUse matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*use/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@r7rsGaucheImportSets
 endif
 if s:braces_as_parens
-  syn region gaucheUse matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@gaucheImportSets
+  syn region gaucheUse matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*use/ end=/}/ contains=r7rsError,@r7rsComments,r7rsUseSyntax,@r7rsGaucheImportSets
 endif
 
 " 'export' can be used outside 'define-library' {{{2

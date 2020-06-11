@@ -228,7 +228,7 @@ EOF
         | find_undefined_keywords_in 'r7rs\w*SyntaxM?' \
         | gawk '{ switch ($0) {
                   case "import":
-                      # skip it as it is handled in (r7rs|gauche)Import
+                      # skip it as it is handled in r7rs(|Gauche)Import
                       break
                   case /^((define|select)-module|export-all|require)$/:
                       print "syn keyword r7rsSyntaxM", $0
