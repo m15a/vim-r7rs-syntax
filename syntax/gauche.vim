@@ -45,7 +45,7 @@ syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
 syn match r7rsDebugDirective /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,r7rsRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
+syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,r7rsRegExp,r7rsIncompleteString,r7rsInterpolatedString,gaucheClass
 
 " Keyword symbols {{{2
 syn match r7rsKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -252,11 +252,11 @@ syn match r7rsREEscapedMnemonic /\\[sSdDwWbB]/ contained
 syn match r7rsREEscapedLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
-syn region gaucheIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline
+syn region r7rsIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline
 
 " Interpolated string {{{2
-syn region gaucheInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline,gaucheInterpolatedStringUnquote
-syn region gaucheInterpolatedStringUnquote start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
+syn region r7rsInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline,r7rsInterpolatedStringUnquote
+syn region r7rsInterpolatedStringUnquote start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2
 syn cluster r7rsEscapedChars add=gaucheEscapedHex,gaucheEscapedMnemonic
@@ -4288,9 +4288,9 @@ hi def link r7rsREPattern r7rsString
 hi def link r7rsREEscapedMeta r7rsSpecialChar
 hi def link r7rsREEscapedMnemonic r7rsEscapedMnemonic
 hi def link r7rsREEscapedLiteral r7rsEscapedLiteral
-hi def link gaucheIncompleteString r7rsString
-hi def link gaucheInterpolatedString r7rsString
-hi def link gaucheInterpolatedStringUnquote r7rsUnquote
+hi def link r7rsIncompleteString r7rsString
+hi def link r7rsInterpolatedString r7rsString
+hi def link r7rsInterpolatedStringUnquote r7rsUnquote
 hi def link gaucheEscapedHex r7rsEscapedHex
 hi def link gaucheEscapedMnemonic r7rsEscapedMnemonic
 hi def link gaucheClass Type
