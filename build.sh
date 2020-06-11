@@ -410,7 +410,7 @@ EOF
     gawk -F'\t' '$3 ~ /^{(\w+ )?module}$/ { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | gawk '{ print "syn keyword gaucheModName", $0 }'
+        | gawk '{ print "syn keyword r7rsGaucheModName", $0 }'
 }
 
 build_class() {
@@ -429,7 +429,7 @@ EOF
     gawk -F'\t' '$3 ~ /^{((meta|\w+ )?class)}$/ || $3 ~ /{condition type}/ { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | gawk '{ print "syn keyword gaucheClass", $0 }'
+        | gawk '{ print "syn keyword r7rsClass", $0 }'
 }
 
 build_syntax() {
