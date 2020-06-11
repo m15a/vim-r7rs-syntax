@@ -28,6 +28,10 @@ setl define=^\s*(define\\k*
 setl iskeyword=@,33,35-38,42-43,45-58,60-64,94,95,126
 setl lisp
 
+if &omnifunc == ""
+  setl omnifunc=syntaxcomplete#Complete
+endif
+
 " lispwords {{{
 
 setl lispwords=lambda,case,when,unless,let,let*,letrec,letrec*,let-values,let*-values,do
@@ -36,7 +40,7 @@ setl lispwords+=define-syntax,define-record-type,define-library
 
 " }}}
 
-let b:undo_ftplugin = 'setl com< cms< def< isk< lisp< lw<'
+let b:undo_ftplugin = 'setl com< cms< def< isk< lisp< lw< ofu<'
 
 let b:did_ftplugin = 1
 
