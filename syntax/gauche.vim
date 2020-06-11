@@ -45,7 +45,7 @@ syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
 syn match r7rsDebugDirective /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,gaucheRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
+syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,r7rsRegExp,gaucheIncompleteString,gaucheInterpolatedString,gaucheClass
 
 " Keyword symbols {{{2
 syn match r7rsKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -234,22 +234,22 @@ syn match r7rsCSEscapedPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|l
 syn match r7rsCSEscapedPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
 " Regular expression {{{2
-syn region gaucheRegExp matchgroup=r7rsDelimiter start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@gaucheREItems
-syn cluster gaucheREItems contains=gaucheRECapture,gaucheREPattern,@gaucheREEscapedChars,r7rsCSSpec
-syn region gaucheRECapture matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
-syn region gaucheRECapture matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
-syn region gaucheRECapture matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
-syn region gaucheREPattern matchgroup=gaucheREEscapedMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@gaucheREItems
+syn region r7rsRegExp matchgroup=r7rsDelimiter start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@r7rsREItems
+syn cluster r7rsREItems contains=r7rsRECapture,r7rsREPattern,@r7rsREEscapedChars,r7rsCSSpec
+syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
+syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
+syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
+syn region r7rsREPattern matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
 
 " Escapedaped characters (embedded in #/regular expression/) {{{2
-syn cluster gaucheREEscapedChars contains=gaucheREEscapedMeta,r7rsEscapedHex,gaucheREEscapedMnemonic,gaucheREEscapedLiteral
+syn cluster r7rsREEscapedChars contains=r7rsREEscapedMeta,r7rsEscapedHex,r7rsREEscapedMnemonic,r7rsREEscapedLiteral
 " FIXME: ^ should be highlighted only after #/, (?=, etc. $ is more complex, hmm.
-syn match gaucheREEscapedMeta /\\\@<![*+?.|^$]/ contained
-syn match gaucheREEscapedMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
-syn match gaucheREEscapedMeta /\\\d\+/ contained
-syn match gaucheREEscapedMeta /\\k<\(\\>\|[^>]\)*>/ contained
-syn match gaucheREEscapedMnemonic /\\[sSdDwWbB]/ contained
-syn match gaucheREEscapedLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
+syn match r7rsREEscapedMeta /\\\@<![*+?.|^$]/ contained
+syn match r7rsREEscapedMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
+syn match r7rsREEscapedMeta /\\\d\+/ contained
+syn match r7rsREEscapedMeta /\\k<\(\\>\|[^>]\)*>/ contained
+syn match r7rsREEscapedMnemonic /\\[sSdDwWbB]/ contained
+syn match r7rsREEscapedLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
 syn region gaucheIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline
@@ -4282,12 +4282,12 @@ hi def link r7rsCSEscapedMeta r7rsSpecialChar
 hi def link r7rsCSEscapedMnemonic r7rsEscapedMnemonic
 hi def link r7rsCSEscapedLiteral r7rsEscapedLiteral
 hi def link r7rsCSEscapedPOSIX r7rsSpecialChar
-hi def link gaucheRegExp r7rsString
-hi def link gaucheRECapture r7rsString
-hi def link gaucheREPattern r7rsString
-hi def link gaucheREEscapedMeta r7rsSpecialChar
-hi def link gaucheREEscapedMnemonic r7rsEscapedMnemonic
-hi def link gaucheREEscapedLiteral r7rsEscapedLiteral
+hi def link r7rsRegExp r7rsString
+hi def link r7rsRECapture r7rsString
+hi def link r7rsREPattern r7rsString
+hi def link r7rsREEscapedMeta r7rsSpecialChar
+hi def link r7rsREEscapedMnemonic r7rsEscapedMnemonic
+hi def link r7rsREEscapedLiteral r7rsEscapedLiteral
 hi def link gaucheIncompleteString r7rsString
 hi def link gaucheInterpolatedString r7rsString
 hi def link gaucheInterpolatedStringUnquote r7rsUnquote
