@@ -61,7 +61,7 @@ It does not care about whether the parens are opening `[{` or closing `]}`.
 
 If this option is disabled (default), any identifier other than single `.` are
 accepted.  If enabled, only those specified in R7RS are accepted: identifiers
-starting from digits, containing non-ascii letters, etc. are rejected.
+starting from digits, containing non-ASCII letters, etc. are rejected.
 ```vim
     let g:r7rs_strict_identifier = 1  " default: 0
 ```
