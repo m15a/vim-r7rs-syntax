@@ -259,10 +259,9 @@ syn region r7rsInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\
 syn region r7rsInterpolatedStringUnquote start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2
-syn cluster r7rsEscapedChars add=gaucheEscapedHex,gaucheEscapedMnemonic
-syn match gaucheEscapedHex /\\u\x\{4}/ contained
-syn match gaucheEscapedHex /\\U\x\{8}/ contained
-syn match gaucheEscapedMnemonic /\\[f0]/ contained
+syn match r7rsEscapedHex /\\u\x\{4}/ contained
+syn match r7rsEscapedHex /\\U\x\{8}/ contained
+syn match r7rsEscapedMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
 syn region r7rsNumericVector matchgroup=r7rsDelimiter start=/#f16(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
@@ -4291,8 +4290,6 @@ hi def link r7rsREEscapedLiteral r7rsEscapedLiteral
 hi def link r7rsIncompleteString r7rsString
 hi def link r7rsInterpolatedString r7rsString
 hi def link r7rsInterpolatedStringUnquote r7rsUnquote
-hi def link gaucheEscapedHex r7rsEscapedHex
-hi def link gaucheEscapedMnemonic r7rsEscapedMnemonic
 hi def link gaucheClass Type
 hi def link gaucheUseSyntax r7rsLibrarySyntax
 hi def link gaucheSyntax r7rsSyntax
