@@ -290,10 +290,10 @@ EOF
                   # != contains ! but not mutator
                   case /!$/:
                       # Use special color
-                      print "syn keyword gaucheCiSEFunctionM", $0
+                      print "syn keyword r7rsCiSEFunctionM", $0
                       break
                   default:
-                      print "syn keyword gaucheCiSEFunction", $0
+                      print "syn keyword r7rsCiSEFunction", $0
                       break
                   }
                 }'
@@ -320,14 +320,14 @@ EOF
         | gawk '{ switch ($0) {
                   case "next-method":
                       # Use special color
-                      print "syn keyword gaucheFunctionM", $0
+                      print "syn keyword r7rsFunctionM", $0
                       break
                   case /!/:
                       # Use special color
-                      print "syn keyword gaucheFunctionM", $0
+                      print "syn keyword r7rsFunctionM", $0
                       break
                   default:
-                      print "syn keyword gaucheFunction", $0
+                      print "syn keyword r7rsFunction", $0
                       break
                   }
                 }'
@@ -351,7 +351,7 @@ EOF
         | sort | uniq \
         | find_undefined_keywords_in 'r7rsFunction' \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
-        | gawk '{ print "syn keyword gaucheFunction", $0 }'
+        | gawk '{ print "syn keyword r7rsFunction", $0 }'
 }
 
 build_variable() {
