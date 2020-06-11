@@ -24,7 +24,7 @@ endif
 " }}}
 
 " Comments and directives {{{1
-syn cluster r7rsComments add=r7rsShebang,gaucheDirective,gaucheDebug
+syn cluster r7rsComments add=r7rsShebang,r7rsDebugDirective
 
 " Comments {{{2
 
@@ -41,8 +41,8 @@ syn region r7rsCommentDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
 
 " Directives {{{2
 syn match r7rsShebang /\%^#![\/ ].*$/
-syn keyword gaucheDirective #!gauche-legacy #!r6rs #!r7rs
-syn match gaucheDebug /#?[,=]/
+syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
+syn match r7rsDebugDirective /#?[,=]/
 
 " Simple data {{{1
 syn cluster r7rsSimpleData remove=r7rsNumericVector
@@ -4277,8 +4277,7 @@ syn match gaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibraryEx
 hi def link gaucheCommentDatumPOSIX r7rsComment
 hi def link gaucheCommentDatumCS r7rsComment
 hi def link r7rsShebang r7rsComment
-hi def link gaucheDirective r7rsDirective
-hi def link gaucheDebug r7rsComment
+hi def link r7rsDebugDirective r7rsComment
 hi def link gaucheKeyword Special
 hi def link gaucheNumber r7rsNumber
 hi def link gaucheCharacter r7rsCharacter
