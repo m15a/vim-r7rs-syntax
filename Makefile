@@ -36,7 +36,7 @@ ftplugin/gauche.vim: $(BUILD)/atdef.tsv
 	./build.sh ftplugin $@ $<
 
 $(BUILD)/macro.vim: $(BUILD)/atdef.tsv
-	./build.sh macro $< > $@
+	./build.scm macro $< > $@
 
 $(BUILD)/specialform.vim: $(BUILD)/atdef.tsv
 	./build.sh specialform $< > $@
