@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-11
+" Last Change: 2020-06-12
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -84,12 +84,17 @@ syn cluster r7rsDataQ contains=@r7rsSimpleData,@r7rsCompoundDataQ,r7rsLabel
 syn cluster r7rsDataQQ contains=@r7rsSimpleData,@r7rsCompoundDataQQ,r7rsLabel
 
 " Simple data (cf. R7RS, sec. 7.1.2) {{{1
-syn cluster r7rsSimpleData contains=r7rsIdentifier,r7rsBoolean,r7rsNumber,r7rsCharacter,r7rsString,r7rsBytevector
+syn cluster r7rsSimpleData contains=r7rsIdentifierString,r7rsIdentifier,r7rsBoolean,r7rsNumber,r7rsCharacter,r7rsString,r7rsBytevector
 
 " Identifiers (cf. R7RS, sec. 2.1 ,p. 62, and SmallErrata, 7) {{{2
 
-" Those enclosed by |
-syn region r7rsIdentifier matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapedChars
+" Those enclosed by ||
+syn region r7rsIdentifierString matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapedChars
+" NOTE: Why the group name contains String? This is identifier!
+" Vim's matchparen plugin finds pairs of parens correctly even if the parens contain extra
+" parens embedded in string, comment, etc.  Example: (a b ")").
+" Such unwanted parens are ignored if they are contained in any syntax group whose name matches
+" (string|character|singlequote|escape|comment).
 
 if s:strict_identifier
   " <initial> <subsequent>*
@@ -530,6 +535,7 @@ hi def link r7rsCommentSharp r7rsComment
 hi def link r7rsCommentDatum r7rsComment
 hi def link r7rsCommentTodo TODO
 hi def link r7rsDirective Comment
+hi def link r7rsIdentifierString r7rsIdentifier
 hi def link r7rsIdentifier Normal
 hi def link r7rsNumber Number
 hi def link r7rsUInt r7rsNumber

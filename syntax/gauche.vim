@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-11
+" Last Change: 2020-06-12
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -45,7 +45,7 @@ syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
 syn match r7rsDebugDirective /#?[,=]/
 
 " Simple data {{{1
-syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,r7rsRegExp,r7rsIncompleteString,r7rsInterpolatedString,r7rsClass
+syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,r7rsRegExpString,r7rsIncompleteString,r7rsInterpolatedString,r7rsClass
 
 " Keyword symbols {{{2
 syn match r7rsKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
@@ -221,8 +221,8 @@ syn match r7rsCharacter /\c#\\\%(alarm\|backspace\|del\%(ete\)\?\|esc\%(ape\)\?\
 syn match r7rsCharacter /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
 
 " Character set {{{2
-syn match r7rsCharSet /#\ze\[/ nextgroup=r7rsCSSpec
-syn region r7rsCSSpec matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@r7rsCSEscapedChars
+syn match r7rsCharSet /#\ze\[/ nextgroup=r7rsCSSpecString
+syn region r7rsCSSpecString matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@r7rsCSEscapedChars
 
 " Escapedaped characters (embedded in #[character set]) {{{2
 syn cluster r7rsCSEscapedChars contains=r7rsCSEscapedMeta,r7rsEscapedHex,r7rsCSEscapedMnemonic,r7rsCSEscapedLiteral,r7rsCSEscapedPOSIX
@@ -234,8 +234,8 @@ syn match r7rsCSEscapedPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|l
 syn match r7rsCSEscapedPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
 " Regular expression {{{2
-syn region r7rsRegExp matchgroup=r7rsDelimiter start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@r7rsREItems
-syn cluster r7rsREItems contains=r7rsRECapture,r7rsREPattern,@r7rsREEscapedChars,r7rsCSSpec
+syn region r7rsRegExpString matchgroup=r7rsDelimiter start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@r7rsREItems
+syn cluster r7rsREItems contains=r7rsRECapture,r7rsREPattern,@r7rsREEscapedChars,r7rsCSSpecString
 syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
 syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
 syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
@@ -4276,12 +4276,12 @@ hi def link r7rsShebang r7rsComment
 hi def link r7rsDebugDirective r7rsComment
 hi def link r7rsKeyword Special
 hi def link r7rsCharSet r7rsDelimiter
-hi def link r7rsCSSpec r7rsString
+hi def link r7rsCSSpecString r7rsString
 hi def link r7rsCSEscapedMeta r7rsSpecialChar
 hi def link r7rsCSEscapedMnemonic r7rsEscapedMnemonic
 hi def link r7rsCSEscapedLiteral r7rsEscapedLiteral
 hi def link r7rsCSEscapedPOSIX r7rsSpecialChar
-hi def link r7rsRegExp r7rsString
+hi def link r7rsRegExpString r7rsString
 hi def link r7rsRECapture r7rsString
 hi def link r7rsREPattern r7rsString
 hi def link r7rsREEscapedMeta r7rsSpecialChar
