@@ -249,7 +249,7 @@ syn match r7rsREEscapedMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
 syn match r7rsREEscapedMeta /\\\d\+/ contained
 syn match r7rsREEscapedMeta /\\k<\(\\>\|[^>]\)*>/ contained
 syn match r7rsREEscapedMnemonic /\\[sSdDwWbB]/ contained
-syn match r7rsREEscapedLiteral /\\[\\*+?.{,}|^$:=!<>\[\];"#/]/ contained
+syn match r7rsREEscapedLiteral /\\[\\*+?.{,}(|)^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
 syn region r7rsIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline
