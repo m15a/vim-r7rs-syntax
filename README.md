@@ -47,6 +47,7 @@ Enabling this option is equivalent to setting
 ```vim
     let g:r7rs_more_parens = ''
     let g:r7rs_strict_identifier = 1
+    let g:r7rs_use_gauche = 0
 ```
 
 NOTE: If `g:r7rs_strict` is set, the other relevant options are ignored.
