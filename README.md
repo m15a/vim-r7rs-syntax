@@ -2,6 +2,9 @@
 
 Yet another syntax highlight for R7RS Scheme and Gauche.
 
+Screenshot (with `g:r7rs_use_gauche = 1`):
+![](./preview.png)
+
 ## Development status
 
 - [x] R7RS-small 
