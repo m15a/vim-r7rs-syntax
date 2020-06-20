@@ -285,11 +285,11 @@ syn match r7rsQuasiQuote /`\ze(/ nextgroup=r7rsQuasiQuoteList
 syn region r7rsQuasiQuoteList matchgroup=r7rsDelimiter start=/(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 if s:brackets_as_parens
   syn match r7rsQuasiQuote /`\ze\[/ nextgroup=r7rsQuasiQuoteList
-  syn region r7rsQuasiQuoteList matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
+  syn region r7rsQuasiQuoteList matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 endif
 if s:braces_as_parens
   syn match r7rsQuasiQuote /`\ze{/ nextgroup=r7rsQuasiQuoteList
-  syn region r7rsQuasiQuoteList matchgroup=r7rsDelimiter start=/{/ end=/}/ contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
+  syn region r7rsQuasiQuoteList matchgroup=r7rsDelimiter start=/{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 endif
 syn match r7rsQuasiQuote /`\ze#(/ nextgroup=r7rsQuasiQuoteVector
 syn region r7rsQuasiQuoteVector matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
