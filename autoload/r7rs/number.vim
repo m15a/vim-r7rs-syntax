@@ -1,5 +1,5 @@
 " Helper functions for r7rs-syntax plugin
-" Last Change: 2020-06-11
+" Last Change: 2020-06-21
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -116,9 +116,9 @@ endfun
 
 " Wrap any number regexp with regexp of decimal fractional number
 " Example:
-"   s:with_frac10('NUMBER') ==> '\%(NUMBER\|\%(\d\+\|\.\d\+\|\d\+\.\d*\)\%([esfdl][+-]\d\+\)\?\)'
+"   s:with_frac10('NUMBER') ==> '\%(NUMBER\|\%(\d\+\|\.\d\+\|\d\+\.\d*\)\%([esfdl][+-]?\d\+\)\?\)'
 fun! s:with_frac10(wrapped) abort
-  return '\%(' . a:wrapped . '\|\%(\d\+\|\.\d\+\|\d\+\.\d*\)\%([esfdl][+-]\d\+\)\?\)'
+  return '\%(' . a:wrapped . '\|\%(\d\+\|\.\d\+\|\d\+\.\d*\)\%([esfdl][+-]?\d\+\)\?\)'
 endfun
 
 " Wrap any signed number regexp with regexp of inf/nan

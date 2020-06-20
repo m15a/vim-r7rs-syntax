@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-12
+" Last Change: 2020-06-21
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -161,7 +161,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#polar('\x') . '/'
 "           | \.\d+                " fractional case 2
 "           | \d+\.\d*             " fractional case 3
 "           )
-"           ([esfdl][+-]\d+)?      " fractional number may have this suffix
+"           ([esfdl][+-]?\d+)?     " fractional number may have this suffix
 "         )
 " | [+-](inf|nan)\.0
 " )
@@ -170,13 +170,13 @@ exec 'syn match r7rsNumber /' . r7rs#number#real('\d') . '/'
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )?
 " ( [+-]? ( \d+(\/\d+)?
-"         | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]\d+)?
+"         | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]?\d+)?
 "         )
 " | [+-](inf|nan)\.0
 " )?
 " [+-]
 " ( ( \d+(\/\d+)?
-"   | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]\d+)?
+"   | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]?\d+)?
 "   )
 " | (inf|nan)\.0
 " )?
@@ -186,13 +186,13 @@ exec 'syn match r7rsNumber /' . r7rs#number#rect('\d') . '/'
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )?
 " ( [+-]? ( \d+(\/\d+)?
-"         | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]\d+)?
+"         | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]?\d+)?
 "         )
 " | [+-](inf|nan)\.0
 " )
 " \@
 " ( [+-]? ( \d+(\/\d+)?
-"         | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]\d+)?
+"         | ( \d+ | \.\d+ | \d+\.\d* ) ([esfdl][+-]?\d+)?
 "         )
 " | [+-](inf|nan)\.0
 " )
