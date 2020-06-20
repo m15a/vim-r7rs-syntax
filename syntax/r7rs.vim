@@ -32,9 +32,6 @@ endif
 
 " }}}
 
-" This may cause slow down but provide accurate syntax highlight.
-syn sync fromstart
-
 " Anything visible other than defined below are error.
 syn match r7rsError /[^[:space:]\n]/
 
@@ -526,6 +523,9 @@ if s:braces_as_parens
 endif
 
 " Highlights {{{1
+
+" This may cause slow down but provide accurate syntax highlight.
+syn sync fromstart
 
 hi def link r7rsError Error
 hi def link r7rsDelimiter Delimiter
