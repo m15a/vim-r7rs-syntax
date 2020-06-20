@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-11
+" Last Change: 2020-06-20
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -22,7 +22,7 @@ endif
 
 " }}}
 
-setl comments=:;;;;,:;;;,:;;,:;
+setl comments=n:;
 setl commentstring=;\ %s
 setl define=^\s*(define\\k*
 setl iskeyword=@,33,35-38,42-43,45-58,60-64,94,95,126
