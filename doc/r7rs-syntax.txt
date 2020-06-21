@@ -1,8 +1,8 @@
-*r7rs-syntax.txt*	*vim-r7rs-syntax*	Last Change: 2020-06-17
+*r7rs-syntax.txt*	*vim-r7rs-syntax*	Last Change: 2020-06-24
 
                                         *r7rs-syntax* *ft-r7rs-syntax*
 
-Yet another syntax highlight for R7RS Scheme and Gauche.
+Syntax highlighting for R7RS Scheme and Gauche.
 
 ==============================================================================
 OPTIONS                                          *r7rs-syntax-options*
@@ -13,8 +13,8 @@ buffer local one takes precedence.  In the example codes, only global options
 
                                                        *g:r7rs_strict*
                                                        *b:r7rs_strict*
-This option forces syntax highlight to obey the Scheme language specification
-in R7RS: it restricts use of `[]` and `{}` as parentheses (see
+This option forces syntax highlighting to obey the Scheme language
+specification in R7RS: it restricts use of `[]` and `{}` as parentheses (see
 |g:r7rs_more_parens|) and rejects some identifiers that could be accepted in
 the wild (see |g:r7rs_strict_identifier|).
 >
@@ -51,7 +51,7 @@ the errata (https://small.r7rs.org/wiki/R7RSSmallErrata/), 7.
 
                                                    *g:r7rs_use_gauche*
                                                    *b:r7rs_use_gauche*
-This option enables highlight for Gauche's extended reader syntaxes
+This option enables highlighting for Gauche's extended reader syntaxes
 (`#/regexp/`, `#[charset]`, `#"~(interpolated) string"`, ...), numeric
 literals (`#12r34_56@78pi`), `:keywords`, `<objects>`, and a bunch of extra
 syntaxes/procedures.
