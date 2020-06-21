@@ -18,6 +18,7 @@ Screenshot (with `g:r7rs_use_gauche = 1`):
     - [x] `(scheme hash-table)`
     - [ ] `(scheme ilist)`
     - [ ] `(scheme rlist)`
+    - [x] `(scheme ideque)`
     - [x] `(scheme box)`
     - [x] `(scheme comparator)`
 - [ ] SRFI

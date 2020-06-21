@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-11
+" Last Change: 2020-06-21
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -339,6 +339,21 @@ syn keyword r7rsFunctionM hash-table-map! hash-table-prune!
 syn keyword r7rsFunction hash-table-copy hash-table-empty-copy hash-table->alist 
 syn keyword r7rsFunctionM hash-table-union! hash-table-intersection! hash-table-difference!
 syn keyword r7rsFunctionM hash-table-xor!
+
+" (scheme ideque) SRFI-134 {{{1
+syn keyword r7rsFunction ideque ideque-tabulate ideque-unfold ideque-unfold-right
+syn keyword r7rsFunction ideque? ideque-empty? ideque= ideque-any ideque-every
+syn keyword r7rsFunction ideque-front ideque-back ideque-remove-front ideque-remove-back
+syn keyword r7rsFunction ideque-add-front ideque-add-back
+syn keyword r7rsFunction ideque-ref ideque-take ideque-take-right ideque-drop ideque-drop-right
+syn keyword r7rsFunction ideque-split-at
+syn keyword r7rsFunction ideque-length ideque-append ideque-reverse ideque-count ideque-zip
+syn keyword r7rsFunction ideque-map ideque-filter-map ideque-for-each ideque-for-each-right
+syn keyword r7rsFunction ideque-fold ideque-fold-right ideque-append-map
+syn keyword r7rsFunction ideque-filter ideque-remove ideque-partition
+syn keyword r7rsFunction ideque-find ideque-find-right ideque-take-while ideque-take-while-right
+syn keyword r7rsFunction ideque-drop-while ideque-drop-while-right ideque-span ideque-break
+syn keyword r7rsFunction list->ideque ideque->list generator->ideque ideque->generator
 
 " (scheme box) SRFI-111 {{{1
 syn keyword r7rsFunction box box? unbox
