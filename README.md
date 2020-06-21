@@ -25,7 +25,7 @@ Screenshot (with `g:r7rs_use_gauche = 1`):
     - [ ] `(scheme stream)`
     - [x] `(scheme box)`
     - [ ] `(scheme list-queue)`
-    - [ ] `(scheme ephemeron)`
+    - [x] `(scheme ephemeron)`
     - [x] `(scheme comparator)`
     - [ ] `(scheme regex)`
     - [ ] `(scheme mapping)`

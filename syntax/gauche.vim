@@ -1044,10 +1044,6 @@ syn keyword r7rsFunction edn-symbol-prefix
 syn keyword r7rsFunction edn-valid-symbol-name?
 syn keyword r7rsFunction edn-write
 syn keyword r7rsFunction encode-float
-syn keyword r7rsFunction ephemeron-broken?
-syn keyword r7rsFunction ephemeron-datum
-syn keyword r7rsFunction ephemeron-key
-syn keyword r7rsFunction ephemeron?
 syn keyword r7rsFunction eq-compare
 syn keyword r7rsFunction eq-hash
 syn keyword r7rsFunction eqv-hash
@@ -1795,7 +1791,6 @@ syn keyword r7rsFunction make-default-console
 syn keyword r7rsFunction make-directory*
 syn keyword r7rsFunction make-edn-object
 syn keyword r7rsFunction make-empty-attlist
-syn keyword r7rsFunction make-ephemeron
 syn keyword r7rsFunction make-f16vector
 syn keyword r7rsFunction make-f32array
 syn keyword r7rsFunction make-f64array
@@ -2221,7 +2216,6 @@ syn keyword r7rsFunction record?
 syn keyword r7rsFunction reduce$
 syn keyword r7rsFunction reduce-right$
 syn keyword r7rsFunction ref
-syn keyword r7rsFunction reference-barrier
 syn keyword r7rsFunction referencer
 syn keyword r7rsFunction regexp
 syn keyword r7rsFunction regexp->sre

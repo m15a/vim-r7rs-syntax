@@ -385,6 +385,10 @@ syn keyword r7rsFunction lseq-drop-while lseq-member lseq-memq lseq-memv
 syn keyword r7rsFunction box box? unbox
 syn keyword r7rsFunctionM set-box!
 
+" (scheme ephemeron) SRFI-124 {{{1
+syn keyword r7rsFunction ephemeron? make-ephemeron ephemeron-broken? ephemeron-key ephemeron-datum
+syn keyword r7rsFunction reference-barrier
+
 " (scheme comparator) SRFI-128 {{{1
 syn keyword r7rsSyntax comparator-if<=>
 syn keyword r7rsFunction comparator? comparator-ordered? comparator-hashable?
