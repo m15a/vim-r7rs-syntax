@@ -308,7 +308,7 @@ syn keyword r7rsDot . contained containedin=r7rsList,r7rsListQ,r7rsListQQ,r7rsQu
 
 " Labels (cf. R7RS, sec. 2.4) {{{1
 syn match r7rsLabel /#\d\+#/
-syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
+syn region r7rsLabel start=/#\d\+=/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData,@r7rsExpressions
 
 " Expressions (cf. R7RS, sec. 4) {{{1
 syn cluster r7rsExpressions contains=r7rsSyntax,r7rsSyntaxM,r7rsSyntaxA,r7rsFunction,r7rsFunctionM,r7rsCondExpand,r7rsImport
