@@ -39,7 +39,7 @@ $(BUILD)/macro.vim: $(BUILD)/atdef.tsv
 	./build.scm macro $< > $@
 
 $(BUILD)/specialform.vim: $(BUILD)/atdef.tsv
-	./build.sh specialform $< > $@
+	./build.scm specialform $< > $@
 
 $(BUILD)/qualifier.vim: $(BUILD)/atdef.tsv
 	./build.sh qualifier $< > $@
