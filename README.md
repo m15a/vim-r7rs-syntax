@@ -19,6 +19,7 @@ Screenshot (with `g:r7rs_use_gauche = 1`):
     - [ ] `(scheme ilist)`
     - [ ] `(scheme rlist)`
     - [x] `(scheme ideque)`
+    - [ ] `(scheme text)`
     - [x] `(scheme box)`
     - [x] `(scheme comparator)`
 - [ ] SRFI
