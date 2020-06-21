@@ -21,6 +21,7 @@ Screenshot (with `g:r7rs_use_gauche = 1`):
     - [x] `(scheme ideque)`
     - [ ] `(scheme text)`
     - [x] `(scheme generator)`
+    - [x] `(scheme lseq)`
     - [x] `(scheme box)`
     - [x] `(scheme comparator)`
 - [ ] SRFI

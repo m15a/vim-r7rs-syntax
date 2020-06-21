@@ -373,6 +373,14 @@ syn keyword r7rsFunction reverse-vector-accumulator string-accumulator bytevecto
 syn keyword r7rsFunction sum-accumulator product-accumulator
 syn keyword r7rsFunctionM generator->vector! vector-accumulator! bytevector-accumulator!
 
+" (scheme lseq) SRFI-127 {{{1
+syn keyword r7rsFunction generator->lseq lseq? lseq=?
+syn keyword r7rsFunction lseq-car lseq-cdr lseq-first lseq-rest lseq-ref lseq-take lseq-drop 
+syn keyword r7rsFunction lseq-realize lseq->generator lseq-length lseq-append lseq-zip
+syn keyword r7rsFunction lseq-map lseq-for-each lseq-filter lseq-remove
+syn keyword r7rsFunction lseq-find lseq-find-tail lseq-any lseq-every lseq-index lseq-take-while
+syn keyword r7rsFunction lseq-drop-while lseq-member lseq-memq lseq-memv 
+
 " (scheme box) SRFI-111 {{{1
 syn keyword r7rsFunction box box? unbox
 syn keyword r7rsFunctionM set-box!
