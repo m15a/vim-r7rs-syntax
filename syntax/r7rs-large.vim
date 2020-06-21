@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-21
+" Last Change: 2020-06-22
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -354,6 +354,24 @@ syn keyword r7rsFunction ideque-filter ideque-remove ideque-partition
 syn keyword r7rsFunction ideque-find ideque-find-right ideque-take-while ideque-take-while-right
 syn keyword r7rsFunction ideque-drop-while ideque-drop-while-right ideque-span ideque-break
 syn keyword r7rsFunction list->ideque ideque->list generator->ideque ideque->generator
+
+" (scheme generator) SRFI-158 {{{1
+syn keyword r7rsFunction generator circular-generator make-iota-generator make-range-generator
+syn keyword r7rsFunction make-coroutine-generator make-for-each-generator make-unfold-generator
+syn keyword r7rsFunction list->generator vector->generator
+syn keyword r7rsFunction reverse-vector->generator string->generator bytevector->generator
+syn keyword r7rsFunction gcons* gappend gflatten ggroup gmerge gmap gcombine gfilter gremove
+syn keyword r7rsFunction gstate-filter gtake gdrop gtake-while gdrop-while gdelete
+syn keyword r7rsFunction gdelete-neighbor-dups gindex gselect
+syn keyword r7rsFunction generator->list generator->reverse-list generator->vector
+syn keyword r7rsFunction generator->string generator-fold generator-for-each generator-map->list
+syn keyword r7rsFunction generator-find generator-count generator-any generator-every
+syn keyword r7rsFunction generator-unfold
+syn keyword r7rsFunction make-accumulator count-accumulator list-accumulator
+syn keyword r7rsFunction reverse-list-accumulator vector-accumulator
+syn keyword r7rsFunction reverse-vector-accumulator string-accumulator bytevector-accumulator
+syn keyword r7rsFunction sum-accumulator product-accumulator
+syn keyword r7rsFunctionM generator->vector! vector-accumulator! bytevector-accumulator!
 
 " (scheme box) SRFI-111 {{{1
 syn keyword r7rsFunction box box? unbox

@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-21
+" Last Change: 2020-06-22
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -636,8 +636,6 @@ syn keyword r7rsFunction build-binary-heap
 syn keyword r7rsFunction build-path
 syn keyword r7rsFunction build-transliterator
 syn keyword r7rsFunction byte-ready?
-syn keyword r7rsFunction bytevector->generator
-syn keyword r7rsFunction bytevector-accumulator
 syn keyword r7rsFunction bytevector=?
 syn keyword r7rsFunction c128vector-add
 syn keyword r7rsFunction c128vector-and
@@ -819,7 +817,6 @@ syn keyword r7rsFunction chars$
 syn keyword r7rsFunction check-directory-tree
 syn keyword r7rsFunction check-substring-spec
 syn keyword r7rsFunction chready?
-syn keyword r7rsFunction circular-generator
 syn keyword r7rsFunction cise-ambient
 syn keyword r7rsFunction cise-ambient-copy
 syn keyword r7rsFunction cise-ambient-decl-strings
@@ -911,7 +908,6 @@ syn keyword r7rsFunction copy-queue
 syn keyword r7rsFunction copy-time
 syn keyword r7rsFunction cosh
 syn keyword r7rsFunction count$
-syn keyword r7rsFunction count-accumulator
 syn keyword r7rsFunction cpu-architecture
 syn keyword r7rsFunction crc32
 syn keyword r7rsFunction create-directory*
@@ -1338,7 +1334,6 @@ syn keyword r7rsFunction fxsquare
 syn keyword r7rsFunction fxxor
 syn keyword r7rsFunction fxzero?
 syn keyword r7rsFunction gamma
-syn keyword r7rsFunction gappend
 syn keyword r7rsFunction gauche-architecture
 syn keyword r7rsFunction gauche-architecture-directory
 syn keyword r7rsFunction gauche-character-encoding
@@ -1352,9 +1347,7 @@ syn keyword r7rsFunction gauche-version
 syn keyword r7rsFunction gbuffer-filter
 syn keyword r7rsFunction gc
 syn keyword r7rsFunction gc-stat
-syn keyword r7rsFunction gcombine
 syn keyword r7rsFunction gconcatenate
-syn keyword r7rsFunction gcons*
 syn keyword r7rsFunction gdbm-close
 syn keyword r7rsFunction gdbm-closed?
 syn keyword r7rsFunction gdbm-delete
@@ -1370,29 +1363,12 @@ syn keyword r7rsFunction gdbm-store
 syn keyword r7rsFunction gdbm-strerror
 syn keyword r7rsFunction gdbm-sync
 syn keyword r7rsFunction gdbm-version
-syn keyword r7rsFunction gdelete
-syn keyword r7rsFunction gdelete-neighbor-dups
-syn keyword r7rsFunction gdrop
-syn keyword r7rsFunction gdrop-while
 syn keyword r7rsFunction generate
-syn keyword r7rsFunction generator
 syn keyword r7rsFunction generator->bytevector
-syn keyword r7rsFunction generator->list
 syn keyword r7rsFunction generator->lseq
-syn keyword r7rsFunction generator->reverse-list
-syn keyword r7rsFunction generator->string
 syn keyword r7rsFunction generator->uvector
-syn keyword r7rsFunction generator->vector
-syn keyword r7rsFunction generator-any
-syn keyword r7rsFunction generator-count
-syn keyword r7rsFunction generator-every
-syn keyword r7rsFunction generator-find
-syn keyword r7rsFunction generator-fold
 syn keyword r7rsFunction generator-fold-right
-syn keyword r7rsFunction generator-for-each
 syn keyword r7rsFunction generator-map
-syn keyword r7rsFunction generator-map->list
-syn keyword r7rsFunction generator-unfold
 syn keyword r7rsFunction gensym
 syn keyword r7rsFunction get-f16
 syn keyword r7rsFunction get-f16be
@@ -1437,32 +1413,21 @@ syn keyword r7rsFunction get-uint
 syn keyword r7rsFunction getch
 syn keyword r7rsFunction getter-with-setter
 syn keyword r7rsFunction gettext
-syn keyword r7rsFunction gfilter
 syn keyword r7rsFunction gfilter-map
-syn keyword r7rsFunction gflatten
-syn keyword r7rsFunction ggroup
-syn keyword r7rsFunction gindex
 syn keyword r7rsFunction giota
 syn keyword r7rsFunction glob
 syn keyword r7rsFunction glob-fold
 syn keyword r7rsFunction global-variable-bound?
 syn keyword r7rsFunction global-variable-ref
-syn keyword r7rsFunction gmap
 syn keyword r7rsFunction gmap-accum
-syn keyword r7rsFunction gmerge
 syn keyword r7rsFunction grange
 syn keyword r7rsFunction greatest-fixnum
-syn keyword r7rsFunction gremove
 syn keyword r7rsFunction group-collection
 syn keyword r7rsFunction group-contiguous-sequence
 syn keyword r7rsFunction group-sequence
 syn keyword r7rsFunction grxmatch
-syn keyword r7rsFunction gselect
 syn keyword r7rsFunction gslices
-syn keyword r7rsFunction gstate-filter
-syn keyword r7rsFunction gtake
 syn keyword r7rsFunction gtake*
-syn keyword r7rsFunction gtake-while
 syn keyword r7rsFunction gunfold
 syn keyword r7rsFunction gzip-decode-string
 syn keyword r7rsFunction gzip-encode-string
@@ -1750,13 +1715,11 @@ syn keyword r7rsFunction list->bits
 syn keyword r7rsFunction list->c32vector
 syn keyword r7rsFunction list->f16vector
 syn keyword r7rsFunction list->file
-syn keyword r7rsFunction list->generator
 syn keyword r7rsFunction list->hook
 syn keyword r7rsFunction list->integer
 syn keyword r7rsFunction list->queue
 syn keyword r7rsFunction list->stream
 syn keyword r7rsFunction list->sys-fdset
-syn keyword r7rsFunction list-accumulator
 syn keyword r7rsFunction list-queue
 syn keyword r7rsFunction list-queue-append
 syn keyword r7rsFunction list-queue-back
@@ -1828,7 +1791,6 @@ syn keyword r7rsFunction macroexpand
 syn keyword r7rsFunction macroexpand-1
 syn keyword r7rsFunction macroexpand-all
 syn keyword r7rsFunction make
-syn keyword r7rsFunction make-accumulator
 syn keyword r7rsFunction make-array
 syn keyword r7rsFunction make-bimap
 syn keyword r7rsFunction make-binary-heap
@@ -1851,7 +1813,6 @@ syn keyword r7rsFunction make-compound-condition
 syn keyword r7rsFunction make-condition
 syn keyword r7rsFunction make-condition-type
 syn keyword r7rsFunction make-condition-variable
-syn keyword r7rsFunction make-coroutine-generator
 syn keyword r7rsFunction make-csv-header-parser
 syn keyword r7rsFunction make-csv-reader
 syn keyword r7rsFunction make-csv-record-parser
@@ -1869,7 +1830,6 @@ syn keyword r7rsFunction make-f64array
 syn keyword r7rsFunction make-fifo-cache
 syn keyword r7rsFunction make-fllog-base
 syn keyword r7rsFunction make-flonum
-syn keyword r7rsFunction make-for-each-generator
 syn keyword r7rsFunction make-gauche-package-description
 syn keyword r7rsFunction make-gettext
 syn keyword r7rsFunction make-glob-fs-fold
@@ -1881,7 +1841,6 @@ syn keyword r7rsFunction make-ideque
 syn keyword r7rsFunction make-imap
 syn keyword r7rsFunction make-improper-list-comparator
 syn keyword r7rsFunction make-inexact-real-comparator
-syn keyword r7rsFunction make-iota-generator
 syn keyword r7rsFunction make-key-comparator
 syn keyword r7rsFunction make-keyword
 syn keyword r7rsFunction make-kmp-restart-vector
@@ -1897,7 +1856,6 @@ syn keyword r7rsFunction make-packer
 syn keyword r7rsFunction make-process-connection
 syn keyword r7rsFunction make-queue
 syn keyword r7rsFunction make-random-source
-syn keyword r7rsFunction make-range-generator
 syn keyword r7rsFunction make-record-type
 syn keyword r7rsFunction make-refining-comparator
 syn keyword r7rsFunction make-reverse-comparator
@@ -1925,7 +1883,6 @@ syn keyword r7rsFunction make-ttl-cache
 syn keyword r7rsFunction make-ttlr-cache
 syn keyword r7rsFunction make-tuple-comparator
 syn keyword r7rsFunction make-u8array
-syn keyword r7rsFunction make-unfold-generator
 syn keyword r7rsFunction make-uvector
 syn keyword r7rsFunction make-vectorwise-comparator
 syn keyword r7rsFunction make-weak-vector
@@ -2217,7 +2174,6 @@ syn keyword r7rsFunction process-upstreams
 syn keyword r7rsFunction process-wait
 syn keyword r7rsFunction process-wait-any
 syn keyword r7rsFunction process?
-syn keyword r7rsFunction product-accumulator
 syn keyword r7rsFunction profiler-reset
 syn keyword r7rsFunction profiler-show
 syn keyword r7rsFunction profiler-start
@@ -2362,9 +2318,6 @@ syn keyword r7rsFunction reverse-bits->generator
 syn keyword r7rsFunction reverse-list->c32vector
 syn keyword r7rsFunction reverse-list->f16vector
 syn keyword r7rsFunction reverse-list->string
-syn keyword r7rsFunction reverse-list-accumulator
-syn keyword r7rsFunction reverse-vector->generator
-syn keyword r7rsFunction reverse-vector-accumulator
 syn keyword r7rsFunction rfc822-atom
 syn keyword r7rsFunction rfc822-date->date
 syn keyword r7rsFunction rfc822-dot-atom
@@ -2702,7 +2655,6 @@ syn keyword r7rsFunction stream=
 syn keyword r7rsFunction stream?
 syn keyword r7rsFunction string->date
 syn keyword r7rsFunction string->file
-syn keyword r7rsFunction string->generator
 syn keyword r7rsFunction string->grapheme-clusters
 syn keyword r7rsFunction string->regexp
 syn keyword r7rsFunction string->s32vector
@@ -2712,7 +2664,6 @@ syn keyword r7rsFunction string->u32vector
 syn keyword r7rsFunction string->u8vector
 syn keyword r7rsFunction string->uninterned-symbol
 syn keyword r7rsFunction string->words
-syn keyword r7rsFunction string-accumulator
 syn keyword r7rsFunction string-any
 syn keyword r7rsFunction string-append/shared
 syn keyword r7rsFunction string-break
@@ -2802,7 +2753,6 @@ syn keyword r7rsFunction substring-spec-ok?
 syn keyword r7rsFunction substring/shared
 syn keyword r7rsFunction subtract-duration
 syn keyword r7rsFunction subtype?
-syn keyword r7rsFunction sum-accumulator
 syn keyword r7rsFunction supported-character-encodings
 syn keyword r7rsFunction sxml:add-attr
 syn keyword r7rsFunction sxml:add-aux
@@ -3321,8 +3271,6 @@ syn keyword r7rsFunction valid-version-spec?
 syn keyword r7rsFunction vector->bits
 syn keyword r7rsFunction vector->c32vector
 syn keyword r7rsFunction vector->f16vector
-syn keyword r7rsFunction vector->generator
-syn keyword r7rsFunction vector-accumulator
 syn keyword r7rsFunction vector-for-each-with-index
 syn keyword r7rsFunction vector-map-with-index
 syn keyword r7rsFunction vector-tabulate
@@ -3449,7 +3397,6 @@ syn keyword r7rsFunctionM blob-u64-set!
 syn keyword r7rsFunctionM blob-u8-set!
 syn keyword r7rsFunctionM blob-uint-set!
 syn keyword r7rsFunctionM break-list-by-sequence!
-syn keyword r7rsFunctionM bytevector-accumulator!
 syn keyword r7rsFunctionM c128vector-add!
 syn keyword r7rsFunctionM c128vector-and!
 syn keyword r7rsFunctionM c128vector-clamp!
@@ -3554,7 +3501,6 @@ syn keyword r7rsFunctionM f64vector-sub!
 syn keyword r7rsFunctionM f64vector-xor!
 syn keyword r7rsFunctionM generator->bytevector!
 syn keyword r7rsFunctionM generator->uvector!
-syn keyword r7rsFunctionM generator->vector!
 syn keyword r7rsFunctionM hash-table-delete!-r7
 syn keyword r7rsFunctionM hash-table-intern!-r7
 syn keyword r7rsFunctionM hash-table-merge!
@@ -3865,7 +3811,6 @@ syn keyword r7rsFunctionM u8vector-sub!
 syn keyword r7rsFunctionM u8vector-xor!
 syn keyword r7rsFunctionM uvector-copy!
 syn keyword r7rsFunctionM uvector-set!
-syn keyword r7rsFunctionM vector-accumulator!
 syn keyword r7rsFunctionM vector-map-with-index!
 syn keyword r7rsFunctionM weak-vector-set!
 syn keyword r7rsFunctionM zstream-params-set!
