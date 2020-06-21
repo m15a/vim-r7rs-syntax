@@ -22,8 +22,17 @@ Screenshot (with `g:r7rs_use_gauche = 1`):
     - [ ] `(scheme text)`
     - [x] `(scheme generator)`
     - [x] `(scheme lseq)`
+    - [ ] `(scheme stream)`
     - [x] `(scheme box)`
+    - [ ] `(scheme list-queue)`
+    - [ ] `(scheme ephemeron)`
     - [x] `(scheme comparator)`
+    - [ ] `(scheme regex)`
+    - [ ] `(scheme mapping)`
+    - [ ] `(scheme division)`
+    - [ ] `(scheme bitwise)`
+    - [ ] `(scheme fixnum)`
+    - [ ] `(scheme flonum)`
 - [ ] SRFI
 - [ ] Gauche (mostly implemented. See [TODO](TODO.md))
 
