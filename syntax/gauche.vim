@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-22
+" Last Change: 2020-06-25
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -225,7 +225,7 @@ syn match r7rsCharSet /#\ze\[/ nextgroup=r7rsCSSpecString
 syn region r7rsCSSpecString matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@r7rsCSEscapedChars
 
 " Escapedaped characters (embedded in #[character set]) {{{2
-syn cluster r7rsCSEscapedChars contains=r7rsCSEscapedMeta,r7rsEscapedHex,r7rsCSEscapedMnemonic,r7rsCSEscapedLiteral,r7rsCSEscapedPOSIX
+syn cluster r7rsCSEscapedChars contains=r7rsCSEscapedMeta,r7rsEscapedCharCode,r7rsCSEscapedMnemonic,r7rsCSEscapedLiteral,r7rsCSEscapedPOSIX
 syn match r7rsCSEscapedMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
 syn match r7rsCSEscapedMeta /\v%(\\@<!\[)@<=\^/ contained
 syn match r7rsCSEscapedMnemonic /\\[sSdDwW]/ contained
@@ -242,7 +242,7 @@ syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\((\d\+)\|(
 syn region r7rsREPattern matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
 
 " Escapedaped characters (embedded in #/regular expression/) {{{2
-syn cluster r7rsREEscapedChars contains=r7rsREEscapedMeta,r7rsEscapedHex,r7rsREEscapedMnemonic,r7rsREEscapedLiteral
+syn cluster r7rsREEscapedChars contains=r7rsREEscapedMeta,r7rsEscapedCharCode,r7rsREEscapedMnemonic,r7rsREEscapedLiteral
 " FIXME: ^ should be highlighted only after #/, (?=, etc. $ is more complex, hmm.
 syn match r7rsREEscapedMeta /\\\@<![*+?.|^$]/ contained
 syn match r7rsREEscapedMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
@@ -259,8 +259,8 @@ syn region r7rsInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\
 syn region r7rsInterpolatedStringUnquote start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
 " Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2
-syn match r7rsEscapedHex /\\u\x\{4}/ contained
-syn match r7rsEscapedHex /\\U\x\{8}/ contained
+syn match r7rsEscapedCharCode /\\u\x\{4}/ contained
+syn match r7rsEscapedCharCode /\\U\x\{8}/ contained
 syn match r7rsEscapedMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2

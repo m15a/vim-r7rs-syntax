@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-21
+" Last Change: 2020-06-25
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -207,9 +207,9 @@ syn match r7rsCharacter /#\\\%(alarm\|backspace\|delete\|escape\|newline\|null\|
 syn region r7rsString matchgroup=r7rsDelimiter start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline
 
 " Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2
-syn cluster r7rsEscapedChars contains=r7rsEscapedLiteral,r7rsEscapedHex,r7rsEscapedMnemonic
+syn cluster r7rsEscapedChars contains=r7rsEscapedLiteral,r7rsEscapedCharCode,r7rsEscapedMnemonic
 syn match r7rsEscapedLiteral /\\[\\|"]/ contained
-syn match r7rsEscapedHex /\\x\x\+;/ contained
+syn match r7rsEscapedCharCode /\\x\x\+;/ contained
 syn match r7rsEscapedMnemonic /\\[abtnr]/ contained
 
 " This can be contained in strings but identifiers
@@ -544,7 +544,7 @@ hi def link r7rsCharacter Character
 hi def link r7rsSpecialChar SpecialChar
 hi def link r7rsString String
 hi def link r7rsEscapedLiteral r7rsCharacter
-hi def link r7rsEscapedHex r7rsCharacter
+hi def link r7rsEscapedCharCode r7rsCharacter
 hi def link r7rsEscapedMnemonic r7rsSpecialChar
 hi def link r7rsEscapedNewline r7rsSpecialChar
 hi def link r7rsQuote r7rsSyntax
