@@ -545,8 +545,8 @@ hi def link r7rsSpecialChar SpecialChar
 hi def link r7rsString String
 hi def link r7rsEscapedLiteral r7rsCharacter
 hi def link r7rsEscapedCharCode r7rsCharacter
-hi def link r7rsEscapedMnemonic r7rsSpecialChar
-hi def link r7rsEscapedNewline r7rsSpecialChar
+hi def link r7rsEscapedMnemonic r7rsCharacter
+hi def link r7rsEscapedNewline r7rsComment
 hi def link r7rsQuote r7rsSyntax
 hi def link r7rsQuasiQuote r7rsSyntax
 hi def link r7rsUnquote r7rsSyntaxA

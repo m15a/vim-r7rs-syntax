@@ -228,7 +228,7 @@ syn region r7rsCSSpecString matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ 
 syn cluster r7rsCSEscapedChars contains=r7rsCSEscapedMeta,r7rsEscapedCharCode,r7rsCSEscapedMnemonic,r7rsCSEscapedLiteral,r7rsCSEscapedPOSIX
 syn match r7rsCSEscapedMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
 syn match r7rsCSEscapedMeta /\v%(\\@<!\[)@<=\^/ contained
-syn match r7rsCSEscapedMnemonic /\\[sSdDwW]/ contained
+syn match r7rsCSEscapedMeta /\\[sSdDwW]/ contained
 syn match r7rsCSEscapedLiteral /\\[\\\-^\[\]]/ contained
 syn match r7rsCSEscapedPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
 syn match r7rsCSEscapedPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
@@ -248,7 +248,7 @@ syn match r7rsREEscapedMeta /\\\@<![*+?.|^$]/ contained
 syn match r7rsREEscapedMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
 syn match r7rsREEscapedMeta /\\\d\+/ contained
 syn match r7rsREEscapedMeta /\\k<\(\\>\|[^>]\)*>/ contained
-syn match r7rsREEscapedMnemonic /\\[sSdDwWbB]/ contained
+syn match r7rsREEscapedMeta /\\[sSdDwWbB]/ contained
 syn match r7rsREEscapedLiteral /\\[\\*+?.{,}(|)^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
