@@ -4109,9 +4109,9 @@ syn match r7rsSyntax /\^[_a-z]/
 
 " Hybrid 'import' {{{2
 syn region r7rsGaucheImport matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/)/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@r7rsGaucheImportSets
-syn cluster r7rsGaucheImportSets contains=r7rsIdentifier,r7rsGaucheImportOER,r7rsGaucheImportP
+syn cluster r7rsGaucheImportSets contains=@r7rsIdentifiers,r7rsGaucheImportOER,r7rsGaucheImportP
 syn region r7rsGaucheImportOER matchgroup=r7rsKeyword start=/:\(only\|except\|rename\)/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsImportList
-syn region r7rsGaucheImportP matchgroup=r7rsKeyword start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,r7rsIdentifier
+syn region r7rsGaucheImportP matchgroup=r7rsKeyword start=/:prefix/ end=/\ze[[:space:]\n]*[:)\]}]/ contained contains=r7rsError,@r7rsComments,@r7rsIdentifiers
 if s:brackets_as_parens
   syn region r7rsGaucheImport matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*import[[:space:]\n]\+[^(\[{]/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsImportSyntax,@r7rsGaucheImportSets
 endif
