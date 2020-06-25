@@ -49,7 +49,7 @@ syn cluster r7rsSimpleData add=r7rsKeyword,r7rsCharSet,r7rsRegExpString,r7rsInco
 
 " Keyword symbols {{{2
 syn match r7rsKeyword /#\?:[^[:space:]\n|()";'`,\\#\[\]{}]*/
-syn region r7rsKeyword matchgroup=r7rsDelimiter start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapedChars
+syn region r7rsKeyword matchgroup=r7rsDelimiter start=/#\?:|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapeChars
 
 " Number {{{2
 syn clear r7rsNumber
@@ -222,46 +222,46 @@ syn match r7rsCharacter /\c#\\\%(nl\|lf\|cr\|ht\|page\)/
 
 " Character set {{{2
 syn match r7rsCharSet /#\ze\[/ nextgroup=r7rsCSSpecString
-syn region r7rsCSSpecString matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@r7rsCSEscapedChars
+syn region r7rsCSSpecString matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@r7rsCSEscapeChars
 
-" Escapedaped characters (embedded in #[character set]) {{{2
-syn cluster r7rsCSEscapedChars contains=r7rsCSEscapedMeta,r7rsEscapedCharCode,r7rsCSEscapedMnemonic,r7rsCSEscapedLiteral,r7rsCSEscapedPOSIX
-syn match r7rsCSEscapedMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
-syn match r7rsCSEscapedMeta /\v%(\\@<!\[)@<=\^/ contained
-syn match r7rsCSEscapedMeta /\\[sSdDwW]/ contained
-syn match r7rsCSEscapedLiteral /\\[\\\-^\[\]]/ contained
-syn match r7rsCSEscapedPOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
-syn match r7rsCSEscapedPOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
+" Escapeaped characters (embedded in #[character set]) {{{2
+syn cluster r7rsCSEscapeChars contains=r7rsCSEscapeMeta,r7rsEscapeCharCode,r7rsCSEscapeMnemonic,r7rsCSEscapeLiteral,r7rsCSEscapePOSIX
+syn match r7rsCSEscapeMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
+syn match r7rsCSEscapeMeta /\v%(\\@<!\[)@<=\^/ contained
+syn match r7rsCSEscapeMeta /\\[sSdDwW]/ contained
+syn match r7rsCSEscapeLiteral /\\[\\\-^\[\]]/ contained
+syn match r7rsCSEscapePOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
+syn match r7rsCSEscapePOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
 " Regular expression {{{2
 syn region r7rsRegExpString matchgroup=r7rsDelimiter start=/#\// skip=/\\[\\\/]/ end=/\/i\?/ contains=@r7rsREItems
-syn cluster r7rsREItems contains=r7rsRECapture,r7rsREPattern,@r7rsREEscapedChars,r7rsCSSpecString
-syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
-syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
-syn region r7rsRECapture matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
-syn region r7rsREPattern matchgroup=r7rsREEscapedMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
+syn cluster r7rsREItems contains=r7rsRECapture,r7rsREPattern,@r7rsREEscapeChars,r7rsCSSpecString
+syn region r7rsRECapture matchgroup=r7rsREEscapeMeta start=/\\\@<!(?\@<!/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
+syn region r7rsRECapture matchgroup=r7rsREEscapeMeta start=/\\\@<!(?\%(:\|-\?i:\|<\%(\\>\|[^>=!]\)*>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
+syn region r7rsRECapture matchgroup=r7rsREEscapeMeta start=/\\\@<!(?\((\d\+)\|(?<\?[=!]\)\@=/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
+syn region r7rsREPattern matchgroup=r7rsREEscapeMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
 
-" Escapedaped characters (embedded in #/regular expression/) {{{2
-syn cluster r7rsREEscapedChars contains=r7rsREEscapedMeta,r7rsEscapedCharCode,r7rsREEscapedMnemonic,r7rsREEscapedLiteral
+" Escapeaped characters (embedded in #/regular expression/) {{{2
+syn cluster r7rsREEscapeChars contains=r7rsREEscapeMeta,r7rsEscapeCharCode,r7rsREEscapeMnemonic,r7rsREEscapeLiteral
 " FIXME: ^ should be highlighted only after #/, (?=, etc. $ is more complex, hmm.
-syn match r7rsREEscapedMeta /\\\@<![*+?.|^$]/ contained
-syn match r7rsREEscapedMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
-syn match r7rsREEscapedMeta /\\\d\+/ contained
-syn match r7rsREEscapedMeta /\\k<\(\\>\|[^>]\)*>/ contained
-syn match r7rsREEscapedMeta /\\[sSdDwWbB]/ contained
-syn match r7rsREEscapedLiteral /\\[\\*+?.{,}(|)^$:=!<>\[\];"#/]/ contained
+syn match r7rsREEscapeMeta /\\\@<![*+?.|^$]/ contained
+syn match r7rsREEscapeMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
+syn match r7rsREEscapeMeta /\\\d\+/ contained
+syn match r7rsREEscapeMeta /\\k<\(\\>\|[^>]\)*>/ contained
+syn match r7rsREEscapeMeta /\\[sSdDwWbB]/ contained
+syn match r7rsREEscapeLiteral /\\[\\*+?.{,}(|)^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
-syn region r7rsIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline
+syn region r7rsIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapeChars,r7rsEscapeNewline
 
 " Interpolated string {{{2
-syn region r7rsInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline,r7rsInterpolatedStringUnquote
+syn region r7rsInterpolatedString matchgroup=r7rsDelimiter start=/#"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapeChars,r7rsEscapeNewline,r7rsInterpolatedStringUnquote
 syn region r7rsInterpolatedStringUnquote start=/\~\@<!\~\~\@!/ end=/\ze\%([^;#[:space:]]\|#[^|;!]\)/ contained contains=@r7rsComments skipwhite skipempty nextgroup=@r7rsData
 
-" Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2
-syn match r7rsEscapedCharCode /\\u\x\{4}/ contained
-syn match r7rsEscapedCharCode /\\U\x\{8}/ contained
-syn match r7rsEscapedMnemonic /\\[f0]/ contained
+" Escapeaped characters (embedded in \"strings\" and |identifiers|) {{{2
+syn match r7rsEscapeCharCode /\\u\x\{4}/ contained
+syn match r7rsEscapeCharCode /\\U\x\{8}/ contained
+syn match r7rsEscapeMnemonic /\\[f0]/ contained
 
 " Uniform vectors {{{2
 syn region r7rsNumericVector matchgroup=r7rsDelimiter start=/#f16(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
@@ -4141,16 +4141,16 @@ hi def link r7rsDebugDirective r7rsComment
 hi def link r7rsKeyword Special
 hi def link r7rsCharSet r7rsDelimiter
 hi def link r7rsCSSpecString r7rsString
-hi def link r7rsCSEscapedMeta r7rsSpecialChar
-hi def link r7rsCSEscapedMnemonic r7rsEscapedMnemonic
-hi def link r7rsCSEscapedLiteral r7rsEscapedLiteral
-hi def link r7rsCSEscapedPOSIX r7rsSpecialChar
+hi def link r7rsCSEscapeMeta r7rsSpecialChar
+hi def link r7rsCSEscapeMnemonic r7rsEscapeMnemonic
+hi def link r7rsCSEscapeLiteral r7rsEscapeLiteral
+hi def link r7rsCSEscapePOSIX r7rsSpecialChar
 hi def link r7rsRegExpString r7rsString
 hi def link r7rsRECapture r7rsString
 hi def link r7rsREPattern r7rsString
-hi def link r7rsREEscapedMeta r7rsSpecialChar
-hi def link r7rsREEscapedMnemonic r7rsEscapedMnemonic
-hi def link r7rsREEscapedLiteral r7rsEscapedLiteral
+hi def link r7rsREEscapeMeta r7rsSpecialChar
+hi def link r7rsREEscapeMnemonic r7rsEscapeMnemonic
+hi def link r7rsREEscapeLiteral r7rsEscapeLiteral
 hi def link r7rsIncompleteString r7rsString
 hi def link r7rsInterpolatedString r7rsString
 hi def link r7rsInterpolatedStringUnquote r7rsUnquote

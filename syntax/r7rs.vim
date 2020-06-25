@@ -86,7 +86,7 @@ syn cluster r7rsSimpleData contains=r7rsIdentifierString,r7rsIdentifier,r7rsBool
 " Identifiers (cf. R7RS, sec. 2.1 ,p. 62, and SmallErrata, 7) {{{2
 
 " Those enclosed by ||
-syn region r7rsIdentifierString matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapedChars
+syn region r7rsIdentifierString matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapeChars
 " NOTE: Why the group name contains String? This is identifier!
 " Vim's matchparen plugin finds pairs of parens correctly even if the parens contain extra
 " parens embedded in string, comment, etc.  Example: (a b ")").
@@ -204,16 +204,16 @@ syn match r7rsCharacter /#\\x\x\+/
 syn match r7rsCharacter /#\\\%(alarm\|backspace\|delete\|escape\|newline\|null\|return\|space\|tab\)/
 
 " String {{{2
-syn region r7rsString matchgroup=r7rsDelimiter start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapedChars,r7rsEscapedNewline
+syn region r7rsString matchgroup=r7rsDelimiter start=/"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapeChars,r7rsEscapeNewline
 
-" Escapedaped characters (embedded in \"strings\" and |identifiers|) {{{2
-syn cluster r7rsEscapedChars contains=r7rsEscapedLiteral,r7rsEscapedCharCode,r7rsEscapedMnemonic
-syn match r7rsEscapedLiteral /\\[\\|"]/ contained
-syn match r7rsEscapedCharCode /\\x\x\+;/ contained
-syn match r7rsEscapedMnemonic /\\[abtnr]/ contained
+" Escapeaped characters (embedded in \"strings\" and |identifiers|) {{{2
+syn cluster r7rsEscapeChars contains=r7rsEscapeLiteral,r7rsEscapeCharCode,r7rsEscapeMnemonic
+syn match r7rsEscapeLiteral /\\[\\|"]/ contained
+syn match r7rsEscapeCharCode /\\x\x\+;/ contained
+syn match r7rsEscapeMnemonic /\\[abtnr]/ contained
 
 " This can be contained in strings but identifiers
-syn match r7rsEscapedNewline /\\[[:space:]]*$/ contained
+syn match r7rsEscapeNewline /\\[[:space:]]*$/ contained
 
 " Bytevectors {{{2
 syn region r7rsBytevector matchgroup=r7rsDelimiter start=/#u8(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
@@ -543,10 +543,10 @@ hi def link r7rsBoolean Boolean
 hi def link r7rsCharacter Character
 hi def link r7rsSpecialChar SpecialChar
 hi def link r7rsString String
-hi def link r7rsEscapedLiteral r7rsCharacter
-hi def link r7rsEscapedCharCode r7rsCharacter
-hi def link r7rsEscapedMnemonic r7rsCharacter
-hi def link r7rsEscapedNewline r7rsComment
+hi def link r7rsEscapeLiteral r7rsCharacter
+hi def link r7rsEscapeCharCode r7rsCharacter
+hi def link r7rsEscapeMnemonic r7rsCharacter
+hi def link r7rsEscapeNewline r7rsComment
 hi def link r7rsQuote r7rsSyntax
 hi def link r7rsQuasiQuote r7rsSyntax
 hi def link r7rsUnquote r7rsSyntaxA
