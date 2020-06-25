@@ -4138,7 +4138,7 @@ hi def link r7rsCommentDatumPOSIX r7rsComment
 hi def link r7rsCommentDatumCS r7rsComment
 hi def link r7rsShebang r7rsComment
 hi def link r7rsDebugDirective r7rsComment
-hi def link r7rsKeyword Special
+hi def link r7rsKeyword r7rsSymbol
 hi def link r7rsCharSet r7rsDelimiter
 hi def link r7rsCSSpecString r7rsString
 hi def link r7rsCSEscapeMeta r7rsSpecialChar
