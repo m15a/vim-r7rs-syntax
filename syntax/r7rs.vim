@@ -76,17 +76,20 @@ syn keyword r7rsDirective #!fold-case #!no-fold-case
 " As the children may not be prefixed by ' or `, it is difficult to distinguish
 " between them from their look. To highlight them differently, preparing three
 " syntax groups is mandatory.
-syn cluster r7rsData contains=@r7rsSimpleData,@r7rsCompoundData,r7rsLabel
-syn cluster r7rsDataQ contains=@r7rsSimpleData,@r7rsCompoundDataQ,r7rsLabel
-syn cluster r7rsDataQQ contains=@r7rsSimpleData,@r7rsCompoundDataQQ,r7rsLabel
+syn cluster r7rsData contains=@r7rsIdentifiers,@r7rsSimpleData,@r7rsCompoundData,r7rsLabel
+syn cluster r7rsDataQ contains=@r7rsSymbols,@r7rsSimpleData,@r7rsCompoundDataQ,r7rsLabel
+syn cluster r7rsDataQQ contains=@r7rsSymbols,@r7rsSimpleData,@r7rsCompoundDataQQ,r7rsLabel
 
 " Simple data (cf. R7RS, sec. 7.1.2) {{{1
-syn cluster r7rsSimpleData contains=r7rsIdentifierString,r7rsIdentifier,r7rsBoolean,r7rsNumber,r7rsCharacter,r7rsString,r7rsBytevector
+syn cluster r7rsSimpleData contains=r7rsBoolean,r7rsNumber,r7rsCharacter,r7rsString,r7rsBytevector
 
-" Identifiers (cf. R7RS, sec. 2.1 ,p. 62, and SmallErrata, 7) {{{2
+" Identifiers and symbols (cf. R7RS, sec. 2.1 ,p. 62, and SmallErrata, 7) {{{2
+syn cluster r7rsIdentifiers contains=r7rsIdentifier,r7rsIdentifierString
+syn cluster r7rsSymbols contains=r7rsSymbol,r7rsSymbolString
 
 " Those enclosed by ||
 syn region r7rsIdentifierString matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapeChars
+syn region r7rsSymbolString matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapeChars
 " NOTE: Why the group name contains String? This is identifier!
 " Vim's matchparen plugin finds pairs of parens correctly even if the parens contain extra
 " parens embedded in string, comment, etc.  Example: (a b ")").
@@ -98,20 +101,25 @@ if s:strict_identifier
   " where <initial> -> [:alpha:] | [!$%&*\/:<=>?^_~@]
   "       <subsequent> -> [:alnum:] | [!$%&*\/:<=>?^_~@] | [.+-]
   syn match r7rsIdentifier /[[:alpha:]!$%&*\/:<=>?^_~@][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
+  syn match r7rsSymbol /[[:alpha:]!$%&*\/:<=>?^_~@][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
 
   " Peculiar identifier case 1 and 2
   " [+-] | [+-] <sign subsequent> <subsequent>*
   " where <sign subsequent> = <initial> | [+-]
   syn match r7rsIdentifier /[+-]\%([[:alpha:]!$%&*\/:<=>?^_~@+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*\)\?/
+  syn match r7rsSymbol /[+-]\%([[:alpha:]!$%&*\/:<=>?^_~@+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*\)\?/
 
   " Peculiar identifier case 3 and 4
   " [+-] . <dot subsequent> <subsequent>* | . <dot subsequent> <subsequent>*
   " where <dot subsequent> -> <initial> | [.+-]
   syn match r7rsIdentifier /[+-]\?\.[[:alpha:]!$%&*\/:<=>?^_~@.+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
+  syn match r7rsSymbol /[+-]\?\.[[:alpha:]!$%&*\/:<=>?^_~@.+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
 else
   " Anything except single '.' is permitted.
   syn match r7rsIdentifier /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/
+  syn match r7rsSymbol /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/
   syn match r7rsIdentifier /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
+  syn match r7rsSymbol /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
 endif
 
 " Number (cf. R7RS, pp. 62-63) {{{2
@@ -535,8 +543,10 @@ hi def link r7rsCommentSharp r7rsComment
 hi def link r7rsCommentDatum r7rsComment
 hi def link r7rsCommentTodo TODO
 hi def link r7rsDirective Comment
-hi def link r7rsIdentifierString r7rsIdentifier
 hi def link r7rsIdentifier Normal
+hi def link r7rsIdentifierString r7rsIdentifier
+hi def link r7rsSymbol Special
+hi def link r7rsSymbolString r7rsSymbol
 hi def link r7rsNumber Number
 hi def link r7rsUInt r7rsNumber
 hi def link r7rsBoolean Boolean
