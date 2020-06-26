@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-25
+" Last Change: 2020-06-27
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -543,7 +543,7 @@ hi def link r7rsCommentSharp r7rsComment
 hi def link r7rsCommentDatum r7rsComment
 hi def link r7rsCommentTodo TODO
 hi def link r7rsDirective Comment
-hi def link r7rsIdentifier Normal
+" hi def link r7rsIdentifier Normal
 hi def link r7rsIdentifierString r7rsIdentifier
 hi def link r7rsSymbol Special
 hi def link r7rsSymbolString r7rsSymbol
