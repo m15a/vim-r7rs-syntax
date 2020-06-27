@@ -89,7 +89,7 @@ syn cluster r7rsSymbols contains=r7rsSymbol,r7rsSymbolString
 
 " Those enclosed by ||
 syn region r7rsIdentifierString matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapeChars
-syn region r7rsSymbolString matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contains=@r7rsEscapeChars
+syn region r7rsSymbolString matchgroup=r7rsDelimiter start=/|/ skip=/\\[\\|]/ end=/|/ contained contains=@r7rsEscapeChars
 " NOTE: Why the group name contains String? This is identifier!
 " Vim's matchparen plugin finds pairs of parens correctly even if the parens contain extra
 " parens embedded in string, comment, etc.  Example: (a b ")").
@@ -101,25 +101,25 @@ if s:strict_identifier
   " where <initial> -> [:alpha:] | [!$%&*\/:<=>?^_~@]
   "       <subsequent> -> [:alnum:] | [!$%&*\/:<=>?^_~@] | [.+-]
   syn match r7rsIdentifier /[[:alpha:]!$%&*\/:<=>?^_~@][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
-  syn match r7rsSymbol /[[:alpha:]!$%&*\/:<=>?^_~@][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
+  syn match r7rsSymbol /[[:alpha:]!$%&*\/:<=>?^_~@][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/ contained
 
   " Peculiar identifier case 1 and 2
   " [+-] | [+-] <sign subsequent> <subsequent>*
   " where <sign subsequent> = <initial> | [+-]
   syn match r7rsIdentifier /[+-]\%([[:alpha:]!$%&*\/:<=>?^_~@+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*\)\?/
-  syn match r7rsSymbol /[+-]\%([[:alpha:]!$%&*\/:<=>?^_~@+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*\)\?/
+  syn match r7rsSymbol /[+-]\%([[:alpha:]!$%&*\/:<=>?^_~@+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*\)\?/ contained
 
   " Peculiar identifier case 3 and 4
   " [+-] . <dot subsequent> <subsequent>* | . <dot subsequent> <subsequent>*
   " where <dot subsequent> -> <initial> | [.+-]
   syn match r7rsIdentifier /[+-]\?\.[[:alpha:]!$%&*\/:<=>?^_~@.+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
-  syn match r7rsSymbol /[+-]\?\.[[:alpha:]!$%&*\/:<=>?^_~@.+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/
+  syn match r7rsSymbol /[+-]\?\.[[:alpha:]!$%&*\/:<=>?^_~@.+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/ contained
 else
   " Anything except single '.' is permitted.
   syn match r7rsIdentifier /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/
-  syn match r7rsSymbol /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/
+  syn match r7rsSymbol /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/ contained
   syn match r7rsIdentifier /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
-  syn match r7rsSymbol /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
+  syn match r7rsSymbol /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/ contained
 endif
 
 " Number (cf. R7RS, pp. 62-63) {{{2
@@ -262,8 +262,8 @@ endif
 syn region r7rsVectorQQ matchgroup=r7rsDelimiter start=/#(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsDataQQ,r7rsUnquote
 
 " Quoted simple data (any identifier, |identifier|, \"string\", or #-syntax other than '#(') {{{2
-syn match r7rsQuote /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsSimpleData
-syn match r7rsQuote /'\ze#[^(]/ nextgroup=@r7rsSimpleData
+syn match r7rsQuote /'\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsSymbols,@r7rsSimpleData
+syn match r7rsQuote /'\ze#[^(]/ nextgroup=@r7rsSymbols,@r7rsSimpleData
 
 " Quoted lists and vector {{{2
 syn match r7rsQuote /'\ze(/ nextgroup=r7rsQuoteList
@@ -285,8 +285,8 @@ syn match r7rsQuote /'\ze`/ nextgroup=r7rsQuasiQuote
 syn match r7rsQuote /'\ze,@\?/ nextgroup=r7rsUnquote
 
 " Quasiquoted simple data (any identifier, |idenfitier|, \"string\", or #-syntax other than '#(') {{{2
-syn match r7rsQuasiQuote /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsSimpleData
-syn match r7rsQuasiQuote /`\ze#[^(]/ nextgroup=@r7rsSimpleData
+syn match r7rsQuasiQuote /`\ze[^[:space:]\n();'`,\\#\[\]{}]/ nextgroup=@r7rsSymbols,@r7rsSimpleData
+syn match r7rsQuasiQuote /`\ze#[^(]/ nextgroup=@r7rsSymbols,@r7rsSimpleData
 
 " Quasiquoted lists and vector {{{2
 syn match r7rsQuasiQuote /`\ze(/ nextgroup=r7rsQuasiQuoteList
