@@ -116,10 +116,10 @@ if s:strict_identifier
   syn match r7rsSymbol /[+-]\?\.[[:alpha:]!$%&*\/:<=>?^_~@.+-][[:alnum:]!$%&*\/:<=>?^_~@.+-]*/ contained
 else
   " Anything except single '.' is permitted.
-  syn match r7rsIdentifier /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/
-  syn match r7rsSymbol /\.[^[:space:]\n|()";'`,\\#\[\]{}]\+/ contained
-  syn match r7rsIdentifier /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/
-  syn match r7rsSymbol /[^.[:space:]\n|()";'`,\\#\[\]{}][^[:space:]\n|()";'`,\\#\[\]{}]*/ contained
+  syn match r7rsIdentifier /\.[^[:space:]\n"#'(),;\[\]\\`{}|]\+/
+  syn match r7rsSymbol /\.[^[:space:]\n"#'(),;\[\]\\`{}|]\+/ contained
+  syn match r7rsIdentifier /[^.[:space:]\n"#'(),;\[\]\\`{}|][^[:space:]\n"#'(),;\[\]\\`{}|]*/
+  syn match r7rsSymbol /[^.[:space:]\n"#'(),;\[\]\\`{}|][^[:space:]\n"#'(),;\[\]\\`{}|]*/ contained
 endif
 
 " Number (cf. R7RS, pp. 62-63) {{{2
