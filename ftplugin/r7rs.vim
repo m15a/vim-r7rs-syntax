@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-20
+" Last Change: 2020-06-27
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -22,15 +22,30 @@ endif
 
 " }}}
 
+setl iskeyword=@,33,35-38,42-43,45-58,60-64,94-95,126
+" 32: SPACE
+" 34: "
+" 35: #
+" NOTE: `#` is required to allow highlighting numbers and booleans (e.g., `#e1.0` and `#false`)
+" 39: '
+" 40,41: ()
+" 44: ,
+" 59: ;
+" 65-90: A-Z (included in @)
+" 91,93: []
+" 92: \
+" 96: `
+" 97-122: a-z (included in @)
+" 123,125: {}
+" 124: |
+" 127: DEL
+
+setl define=^\s*(define\\k*
+
 setl comments=n:;
 setl commentstring=;\ %s
-setl define=^\s*(define\\k*
-setl iskeyword=@,33,35-38,42-43,45-58,60-64,94,95,126
-setl lisp
 
-if &omnifunc == ""
-  setl omnifunc=syntaxcomplete#Complete
-endif
+setl lisp
 
 " lispwords {{{
 
@@ -40,7 +55,11 @@ setl lispwords+=define-syntax,define-record-type,define-library
 
 " }}}
 
-let b:undo_ftplugin = 'setl com< cms< def< isk< lisp< lw< ofu<'
+if &omnifunc == ''
+  setl omnifunc=syntaxcomplete#Complete
+endif
+
+let b:undo_ftplugin = 'setl isk< def< com< cms< lisp< lw< ofu<'
 
 let b:did_ftplugin = 1
 
