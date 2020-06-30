@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-27
+" Last Change: 2020-07-01
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -64,7 +64,7 @@ syn region r7rsCommentDatum start=/{/ end=/}/ contained contains=r7rsCommentDatu
 " Move on when prefix before parens found
 syn match r7rsCommentDatum /\(['`]\|,@\?\|#\([[:alpha:]]\d\+\)\?\ze(\)/ contained nextgroup=r7rsCommentDatum
 
-syntax match r7rsCommentTodo /\c\(FIXME\|TODO\|NOTE\):\?/ contained
+syntax match r7rsCommentTodo /\c\(FIXME\|XXX\|TODO\|NOTE\|TBD\):\?/ contained
 
 " Directives (cf. R7RS, sec. 2.1 (p. 8) last paragraph) {{{2
 syn keyword r7rsDirective #!fold-case #!no-fold-case
