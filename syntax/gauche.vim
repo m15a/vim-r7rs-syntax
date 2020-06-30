@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-06-25
+" Last Change: 2020-07-01
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -11,11 +11,11 @@ endif
 
 " Options {{{1
 
-if r7rs#get('strict', 0)
+if r7rs#Get('strict', 0)
   let s:brackets_as_parens = 0
   let s:braces_as_parens = 0
 else
-  let s:more_parens = r7rs#get('more_parens', ']')
+  let s:more_parens = r7rs#Get('more_parens', ']')
   let s:brackets_as_parens = match(s:more_parens, '[\[\]]') > -1
   let s:braces_as_parens = match(s:more_parens, '[{}]') > -1
   unlet s:more_parens
@@ -67,9 +67,9 @@ syn clear r7rsNumber
 " | [+-](inf|nan)\.0          " inf or nan
 " )
 " Other radixes are analogous to the above binary case.
-exec 'syn match r7rsNumber /' . r7rs#number#real('[_01]') . '/'
-exec 'syn match r7rsNumber /' . r7rs#number#real('[_0-7]') . '/'
-exec 'syn match r7rsNumber /' . r7rs#number#real('[_[:xdigit:]]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Real('[_01]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Real('[_0-7]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Real('[_[:xdigit:]]') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -77,9 +77,9 @@ exec 'syn match r7rsNumber /' . r7rs#number#real('[_[:xdigit:]]') . '/'
 " [+-]
 " ( [_01]+(\/[_01]+)? | (inf|nan)\.0 )?
 " i
-exec 'syn match r7rsNumber /' . r7rs#number#rect('[_01]') . '/'
-exec 'syn match r7rsNumber /' . r7rs#number#rect('[_0-7]') . '/'
-exec 'syn match r7rsNumber /' . r7rs#number#rect('[_[:xdigit:]]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Rect('[_01]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Rect('[_0-7]') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Rect('[_[:xdigit:]]') . '/'
 
 " Complex number in polar notation {{{4
 " ( #b | #[ei]#b | #b#[ei] )
@@ -87,9 +87,9 @@ exec 'syn match r7rsNumber /' . r7rs#number#rect('[_[:xdigit:]]') . '/'
 " \@
 " ( [+-]?[_01]+(\/[_01]+)? | [+-](inf|nan)\.0 )
 " (pi)?
-exec 'syn match r7rsNumber /' . r7rs#number#polar('[_01]', { 'suffix_pi': 1 }) . '/'
-exec 'syn match r7rsNumber /' . r7rs#number#polar('[_0-7]', { 'suffix_pi': 1 }) . '/'
-exec 'syn match r7rsNumber /' . r7rs#number#polar('[_[:xdigit:]]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Polar('[_01]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Polar('[_0-7]', { 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Polar('[_[:xdigit:]]', { 'suffix_pi': 1 }) . '/'
 
 " Common-Lisp-y radix prefixed notation {{{3
 
@@ -101,7 +101,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#polar('[_[:xdigit:]]', { 'suffix_pi'
 " | [+-](inf|nan)\.0
 " )
 " Other radixes are analogous to the above binary case.
-exec 'syn match r7rsNumber /' . r7rs#number#real('\w') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Real('\w') . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #\d{1,2}r | #[ei]#\d{1,2}r | #\d{1,2}r#[ei] )
@@ -109,7 +109,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#real('\w') . '/'
 " [+-]
 " ( \w+(\/\w+)? | (inf|nan)\.0 )?
 " i
-exec 'syn match r7rsNumber /' . r7rs#number#rect('\w') . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Rect('\w') . '/'
 
 " Complex number in polar notation {{{4
 " ( #\d{1,2}r | #[ei]#\d{1,2}r | #\d{1,2}r#[ei] )
@@ -117,7 +117,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#rect('\w') . '/'
 " \@
 " ( [+-]?\w+(\/\w+)? | [+-](inf|nan)\.0 )
 " (pi)?
-exec 'syn match r7rsNumber /' . r7rs#number#polar('\w', { 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Polar('\w', { 'suffix_pi': 1 }) . '/'
 
 " Decimal number (prefixed) {{{3
 
@@ -132,7 +132,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#polar('\w', { 'suffix_pi': 1 }) . '/
 "         )
 " | [+-](inf|nan)\.0
 " )
-exec 'syn match r7rsNumber /' . r7rs#number#real('[_0-9]', { 'prefix_req': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Real('[_0-9]', { 'prefix_req': 1 }) . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )
@@ -148,7 +148,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#real('[_0-9]', { 'prefix_req': 1 }) 
 " | (inf|nan)\.0
 " )?
 " i
-exec 'syn match r7rsNumber /' . r7rs#number#rect('[_0-9]', { 'prefix_req': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Rect('[_0-9]', { 'prefix_req': 1 }) . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )
@@ -164,7 +164,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#rect('[_0-9]', { 'prefix_req': 1 }) 
 " | [+-](inf|nan)\.0
 " )
 " (pi)?
-exec 'syn match r7rsNumber /' . r7rs#number#polar('[_0-9]', { 'prefix_req': 1, 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Polar('[_0-9]', { 'prefix_req': 1, 'suffix_pi': 1 }) . '/'
 
 " Decimal number (no prefix) {{{3
 
@@ -179,7 +179,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#polar('[_0-9]', { 'prefix_req': 1, '
 "         )
 " | [+-](inf|nan)\.0
 " )
-exec 'syn match r7rsNumber /' . r7rs#number#real('\d', { 'prefix_req': -1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Real('\d', { 'prefix_req': -1 }) . '/'
 
 " Complex number in rectangular notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )@<!
@@ -195,7 +195,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#real('\d', { 'prefix_req': -1 }) . '
 " | (inf|nan)\.0
 " )?
 " i
-exec 'syn match r7rsNumber /' . r7rs#number#rect('\d', { 'prefix_req': -1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Rect('\d', { 'prefix_req': -1 }) . '/'
 
 " Complex number in polar notation {{{4
 " ( #[dei] | #[ei]#d | #d#[ei] )@<!
@@ -211,7 +211,7 @@ exec 'syn match r7rsNumber /' . r7rs#number#rect('\d', { 'prefix_req': -1 }) . '
 " | [+-](inf|nan)\.0
 " )
 " (pi)?
-exec 'syn match r7rsNumber /' . r7rs#number#polar('\d', { 'prefix_req': -1, 'suffix_pi': 1 }) . '/'
+exec 'syn match r7rsNumber /' . r7rs#number#Polar('\d', { 'prefix_req': -1, 'suffix_pi': 1 }) . '/'
 
 " Character {{{2
 

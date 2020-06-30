@@ -14,10 +14,10 @@ set cpo&vim
 
 " Options {{{1
 
-if r7rs#get('strict', 0)
+if r7rs#Get('strict', 0)
   let s:use_gauche = 0
 else
-  let s:use_gauche = r7rs#get('use_gauche', 0)
+  let s:use_gauche = r7rs#Get('use_gauche', 0)
 endif
 
 " }}}
