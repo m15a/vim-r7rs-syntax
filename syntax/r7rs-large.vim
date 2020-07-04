@@ -454,6 +454,35 @@ syn keyword r7rsFunction make-mapping-comparator
 syn keyword r7rsVariable mapping-comparator
 
 
+" (scheme mapping hash) SRFI-146 {{{1
+syn keyword r7rsFunction hashmap hashmap-unfold hashmap/ordered hashmap-unfold/ordered
+syn keyword r7rsFunction hashmap? hashmap-contains? hashmap-empty? hashmap-disjoint?
+syn keyword r7rsFunction hashmap-ref hashmap-ref/default hashmap-key-comparator
+syn keyword r7rsFunction hashmap-adjoin hashmap-set hashmap-replace hashmap-delete
+syn keyword r7rsFunctionM hashmap-adjoin! hashmap-set! hashmap-replace! hashmap-delete!
+syn keyword r7rsFunction hashmap-delete-all hashmap-intern hashmap-update
+syn keyword r7rsFunctionM hashmap-delete-all! hashmap-intern! hashmap-update!
+syn keyword r7rsFunction hashmap-update/default hashmap-pop hashmap-search
+syn keyword r7rsFunctionM hashmap-update!/default hashmap-pop! hashmap-search!
+syn keyword r7rsFunction hashmap-size hashmap-find hashmap-count hashmap-any? hashmap-every?
+syn keyword r7rsFunction hashmap-keys hashmap-values hashmap-entries
+syn keyword r7rsFunction hashmap-map hashmap-map->list hashmap-for-each hashmap-fold
+syn keyword r7rsFunction hashmap-filter hashmap-remove hashmap-partition
+syn keyword r7rsFunctionM hashmap-filter! hashmap-remove! hashmap-partition!
+syn keyword r7rsFunction hashmap-copy hashmap->alist alist->hashmap alist->hashmap/ordered
+syn keyword r7rsFunctionM alist->hashmap! alist->hashmap/ordered!
+syn keyword r7rsFunction hashmap=? hashmap<? hashmap>? hashmap<=? hashmap>=?
+syn keyword r7rsFunction hashmap-union hashmap-intersection hashmap-difference hashmap-xor
+syn keyword r7rsFunctionM hashmap-union! hashmap-intersection! hashmap-difference! hashmap-xor!
+syn keyword r7rsFunction hashmap-min-key hashmap-max-key hashmap-min-value hashmap-max-value
+syn keyword r7rsFunction hashmap-min-entry hashmap-max-entry hashmap-key-predecessor hashmap-key-successor
+syn keyword r7rsFunction hashmap-range= hashmap-range< hashmap-range> hashmap-range<= hashmap-range>=
+syn keyword r7rsFunctionM hashmap-range=! hashmap-range<! hashmap-range>! hashmap-range<=! hashmap-range>=!
+syn keyword r7rsFunction hashmap-split hashmap-catenate hashmap-map/monotone hashmap-fold/reverse
+syn keyword r7rsFunctionM hashmap-split! hashmap-catenate! hashmap-map/monotone!
+syn keyword r7rsFunction make-hashmap-comparator
+syn keyword r7rsVariable hashmap-comparator
+
 " (scheme division) SRFI-141 {{{1
 " `floor` and `truncate` families are part of R7RS-small.
 " syn keyword r7rsFunction floor/ floor-quotient floor-remainder

@@ -26,7 +26,7 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
     - [x] `(scheme ephemeron)`
     - [x] `(scheme comparator)`
     - [x] `(scheme mapping)`
-    - [ ] `(scheme mapping hash)`
+    - [x] `(scheme mapping hash)`
     - [ ] `(scheme regex)`
     - [x] `(scheme generator)`
     - [x] `(scheme division)`
