@@ -322,6 +322,9 @@ EOF
                       # Use special color
                       print "syn keyword r7rsFunctionM", $0
                       break
+                  case "list-queue-fist-last":
+                      # typo and already contained in R7RS large
+                      break
                   case /!/:
                       # Use special color
                       print "syn keyword r7rsFunctionM", $0

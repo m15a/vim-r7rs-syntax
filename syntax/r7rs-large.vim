@@ -396,6 +396,15 @@ syn keyword r7rsFunction stream-take-while stream-unfold stream-unfolds stream-z
 syn keyword r7rsFunction box box? unbox
 syn keyword r7rsFunctionM set-box!
 
+" (scheme list-queue) SRFI-117 {{{1
+syn keyword r7rsFunction make-list-queue list-queue list-queue-copy list-queue-unfold
+syn keyword r7rsFunction list-queue-unfold-right list-queue? list-queue-empty?
+syn keyword r7rsFunction list-queue-front list-queue-back list-queue-list list-queue-first-last
+syn keyword r7rsFunction list-queue-append list-queue-concatenate list-queue-map list-queue-for-each
+syn keyword r7rsFunctionM list-queue-add-front! list-queue-add-back! list-queue-remove-front!
+syn keyword r7rsFunctionM list-queue-remove-back! list-queue-remove-all! list-queue-set-list!
+syn keyword r7rsFunctionM list-queue-append! list-queue-map!
+
 " (scheme ephemeron) SRFI-124 {{{1
 syn keyword r7rsFunction ephemeron? make-ephemeron ephemeron-broken? ephemeron-key ephemeron-datum
 syn keyword r7rsFunction reference-barrier
