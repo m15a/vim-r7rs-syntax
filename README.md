@@ -31,7 +31,7 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
     - [x] `(scheme generator)`
     - [x] `(scheme division)`
     - [x] `(scheme bitwise)`
-    - [ ] `(scheme fixnum)`
+    - [x] `(scheme fixnum)`
     - [ ] `(scheme flonum)`
     - [ ] `(scheme bytevector)`
     - [x] `(scheme vector @)`

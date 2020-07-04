@@ -443,6 +443,17 @@ syn keyword r7rsFunction bit-field-replace bit-field-replace-same bit-field-rota
 syn keyword r7rsFunction bits->list list->bits bits->vector vector->bits bits
 syn keyword r7rsFunction bitwise-fold bitwise-for-each bitwise-unfold make-bitwise-generator
 
+" (scheme fixnum) SRFI-143 {{{1
+syn keyword r7rsFunction fx-width fx-greatest fx-least fixnum? fx=? fx<? fx>? fx<=? fx>=?
+syn keyword r7rsFunction fxzero? fxpositive? fxnegative? fxodd? fxeven? fxmax fxmin
+syn keyword r7rsFunction fx+ fx- fxneg fx* fxquotient fxremainder fxabs fxsquare fxsqrt
+syn keyword r7rsFunction fx+/carry fx-/carry fx*/carry
+syn keyword r7rsFunction fxnot fxand fxior fxxor
+syn keyword r7rsFunction fxarithmetic-shift fxarithmetic-shift-left fxarithmetic-shift-right
+syn keyword r7rsFunction fxbit-count fxlength fxif fxbit-set?
+syn keyword r7rsFunction fxcopy-bit fxfirst-set-bit fxbit-field fxbit-field-rotate
+syn keyword r7rsFunction fxbit-field-reverse
+
 " Highlights {{{1
 
 hi def link r7rsVariable Identifier
