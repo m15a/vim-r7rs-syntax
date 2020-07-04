@@ -48,7 +48,7 @@ $(BUILD)/function.vim: $(BUILD)/atdef.tsv
 	./build.scm function $< > $@
 
 $(BUILD)/parameter.vim: $(BUILD)/atdef.tsv
-	./build.sh parameter $< > $@
+	./build.scm parameter $< > $@
 
 $(BUILD)/variable.vim: $(BUILD)/atdef.tsv
 	./build.sh variable $< > $@
