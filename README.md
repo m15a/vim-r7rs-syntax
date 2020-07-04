@@ -29,7 +29,7 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
     - [ ] `(scheme mapping hash)`
     - [ ] `(scheme regex)`
     - [x] `(scheme generator)`
-    - [ ] `(scheme division)`
+    - [x] `(scheme division)`
     - [ ] `(scheme bitwise)`
     - [ ] `(scheme fixnum)`
     - [ ] `(scheme flonum)`

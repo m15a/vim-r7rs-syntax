@@ -424,6 +424,15 @@ syn keyword r7rsFunction comparator-check-type comparator-hash
 syn keyword r7rsFunction =? <? >? <=? >=?
 syn keyword r7rsFunctionM comparator-register-default!
 
+" (scheme division) SRFI-141 {{{1
+" `floor` and `truncate` families are part of R7RS-small.
+" syn keyword r7rsFunction floor/ floor-quotient floor-remainder
+" syn keyword r7rsFunction truncate/ truncate-quotient truncate-remainder
+syn keyword r7rsFunction ceiling/ ceiling-quotient ceiling-remainder
+syn keyword r7rsFunction round/ round-quotient round-remainder
+syn keyword r7rsFunction euclidean/ euclidean-quotient euclidean-remainder
+syn keyword r7rsFunction balanced/ balanced-quotient balanced-remainder
+
 " Highlights {{{1
 
 hi def link r7rsVariable Identifier

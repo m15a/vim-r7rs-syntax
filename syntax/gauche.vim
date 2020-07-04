@@ -548,9 +548,6 @@ syn keyword r7rsFunction attlist-add
 syn keyword r7rsFunction attlist-fold
 syn keyword r7rsFunction attlist-null?
 syn keyword r7rsFunction attlist-remove-top
-syn keyword r7rsFunction balanced-quotient
-syn keyword r7rsFunction balanced-remainder
-syn keyword r7rsFunction balanced/
 syn keyword r7rsFunction base64-decode
 syn keyword r7rsFunction base64-decode-string
 syn keyword r7rsFunction base64-encode
@@ -714,9 +711,6 @@ syn keyword r7rsFunction car-sxpath
 syn keyword r7rsFunction cartesian-product
 syn keyword r7rsFunction cartesian-product-right
 syn keyword r7rsFunction ceiling->exact
-syn keyword r7rsFunction ceiling-quotient
-syn keyword r7rsFunction ceiling-remainder
-syn keyword r7rsFunction ceiling/
 syn keyword r7rsFunction ces-conversion-supported?
 syn keyword r7rsFunction ces-convert
 syn keyword r7rsFunction ces-convert-to
@@ -1048,9 +1042,6 @@ syn keyword r7rsFunction eq-compare
 syn keyword r7rsFunction eq-hash
 syn keyword r7rsFunction eqv-hash
 syn keyword r7rsFunction errorf
-syn keyword r7rsFunction euclidean-quotient
-syn keyword r7rsFunction euclidean-remainder
-syn keyword r7rsFunction euclidean/
 syn keyword r7rsFunction every$
 syn keyword r7rsFunction every-bit-set?
 syn keyword r7rsFunction every-in-queue
@@ -2288,9 +2279,6 @@ syn keyword r7rsFunction ring-buffer-num-entries
 syn keyword r7rsFunction ring-buffer-ref
 syn keyword r7rsFunction rotate-bit-field
 syn keyword r7rsFunction round->exact
-syn keyword r7rsFunction round-quotient
-syn keyword r7rsFunction round-remainder
-syn keyword r7rsFunction round/
 syn keyword r7rsFunction rtd-accessor
 syn keyword r7rsFunction rtd-all-field-names
 syn keyword r7rsFunction rtd-constructor
