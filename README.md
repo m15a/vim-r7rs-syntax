@@ -11,7 +11,6 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
 - [ ] R7RS-large
     - [x] `(scheme list)`
     - [x] `(scheme vector)`
-    - [x] `(scheme vector @)`
     - [x] `(scheme sort)`
     - [x] `(scheme set)`
     - [x] `(scheme charset)`
@@ -20,19 +19,23 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
     - [ ] `(scheme rlist)`
     - [x] `(scheme ideque)`
     - [ ] `(scheme text)`
-    - [x] `(scheme generator)`
     - [x] `(scheme lseq)`
     - [x] `(scheme stream)`
     - [x] `(scheme box)`
     - [x] `(scheme list-queue)`
     - [x] `(scheme ephemeron)`
     - [x] `(scheme comparator)`
-    - [ ] `(scheme regex)`
     - [ ] `(scheme mapping)`
+    - [ ] `(scheme mapping hash)`
+    - [ ] `(scheme regex)`
+    - [x] `(scheme generator)`
     - [ ] `(scheme division)`
     - [ ] `(scheme bitwise)`
     - [ ] `(scheme fixnum)`
     - [ ] `(scheme flonum)`
+    - [ ] `(scheme bytevector)`
+    - [x] `(scheme vector @)`
+    - [ ] `(scheme show)`
 - [ ] SRFI
 - [ ] Gauche (mostly implemented. See [TODO](TODO.md))
 
