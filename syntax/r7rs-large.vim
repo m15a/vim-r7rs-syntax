@@ -483,6 +483,14 @@ syn keyword r7rsFunctionM hashmap-split! hashmap-catenate! hashmap-map/monotone!
 syn keyword r7rsFunction make-hashmap-comparator
 syn keyword r7rsVariable hashmap-comparator
 
+" (scheme regex) SRFI-115 {{{1
+syn keyword r7rsSyntax rx
+syn keyword r7rsFunction regexp regexp->sre char-set->sre valid-sre? regexp? regexp-match?
+syn keyword r7rsFunction regexp-matches regexp-matches? regexp-search regexp-fold regexp-extract
+syn keyword r7rsFunction regexp-split regexp-partition regexp-replace regexp-replace-all
+syn keyword r7rsFunction regexp-match-submatch regexp-match-submatch-start regexp-match-submatch-end
+syn keyword r7rsFunction regexp-match-count regexp-match->list
+
 " (scheme division) SRFI-141 {{{1
 " `floor` and `truncate` families are part of R7RS-small.
 " syn keyword r7rsFunction floor/ floor-quotient floor-remainder
