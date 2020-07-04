@@ -32,12 +32,12 @@ syn keyword r7rsFunctionM lset-diff+intersection!
 " (scheme vector) SRFI-133 {{{1
 syn keyword r7rsFunction vector-unfold vector-unfold-right vector-reverse-copy vector-concatenate
 syn keyword r7rsFunction vector-append-subvectors vector-empty? vector=
-syn keyword r7rsFunction vector-fold vector-fold-right vector-map! vector-count vector-cumulate
+syn keyword r7rsFunction vector-fold vector-fold-right vector-count vector-cumulate
 syn keyword r7rsFunction vector-index vector-index-right vector-skip vector-skip-right
 syn keyword r7rsFunction vector-binary-search vector-any vector-every vector-partition
 syn keyword r7rsFunction reverse-vector->list reverse-list->vector
-syn keyword r7rsFunctionM vector-swap! vector-reverse! vector-reverse-copy! vector-unfold!
-syn keyword r7rsFunctionM vector-unfold-right!
+syn keyword r7rsFunctionM vector-map! vector-swap! vector-reverse! vector-reverse-copy!
+syn keyword r7rsFunctionM vector-unfold! vector-unfold-right!
 
 " (scheme vector @) SRFI-160 {{{1
 syn clear r7rsBytevector
