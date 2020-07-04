@@ -433,6 +433,16 @@ syn keyword r7rsFunction round/ round-quotient round-remainder
 syn keyword r7rsFunction euclidean/ euclidean-quotient euclidean-remainder
 syn keyword r7rsFunction balanced/ balanced-quotient balanced-remainder
 
+" (scheme bitwise) SRFI-151 {{{1
+syn keyword r7rsFunction bitwise-not bitwise-and bitwise-ior bitwise-xor bitwise-eqv bitwise-nand
+syn keyword r7rsFunction bitwise-nor bitwise-andc1 bitwise-andc2 bitwise-orc1 bitwise-orc2 
+syn keyword r7rsFunction arithmetic-shift bit-count integer-length bitwise-if
+syn keyword r7rsFunction bit-set? copy-bit bit-swap any-bit-set? every-bit-set? first-set-bit
+syn keyword r7rsFunction bit-field bit-field-any? bit-field-every? bit-field-clear bit-field-set
+syn keyword r7rsFunction bit-field-replace bit-field-replace-same bit-field-rotate bit-field-reverse
+syn keyword r7rsFunction bits->list list->bits bits->vector vector->bits bits
+syn keyword r7rsFunction bitwise-fold bitwise-for-each bitwise-unfold make-bitwise-generator
+
 " Highlights {{{1
 
 hi def link r7rsVariable Identifier
