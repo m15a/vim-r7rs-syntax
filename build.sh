@@ -325,6 +325,9 @@ EOF
                   case "list-queue-fist-last":
                       # typo and already contained in R7RS large
                       break
+                  case "flnevative?":
+                      # typo and already contained in R7RS large
+                      break
                   case /!/:
                       # Use special color
                       print "syn keyword r7rsFunctionM", $0

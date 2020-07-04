@@ -454,6 +454,29 @@ syn keyword r7rsFunction fxbit-count fxlength fxif fxbit-set?
 syn keyword r7rsFunction fxcopy-bit fxfirst-set-bit fxbit-field fxbit-field-rotate
 syn keyword r7rsFunction fxbit-field-reverse
 
+" (scheme flonum) SRFI-144 {{{1
+syn keyword r7rsConstant fl-e fl-1/e fl-e-2 fl-e-pi/4 fl-log2-e fl-log10-e fl-log-2 fl-1/log-2
+syn keyword r7rsConstant fl-log-3 fl-log-pi fl-log-10 fl-1/log-10 fl-pi fl-1/pi fl-2pi fl-pi/2
+syn keyword r7rsConstant fl-pi/4 fl-pi-squared fl-degree fl-2/pi fl-2/sqrt-pi fl-sqrt-2 fl-sqrt-3
+syn keyword r7rsConstant fl-sqrt-5 fl-sqrt-10 fl-1/sqrt-2 fl-cbrt-2 fl-cbrt-3 fl-4thrt-2
+syn keyword r7rsConstant fl-phi fl-log-phi fl-1/log-phi fl-euler fl-e-euler
+syn keyword r7rsConstant fl-sin-1 fl-cos-1 fl-gamma-1/2 fl-gamma-1/3 fl-gamma-2/3
+syn keyword r7rsConstant fl-greatest fl-least fl-epsilon fl-fast-fl+*
+syn keyword r7rsConstant fl-integer-exponent-zero fl-integer-exponent-nan
+syn keyword r7rsFunction flonum fladjacent flcopysign make-flonum
+syn keyword r7rsFunction flinteger-fraction flexponent flinteger-exponent
+syn keyword r7rsFunction flnormalized-fraction-exponent flsign-bit
+syn keyword r7rsFunction flonum? fl=? fl<? fl>? fl<=? fl>=? flunordered? flinteger? flzero?
+syn keyword r7rsFunction flpositive? flnegative? flodd? fleven? flfinite? flinfinite? flnan?
+syn keyword r7rsFunction flnormalized? fldenormalized?
+syn keyword r7rsFunction flmax flmin fl+ fl* fl+* fl- fl/ flabs flabsdiff flposdiff flsgn
+syn keyword r7rsFunction flnumerator fldenominator flfloor flceiling flround fltruncate
+syn keyword r7rsFunction flexp flexp2 flexp-1 flsquare flsqrt flcbrt flhypot flexpt fllog fllog1+
+syn keyword r7rsFunction fllog2 fllog10 make-fllog-base
+syn keyword r7rsFunction flsin flcos fltan flasin flacos flatan flsinh flcosh fltanh
+syn keyword r7rsFunction flasinh flacosh flatanh flquotient flremainder flremquo
+syn keyword r7rsFunction flgamma flloggamma flfirst-bessel flsecond-bessel flerf flerfc
+
 " Highlights {{{1
 
 hi def link r7rsVariable Identifier
