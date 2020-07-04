@@ -397,6 +397,7 @@ EOF
     gawk -F'\t' '$3 ~ /^{constant}$/ { print $4 }' "$1" \
         | sort | uniq \
         | gawk -i"$LIB" '{ print_with_at_expanded($0) }' \
+        | find_undefined_keywords_in 'r7rsConstant' \
         | gawk '{ print "syn keyword r7rsConstant", $0 }'
 }
 
