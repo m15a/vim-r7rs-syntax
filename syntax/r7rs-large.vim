@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-22
+" Last Change: 2020-07-04
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -380,6 +380,17 @@ syn keyword r7rsFunction lseq-realize lseq->generator lseq-length lseq-append ls
 syn keyword r7rsFunction lseq-map lseq-for-each lseq-filter lseq-remove
 syn keyword r7rsFunction lseq-find lseq-find-tail lseq-any lseq-every lseq-index lseq-take-while
 syn keyword r7rsFunction lseq-drop-while lseq-member lseq-memq lseq-memv 
+
+" (scheme stream) SRFI-41 {{{1
+syn keyword r7rsSyntaxM define-stream
+syn keyword r7rsSyntax stream-cons stream-lambda stream stream-let stream-match stream-of
+syn keyword r7rsVariable stream-null
+syn keyword r7rsFunction stream? stream-null? stream-pair? stream-car stream-cdr
+syn keyword r7rsFunction list->stream port->stream stream->list stream-append stream-concat
+syn keyword r7rsFunction stream-constant stream-drop stream-drop-while stream-filter stream-fold
+syn keyword r7rsFunction stream-for-each stream-from stream-iterate stream-length stream-map
+syn keyword r7rsFunction stream-range stream-ref stream-reverse stream-scan stream-take
+syn keyword r7rsFunction stream-take-while stream-unfold stream-unfolds stream-zip
 
 " (scheme box) SRFI-111 {{{1
 syn keyword r7rsFunction box box? unbox

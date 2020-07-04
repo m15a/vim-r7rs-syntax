@@ -22,7 +22,7 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
     - [ ] `(scheme text)`
     - [x] `(scheme generator)`
     - [x] `(scheme lseq)`
-    - [ ] `(scheme stream)`
+    - [x] `(scheme stream)`
     - [x] `(scheme box)`
     - [ ] `(scheme list-queue)`
     - [x] `(scheme ephemeron)`

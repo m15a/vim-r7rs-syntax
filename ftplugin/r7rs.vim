@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (R7RS)
-" Last Change: 2020-06-27
+" Last Change: 2020-07-04
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -64,6 +64,7 @@ let b:undo_ftplugin = 'setl isk< def< com< cms< lisp< lw< ofu<'
 let b:did_ftplugin = 1
 
 let b:did_r7rs_ftplugin = 1
+runtime! ftplugin/r7rs-large.vim
 if s:use_gauche
   runtime! ftplugin/gauche.vim
 endif
