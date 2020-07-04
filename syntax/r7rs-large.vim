@@ -424,6 +424,36 @@ syn keyword r7rsFunction comparator-check-type comparator-hash
 syn keyword r7rsFunction =? <? >? <=? >=?
 syn keyword r7rsFunctionM comparator-register-default!
 
+" (scheme mapping) SRFI-146 {{{1
+syn keyword r7rsFunction mapping mapping-unfold mapping/ordered mapping-unfold/ordered
+syn keyword r7rsFunction mapping? mapping-contains? mapping-empty? mapping-disjoint?
+syn keyword r7rsFunction mapping-ref mapping-ref/default mapping-key-comparator
+syn keyword r7rsFunction mapping-adjoin mapping-set mapping-replace mapping-delete
+syn keyword r7rsFunctionM mapping-adjoin! mapping-set! mapping-replace! mapping-delete!
+syn keyword r7rsFunction mapping-delete-all mapping-intern mapping-update
+syn keyword r7rsFunctionM mapping-delete-all! mapping-intern! mapping-update!
+syn keyword r7rsFunction mapping-update/default mapping-pop mapping-search
+syn keyword r7rsFunctionM mapping-update!/default mapping-pop! mapping-search!
+syn keyword r7rsFunction mapping-size mapping-find mapping-count mapping-any? mapping-every?
+syn keyword r7rsFunction mapping-keys mapping-values mapping-entries
+syn keyword r7rsFunction mapping-map mapping-map->list mapping-for-each mapping-fold
+syn keyword r7rsFunction mapping-filter mapping-remove mapping-partition
+syn keyword r7rsFunctionM mapping-filter! mapping-remove! mapping-partition!
+syn keyword r7rsFunction mapping-copy mapping->alist alist->mapping alist->mapping/ordered
+syn keyword r7rsFunctionM alist->mapping! alist->mapping/ordered!
+syn keyword r7rsFunction mapping=? mapping<? mapping>? mapping<=? mapping>=?
+syn keyword r7rsFunction mapping-union mapping-intersection mapping-difference mapping-xor
+syn keyword r7rsFunctionM mapping-union! mapping-intersection! mapping-difference! mapping-xor!
+syn keyword r7rsFunction mapping-min-key mapping-max-key mapping-min-value mapping-max-value
+syn keyword r7rsFunction mapping-min-entry mapping-max-entry mapping-key-predecessor mapping-key-successor
+syn keyword r7rsFunction mapping-range= mapping-range< mapping-range> mapping-range<= mapping-range>=
+syn keyword r7rsFunctionM mapping-range=! mapping-range<! mapping-range>! mapping-range<=! mapping-range>=!
+syn keyword r7rsFunction mapping-split mapping-catenate mapping-map/monotone mapping-fold/reverse
+syn keyword r7rsFunctionM mapping-split! mapping-catenate! mapping-map/monotone!
+syn keyword r7rsFunction make-mapping-comparator
+syn keyword r7rsVariable mapping-comparator
+
+
 " (scheme division) SRFI-141 {{{1
 " `floor` and `truncate` families are part of R7RS-small.
 " syn keyword r7rsFunction floor/ floor-quotient floor-remainder
