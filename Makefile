@@ -60,10 +60,10 @@ $(BUILD)/cise.vim: $(BUILD)/atdef.tsv
 	./build.sh cise $< > $@
 
 $(BUILD)/module.vim: $(BUILD)/atdef.tsv
-	./build.sh module $< > $@
+	./build.scm module $< > $@
 
 $(BUILD)/class.vim: $(BUILD)/atdef.tsv
-	./build.sh class $< > $@
+	./build.scm class $< > $@
 
 $(BUILD)/atdef.tsv:
 	mkdir -p $(BUILD)
