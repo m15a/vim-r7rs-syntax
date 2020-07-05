@@ -30,7 +30,7 @@ clean:
 	rm -rf _build
 
 syntax/gauche.vim: $(VIM_FILES)
-	./build.sh syntax $@ $^
+	./build.scm syntax $@ $^
 
 ftplugin/gauche.vim: $(BUILD)/atdef.tsv
 	./build.scm ftplugin $@ $<
