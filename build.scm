@@ -58,6 +58,10 @@
             [else (usage)])))))
 
 (define (build-tsv names)
+  (when (not (sys-getenv "GAUCHE_SRC"))
+    (parameterize ([current-output-port (current-error-port)])
+      (write-string "Please set GAUCHE_SRC to gauche source path\n"))
+    (exit 1))
   (when (null? names)
     (usage "tsv [NAME...]"
            "Convert gauche document source files to a TSV table."
