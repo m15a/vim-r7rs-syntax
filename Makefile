@@ -33,7 +33,7 @@ syntax/gauche.vim: $(VIM_FILES)
 	./build.sh syntax $@ $^
 
 ftplugin/gauche.vim: $(BUILD)/atdef.tsv
-	./build.sh ftplugin $@ $<
+	./build.scm ftplugin $@ $<
 
 $(BUILD)/macro.vim: $(BUILD)/atdef.tsv
 	./build.scm macro $< > $@
