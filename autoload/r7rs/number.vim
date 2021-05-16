@@ -119,7 +119,7 @@ endfun
 "   s:WithFrac10('NUMBER') ==> '\%(NUMBER\|\%(\d\+\|\.\d\+\|\d\+\.\d*\)\%([esfdl][+-]?\d\+\)\?\)'
 fun! s:WithFrac10(wrapped, ...) abort
   let l:d = get(a:000, 0, '\d')
-  return '\%(' . a:wrapped . '\|\%(' . l:d . '\+\|\.' . l:d . '\+\|' . l:d . '\+\.' . l:d . '*\)\%([esfdl][+-]?' . l:d . '\+\)\?\)'
+  return '\%(' . a:wrapped . '\|\%(' . l:d . '\+\|\.' . l:d . '\+\|' . l:d . '\+\.' . l:d . '*\)\%([esfdl][+-]\?' . l:d . '\+\)\?\)'
 endfun
 
 " Wrap any signed number regexp with regexp of inf/nan
