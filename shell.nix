@@ -1,19 +1,22 @@
-with import <nixpkgs> {};
-
 let
-  gauche_src = runCommand "${gauche.name}-src" {
-    inherit (gauche) src;
-  } ''
-    tar xf "$src"
-    mkdir -p "$out"/doc
-    cp -r */doc/*.texi "$out"/doc
-  '';
+  pkgs = import (fetchNixpkgs {
+    rev = "a2c3ea5bf825348322c901358b155f651d8ed699";
+    sha256 = "0rxn9wg73gvgb7zwzrdhranlj3jpkkcnsqmrzw5m0znwv6apj6k4";
+  }) {};
+
+  fetchNixpkgs = { rev, sha256 }:
+  builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
+    inherit sha256;
+  };
 in
+
+with pkgs;
 
 mkShell {
   buildInputs = [ gauche shellcheck ];
 
-  GAUCHE_SRC = gauche_src;
+  GAUCHE_SRC = gauche.src;
 
   VIM_SRC = vim.src;
 
