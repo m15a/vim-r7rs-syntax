@@ -1,5 +1,5 @@
 " Helper functions for r7rs-syntax plugin
-" Last Change: 2020-07-01
+" Last Change: 2021-05-16
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -101,7 +101,7 @@ fun! s:UReal(digit, ...) abort
   let l:radix = get(a:000, 0, s:Radix(a:digit))
   let l:ureal = s:IntOrRat(a:digit)
   if l:radix ==# 'd'
-    let l:ureal = s:WithFrac10(l:ureal)
+    let l:ureal = s:WithFrac10(l:ureal, a:digit)
   endif
   return l:ureal
 endfun
@@ -117,8 +117,9 @@ endfun
 " Wrap any number regexp with regexp of decimal fractional number
 " Example:
 "   s:WithFrac10('NUMBER') ==> '\%(NUMBER\|\%(\d\+\|\.\d\+\|\d\+\.\d*\)\%([esfdl][+-]?\d\+\)\?\)'
-fun! s:WithFrac10(wrapped) abort
-  return '\%(' . a:wrapped . '\|\%(\d\+\|\.\d\+\|\d\+\.\d*\)\%([esfdl][+-]?\d\+\)\?\)'
+fun! s:WithFrac10(wrapped, ...) abort
+  let l:d = get(a:000, 0, '\d')
+  return '\%(' . a:wrapped . '\|\%(' . l:d . '\+\|\.' . l:d . '\+\|' . l:d . '\+\.' . l:d . '*\)\%([esfdl][+-]?' . l:d . '\+\)\?\)'
 endfun
 
 " Wrap any signed number regexp with regexp of inf/nan
