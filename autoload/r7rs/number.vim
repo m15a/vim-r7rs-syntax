@@ -1,8 +1,13 @@
 " Helper functions for r7rs-syntax plugin
-" Last Change: 2021-05-16
+" Last Change: 2021-06-09
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
+
+if exists('g:autoloaded_r7rs_number')
+  finish
+endif
+let g:autoloaded_r7rs_number = 1
 
 " Build regexp of real number
 fun! r7rs#number#Real(digit, ...) abort

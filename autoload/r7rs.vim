@@ -1,8 +1,13 @@
 " Helper functions for r7rs-syntax plugin
-" Last Change: 2020-07-01
+" Last Change: 2021-06-09
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
+
+if exists('g:autoloaded_r7rs')
+  finish
+endif
+let g:autoloaded_r7rs = 1
 
 " Get value from a buffer-local or global variable with fall back
 fun! r7rs#Get(varname, default) abort
