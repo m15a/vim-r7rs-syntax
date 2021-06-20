@@ -41,15 +41,20 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
 
 ## Installation
 
-Follow usual vim plugin installation procedure.
+Use your favorite package manager. For example using [Paq][4]:
+
+```lua
+require'paq-nvim' {
+  'mnacamura/vim-r7rs-syntax',
+}
+```
 
 ## Options
 
-For all options below, if both global and buffer local ones are found, the
-buffer local one takes precedence.  In the example codes, only global options
-`g:...` are shown but `b:...` also works.
+For all options, if both global and buffer local ones are defined, the
+buffer local one takes precedence.
 
-### r7rs_strict
+### `r7rs_strict`
 
 This option forces syntax highlighting to obey the Scheme language
 specification in R7RS: it restricts use of `[]` and `{}` as parentheses (see
@@ -69,9 +74,9 @@ let g:r7rs_strict_identifier = 1
 let g:r7rs_use_gauche = 0
 ```
 
-NOTE: If `g:r7rs_strict` is set, the other relevant options are ignored.
+If `g:r7rs_strict` is set, the other relevant options are ignored.
 
-### r7rs_more_parens
+### `r7rs_more_parens`
 
 If square brackets `[]` and curly braces `{}` are included in this option,
 they are accepted as additional parentheses.
@@ -82,7 +87,7 @@ let g:r7rs_more_parens = ']}'  " default: ']'
 
 It does not care about whether the parens are opening `[{` or closing `]}`.
 
-### r7rs_strict_identifier
+### `r7rs_strict_identifier`
 
 If this option is disabled (default), any identifier other than single `.` are
 accepted.  If enabled, only those specified in R7RS are accepted: identifiers
@@ -94,7 +99,7 @@ let g:r7rs_strict_identifier = 1  " default: 0
 
 For more details, see [R7RS][1], sec. 7.1.1 (p. 62) and [the errata][2], 7.
 
-### r7rs_use_gauche
+### `r7rs_use_gauche`
 
 This option enables highlighting for Gauche's extended reader syntaxes
 (`#/regexp/`, `#[charset]`, `#"~(interpolated) string"`, ...), numeric
@@ -107,8 +112,12 @@ let g:r7rs_use_gauche = 1  " default: 0
 
 Enjoy Gauche!
 
-NOTE: If `g:use_gauche` is set, `g:strict_identifier` is ignored since
-identifiers in Gauche are not strict (e.g., `1/pi` in `math.const` module).
+If `g:use_gauche` is set, `g:strict_identifier` is ignored since identifiers
+in Gauche are not strict (e.g., `1/pi` in `math.const` module).
+
+## Change log
+
+### Unreleased
 
 ## License
 
@@ -117,5 +126,6 @@ identifiers in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 [1]: https://small.r7rs.org/
 [2]: https://small.r7rs.org/wiki/R7RSSmallErrata/
 [3]: https://practical-scheme.net/gauche/
+[4]: https://github.com/savq/paq-nvim/
 
 <!-- vim: set tw=78 spell: -->
