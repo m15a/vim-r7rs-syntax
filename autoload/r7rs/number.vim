@@ -1,5 +1,5 @@
 " Helper functions for r7rs-syntax plugin
-" Last Change: 2021-06-09
+" Last Change: 2021-06-20
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -9,7 +9,7 @@ if exists('g:autoloaded_r7rs_number')
 endif
 let g:autoloaded_r7rs_number = 1
 
-" Build regexp of real number
+" Build regexp of real number.
 fun! r7rs#number#Real(digit, ...) abort
   " Optional arguments:
   let l:optionals = get(a:000, 0, {})
@@ -23,7 +23,7 @@ fun! r7rs#number#Real(digit, ...) abort
   return s:Bless(l:prefix . l:real)
 endfun
 
-" Build regexp of complex number (rectangular notation)
+" Build regexp of complex number (rectangular notation).
 fun! r7rs#number#Rect(digit, ...) abort
   let l:optionals = get(a:000, 0, {})
   let l:prefix_req = get(l:optionals, 'prefix_req')
@@ -36,7 +36,7 @@ fun! r7rs#number#Rect(digit, ...) abort
   return s:Bless(l:prefix . l:real . l:imag . 'i')
 endfun
 
-" Build regexp of complex number (polar notation)
+" Build regexp of complex number (polar notation).
 fun! r7rs#number#Polar(digit, ...) abort
   let l:optionals = get(a:000, 0, {})
   let l:prefix_req = get(l:optionals, 'prefix_req')
@@ -52,7 +52,7 @@ fun! r7rs#number#Polar(digit, ...) abort
   return s:Bless(l:prefix . l:real . '@' . l:imag . l:pi)
 endfun
 
-" Radix letter for the digit
+" Radix letter for the digit.
 " Example:
 "   s:Radix('[0-9]') ==> 'd'
 "   s:Radix('[_0-9]') ==> 'd'
@@ -74,7 +74,7 @@ fun! s:Radix(digit) abort
   endif
 endfun
 
-" Regexp of number prefix
+" Regexp of number prefix.
 " Example:
 "   s:Prefix('b', 0)  ==> '\%(#b\|#[ei]#b\|#b#[ei]\)'
 "   s:Prefix('d', 0)  ==> '\%(#d\|#[ei]#d\|#d#[ei]\)\?'
@@ -101,7 +101,7 @@ fun! s:Prefix(radix, required) abort
   return l:prefix
 endfun
 
-" Regexp of unsigned real number
+" Regexp of unsigned real number.
 fun! s:UReal(digit, ...) abort
   let l:radix = get(a:000, 0, s:Radix(a:digit))
   let l:ureal = s:IntOrRat(a:digit)
@@ -111,7 +111,7 @@ fun! s:UReal(digit, ...) abort
   return l:ureal
 endfun
 
-" Regexp of integral or rational number
+" Regexp of integral or rational number.
 " Example:
 "   s:IntOrRat('[0-9]') ==> '[0-9]\+\%(\/[0-9]\+\)\?'
 fun! s:IntOrRat(digit) abort
@@ -119,7 +119,7 @@ fun! s:IntOrRat(digit) abort
   return l:digits . '\%(\/' . l:digits . '\)\?'
 endfun
 
-" Wrap any number regexp with regexp of decimal fractional number
+" Wrap any number regexp with regexp of decimal fractional number.
 " Example:
 "   s:WithFrac10('NUMBER') ==> '\%(NUMBER\|\%(\d\+\|\.\d\+\|\d\+\.\d*\)\%([esfdl][+-]?\d\+\)\?\)'
 fun! s:WithFrac10(wrapped, ...) abort
@@ -127,7 +127,7 @@ fun! s:WithFrac10(wrapped, ...) abort
   return '\%(' . a:wrapped . '\|\%(' . l:d . '\+\|\.' . l:d . '\+\|' . l:d . '\+\.' . l:d . '*\)\%([esfdl][+-]\?' . l:d . '\+\)\?\)'
 endfun
 
-" Wrap any signed number regexp with regexp of inf/nan
+" Wrap any signed number regexp with regexp of inf/nan.
 " Example:
 "   s:WithInfNaN('[+-]\?NUMBER') ==> '\%([+-]\?NUMBER\|[+-]\%(inf\|nan\)\.0\)'
 "   s:WithInfNaN('[+-]NUMBER')   ==> '[+-]\%(NUMBER\|\%(inf\|nan\)\.0\)'
@@ -140,7 +140,7 @@ fun! s:WithInfNaN(signed) abort
   endif
 endfun
 
-" Finalize building regexp of number
+" Finalize building regexp of number.
 fun! s:Bless(blessed) abort
   return '\c\<' . a:blessed . '\>'
 endfun
