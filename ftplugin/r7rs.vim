@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (R7RS)
-" Last Change: 2020-07-04
+" Last Change: 2021-06-20
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -55,7 +55,7 @@ setl lispwords+=define-syntax,define-record-type,define-library
 
 " }}}
 
-if &omnifunc == ''
+if &omnifunc ==# ''
   setl omnifunc=syntaxcomplete#Complete
 endif
 

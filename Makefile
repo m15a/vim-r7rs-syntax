@@ -23,11 +23,15 @@ TEXI_NAMES := \
 	modr7rs \
 	modsrfi
 
-.PHONY: build clean
+.PHONY: build clean lint
+
 build: syntax/gauche.vim ftplugin/gauche.vim
 
 clean:
 	rm -rf _build
+
+lint:
+	@vint **/*.vim
 
 syntax/gauche.vim: $(VIM_FILES)
 	./build.scm syntax $@ $^

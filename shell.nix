@@ -14,7 +14,7 @@ in
 with pkgs;
 
 mkShell {
-  buildInputs = [ gauche shellcheck ];
+  buildInputs = [ gauche shellcheck vim-vint ];
 
   GAUCHE_SRC = gauche.src;
 
