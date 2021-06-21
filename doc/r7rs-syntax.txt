@@ -70,7 +70,7 @@ local one takes precedence.
 ==============================================================================
 CHANGELOG                                              *r7rs-syntax-changelog*
 
-Unreleased             * Support R7RS small
+0.1      2021-06-22    * Support R7RS small
                        * Support R7RS large except:
                          - `(scheme ilist)`
                          - `(scheme rlist)`

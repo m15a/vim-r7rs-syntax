@@ -90,7 +90,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 ## Change log
 
-### Unreleased
+### [0.1][v0.1] (2021-06-22)
 
 * Support R7RS small
 * Support R7RS large except:
@@ -111,5 +111,6 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 [4]: https://github.com/savq/paq-nvim/
 [5]: https://github.com/mnacamura/vim-r7rs-syntax/issues/8
 [6]: https://github.com/mnacamura/vim-r7rs-syntax/issues/7
+[v0.1]: https://github.com/mnacamura/vim-r7rs-syntax/tree/v0.1
 
 <!-- vim: set tw=78 spell: -->
