@@ -92,6 +92,15 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 ### Unreleased
 
+* Support R7RS small
+* Support R7RS large except:
+  - `(scheme ilist)`
+  - `(scheme rlist)`
+  - `(scheme text)`
+  - `(scheme bytevector)`
+  - `(scheme show)`
+* Support Gauche except SRFIs 7 and 10
+
 ## License
 
 [MIT](LICENSE)
