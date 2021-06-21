@@ -10,7 +10,7 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
 - [x] R7RS-small 
 - [ ] R7RS-large: See [R7RS large tracking issue][5].
 - [ ] SRFI: See [SRFIs tracking issue][6].
-- [ ] Gauche (mostly implemented. See [TODO](TODO.md))
+- [ ] Gauche: Mostly implemented. See [TODO](TODO.md).
 
 ## Installation
 
