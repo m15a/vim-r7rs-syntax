@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-07-01
+" Last Change: 2021-06-21
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -15,19 +15,19 @@ set cpo&vim
 " Options {{{1
 
 " If (b|g):r7rs_strict is true, the following options are set to obey strict R7RS.
-if r7rs#Get('strict', 0)
+if r7rs#GetOption('strict', 0)
   let s:brackets_as_parens = 0
   let s:braces_as_parens = 0
   let s:strict_identifier = 1
   let s:use_gauche = 0
 else
-  let s:more_parens = r7rs#Get('more_parens', ']')
+  let s:more_parens = r7rs#GetOption('more_parens', ']')
   let s:brackets_as_parens = match(s:more_parens, '[\[\]]') > -1
   let s:braces_as_parens = match(s:more_parens, '[{}]') > -1
   unlet s:more_parens
-  let s:use_gauche = r7rs#Get('use_gauche', 0)
+  let s:use_gauche = r7rs#GetOption('use_gauche', 0)
   " Gauche permits identifiers like 1/pi, conflicting with s:strict_identifier.
-  let s:strict_identifier = s:use_gauche ? 0 : r7rs#Get('strict_identifier', 0)
+  let s:strict_identifier = s:use_gauche ? 0 : r7rs#GetOption('strict_identifier', 0)
 endif
 
 " }}}

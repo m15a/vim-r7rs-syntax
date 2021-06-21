@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2020-07-04
+" Last Change: 2021-06-21
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -11,11 +11,11 @@ endif
 
 " Options {{{1
 
-if r7rs#Get('strict', 0)
+if r7rs#GetOption('strict', 0)
   let s:brackets_as_parens = 0
   let s:braces_as_parens = 0
 else
-  let s:more_parens = r7rs#Get('more_parens', ']')
+  let s:more_parens = r7rs#GetOption('more_parens', ']')
   let s:brackets_as_parens = match(s:more_parens, '[\[\]]') > -1
   let s:braces_as_parens = match(s:more_parens, '[{}]') > -1
   unlet s:more_parens

@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (R7RS)
-" Last Change: 2021-06-20
+" Last Change: 2021-06-21
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -14,10 +14,10 @@ set cpo&vim
 
 " Options {{{1
 
-if r7rs#Get('strict', 0)
+if r7rs#GetOption('strict', 0)
   let s:use_gauche = 0
 else
-  let s:use_gauche = r7rs#Get('use_gauche', 0)
+  let s:use_gauche = r7rs#GetOption('use_gauche', 0)
 endif
 
 " }}}
