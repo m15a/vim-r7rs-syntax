@@ -8,35 +8,8 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
 ## Development status
 
 - [x] R7RS-small 
-- [ ] R7RS-large
-    - [x] `(scheme list)`
-    - [x] `(scheme vector)`
-    - [x] `(scheme sort)`
-    - [x] `(scheme set)`
-    - [x] `(scheme charset)`
-    - [x] `(scheme hash-table)`
-    - [ ] `(scheme ilist)`
-    - [ ] `(scheme rlist)`
-    - [x] `(scheme ideque)`
-    - [ ] `(scheme text)`
-    - [x] `(scheme lseq)`
-    - [x] `(scheme stream)`
-    - [x] `(scheme box)`
-    - [x] `(scheme list-queue)`
-    - [x] `(scheme ephemeron)`
-    - [x] `(scheme comparator)`
-    - [x] `(scheme mapping)`
-    - [x] `(scheme mapping hash)`
-    - [x] `(scheme regex)`
-    - [x] `(scheme generator)`
-    - [x] `(scheme division)`
-    - [x] `(scheme bitwise)`
-    - [x] `(scheme fixnum)`
-    - [x] `(scheme flonum)`
-    - [ ] `(scheme bytevector)`
-    - [x] `(scheme vector @)`
-    - [ ] `(scheme show)`
-- [ ] SRFI
+- [ ] R7RS-large: See [R7RS large tracking issue][5].
+- [ ] SRFI: See [SRFIs tracking issue][6].
 - [ ] Gauche (mostly implemented. See [TODO](TODO.md))
 
 ## Installation
@@ -127,5 +100,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 [2]: https://small.r7rs.org/wiki/R7RSSmallErrata/
 [3]: https://practical-scheme.net/gauche/
 [4]: https://github.com/savq/paq-nvim/
+[5]: https://github.com/mnacamura/vim-r7rs-syntax/issues/8
+[6]: https://github.com/mnacamura/vim-r7rs-syntax/issues/7
 
 <!-- vim: set tw=78 spell: -->
