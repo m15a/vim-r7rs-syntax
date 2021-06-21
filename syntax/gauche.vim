@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2021-06-21
+" Last Change: 2021-06-22
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -3345,7 +3345,6 @@ syn keyword r7rsSyntax ^
 syn keyword r7rsSyntax add-load-path
 syn keyword r7rsSyntax address-family
 syn keyword r7rsSyntax address-info
-syn keyword r7rsSyntax and-let*
 syn keyword r7rsSyntax and-let1
 syn keyword r7rsSyntax any?-ec
 syn keyword r7rsSyntax append-ec
