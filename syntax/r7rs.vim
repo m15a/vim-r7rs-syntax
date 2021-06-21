@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2021-06-21
+" Last Change: 2021-06-22
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -582,6 +582,7 @@ let b:current_syntax = 'r7rs'
 
 let b:did_r7rs_syntax = 1
 runtime! syntax/r7rs-large.vim
+runtime! syntax/srfi.vim
 if s:use_gauche
   runtime! syntax/gauche.vim
 endif
