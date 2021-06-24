@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme
-" Last Change: 2021-06-24
+" Last Change: 2021-06-25
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -25,6 +25,9 @@ syn keyword r7rsFunctionM timer-cancel! timer-schedule! timer-reschedule! timer-
 
 " SRFI-129 {{{1
 syn keyword r7rsFunction char-title-case? char-titlecase string-titlecase
+
+" SRFI-145 {{{1
+syn keyword r7rsSyntax assume
 
 " }}}
 
