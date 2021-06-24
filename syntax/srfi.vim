@@ -16,6 +16,9 @@ syn keyword r7rsSyntax and-let*
 syn keyword r7rsFunction implementation-name implementation-version cpu-architecture machine-name
 syn keyword r7rsFunction os-name os-version
 
+" SRFI-118 {{{1
+syn keyword r7rsFunctionM string-append! string-replace!
+
 " SRFI-129 {{{1
 syn keyword r7rsFunction char-title-case? char-titlecase string-titlecase
 
