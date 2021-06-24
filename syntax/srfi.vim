@@ -19,6 +19,10 @@ syn keyword r7rsFunction os-name os-version
 " SRFI-118 {{{1
 syn keyword r7rsFunctionM string-append! string-replace!
 
+" SRFI-120 {{{1
+syn keyword r7rsFunction make-timer timer? timer-task-exists? make-timer-delta timer-delta?
+syn keyword r7rsFunctionM timer-cancel! timer-schedule! timer-reschedule! timer-task-remove!
+
 " SRFI-129 {{{1
 syn keyword r7rsFunction char-title-case? char-titlecase string-titlecase
 
