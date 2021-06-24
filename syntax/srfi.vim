@@ -12,6 +12,10 @@ endif
 " SRFI-2 {{{1
 syn keyword r7rsSyntax and-let*
 
+" SRFI-112 {{{1
+syn keyword r7rsFunction implementation-name implementation-version cpu-architecture machine-name
+syn keyword r7rsFunction os-name os-version
+
 " SRFI-129 {{{1
 syn keyword r7rsFunction char-title-case? char-titlecase string-titlecase
 

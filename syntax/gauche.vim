@@ -819,7 +819,6 @@ syn keyword r7rsFunction copy-queue
 syn keyword r7rsFunction copy-time
 syn keyword r7rsFunction cosh
 syn keyword r7rsFunction count$
-syn keyword r7rsFunction cpu-architecture
 syn keyword r7rsFunction crc32
 syn keyword r7rsFunction create-directory*
 syn keyword r7rsFunction create-directory-tree
@@ -1368,8 +1367,6 @@ syn keyword r7rsFunction imap-max
 syn keyword r7rsFunction imap-min
 syn keyword r7rsFunction imap-put
 syn keyword r7rsFunction imap?
-syn keyword r7rsFunction implementation-name
-syn keyword r7rsFunction implementation-version
 syn keyword r7rsFunction in-closed-interval?
 syn keyword r7rsFunction in-closed-open-interval?
 syn keyword r7rsFunction in-open-closed-interval?
@@ -1485,7 +1482,6 @@ syn keyword r7rsFunction lstate-filter
 syn keyword r7rsFunction ltake
 syn keyword r7rsFunction ltake-while
 syn keyword r7rsFunction lunfold
-syn keyword r7rsFunction machine-name
 syn keyword r7rsFunction macroexpand
 syn keyword r7rsFunction macroexpand-1
 syn keyword r7rsFunction macroexpand-all
@@ -1715,8 +1711,6 @@ syn keyword r7rsFunction option-optional-arg?
 syn keyword r7rsFunction option-processor
 syn keyword r7rsFunction option-required-arg?
 syn keyword r7rsFunction option?
-syn keyword r7rsFunction os-name
-syn keyword r7rsFunction os-version
 syn keyword r7rsFunction pa$
 syn keyword r7rsFunction pack
 syn keyword r7rsFunction pairs-of
