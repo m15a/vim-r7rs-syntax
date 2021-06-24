@@ -99,7 +99,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
   - `(scheme text)`
   - `(scheme bytevector)`
   - `(scheme show)`
-* Support Gauche except SRFIs 7 and 10
+* Support Gauche 0.9.10 except SRFIs 7 and 10
 
 ## License
 

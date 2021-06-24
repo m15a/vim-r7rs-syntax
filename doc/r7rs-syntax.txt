@@ -1,4 +1,4 @@
-*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-06-22
+*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-06-25
 
                                                 *r7rs-syntax* *ft-r7rs-syntax*
 
@@ -77,6 +77,6 @@ CHANGELOG                                              *r7rs-syntax-changelog*
                          - `(scheme text)`
                          - `(scheme bytevector)`
                          - `(scheme show)`
-                       * Support Gauche except SRFIs 7 and 10
+                       * Support Gauche 0.9.10 except SRFIs 7 and 10
 
  vim:tw=78:et:ft=help:norl:
