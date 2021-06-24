@@ -24,7 +24,7 @@ endif
 " }}}
 
 " Comments and directives {{{1
-syn cluster r7rsComments add=r7rsShebang,r7rsDebugDirective
+syn cluster r7rsComments add=r7rsDebugDirective
 
 " Comments {{{2
 
@@ -3671,7 +3671,6 @@ syn match r7rsGaucheExport /\ze[(\[{][[:space:]\n]*export\>/ nextgroup=r7rsLibra
 
 hi def link r7rsCommentDatumPOSIX r7rsComment
 hi def link r7rsCommentDatumCS r7rsComment
-hi def link r7rsShebang r7rsComment
 hi def link r7rsDebugDirective r7rsComment
 hi def link r7rsKeyword r7rsSymbol
 hi def link r7rsCharSet r7rsDelimiter

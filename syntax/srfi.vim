@@ -12,6 +12,10 @@ endif
 " SRFI-2 {{{1
 syn keyword r7rsSyntax and-let*
 
+" SRFI-22 {{{1
+syn cluster r7rsComments add=r7rsShebang
+syn match r7rsShebang /\%^#! .*$/
+
 " SRFI-112 {{{1
 syn keyword r7rsFunction implementation-name implementation-version cpu-architecture machine-name
 syn keyword r7rsFunction os-name os-version
@@ -28,6 +32,10 @@ syn keyword r7rsFunction char-title-case? char-titlecase string-titlecase
 
 " SRFI-145 {{{1
 syn keyword r7rsSyntax assume
+
+" Highlights {{{1
+
+hi def link r7rsShebang r7rsComment
 
 " }}}
 
