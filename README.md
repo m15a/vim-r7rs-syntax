@@ -93,6 +93,14 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 ### Unreleased
 
 * Fix Gauche shebang to accept `<file-start>#!<newline>`
+* Support the following SRFIs:
+  - SRFI 2
+  - SRFI 22
+  - SRFI 112
+  - SRFI 118
+  - SRFI 120
+  - SRFI 129
+  - SRFI 145
 
 ### [0.1][v0.1] (2021-06-22)
 
