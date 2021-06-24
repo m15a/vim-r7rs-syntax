@@ -70,6 +70,7 @@ local one takes precedence.
 ==============================================================================
 CHANGELOG                                              *r7rs-syntax-changelog*
 
+Unreleased             * Fix Gauche shebang to accept `<file-start>#!<newline>`
 0.1      2021-06-22    * Support R7RS small
                        * Support R7RS large except:
                          - `(scheme ilist)`

@@ -40,7 +40,7 @@ syn region r7rsCommentDatumCS start=/\\\@<!\[/ skip=/\\[\\\]]/ end=/\]/ containe
 syn region r7rsCommentDatum start=/#\*\?"/ skip=/\\[\\"]/ end=/"/ contained
 
 " Directives {{{2
-syn match r7rsShebang /\%^#![\/ ].*$/
+syn match r7rsShebang /\%^#!\%([\/ ].*\)\?$/
 syn keyword r7rsDirective #!gauche-legacy #!r6rs #!r7rs
 syn match r7rsDebugDirective /#?[,=]/
 
