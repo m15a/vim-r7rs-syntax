@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2021-06-22
+" Last Change: 2021-06-24
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -725,7 +725,6 @@ syn keyword r7rsFunction char->ucs
 syn keyword r7rsFunction char-east-asian-width
 syn keyword r7rsFunction char-general-category
 syn keyword r7rsFunction char-set-immutable?
-syn keyword r7rsFunction char-titlecase
 syn keyword r7rsFunction chars$
 syn keyword r7rsFunction check-directory-tree
 syn keyword r7rsFunction check-substring-spec
@@ -2312,7 +2311,6 @@ syn keyword r7rsFunction string-take
 syn keyword r7rsFunction string-take-right
 syn keyword r7rsFunction string-take-while
 syn keyword r7rsFunction string-take-while-right
-syn keyword r7rsFunction string-titlecase
 syn keyword r7rsFunction string-tokenize
 syn keyword r7rsFunction string-tr
 syn keyword r7rsFunction string-trim
