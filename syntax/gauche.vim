@@ -3233,11 +3233,9 @@ syn keyword r7rsFunctionM string->s32vector!
 syn keyword r7rsFunctionM string->s8vector!
 syn keyword r7rsFunctionM string->u32vector!
 syn keyword r7rsFunctionM string->u8vector!
-syn keyword r7rsFunctionM string-append!
 syn keyword r7rsFunctionM string-byte-set!
 syn keyword r7rsFunctionM string-downcase!
 syn keyword r7rsFunctionM string-map!
-syn keyword r7rsFunctionM string-replace!
 syn keyword r7rsFunctionM string-reverse!
 syn keyword r7rsFunctionM string-titlecase!
 syn keyword r7rsFunctionM string-upcase!
