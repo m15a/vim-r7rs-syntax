@@ -94,6 +94,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 * Fix Gauche shebang to accept `<file-start>#!<newline>`
 * Support the following R7RS large libraries:
+  - `(scheme ilist)`
   - `(scheme rlist)`
   - `(scheme bytevector)`
 * Support the following SRFIs:

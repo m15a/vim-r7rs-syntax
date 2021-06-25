@@ -340,6 +340,30 @@ syn keyword r7rsFunction hash-table-copy hash-table-empty-copy hash-table->alist
 syn keyword r7rsFunctionM hash-table-union! hash-table-intersection! hash-table-difference!
 syn keyword r7rsFunctionM hash-table-xor!
 
+" (scheme ilist) SRFI-116 {{{1
+syn keyword r7rsFunction ipair ilist xipair ipair* make-ilist ilist-tabulate ilist-copy iiota
+syn keyword r7rsFunction ipair? proper-ilist? ilist? dotted-ilist? not-ipair? null-ilist? ilist=
+syn keyword r7rsFunction icar icdr icaar icdar icadr icddr
+syn keyword r7rsFunction icaaar icdaar icadar icddar icaadr icdadr icaddr icdddr
+syn keyword r7rsFunction icaaaar icdaaar icadaar icddaar icaadar icdadar icaddar icdddar
+syn keyword r7rsFunction icaaadr icdaadr icadadr icddadr icaaddr icdaddr icadddr icddddr ilist-ref
+syn keyword r7rsFunction ifirst isecond ithird ifourth ififth isixth iseventh ieighth ininth itenth
+syn keyword r7rsFunction icar+icdr itake idrop ilist-tail itake-right idrop-right isplit-at
+syn keyword r7rsFunction ilast last-ipair ilength iappend iconcatenate ireverse iappend-reverse
+syn keyword r7rsFunction izip iunzip1 iunzip2 iunzip3 iunzip4 iunzip5 icount
+syn keyword r7rsFunction imap ifor-each ifold iunfold ipair-fold ireduce ifold-right iunfold-right
+syn keyword r7rsFunction ipair-fold-right ireduce-right iappend-map ipair-for-each ifilter-map
+syn keyword r7rsFunction imap-in-order
+syn keyword r7rsFunction ifilter ipartition iremove
+syn keyword r7rsFunction imember imemq imemv ifind ifind-tail iany ievery ilist-index
+syn keyword r7rsFunction itake-while idrop-while ispan ibreak idelete idelete-duplicates
+syn keyword r7rsFunction iassoc iassq iassv ialist-cons ialist-delete
+syn keyword r7rsFunction replace-icar replace-icdr pair->ipair ipair->pair list->ilist
+syn keyword r7rsFunction ilist->list tree->itree itree->tree gtree->itree gtree->tree iapply
+syn keyword r7rsFunction make-ilist-comparator make-improper-ilist-comparator
+syn keyword r7rsFunction make-icar-comparator make-icdr-comparator
+syn keyword r7rsVariable ipair-comparator ilist-comparator
+
 " (scheme rlist) SRFI-101 {{{1
 syn keyword r7rsFunction list-set list-ref/update random-access-list->linear-access-list
 syn keyword r7rsFunction linear-access-list->random-access-list
