@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme
-" Last Change: 2021-07-04
+" Last Change: 2021-07-09
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -9,8 +9,52 @@ if !exists('b:did_r7rs_syntax')
   finish
 endif
 
+" Options {{{1
+
+" If (b|g):r7rs_strict is true, the following options are set to obey strict R7RS.
+if r7rs#GetOption('strict', 0)
+  let s:brackets_as_parens = 0
+  let s:braces_as_parens = 0
+else
+  let s:more_parens = r7rs#GetOption('more_parens', ']')
+  let s:brackets_as_parens = match(s:more_parens, '[\[\]]') > -1
+  let s:braces_as_parens = match(s:more_parens, '[{}]') > -1
+  unlet s:more_parens
+endif
+
+" }}}
+
 " SRFI 2 {{{1
 syn keyword r7rsSyntax and-let*
+
+" SRFI-7 {{{1
+syn region r7rsProgram matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*program\>/ end=/)/ contains=r7rsError,@r7rsComments,r7rsProgramSyntax,r7rsProgramClause
+syn keyword r7rsProgramSyntax contained program and or not
+syn keyword r7rsProgramSyntaxA contained requires files code feature-cond
+syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*requires\>/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,r7rsCEFeatureId
+syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*files\>/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,r7rsString
+syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*code\>/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,@r7rsData,@r7rsExpressions
+syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*feature-cond\>/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,r7rsProgramFCClause,r7rsProgramClause
+syn region r7rsProgramFCClause matchgroup=r7rsDelimiter start=/(/ end=/)/ contained contains=r7rsError,@r7rsComments,@r7rsProgramFCRequirements,r7rsProgramClause
+syn cluster r7rsProgramFCRequirements contains=r7rsCEFeatureId,r7rsProgramFCRequirementsAON,r7rsFCRequirementsElse
+syn region r7rsProgramFCRequirementsAON matchgroup=r7rsDelimiter start=/(\ze[[:space:]\n]*\%(and\|or\|not\)/ end=/)/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntax,@r7rsProgramFCRequirements
+syn keyword r7rsProgramFCRequirementsElse contained else
+if s:brackets_as_parens
+  syn region r7rsProgram matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*program/ end=/\]/ contains=r7rsError,@r7rsComments,r7rsProgramSyntax,r7rsProgramClause
+  syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*requires/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,r7rsCEFeatureId
+  syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*files/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,r7rsString
+  syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*code/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,@r7rsExpressions
+  syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/\[\ze[[:space:]\n]*feature-cond/ end=/\]/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,r7rsProgramFCClause
+  syn region r7rsProgramFCClause matchgroup=r7rsDelimiter start=/\[/ end=/\]/ contained contains=r7rsError,@r7rsComments,@r7rsProgramFCRequirements,r7rsProgramClause
+endif
+if s:braces_as_parens
+  syn region r7rsProgram matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*program/ end=/}/ contains=r7rsError,@r7rsComments,r7rsProgramSyntax,r7rsProgramClause
+  syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*requires/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,r7rsCEFeatureId
+  syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*files/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,r7rsString
+  syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*code/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,@r7rsExpressions
+  syn region r7rsProgramClause matchgroup=r7rsDelimiter start=/{\ze[[:space:]\n]*feature-cond/ end=/}/ contained contains=r7rsError,@r7rsComments,r7rsProgramSyntaxA,r7rsProgramFCClause
+  syn region r7rsProgramFCClause matchgroup=r7rsDelimiter start=/{/ end=/}/ contained contains=r7rsError,@r7rsComments,@r7rsProgramFCRequirements,r7rsProgramClause
+endif
 
 " SRFI 8 {{{1
 syn keyword r7rsSyntax receive
@@ -95,6 +139,9 @@ syn keyword r7rsFunction string-replicate string-segment string-split
 " Highlights {{{1
 
 hi def link r7rsShebang r7rsComment
+hi def link r7rsProgramSyntax r7rsLibrarySyntax
+hi def link r7rsProgramSyntaxA r7rsLibrarySyntaxA
+hi def link r7rsProgramFCRequirementsElse r7rsProgramSyntaxA
 
 " }}}
 
