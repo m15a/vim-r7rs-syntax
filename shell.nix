@@ -1,32 +1,31 @@
 let
-  pkgs = import (fetchNixpkgs {
-    rev = "a2c3ea5bf825348322c901358b155f651d8ed699";
-    sha256 = "0rxn9wg73gvgb7zwzrdhranlj3jpkkcnsqmrzw5m0znwv6apj6k4";
-  }) {};
+  lock = {
+    nixpkgs = {
+      rev = "51bb9f3e9ab6161a3bf7746e20b955712cef618b";
+      sha256 = "1bqla14c80ani27c7901rnl37kiiqrvyixs6ifvm48p5y6xbv1p7";
+    };
+  };
 
-  fetchNixpkgs = { rev, sha256 }:
+  nixpkgs = with lock.nixpkgs;
   builtins.fetchTarball {
     url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
     inherit sha256;
   };
+
+  pkgs = import nixpkgs {};
 in
 
-with pkgs;
-
-mkShell {
-  buildInputs = [
+pkgs.mkShell {
+  buildInputs = with pkgs; [
     gauche
     shellcheck
     vim-vint
     nodePackages.vim-language-server
   ];
 
-  GAUCHE_SRC = gauche.src;
+  GAUCHE_SRC = pkgs.gauche.src;
 
-  VIM_SRC = vim.src;
+  VIM_SRC = pkgs.vim.src;
 
   GAUCHE_READ_EDIT = "yes";
-
-  shellHook = ''
-  '';
 }
