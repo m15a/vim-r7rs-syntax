@@ -341,7 +341,6 @@ syn keyword r7rsFunctionM hash-table-union! hash-table-intersection! hash-table-
 syn keyword r7rsFunctionM hash-table-xor!
 
 " (scheme rlist) SRFI-101 {{{1
-syn keyword r7rsSyntax quote
 syn keyword r7rsFunction list-set list-ref/update random-access-list->linear-access-list
 syn keyword r7rsFunction linear-access-list->random-access-list
 
