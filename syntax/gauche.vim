@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2021-06-25
+" Last Change: 2021-06-26
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -225,11 +225,11 @@ syn match r7rsCharSet /#\ze\[/ nextgroup=r7rsCSSpecString
 syn region r7rsCSSpecString matchgroup=r7rsDelimiter start=/\[/ skip=/\\[\\\]]/ end=/\]/ contained contains=@r7rsCSEscapeChars
 
 " Escapeaped characters (embedded in #[character set]) {{{2
-syn cluster r7rsCSEscapeChars contains=r7rsCSEscapeMeta,r7rsEscapeCharCode,r7rsCSEscapeMnemonic,r7rsCSEscapeLiteral,r7rsCSEscapePOSIX
+syn cluster r7rsCSEscapeChars contains=r7rsCSEscapeMeta,r7rsEscapeCharCode,r7rsCSEscapeMnemonic,r7rsCSEscapeChar,r7rsCSEscapePOSIX
 syn match r7rsCSEscapeMeta /\v%(\\@<!\[\^?)@<!-\]@!/ contained
 syn match r7rsCSEscapeMeta /\v%(\\@<!\[)@<=\^/ contained
 syn match r7rsCSEscapeMeta /\\[sSdDwW]/ contained
-syn match r7rsCSEscapeLiteral /\\[\\\-^\[\]]/ contained
+syn match r7rsCSEscapeChar /\\[\\\-^\[\]]/ contained
 syn match r7rsCSEscapePOSIX /\v\[:\^?%(al%(pha|num)|blank|cntrl|x?digit|graph|lower|print|punct|space|upper|word|ascii):\]/ contained
 syn match r7rsCSEscapePOSIX /\v\[:\^?%(AL%(PHA|NUM)|BLANK|CNTRL|X?DIGIT|GRAPH|LOWER|PRINT|PUNCT|SPACE|UPPER|WORD|ASCII):\]/ contained
 
@@ -242,14 +242,14 @@ syn region r7rsRECapture matchgroup=r7rsREEscapeMeta start=/\\\@<!(?\((\d\+)\|(?
 syn region r7rsREPattern matchgroup=r7rsREEscapeMeta start=/\\\@<!(?\%(<\?[=!]\|>\)/ skip=/\\[\\)]/ end=/)/ contained contains=@r7rsREItems
 
 " Escapeaped characters (embedded in #/regular expression/) {{{2
-syn cluster r7rsREEscapeChars contains=r7rsREEscapeMeta,r7rsEscapeCharCode,r7rsREEscapeMnemonic,r7rsREEscapeLiteral
+syn cluster r7rsREEscapeChars contains=r7rsREEscapeMeta,r7rsEscapeCharCode,r7rsREEscapeMnemonic,r7rsREEscapeChar
 " FIXME: ^ should be highlighted only after #/, (?=, etc. $ is more complex, hmm.
 syn match r7rsREEscapeMeta /\\\@<![*+?.|^$]/ contained
 syn match r7rsREEscapeMeta /\v\{%(\d+)?%(,)?%(\d+)?\}/ contained
 syn match r7rsREEscapeMeta /\\\d\+/ contained
 syn match r7rsREEscapeMeta /\\k<\(\\>\|[^>]\)*>/ contained
 syn match r7rsREEscapeMeta /\\[sSdDwWbB]/ contained
-syn match r7rsREEscapeLiteral /\\[\\*+?.{,}(|)^$:=!<>\[\];"#/]/ contained
+syn match r7rsREEscapeChar /\\[\\*+?.{,}(|)^$:=!<>\[\];"#/]/ contained
 
 " Incomplete string {{{2
 syn region r7rsIncompleteString matchgroup=r7rsDelimiter start=/#\*"/ skip=/\\[\\"]/ end=/"/ contains=@r7rsEscapeChars,r7rsEscapeNewline
@@ -3677,14 +3677,14 @@ hi def link r7rsCharSet r7rsDelimiter
 hi def link r7rsCSSpecString r7rsString
 hi def link r7rsCSEscapeMeta r7rsSpecialChar
 hi def link r7rsCSEscapeMnemonic r7rsEscapeMnemonic
-hi def link r7rsCSEscapeLiteral r7rsEscapeLiteral
+hi def link r7rsCSEscapeChar r7rsEscapeChar
 hi def link r7rsCSEscapePOSIX r7rsSpecialChar
 hi def link r7rsRegExpString r7rsString
 hi def link r7rsRECapture r7rsString
 hi def link r7rsREPattern r7rsString
 hi def link r7rsREEscapeMeta r7rsSpecialChar
 hi def link r7rsREEscapeMnemonic r7rsEscapeMnemonic
-hi def link r7rsREEscapeLiteral r7rsEscapeLiteral
+hi def link r7rsREEscapeChar r7rsEscapeChar
 hi def link r7rsIncompleteString r7rsString
 hi def link r7rsInterpolatedString r7rsString
 hi def link r7rsInterpolatedStringUnquote r7rsUnquote
