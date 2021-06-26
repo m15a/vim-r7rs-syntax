@@ -548,6 +548,34 @@ syn keyword r7rsFunction flsin flcos fltan flasin flacos flatan flsinh flcosh fl
 syn keyword r7rsFunction flasinh flacosh flatanh flquotient flremainder flremquo
 syn keyword r7rsFunction flgamma flloggamma flfirst-bessel flsecond-bessel flerf flerfc
 
+" (scheme bytevector) R6RS {{{1
+syn keyword r7rsSyntax endianness
+syn keyword r7rsFunction native-endianness bytevector=?
+syn keyword r7rsFunctionM bytevector-fill!
+syn keyword r7rsFunction bytevector-s8-ref bytevector->u8-list u8-list->bytevector
+syn keyword r7rsFunctionM bytevector-s8-set!
+syn keyword r7rsFunction bytevector-uint-ref bytevector-sint-ref
+syn keyword r7rsFunctionM bytevector-uint-set! bytevector-sint-set!
+syn keyword r7rsFunction bytevector->uint-list bytevector->sint-list
+syn keyword r7rsFunction uint-list->bytevector sint-list->bytevector
+syn keyword r7rsFunction bytevector-u16-ref bytevector-s16-ref
+syn keyword r7rsFunction bytevector-u16-native-ref bytevector-s16-native-ref
+syn keyword r7rsFunctionM bytevector-u16-set! bytevector-s16-set!
+syn keyword r7rsFunctionM bytevector-u16-native-set! bytevector-s16-native-set!
+syn keyword r7rsFunction bytevector-u32-ref bytevector-s32-ref
+syn keyword r7rsFunction bytevector-u32-native-ref bytevector-s32-native-ref
+syn keyword r7rsFunctionM bytevector-u32-set! bytevector-s32-set!
+syn keyword r7rsFunctionM bytevector-u32-native-set! bytevector-s32-native-set!
+syn keyword r7rsFunction bytevector-u64-ref bytevector-s64-ref
+syn keyword r7rsFunction bytevector-u64-native-ref bytevector-s64-native-ref
+syn keyword r7rsFunctionM bytevector-u64-set! bytevector-s64-set!
+syn keyword r7rsFunctionM bytevector-u64-native-set! bytevector-s64-native-set!
+syn keyword r7rsFunction bytevector-ieee-single-ref bytevector-ieee-double-ref
+syn keyword r7rsFunction bytevector-ieee-single-native-ref bytevector-ieee-double-native-ref
+syn keyword r7rsFunctionM bytevector-ieee-single-set! bytevector-ieee-double-set!
+syn keyword r7rsFunctionM bytevector-ieee-single-native-set! bytevector-ieee-double-native-set!
+syn keyword r7rsFunction string->utf16 string->utf32 utf16->string utf32->string
+
 " Highlights {{{1
 
 hi def link r7rsVariable Identifier

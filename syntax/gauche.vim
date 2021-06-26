@@ -553,7 +553,6 @@ syn keyword r7rsFunction build-binary-heap
 syn keyword r7rsFunction build-path
 syn keyword r7rsFunction build-transliterator
 syn keyword r7rsFunction byte-ready?
-syn keyword r7rsFunction bytevector=?
 syn keyword r7rsFunction c128vector-add
 syn keyword r7rsFunction c128vector-and
 syn keyword r7rsFunction c128vector-clamp
@@ -3357,7 +3356,6 @@ syn keyword r7rsSyntax dolist
 syn keyword r7rsSyntax dotimes
 syn keyword r7rsSyntax dynamic-lambda
 syn keyword r7rsSyntax ecase
-syn keyword r7rsSyntax endianness
 syn keyword r7rsSyntax er-macro-transformer
 syn keyword r7rsSyntax every?-ec
 syn keyword r7rsSyntax extend
