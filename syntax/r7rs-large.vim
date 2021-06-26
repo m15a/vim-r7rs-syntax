@@ -557,7 +557,7 @@ syn keyword r7rsFunctionM bytevector-s8-set!
 syn keyword r7rsFunction bytevector-uint-ref bytevector-sint-ref
 syn keyword r7rsFunctionM bytevector-uint-set! bytevector-sint-set!
 syn keyword r7rsFunction bytevector->uint-list bytevector->sint-list
-syn keyword r7rsFunction unit-list->bytevector sint-list->bytevector
+syn keyword r7rsFunction uint-list->bytevector sint-list->bytevector
 syn keyword r7rsFunction bytevector-u16-ref bytevector-s16-ref
 syn keyword r7rsFunction bytevector-u16-native-ref bytevector-s16-native-ref
 syn keyword r7rsFunctionM bytevector-u16-set! bytevector-s16-set!
