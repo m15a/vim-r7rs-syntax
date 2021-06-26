@@ -1,4 +1,4 @@
-*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-06-25
+*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-06-26
 
                                                 *r7rs-syntax* *ft-r7rs-syntax*
 
@@ -71,6 +71,8 @@ local one takes precedence.
 CHANGELOG                                              *r7rs-syntax-changelog*
 
 Unreleased             * Fix Gauche shebang to accept `<file-start>#!<newline>`
+                       * Support the following R7RS large libraries:
+                         - `(scheme rlist)`
                        * Support the following SRFIs:
                          - `SRFI 2`
                          - `SRFI 22`

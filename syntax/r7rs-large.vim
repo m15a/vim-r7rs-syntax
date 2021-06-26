@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2020-07-04
+" Last Change: 2021-06-26
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -339,6 +339,10 @@ syn keyword r7rsFunctionM hash-table-map! hash-table-prune!
 syn keyword r7rsFunction hash-table-copy hash-table-empty-copy hash-table->alist 
 syn keyword r7rsFunctionM hash-table-union! hash-table-intersection! hash-table-difference!
 syn keyword r7rsFunctionM hash-table-xor!
+
+" (scheme rlist) SRFI-101 {{{1
+syn keyword r7rsFunction list-set list-ref/update random-access-list->linear-access-list
+syn keyword r7rsFunction linear-access-list->random-access-list
 
 " (scheme ideque) SRFI-134 {{{1
 syn keyword r7rsFunction ideque ideque-tabulate ideque-unfold ideque-unfold-right
