@@ -93,7 +93,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 ### [0.2][v0.2] (2021-06-27)
 
 * Fix Gauche shebang to accept `<file-start>#!<newline>`
-* Support all R7RS-large libraries up to Tangerine
+* Support all R7RS-large libraries in Red and Tangerine editions
 * Support the following SRFIs:
   - SRFI 2
   - SRFI 8
