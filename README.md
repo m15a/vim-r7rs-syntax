@@ -92,6 +92,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 ### Unreleased
 * Fix highlighting of `r7rsVariable`
+* Fix highlighting of `@vector-comparator`
 
 ### [0.2][v0.2] (2021-06-27)
 

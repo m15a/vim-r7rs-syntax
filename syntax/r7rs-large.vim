@@ -10,7 +10,7 @@ if !exists('b:did_r7rs_syntax')
 endif
 
 " Expressions {{{1
-syn cluster r7rsExpressions add=r7rsVariable 
+syn cluster r7rsExpressions add=r7rsVariable
 
 " (scheme list) SRFI 1 {{{1
 syn keyword r7rsFunction xcons cons* list-tabulate circular-list iota
@@ -62,10 +62,11 @@ syn keyword r7rsFunction s8vector-index s8vector-index-right s8vector-skip s8vec
 syn keyword r7rsFunction s8vector-any s8vector-every s8vector-partition s8vector-filter
 syn keyword r7rsFunction s8vector-remove s8vector->list reverse-s8vector->list list->s8vector
 syn keyword r7rsFunction reverse-list->s8vector s8vector->vector vector->s8vector
-syn keyword r7rsFunction make-s8vector-generator s8vector-comparator write-s8vector
+syn keyword r7rsFunction make-s8vector-generator write-s8vector
 syn keyword r7rsFunctionM s8vector-map! s8vector-set! s8vector-swap! s8vector-fill!
 syn keyword r7rsFunctionM s8vector-reverse! s8vector-copy! s8vector-reverse-copy!
 syn keyword r7rsFunctionM s8vector-unfold! s8vector-unfold-right!
+syn keyword r7rsVariable s8vector-comparator
 
 " u8 {{{2
 syn keyword r7rsFunction make-u8vector u8vector u8vector-unfold u8vector-unfold-right
@@ -80,10 +81,11 @@ syn keyword r7rsFunction u8vector-index u8vector-index-right u8vector-skip u8vec
 syn keyword r7rsFunction u8vector-any u8vector-every u8vector-partition u8vector-filter
 syn keyword r7rsFunction u8vector-remove u8vector->list reverse-u8vector->list list->u8vector
 syn keyword r7rsFunction reverse-list->u8vector u8vector->vector vector->u8vector
-syn keyword r7rsFunction make-u8vector-generator u8vector-comparator write-u8vector
+syn keyword r7rsFunction make-u8vector-generator write-u8vector
 syn keyword r7rsFunctionM u8vector-map! u8vector-set! u8vector-swap! u8vector-fill!
 syn keyword r7rsFunctionM u8vector-reverse! u8vector-copy! u8vector-reverse-copy!
 syn keyword r7rsFunctionM u8vector-unfold! u8vector-unfold-right!
+syn keyword r7rsVariable u8vector-comparator
 
 " s16 {{{2
 syn keyword r7rsFunction make-s16vector s16vector s16vector-unfold s16vector-unfold-right
@@ -98,10 +100,11 @@ syn keyword r7rsFunction s16vector-index s16vector-index-right s16vector-skip s1
 syn keyword r7rsFunction s16vector-any s16vector-every s16vector-partition s16vector-filter
 syn keyword r7rsFunction s16vector-remove s16vector->list reverse-s16vector->list list->s16vector
 syn keyword r7rsFunction reverse-list->s16vector s16vector->vector vector->s16vector
-syn keyword r7rsFunction make-s16vector-generator s16vector-comparator write-s16vector
+syn keyword r7rsFunction make-s16vector-generator write-s16vector
 syn keyword r7rsFunctionM s16vector-map! s16vector-set! s16vector-swap! s16vector-fill!
 syn keyword r7rsFunctionM s16vector-reverse! s16vector-copy! s16vector-reverse-copy!
 syn keyword r7rsFunctionM s16vector-unfold! s16vector-unfold-right!
+syn keyword r7rsVariable s16vector-comparator
 
 " u16 {{{2
 syn keyword r7rsFunction make-u16vector u16vector u16vector-unfold u16vector-unfold-right
@@ -116,10 +119,11 @@ syn keyword r7rsFunction u16vector-index u16vector-index-right u16vector-skip u1
 syn keyword r7rsFunction u16vector-any u16vector-every u16vector-partition u16vector-filter
 syn keyword r7rsFunction u16vector-remove u16vector->list reverse-u16vector->list list->u16vector
 syn keyword r7rsFunction reverse-list->u16vector u16vector->vector vector->u16vector
-syn keyword r7rsFunction make-u16vector-generator u16vector-comparator write-u16vector
+syn keyword r7rsFunction make-u16vector-generator write-u16vector
 syn keyword r7rsFunctionM u16vector-map! u16vector-set! u16vector-swap! u16vector-fill!
 syn keyword r7rsFunctionM u16vector-reverse! u16vector-copy! u16vector-reverse-copy!
 syn keyword r7rsFunctionM u16vector-unfold! u16vector-unfold-right!
+syn keyword r7rsVariable u16vector-comparator
 
 " s32 {{{2
 syn keyword r7rsFunction make-s32vector s32vector s32vector-unfold s32vector-unfold-right
@@ -134,10 +138,11 @@ syn keyword r7rsFunction s32vector-index s32vector-index-right s32vector-skip s3
 syn keyword r7rsFunction s32vector-any s32vector-every s32vector-partition s32vector-filter
 syn keyword r7rsFunction s32vector-remove s32vector->list reverse-s32vector->list list->s32vector
 syn keyword r7rsFunction reverse-list->s32vector s32vector->vector vector->s32vector
-syn keyword r7rsFunction make-s32vector-generator s32vector-comparator write-s32vector
+syn keyword r7rsFunction make-s32vector-generator write-s32vector
 syn keyword r7rsFunctionM s32vector-map! s32vector-set! s32vector-swap! s32vector-fill!
 syn keyword r7rsFunctionM s32vector-reverse! s32vector-copy! s32vector-reverse-copy!
 syn keyword r7rsFunctionM s32vector-unfold! s32vector-unfold-right!
+syn keyword r7rsVariable s32vector-comparator
 
 " u32 {{{2
 syn keyword r7rsFunction make-u32vector u32vector u32vector-unfold u32vector-unfold-right
@@ -152,10 +157,11 @@ syn keyword r7rsFunction u32vector-index u32vector-index-right u32vector-skip u3
 syn keyword r7rsFunction u32vector-any u32vector-every u32vector-partition u32vector-filter
 syn keyword r7rsFunction u32vector-remove u32vector->list reverse-u32vector->list list->u32vector
 syn keyword r7rsFunction reverse-list->u32vector u32vector->vector vector->u32vector
-syn keyword r7rsFunction make-u32vector-generator u32vector-comparator write-u32vector
+syn keyword r7rsFunction make-u32vector-generator write-u32vector
 syn keyword r7rsFunctionM u32vector-map! u32vector-set! u32vector-swap! u32vector-fill!
 syn keyword r7rsFunctionM u32vector-reverse! u32vector-copy! u32vector-reverse-copy!
 syn keyword r7rsFunctionM u32vector-unfold! u32vector-unfold-right!
+syn keyword r7rsVariable u32vector-comparator
 
 " s64 {{{2
 syn keyword r7rsFunction make-s64vector s64vector s64vector-unfold s64vector-unfold-right
@@ -170,10 +176,11 @@ syn keyword r7rsFunction s64vector-index s64vector-index-right s64vector-skip s6
 syn keyword r7rsFunction s64vector-any s64vector-every s64vector-partition s64vector-filter
 syn keyword r7rsFunction s64vector-remove s64vector->list reverse-s64vector->list list->s64vector
 syn keyword r7rsFunction reverse-list->s64vector s64vector->vector vector->s64vector
-syn keyword r7rsFunction make-s64vector-generator s64vector-comparator write-s64vector
+syn keyword r7rsFunction make-s64vector-generator write-s64vector
 syn keyword r7rsFunctionM s64vector-map! s64vector-set! s64vector-swap! s64vector-fill!
 syn keyword r7rsFunctionM s64vector-reverse! s64vector-copy! s64vector-reverse-copy!
 syn keyword r7rsFunctionM s64vector-unfold! s64vector-unfold-right!
+syn keyword r7rsVariable s64vector-comparator
 
 " u64 {{{2
 syn keyword r7rsFunction make-u64vector u64vector u64vector-unfold u64vector-unfold-right
@@ -188,10 +195,11 @@ syn keyword r7rsFunction u64vector-index u64vector-index-right u64vector-skip u6
 syn keyword r7rsFunction u64vector-any u64vector-every u64vector-partition u64vector-filter
 syn keyword r7rsFunction u64vector-remove u64vector->list reverse-u64vector->list list->u64vector
 syn keyword r7rsFunction reverse-list->u64vector u64vector->vector vector->u64vector
-syn keyword r7rsFunction make-u64vector-generator u64vector-comparator write-u64vector
+syn keyword r7rsFunction make-u64vector-generator write-u64vector
 syn keyword r7rsFunctionM u64vector-map! u64vector-set! u64vector-swap! u64vector-fill!
 syn keyword r7rsFunctionM u64vector-reverse! u64vector-copy! u64vector-reverse-copy!
 syn keyword r7rsFunctionM u64vector-unfold! u64vector-unfold-right!
+syn keyword r7rsVariable u64vector-comparator
 
 " f32 {{{2
 syn keyword r7rsFunction make-f32vector f32vector f32vector-unfold f32vector-unfold-right
@@ -206,10 +214,11 @@ syn keyword r7rsFunction f32vector-index f32vector-index-right f32vector-skip f3
 syn keyword r7rsFunction f32vector-any f32vector-every f32vector-partition f32vector-filter
 syn keyword r7rsFunction f32vector-remove f32vector->list reverse-f32vector->list list->f32vector
 syn keyword r7rsFunction reverse-list->f32vector f32vector->vector vector->f32vector
-syn keyword r7rsFunction make-f32vector-generator f32vector-comparator write-f32vector
+syn keyword r7rsFunction make-f32vector-generator write-f32vector
 syn keyword r7rsFunctionM f32vector-map! f32vector-set! f32vector-swap! f32vector-fill!
 syn keyword r7rsFunctionM f32vector-reverse! f32vector-copy! f32vector-reverse-copy!
 syn keyword r7rsFunctionM f32vector-unfold! f32vector-unfold-right!
+syn keyword r7rsVariable f32vector-comparator
 
 " f64 {{{2
 syn keyword r7rsFunction make-f64vector f64vector f64vector-unfold f64vector-unfold-right
@@ -224,11 +233,11 @@ syn keyword r7rsFunction f64vector-index f64vector-index-right f64vector-skip f6
 syn keyword r7rsFunction f64vector-any f64vector-every f64vector-partition f64vector-filter
 syn keyword r7rsFunction f64vector-remove f64vector->list reverse-f64vector->list list->f64vector
 syn keyword r7rsFunction reverse-list->f64vector f64vector->vector vector->f64vector
-syn keyword r7rsFunction make-f64vector-generator f64vector-comparator write-f64vector
+syn keyword r7rsFunction make-f64vector-generator write-f64vector
 syn keyword r7rsFunctionM f64vector-map! f64vector-set! f64vector-swap! f64vector-fill!
 syn keyword r7rsFunctionM f64vector-reverse! f64vector-copy! f64vector-reverse-copy!
 syn keyword r7rsFunctionM f64vector-unfold! f64vector-unfold-right!
-
+syn keyword r7rsVariable f64vector-comparator
 " c64 {{{2
 syn keyword r7rsFunction make-c64vector c64vector c64vector-unfold c64vector-unfold-right
 syn keyword r7rsFunction c64vector-copy c64vector-reverse-copy c64vector-append
@@ -242,11 +251,11 @@ syn keyword r7rsFunction c64vector-index c64vector-index-right c64vector-skip c6
 syn keyword r7rsFunction c64vector-any c64vector-every c64vector-partition c64vector-filter
 syn keyword r7rsFunction c64vector-remove c64vector->list reverse-c64vector->list list->c64vector
 syn keyword r7rsFunction reverse-list->c64vector c64vector->vector vector->c64vector
-syn keyword r7rsFunction make-c64vector-generator c64vector-comparator write-c64vector
+syn keyword r7rsFunction make-c64vector-generator write-c64vector
 syn keyword r7rsFunctionM c64vector-map! c64vector-set! c64vector-swap! c64vector-fill!
 syn keyword r7rsFunctionM c64vector-reverse! c64vector-copy! c64vector-reverse-copy!
 syn keyword r7rsFunctionM c64vector-unfold! c64vector-unfold-right!
-
+syn keyword r7rsVariable c64vector-comparator
 " c128 {{{2
 syn keyword r7rsFunction make-c128vector c128vector c128vector-unfold c128vector-unfold-right
 syn keyword r7rsFunction c128vector-copy c128vector-reverse-copy c128vector-append
@@ -260,10 +269,11 @@ syn keyword r7rsFunction c128vector-index c128vector-index-right c128vector-skip
 syn keyword r7rsFunction c128vector-any c128vector-every c128vector-partition c128vector-filter
 syn keyword r7rsFunction c128vector-remove c128vector->list reverse-c128vector->list list->c128vector
 syn keyword r7rsFunction reverse-list->c128vector c128vector->vector vector->c128vector
-syn keyword r7rsFunction make-c128vector-generator c128vector-comparator write-c128vector
+syn keyword r7rsFunction make-c128vector-generator write-c128vector
 syn keyword r7rsFunctionM c128vector-map! c128vector-set! c128vector-swap! c128vector-fill!
 syn keyword r7rsFunctionM c128vector-reverse! c128vector-copy! c128vector-reverse-copy!
 syn keyword r7rsFunctionM c128vector-unfold! c128vector-unfold-right!
+syn keyword r7rsVariable c128vector-comparator
 
 " (scheme sort) SRFI 132 {{{1
 syn keyword r7rsFunction list-sorted? vector-sorted?

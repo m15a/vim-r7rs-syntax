@@ -71,6 +71,7 @@ local one takes precedence.
 CHANGELOG                                              *r7rs-syntax-changelog*
 
 Unreleased             * Fix highlighting of `r7rsVariable`
+                       * Fix highlighting of `@vector-comparator`
 0.2      2021-06-27    * Fix Gauche shebang to accept `<file-start>#!<newline>`
                        * Support all R7RS-large libraries in Red and Tangerine
                          editions
