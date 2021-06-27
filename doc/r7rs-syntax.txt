@@ -1,4 +1,4 @@
-*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-06-27
+*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-06-28
 
                                                 *r7rs-syntax* *ft-r7rs-syntax*
 
@@ -70,6 +70,7 @@ local one takes precedence.
 ==============================================================================
 CHANGELOG                                              *r7rs-syntax-changelog*
 
+Unreleased             * Fix highlighting of `r7rsVariable`
 0.2      2021-06-27    * Fix Gauche shebang to accept `<file-start>#!<newline>`
                        * Support all R7RS-large libraries in Red and Tangerine
                          editions

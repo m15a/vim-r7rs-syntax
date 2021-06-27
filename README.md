@@ -90,6 +90,9 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 ## Change log
 
+### Unreleased
+* Fix highlighting of `r7rsVariable`
+
 ### [0.2][v0.2] (2021-06-27)
 
 * Fix Gauche shebang to accept `<file-start>#!<newline>`

@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2021-06-27
+" Last Change: 2021-06-28
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -8,6 +8,9 @@
 if !exists('b:did_r7rs_syntax')
   finish
 endif
+
+" Expressions {{{1
+syn cluster r7rsExpressions add=r7rsVariable 
 
 " (scheme list) SRFI 1 {{{1
 syn keyword r7rsFunction xcons cons* list-tabulate circular-list iota
