@@ -90,7 +90,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 ## Change log
 
-### Unreleased
+### [0.2][v0.2] (2021-06-27)
 
 * Fix Gauche shebang to accept `<file-start>#!<newline>`
 * Support all R7RS-large libraries up to Tangerine
@@ -126,5 +126,6 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 [5]: https://github.com/mnacamura/vim-r7rs-syntax/issues/8
 [6]: https://github.com/mnacamura/vim-r7rs-syntax/issues/7
 [v0.1]: https://github.com/mnacamura/vim-r7rs-syntax/tree/v0.1
+[v0.2]: https://github.com/mnacamura/vim-r7rs-syntax/tree/v0.2
 
 <!-- vim: set tw=78 spell: -->

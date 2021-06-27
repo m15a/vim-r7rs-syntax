@@ -70,7 +70,7 @@ local one takes precedence.
 ==============================================================================
 CHANGELOG                                              *r7rs-syntax-changelog*
 
-Unreleased             * Fix Gauche shebang to accept `<file-start>#!<newline>`
+0.2      2021-06-27    * Fix Gauche shebang to accept `<file-start>#!<newline>`
                        * Support all R7RS-large libraries up to Tangerine
                        * Support the following SRFIs:
                          - `SRFI 2`
