@@ -8,7 +8,7 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
 ## Development status
 
 - [x] R7RS-small 
-- [ ] R7RS-large: See [R7RS large tracking issue][5].
+- [x] R7RS-large (Red, Tangerine): See [R7RS-large tracking issue][5].
 - [ ] SRFI: See [SRFIs tracking issue][6].
 - [ ] Gauche: Mostly implemented. See [TODO](TODO.md).
 
@@ -93,12 +93,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 ### Unreleased
 
 * Fix Gauche shebang to accept `<file-start>#!<newline>`
-* Support the following R7RS large libraries:
-  - `(scheme ilist)`
-  - `(scheme rlist)`
-  - `(scheme text)`
-  - `(scheme bytevector)`
-  - `(scheme show)`
+* Support all R7RS-large libraries up to Tangerine
 * Support the following SRFIs:
   - SRFI 2
   - SRFI 8
@@ -112,7 +107,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 ### [0.1][v0.1] (2021-06-22)
 
 * Support R7RS small
-* Support R7RS large except:
+* Support R7RS-large libraries except:
   - `(scheme ilist)`
   - `(scheme rlist)`
   - `(scheme text)`

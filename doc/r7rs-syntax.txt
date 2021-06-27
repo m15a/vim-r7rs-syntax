@@ -71,12 +71,7 @@ local one takes precedence.
 CHANGELOG                                              *r7rs-syntax-changelog*
 
 Unreleased             * Fix Gauche shebang to accept `<file-start>#!<newline>`
-                       * Support the following R7RS large libraries:
-                         - `(scheme ilist)`
-                         - `(scheme rlist)`
-                         - `(scheme text)`
-                         - `(scheme bytevector)`
-                         - `(scheme show)`
+                       * Support all R7RS-large libraries up to Tangerine
                        * Support the following SRFIs:
                          - `SRFI 2`
                          - `SRFI 8`
@@ -87,7 +82,7 @@ Unreleased             * Fix Gauche shebang to accept `<file-start>#!<newline>`
                          - `SRFI 129`
                          - `SRFI 145`
 0.1      2021-06-22    * Support R7RS small
-                       * Support R7RS large except:
+                       * Support R7RS-large libraries except:
                          - `(scheme ilist)`
                          - `(scheme rlist)`
                          - `(scheme text)`
