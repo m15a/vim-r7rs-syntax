@@ -1,4 +1,4 @@
-*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-06-26
+*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-06-27
 
                                                 *r7rs-syntax* *ft-r7rs-syntax*
 
@@ -77,6 +77,7 @@ Unreleased             * Fix Gauche shebang to accept `<file-start>#!<newline>`
                          - `(scheme bytevector)`
                        * Support the following SRFIs:
                          - `SRFI 2`
+                         - `SRFI 8`
                          - `SRFI 22`
                          - `SRFI 112`
                          - `SRFI 118`

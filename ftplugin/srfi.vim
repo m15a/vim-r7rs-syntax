@@ -11,7 +11,7 @@ endif
 
 " lispwords {{{
 
-setl lispwords+=and-let*,assume
+setl lispwords+=and-let*,assume,receive
 
 " }}}
 

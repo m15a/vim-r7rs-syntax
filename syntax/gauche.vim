@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2021-06-26
+" Last Change: 2021-06-27
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -3406,7 +3406,6 @@ syn keyword r7rsSyntax parse-options
 syn keyword r7rsSyntax product-ec
 syn keyword r7rsSyntax quasirename
 syn keyword r7rsSyntax rec
-syn keyword r7rsSyntax receive
 syn keyword r7rsSyntax require-extension
 syn keyword r7rsSyntax reset
 syn keyword r7rsSyntax rlet1

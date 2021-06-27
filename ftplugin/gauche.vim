@@ -47,7 +47,6 @@ setl lispwords+=match-let*
 setl lispwords+=match-let1
 setl lispwords+=match-letrec
 setl lispwords+=rec
-setl lispwords+=receive
 setl lispwords+=rlet1
 setl lispwords+=rxmatch-case
 setl lispwords+=rxmatch-let
