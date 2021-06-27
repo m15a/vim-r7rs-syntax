@@ -383,6 +383,28 @@ syn keyword r7rsFunction ideque-find ideque-find-right ideque-take-while ideque-
 syn keyword r7rsFunction ideque-drop-while ideque-drop-while-right ideque-span ideque-break
 syn keyword r7rsFunction list->ideque ideque->list generator->ideque ideque->generator
 
+" (scheme text) SRFI 135 {{{1
+syn keyword r7rsFunction text? textual? textual-null? textual-every textual-any
+syn keyword r7rsFunction make-text text text-tabulate text-unfold text-unfold-right
+syn keyword r7rsFunction textual->text textual->string textual->vector textual->list string->text
+syn keyword r7rsFunction vector->text list->text reverse-list->text textual->utf8 textual->utf16
+syn keyword r7rsFunction textual->utf16be textual->utf16le utf8->text utf16->text utf16be->text
+syn keyword r7rsFunction utf16le->text
+syn keyword r7rsFunction text-length text-ref textual-length textual->ref subtext subtextual
+syn keyword r7rsFunction textual-copy textual-take textual-drop textual-take-right
+syn keyword r7rsFunction textual-drop-right textual-pad textual-pad-right textual-trim
+syn keyword r7rsFunction textual-trim-right textual-trim-both textual-replace
+syn keyword r7rsFunction textual=? textual<? textual>? textual<=? textual>=?
+syn keyword r7rsFunction textual-ci=? textual-ci<? textual-ci>? textual-ci<=? textual-ci>=?
+syn keyword r7rsFunction textual-prefix-length textual-suffix-length textual-prefix? textual-suffix?
+syn keyword r7rsFunction textual-index textual-index-right textual-skip textual-skip-right
+syn keyword r7rsFunction textual-contains textual-contains-right
+syn keyword r7rsFunction textual-upcase textual-downcase textual-foldcase textual-titlecase
+syn keyword r7rsFunction textual-append textual-concatenate textual-concatenate-reverse textual-join
+syn keyword r7rsFunction textual-fold textual-fold-right textual-map textual-for-each
+syn keyword r7rsFunction textual-map-index textual-for-each-index textual-count textual-filter
+syn keyword r7rsFunction textual-remove textual-replicate textual-split
+
 " (scheme generator) SRFI 158 {{{1
 syn keyword r7rsFunction generator circular-generator make-iota-generator make-range-generator
 syn keyword r7rsFunction make-coroutine-generator make-for-each-generator make-unfold-generator

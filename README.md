@@ -96,6 +96,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 * Support the following R7RS large libraries:
   - `(scheme ilist)`
   - `(scheme rlist)`
+  - `(scheme text)`
   - `(scheme bytevector)`
 * Support the following SRFIs:
   - SRFI 2
