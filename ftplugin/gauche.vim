@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (Gauche)
-" Last Change: 2020-07-05
+" Last Change: 2021-06-27
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -13,9 +13,7 @@ endif
 
 setl lispwords+=^
 setl lispwords+=add-load-path
-setl lispwords+=and-let*
 setl lispwords+=and-let1
-setl lispwords+=assume
 setl lispwords+=autoload
 setl lispwords+=cgen-with-cpp-condition
 setl lispwords+=define-cise-macro
