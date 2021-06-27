@@ -99,6 +99,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
   - `(scheme bytevector)`
 * Support the following SRFIs:
   - SRFI 2
+  - SRFI 8
   - SRFI 22
   - SRFI 112
   - SRFI 118

@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme
-" Last Change: 2021-06-25
+" Last Change: 2021-06-27
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -11,6 +11,9 @@ endif
 
 " SRFI-2 {{{1
 syn keyword r7rsSyntax and-let*
+
+" SRFI-8 {{{1
+syn keyword r7rsSyntax receive
 
 " SRFI-22 {{{1
 syn cluster r7rsComments add=r7rsShebang
