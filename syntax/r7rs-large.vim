@@ -622,6 +622,20 @@ syn keyword r7rsFunctionM bytevector-ieee-single-set! bytevector-ieee-double-set
 syn keyword r7rsFunctionM bytevector-ieee-single-native-set! bytevector-ieee-double-native-set!
 syn keyword r7rsFunction string->utf16 string->utf32 utf16->string utf32->string
 
+" (scheme show) SRFI 159 {{{1
+syn keyword r7rsFunction show displayed written written-simply pretty pretty-simply escaped
+syn keyword r7rsFunction maybe-escaped numeric numeric/comma numeric/si numeric/fitted space-to
+syn keyword r7rsFunction tab-to each each-in-list joined joined/prefix joined/suffix joined/last
+syn keyword r7rsFunction joined/dot joined/range padded padded/right padded/both trimmed
+syn keyword r7rsFunction trimmed/right trimmed/both trimmed/lazy fitted fitted/right fitted/both
+syn keyword r7rsFunction columnar tabular wrapped wrapped/list wrapped/char justified from-file
+syn keyword r7rsFunction line-numbers as-red as-blue as-green as-cyan as-yellow as-magenta as-white
+syn keyword r7rsFunction as-black as-bold as-underline as-unicode unicode-terminal-width fn with
+syn keyword r7rsFunction forked call-with-output
+syn keyword r7rsFunctionM with!
+syn keyword r7rsVariable nl fl nothing port row col width output writer string-width pad-char radix
+syn keyword r7rsVariable ellipsis precision comma-sep decimal-sep decimal-align word-separator?
+
 " Highlights {{{1
 
 hi def link r7rsVariable Identifier
