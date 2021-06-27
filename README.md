@@ -8,7 +8,7 @@ Vim syntax highlighting for [R7RS Scheme][1] and [Gauche][3].
 ## Development status
 
 - [x] R7RS-small 
-- [x] R7RS-large (Red, Tangerine): See [R7RS-large tracking issue][5].
+- [x] R7RS-large: [Red][7] and [Tangerine][8] editions
 - [ ] SRFI: See [SRFIs tracking issue][6].
 - [ ] Gauche: Mostly implemented. See [TODO](TODO.md).
 
@@ -123,8 +123,9 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 [2]: https://small.r7rs.org/wiki/R7RSSmallErrata/
 [3]: https://practical-scheme.net/gauche/
 [4]: https://github.com/savq/paq-nvim/
-[5]: https://github.com/mnacamura/vim-r7rs-syntax/issues/8
 [6]: https://github.com/mnacamura/vim-r7rs-syntax/issues/7
+[7]: https://github.com/johnwcowan/r7rs-work/blob/master/RedEdition.md
+[8]: https://github.com/johnwcowan/r7rs-work/blob/master/TangerineEdition.md
 [v0.1]: https://github.com/mnacamura/vim-r7rs-syntax/tree/v0.1
 [v0.2]: https://github.com/mnacamura/vim-r7rs-syntax/tree/v0.2
 
