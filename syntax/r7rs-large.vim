@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (R7RS)
-" Last Change: 2021-06-26
+" Last Change: 2021-06-27
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -9,7 +9,7 @@ if !exists('b:did_r7rs_syntax')
   finish
 endif
 
-" (scheme list) SRFI-1 {{{1
+" (scheme list) SRFI 1 {{{1
 syn keyword r7rsFunction xcons cons* list-tabulate circular-list iota
 syn keyword r7rsFunction proper-list? circular-list? dotted-list? not-pair? null-list? list=
 syn keyword r7rsFunction first second third fourth fifth sixth seventh eighth ninth tenth
@@ -29,7 +29,7 @@ syn keyword r7rsFunctionM delete! delete-duplicates! alist-delete!
 syn keyword r7rsFunctionM lset-union! lset-intersection! lset-difference! lset-xor!
 syn keyword r7rsFunctionM lset-diff+intersection!
 
-" (scheme vector) SRFI-133 {{{1
+" (scheme vector) SRFI 133 {{{1
 syn keyword r7rsFunction vector-unfold vector-unfold-right vector-reverse-copy vector-concatenate
 syn keyword r7rsFunction vector-append-subvectors vector-empty? vector=
 syn keyword r7rsFunction vector-fold vector-fold-right vector-count vector-cumulate
@@ -39,7 +39,7 @@ syn keyword r7rsFunction reverse-vector->list reverse-list->vector
 syn keyword r7rsFunctionM vector-map! vector-swap! vector-reverse! vector-reverse-copy!
 syn keyword r7rsFunctionM vector-unfold! vector-unfold-right!
 
-" (scheme vector @) SRFI-160 {{{1
+" (scheme vector @) SRFI 160 {{{1
 syn clear r7rsBytevector
 syn cluster r7rsSimpleData remove=r7rsBytevector add=r7rsNumericVector
 syn region r7rsNumericVector matchgroup=r7rsDelimiter start=/#[su]\%(8\|16\|32\|64\)(/ end=/)/ contains=r7rsError,@r7rsComments,r7rsNumber
@@ -262,7 +262,7 @@ syn keyword r7rsFunctionM c128vector-map! c128vector-set! c128vector-swap! c128v
 syn keyword r7rsFunctionM c128vector-reverse! c128vector-copy! c128vector-reverse-copy!
 syn keyword r7rsFunctionM c128vector-unfold! c128vector-unfold-right!
 
-" (scheme sort) SRFI-132 {{{1
+" (scheme sort) SRFI 132 {{{1
 syn keyword r7rsFunction list-sorted? vector-sorted?
 syn keyword r7rsFunction list-sort list-stable-sort vector-sort vector-stable-sort
 syn keyword r7rsFunction list-merge vector-merge list-delete-neighbor-dups vector-delete-neighbor-dups
@@ -271,7 +271,7 @@ syn keyword r7rsFunctionM list-sort! list-stable-sort! vector-sort! vector-stabl
 syn keyword r7rsFunctionM list-merge! vector-merge! list-delete-neighbor-dups! vector-delete-neighbor-dups!
 syn keyword r7rsFunctionM vector-find-median! vector-select! vector-separate!
 
-" (scheme set) SRFI-113 {{{1
+" (scheme set) SRFI 113 {{{1
 syn keyword r7rsFunction set set-unfold
 syn keyword r7rsFunction bag bag-unfold
 syn keyword r7rsFunction set? set-contains? set-empty? set-disjoint?
@@ -305,7 +305,7 @@ syn keyword r7rsFunction bag->set set->bag bag->alist alist->bag
 syn keyword r7rsFunctionM set->bag!
 syn keyword r7rsVariable set-comparator bag-comparator
 
-" (scheme charset) SRFI-14 {{{1
+" (scheme charset) SRFI 14 {{{1
 syn keyword r7rsFunction char-set? char-set= char-set<= char-set-hash
 syn keyword r7rsFunction char-set-cursor char-set-ref char-set-cursor-next end-of-char-set? 
 syn keyword r7rsFunction char-set-fold char-set-unfold char-set-for-each char-set-map
@@ -326,7 +326,7 @@ syn keyword r7rsVariable char-set:digit char-set:letter+digit char-set:graphic c
 syn keyword r7rsVariable char-set:whitespace char-set:iso-control char-set:punctuation char-set:symbol
 syn keyword r7rsVariable char-set:hex-digit char-set:blank char-set:ascii char-set:empty char-set:full
 
-" (scheme hash-table) SRFI-125 {{{1
+" (scheme hash-table) SRFI 125 {{{1
 syn keyword r7rsFunction make-hash-table hash-table hash-table-unfold alist->hash-table hash-table?
 syn keyword r7rsFunction hash-table-contains? hash-table-empty? hash-table=? hash-table-mutable?
 syn keyword r7rsFunction hash-table-ref hash-table-ref/default
@@ -340,7 +340,7 @@ syn keyword r7rsFunction hash-table-copy hash-table-empty-copy hash-table->alist
 syn keyword r7rsFunctionM hash-table-union! hash-table-intersection! hash-table-difference!
 syn keyword r7rsFunctionM hash-table-xor!
 
-" (scheme ilist) SRFI-116 {{{1
+" (scheme ilist) SRFI 116 {{{1
 syn keyword r7rsFunction ipair ilist xipair ipair* make-ilist ilist-tabulate ilist-copy iiota
 syn keyword r7rsFunction ipair? proper-ilist? ilist? dotted-ilist? not-ipair? null-ilist? ilist=
 syn keyword r7rsFunction icar icdr icaar icdar icadr icddr
@@ -364,11 +364,11 @@ syn keyword r7rsFunction make-ilist-comparator make-improper-ilist-comparator
 syn keyword r7rsFunction make-icar-comparator make-icdr-comparator
 syn keyword r7rsVariable ipair-comparator ilist-comparator
 
-" (scheme rlist) SRFI-101 {{{1
+" (scheme rlist) SRFI 101 {{{1
 syn keyword r7rsFunction list-set list-ref/update random-access-list->linear-access-list
 syn keyword r7rsFunction linear-access-list->random-access-list
 
-" (scheme ideque) SRFI-134 {{{1
+" (scheme ideque) SRFI 134 {{{1
 syn keyword r7rsFunction ideque ideque-tabulate ideque-unfold ideque-unfold-right
 syn keyword r7rsFunction ideque? ideque-empty? ideque= ideque-any ideque-every
 syn keyword r7rsFunction ideque-front ideque-back ideque-remove-front ideque-remove-back
@@ -383,7 +383,7 @@ syn keyword r7rsFunction ideque-find ideque-find-right ideque-take-while ideque-
 syn keyword r7rsFunction ideque-drop-while ideque-drop-while-right ideque-span ideque-break
 syn keyword r7rsFunction list->ideque ideque->list generator->ideque ideque->generator
 
-" (scheme generator) SRFI-158 {{{1
+" (scheme generator) SRFI 158 {{{1
 syn keyword r7rsFunction generator circular-generator make-iota-generator make-range-generator
 syn keyword r7rsFunction make-coroutine-generator make-for-each-generator make-unfold-generator
 syn keyword r7rsFunction list->generator vector->generator
@@ -401,7 +401,7 @@ syn keyword r7rsFunction reverse-vector-accumulator string-accumulator bytevecto
 syn keyword r7rsFunction sum-accumulator product-accumulator
 syn keyword r7rsFunctionM generator->vector! vector-accumulator! bytevector-accumulator!
 
-" (scheme lseq) SRFI-127 {{{1
+" (scheme lseq) SRFI 127 {{{1
 syn keyword r7rsFunction generator->lseq lseq? lseq=?
 syn keyword r7rsFunction lseq-car lseq-cdr lseq-first lseq-rest lseq-ref lseq-take lseq-drop 
 syn keyword r7rsFunction lseq-realize lseq->generator lseq-length lseq-append lseq-zip
@@ -409,7 +409,7 @@ syn keyword r7rsFunction lseq-map lseq-for-each lseq-filter lseq-remove
 syn keyword r7rsFunction lseq-find lseq-find-tail lseq-any lseq-every lseq-index lseq-take-while
 syn keyword r7rsFunction lseq-drop-while lseq-member lseq-memq lseq-memv 
 
-" (scheme stream) SRFI-41 {{{1
+" (scheme stream) SRFI 41 {{{1
 syn keyword r7rsSyntaxM define-stream
 syn keyword r7rsSyntax stream-cons stream-lambda stream stream-let stream-match stream-of
 syn keyword r7rsVariable stream-null
@@ -420,11 +420,11 @@ syn keyword r7rsFunction stream-for-each stream-from stream-iterate stream-lengt
 syn keyword r7rsFunction stream-range stream-ref stream-reverse stream-scan stream-take
 syn keyword r7rsFunction stream-take-while stream-unfold stream-unfolds stream-zip
 
-" (scheme box) SRFI-111 {{{1
+" (scheme box) SRFI 111 {{{1
 syn keyword r7rsFunction box box? unbox
 syn keyword r7rsFunctionM set-box!
 
-" (scheme list-queue) SRFI-117 {{{1
+" (scheme list-queue) SRFI 117 {{{1
 syn keyword r7rsFunction make-list-queue list-queue list-queue-copy list-queue-unfold
 syn keyword r7rsFunction list-queue-unfold-right list-queue? list-queue-empty?
 syn keyword r7rsFunction list-queue-front list-queue-back list-queue-list list-queue-first-last
@@ -433,11 +433,11 @@ syn keyword r7rsFunctionM list-queue-add-front! list-queue-add-back! list-queue-
 syn keyword r7rsFunctionM list-queue-remove-back! list-queue-remove-all! list-queue-set-list!
 syn keyword r7rsFunctionM list-queue-append! list-queue-map!
 
-" (scheme ephemeron) SRFI-124 {{{1
+" (scheme ephemeron) SRFI 124 {{{1
 syn keyword r7rsFunction ephemeron? make-ephemeron ephemeron-broken? ephemeron-key ephemeron-datum
 syn keyword r7rsFunction reference-barrier
 
-" (scheme comparator) SRFI-128 {{{1
+" (scheme comparator) SRFI 128 {{{1
 syn keyword r7rsSyntax comparator-if<=>
 syn keyword r7rsFunction comparator? comparator-ordered? comparator-hashable?
 syn keyword r7rsFunction make-comparator make-pair-comparator make-list-comparator
@@ -452,7 +452,7 @@ syn keyword r7rsFunction comparator-check-type comparator-hash
 syn keyword r7rsFunction =? <? >? <=? >=?
 syn keyword r7rsFunctionM comparator-register-default!
 
-" (scheme mapping) SRFI-146 {{{1
+" (scheme mapping) SRFI 146 {{{1
 syn keyword r7rsFunction mapping mapping-unfold mapping/ordered mapping-unfold/ordered
 syn keyword r7rsFunction mapping? mapping-contains? mapping-empty? mapping-disjoint?
 syn keyword r7rsFunction mapping-ref mapping-ref/default mapping-key-comparator
@@ -482,7 +482,7 @@ syn keyword r7rsFunction make-mapping-comparator
 syn keyword r7rsVariable mapping-comparator
 
 
-" (scheme mapping hash) SRFI-146 {{{1
+" (scheme mapping hash) SRFI 146 {{{1
 syn keyword r7rsFunction hashmap hashmap-unfold hashmap/ordered hashmap-unfold/ordered
 syn keyword r7rsFunction hashmap? hashmap-contains? hashmap-empty? hashmap-disjoint?
 syn keyword r7rsFunction hashmap-ref hashmap-ref/default hashmap-key-comparator
@@ -511,7 +511,7 @@ syn keyword r7rsFunctionM hashmap-split! hashmap-catenate! hashmap-map/monotone!
 syn keyword r7rsFunction make-hashmap-comparator
 syn keyword r7rsVariable hashmap-comparator
 
-" (scheme regex) SRFI-115 {{{1
+" (scheme regex) SRFI 115 {{{1
 syn keyword r7rsSyntax rx
 syn keyword r7rsFunction regexp regexp->sre char-set->sre valid-sre? regexp? regexp-match?
 syn keyword r7rsFunction regexp-matches regexp-matches? regexp-search regexp-fold regexp-extract
@@ -519,7 +519,7 @@ syn keyword r7rsFunction regexp-split regexp-partition regexp-replace regexp-rep
 syn keyword r7rsFunction regexp-match-submatch regexp-match-submatch-start regexp-match-submatch-end
 syn keyword r7rsFunction regexp-match-count regexp-match->list
 
-" (scheme division) SRFI-141 {{{1
+" (scheme division) SRFI 141 {{{1
 " `floor` and `truncate` families are part of R7RS-small.
 " syn keyword r7rsFunction floor/ floor-quotient floor-remainder
 " syn keyword r7rsFunction truncate/ truncate-quotient truncate-remainder
@@ -528,7 +528,7 @@ syn keyword r7rsFunction round/ round-quotient round-remainder
 syn keyword r7rsFunction euclidean/ euclidean-quotient euclidean-remainder
 syn keyword r7rsFunction balanced/ balanced-quotient balanced-remainder
 
-" (scheme bitwise) SRFI-151 {{{1
+" (scheme bitwise) SRFI 151 {{{1
 syn keyword r7rsFunction bitwise-not bitwise-and bitwise-ior bitwise-xor bitwise-eqv bitwise-nand
 syn keyword r7rsFunction bitwise-nor bitwise-andc1 bitwise-andc2 bitwise-orc1 bitwise-orc2 
 syn keyword r7rsFunction arithmetic-shift bit-count integer-length bitwise-if
@@ -538,7 +538,7 @@ syn keyword r7rsFunction bit-field-replace bit-field-replace-same bit-field-rota
 syn keyword r7rsFunction bits->list list->bits bits->vector vector->bits bits
 syn keyword r7rsFunction bitwise-fold bitwise-for-each bitwise-unfold make-bitwise-generator
 
-" (scheme fixnum) SRFI-143 {{{1
+" (scheme fixnum) SRFI 143 {{{1
 syn keyword r7rsFunction fx-width fx-greatest fx-least fixnum? fx=? fx<? fx>? fx<=? fx>=?
 syn keyword r7rsFunction fxzero? fxpositive? fxnegative? fxodd? fxeven? fxmax fxmin
 syn keyword r7rsFunction fx+ fx- fxneg fx* fxquotient fxremainder fxabs fxsquare fxsqrt
@@ -549,7 +549,7 @@ syn keyword r7rsFunction fxbit-count fxlength fxif fxbit-set?
 syn keyword r7rsFunction fxcopy-bit fxfirst-set-bit fxbit-field fxbit-field-rotate
 syn keyword r7rsFunction fxbit-field-reverse
 
-" (scheme flonum) SRFI-144 {{{1
+" (scheme flonum) SRFI 144 {{{1
 syn keyword r7rsConstant fl-e fl-1/e fl-e-2 fl-e-pi/4 fl-log2-e fl-log10-e fl-log-2 fl-1/log-2
 syn keyword r7rsConstant fl-log-3 fl-log-pi fl-log-10 fl-1/log-10 fl-pi fl-1/pi fl-2pi fl-pi/2
 syn keyword r7rsConstant fl-pi/4 fl-pi-squared fl-degree fl-2/pi fl-2/sqrt-pi fl-sqrt-2 fl-sqrt-3

@@ -1,10 +1,10 @@
 # TODO
 
 ## SRFI
-- [ ] SRFI-7
+- [ ] SRFI 7
     - [ ] `{configuration language}`
     - [ ] `{program clause}`
-- [ ] SRFI-10 (`#,`)
+- [ ] SRFI 10 (`#,`)
 
 ## Gauche
 
