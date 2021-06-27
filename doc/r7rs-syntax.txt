@@ -76,6 +76,7 @@ Unreleased             * Fix Gauche shebang to accept `<file-start>#!<newline>`
                          - `(scheme rlist)`
                          - `(scheme text)`
                          - `(scheme bytevector)`
+                         - `(scheme show)`
                        * Support the following SRFIs:
                          - `SRFI 2`
                          - `SRFI 8`
