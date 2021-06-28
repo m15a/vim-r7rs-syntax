@@ -90,6 +90,11 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 ## Change log
 
+### Unreleased
+
+* Support the following SRFIs:
+  - SRFI 17
+
 ### [0.2.1][v0.2.1] (2021-06-28)
 
 * Fix highlighting for `r7rsVariable`

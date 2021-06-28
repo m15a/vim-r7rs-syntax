@@ -1197,7 +1197,6 @@ syn keyword r7rsFunction get-u64le
 syn keyword r7rsFunction get-u8
 syn keyword r7rsFunction get-uint
 syn keyword r7rsFunction getch
-syn keyword r7rsFunction getter-with-setter
 syn keyword r7rsFunction gettext
 syn keyword r7rsFunction gfilter-map
 syn keyword r7rsFunction giota
@@ -2029,7 +2028,6 @@ syn keyword r7rsFunction sequence-contains
 syn keyword r7rsFunction sequences-of
 syn keyword r7rsFunction set-character-attribute
 syn keyword r7rsFunction set-signal-pending-limit
-syn keyword r7rsFunction setter
 syn keyword r7rsFunction sexp-list->file
 syn keyword r7rsFunction sha1-digest
 syn keyword r7rsFunction sha1-digest-string
