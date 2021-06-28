@@ -238,6 +238,7 @@ syn keyword r7rsFunctionM f64vector-map! f64vector-set! f64vector-swap! f64vecto
 syn keyword r7rsFunctionM f64vector-reverse! f64vector-copy! f64vector-reverse-copy!
 syn keyword r7rsFunctionM f64vector-unfold! f64vector-unfold-right!
 syn keyword r7rsVariable f64vector-comparator
+
 " c64 {{{2
 syn keyword r7rsFunction make-c64vector c64vector c64vector-unfold c64vector-unfold-right
 syn keyword r7rsFunction c64vector-copy c64vector-reverse-copy c64vector-append
@@ -256,6 +257,7 @@ syn keyword r7rsFunctionM c64vector-map! c64vector-set! c64vector-swap! c64vecto
 syn keyword r7rsFunctionM c64vector-reverse! c64vector-copy! c64vector-reverse-copy!
 syn keyword r7rsFunctionM c64vector-unfold! c64vector-unfold-right!
 syn keyword r7rsVariable c64vector-comparator
+
 " c128 {{{2
 syn keyword r7rsFunction make-c128vector c128vector c128vector-unfold c128vector-unfold-right
 syn keyword r7rsFunction c128vector-copy c128vector-reverse-copy c128vector-append
@@ -515,7 +517,6 @@ syn keyword r7rsFunction mapping-split mapping-catenate mapping-map/monotone map
 syn keyword r7rsFunctionM mapping-split! mapping-catenate! mapping-map/monotone!
 syn keyword r7rsFunction make-mapping-comparator
 syn keyword r7rsVariable mapping-comparator
-
 
 " (scheme mapping hash) SRFI 146 {{{1
 syn keyword r7rsFunction hashmap hashmap-unfold hashmap/ordered hashmap-unfold/ordered
