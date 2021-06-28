@@ -90,9 +90,10 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 ## Change log
 
-### Unreleased
-* Fix highlighting of `r7rsVariable`
-* Fix highlighting of `@vector-comparator`
+### [0.2.1][v0.2.1] (2021-06-28)
+
+* Fix highlighting for `r7rsVariable`
+* Fix highlighting for `@vector-comparator`
 
 ### [0.2][v0.2] (2021-06-27)
 
@@ -132,5 +133,6 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 [8]: https://github.com/johnwcowan/r7rs-work/blob/master/TangerineEdition.md
 [v0.1]: https://github.com/mnacamura/vim-r7rs-syntax/tree/v0.1
 [v0.2]: https://github.com/mnacamura/vim-r7rs-syntax/tree/v0.2
+[v0.2.1]: https://github.com/mnacamura/vim-r7rs-syntax/tree/v0.2.1
 
 <!-- vim: set tw=78 spell: -->
