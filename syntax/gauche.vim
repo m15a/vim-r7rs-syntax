@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2021-06-27
+" Last Change: 2021-06-28
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -3546,9 +3546,7 @@ syn keyword r7rsVariable SO_REUSEADDR
 syn keyword r7rsVariable SO_TYPE
 syn keyword r7rsVariable boolean-comparator
 syn keyword r7rsVariable bytevector-comparator
-syn keyword r7rsVariable c128vector-comparator
 syn keyword r7rsVariable c32vector-comparator
-syn keyword r7rsVariable c64vector-comparator
 syn keyword r7rsVariable char-ci-comparator
 syn keyword r7rsVariable char-comparator
 syn keyword r7rsVariable char-set:C
@@ -3611,8 +3609,6 @@ syn keyword r7rsVariable equal-comparator
 syn keyword r7rsVariable eqv-comparator
 syn keyword r7rsVariable exact-integer-comparator
 syn keyword r7rsVariable f16vector-comparator
-syn keyword r7rsVariable f32vector-comparator
-syn keyword r7rsVariable f64vector-comparator
 syn keyword r7rsVariable fx-greatest
 syn keyword r7rsVariable fx-least
 syn keyword r7rsVariable fx-width
@@ -3622,17 +3618,9 @@ syn keyword r7rsVariable number-comparator
 syn keyword r7rsVariable pair-comparator
 syn keyword r7rsVariable rational-comparator
 syn keyword r7rsVariable real-comparator
-syn keyword r7rsVariable s16vector-comparator
-syn keyword r7rsVariable s32vector-comparator
-syn keyword r7rsVariable s64vector-comparator
-syn keyword r7rsVariable s8vector-comparator
 syn keyword r7rsVariable ssax:Prefix-XML
 syn keyword r7rsVariable string-ci-comparator
 syn keyword r7rsVariable string-comparator
-syn keyword r7rsVariable u16vector-comparator
-syn keyword r7rsVariable u32vector-comparator
-syn keyword r7rsVariable u64vector-comparator
-syn keyword r7rsVariable u8vector-comparator
 syn keyword r7rsVariable uvector-comparator
 syn keyword r7rsVariable vector-comparator
 syn match r7rsSyntax /\^[_a-z]/
