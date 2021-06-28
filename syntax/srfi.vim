@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme
-" Last Change: 2021-06-27
+" Last Change: 2021-06-28
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -14,6 +14,9 @@ syn keyword r7rsSyntax and-let*
 
 " SRFI 8 {{{1
 syn keyword r7rsSyntax receive
+
+" SRFI 17 {{{1
+syn keyword r7rsFunction setter getter-with-setter
 
 " SRFI 22 {{{1
 syn cluster r7rsComments add=r7rsShebang
