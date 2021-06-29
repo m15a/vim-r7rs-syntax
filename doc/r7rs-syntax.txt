@@ -72,6 +72,7 @@ CHANGELOG                                              *r7rs-syntax-changelog*
 
 Unreleased             * Support the following SRFIs:
                          - `SRFI 17`
+                         - `SRFI 26`
                          - `SRFI 27`
 0.2.1    2021-06-28    * Fix highlighting for `r7rsVariable`
                        * Fix highlighting for `@vector-comparator`

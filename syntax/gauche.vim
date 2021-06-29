@@ -3334,8 +3334,6 @@ syn keyword r7rsSyntax chibi-test
 syn keyword r7rsSyntax cond-list
 syn keyword r7rsSyntax condition
 syn keyword r7rsSyntax current-module
-syn keyword r7rsSyntax cut
-syn keyword r7rsSyntax cute
 syn keyword r7rsSyntax debug-funcall
 syn keyword r7rsSyntax debug-print
 syn keyword r7rsSyntax do-ec

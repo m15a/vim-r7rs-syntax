@@ -22,6 +22,10 @@ syn keyword r7rsFunction setter getter-with-setter
 syn cluster r7rsComments add=r7rsShebang
 syn match r7rsShebang /\%^#! .*$/
 
+" SRFI 26 {{{1
+syn keyword r7rsSyntax cut cute
+syn keyword r7rsSyntaxA <> <...>
+
 " SRFI 27 {{{1
 syn keyword r7rsFunction random-integer random-real make-random-source random-source?
 syn keyword r7rsFunction random-source-state-ref random-source-make-integers
