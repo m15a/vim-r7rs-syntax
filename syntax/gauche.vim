@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2021-06-28
+" Last Change: 2021-06-30
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -1541,7 +1541,6 @@ syn keyword r7rsFunction make-overflow-doubler
 syn keyword r7rsFunction make-packer
 syn keyword r7rsFunction make-process-connection
 syn keyword r7rsFunction make-queue
-syn keyword r7rsFunction make-random-source
 syn keyword r7rsFunction make-record-type
 syn keyword r7rsFunction make-refining-comparator
 syn keyword r7rsFunction make-reverse-comparator
@@ -1817,12 +1816,6 @@ syn keyword r7rsFunction quoted-printable-encode
 syn keyword r7rsFunction quoted-printable-encode-string
 syn keyword r7rsFunction quotient&remainder
 syn keyword r7rsFunction random-data-seed
-syn keyword r7rsFunction random-integer
-syn keyword r7rsFunction random-real
-syn keyword r7rsFunction random-source-make-integers
-syn keyword r7rsFunction random-source-make-reals
-syn keyword r7rsFunction random-source-state-ref
-syn keyword r7rsFunction random-source?
 syn keyword r7rsFunction rassoc
 syn keyword r7rsFunction rassoc-ref
 syn keyword r7rsFunction rassq
@@ -3133,9 +3126,6 @@ syn keyword r7rsFunctionM queue-pop/wait!
 syn keyword r7rsFunctionM queue-push!
 syn keyword r7rsFunctionM queue-push-unique!
 syn keyword r7rsFunctionM queue-push/wait!
-syn keyword r7rsFunctionM random-source-pseudo-randomize!
-syn keyword r7rsFunctionM random-source-randomize!
-syn keyword r7rsFunctionM random-source-state-set!
 syn keyword r7rsFunctionM read-block!
 syn keyword r7rsFunctionM read-uvector!
 syn keyword r7rsFunctionM register-edn-object-handler!
@@ -3600,7 +3590,6 @@ syn keyword r7rsVariable char-set:ascii-word
 syn keyword r7rsVariable char-set:word
 syn keyword r7rsVariable complex-comparator
 syn keyword r7rsVariable default-comparator
-syn keyword r7rsVariable default-random-source
 syn keyword r7rsVariable edn-comparator
 syn keyword r7rsVariable eq-comparator
 syn keyword r7rsVariable equal-comparator
