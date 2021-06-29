@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme
-" Last Change: 2021-06-28
+" Last Change: 2021-06-30
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -21,6 +21,14 @@ syn keyword r7rsFunction setter getter-with-setter
 " SRFI 22 {{{1
 syn cluster r7rsComments add=r7rsShebang
 syn match r7rsShebang /\%^#! .*$/
+
+" SRFI 27 {{{1
+syn keyword r7rsFunction random-integer random-real make-random-source random-source?
+syn keyword r7rsFunction random-source-state-ref random-source-make-integers
+syn keyword r7rsFunction random-source-make-reals
+syn keyword r7rsFunctionM random-source-state-set! random-source-randomize!
+syn keyword r7rsFunctionM random-source-pseudo-randomize!
+syn keyword r7rsVariable default-random-source
 
 " SRFI 112 {{{1
 syn keyword r7rsFunction implementation-name implementation-version cpu-architecture machine-name
