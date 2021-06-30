@@ -18,6 +18,26 @@ syn keyword r7rsSyntax receive
 " SRFI 17 {{{1
 syn keyword r7rsFunction setter getter-with-setter
 
+" SRFI 18 {{{1
+syn keyword r7rsFunction current-thread thread? make-thread thread-name thread-specific
+syn keyword r7rsFunctionM thread-specific-set! thread-start! thread-yield! thread-sleep!
+syn keyword r7rsFunctionM thread-terminate! thread-join!
+syn keyword r7rsFunction mutex? make-mutex mutex-name mutex-specific mutex-state
+syn keyword r7rsFunctionM mutex-specific-set! mutex-lock! mutex-unlock!
+syn keyword r7rsFunction condition-variable? make-condition-variable condition-variable-name
+syn keyword r7rsFunction condition-variable-specific
+syn keyword r7rsFunctionM condition-variable-specific-set! condition-variable-signal!
+syn keyword r7rsFunctionM condition-variable-broadcast!
+syn keyword r7rsFunction current-time time? time->seconds seconds->time
+syn keyword r7rsFunction current-exception-handler
+syn keyword r7rsFunction join-timeout-exception? abondoned-mutex-exception?
+syn keyword r7rsFunction terminated-thread-exception? uncaught-exception? uncaught-exception-reason
+
+" SRFI 21 {{{1
+syn keyword r7rsFunction thread-base-priority thread-priority-boost thread-quantum
+syn keyword r7rsFunctionM thread-base-priority-set! thread-priority-boost-set!
+syn keyword r7rsFunctionM thread-quantum-set!
+
 " SRFI 22 {{{1
 syn cluster r7rsComments add=r7rsShebang
 syn match r7rsShebang /\%^#! .*$/

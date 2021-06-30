@@ -425,7 +425,6 @@ syn keyword r7rsFunction -.
 syn keyword r7rsFunction .$
 syn keyword r7rsFunction /.
 syn keyword r7rsFunction <gauche-package-description>
-syn keyword r7rsFunction abandoned-mutex-exception?
 syn keyword r7rsFunction absolute-path?
 syn keyword r7rsFunction acons
 syn keyword r7rsFunction acosh
@@ -785,9 +784,6 @@ syn keyword r7rsFunction compute-slots
 syn keyword r7rsFunction condition-has-type?
 syn keyword r7rsFunction condition-ref
 syn keyword r7rsFunction condition-type?
-syn keyword r7rsFunction condition-variable-name
-syn keyword r7rsFunction condition-variable-specific
-syn keyword r7rsFunction condition-variable?
 syn keyword r7rsFunction condition?
 syn keyword r7rsFunction connection-address-name
 syn keyword r7rsFunction connection-close
@@ -821,7 +817,6 @@ syn keyword r7rsFunction current-country
 syn keyword r7rsFunction current-date
 syn keyword r7rsFunction current-directory
 syn keyword r7rsFunction current-dynamic-extent
-syn keyword r7rsFunction current-exception-handler
 syn keyword r7rsFunction current-julian-day
 syn keyword r7rsFunction current-language
 syn keyword r7rsFunction current-load-history
@@ -830,8 +825,6 @@ syn keyword r7rsFunction current-load-path
 syn keyword r7rsFunction current-load-port
 syn keyword r7rsFunction current-locale-details
 syn keyword r7rsFunction current-modified-julian-day
-syn keyword r7rsFunction current-thread
-syn keyword r7rsFunction current-time
 syn keyword r7rsFunction cursor-down/scroll-up
 syn keyword r7rsFunction cursor-up/scroll-down
 syn keyword r7rsFunction d
@@ -1402,7 +1395,6 @@ syn keyword r7rsFunction job-start-time
 syn keyword r7rsFunction job-status
 syn keyword r7rsFunction job-wait
 syn keyword r7rsFunction job?
-syn keyword r7rsFunction join-timeout-exception?
 syn keyword r7rsFunction json-array-handler
 syn keyword r7rsFunction json-object-handler
 syn keyword r7rsFunction json-special-handler
@@ -1497,7 +1489,6 @@ syn keyword r7rsFunction make-comparison>=
 syn keyword r7rsFunction make-compound-condition
 syn keyword r7rsFunction make-condition
 syn keyword r7rsFunction make-condition-type
-syn keyword r7rsFunction make-condition-variable
 syn keyword r7rsFunction make-csv-header-parser
 syn keyword r7rsFunction make-csv-reader
 syn keyword r7rsFunction make-csv-record-parser
@@ -1529,7 +1520,6 @@ syn keyword r7rsFunction make-listwise-comparator
 syn keyword r7rsFunction make-lru-cache
 syn keyword r7rsFunction make-module
 syn keyword r7rsFunction make-mtqueue
-syn keyword r7rsFunction make-mutex
 syn keyword r7rsFunction make-overflow-doubler
 syn keyword r7rsFunction make-packer
 syn keyword r7rsFunction make-process-connection
@@ -1551,7 +1541,6 @@ syn keyword r7rsFunction make-sparse-vector
 syn keyword r7rsFunction make-stream
 syn keyword r7rsFunction make-template-environment
 syn keyword r7rsFunction make-text-progress-bar
-syn keyword r7rsFunction make-thread
 syn keyword r7rsFunction make-thread-pool
 syn keyword r7rsFunction make-time
 syn keyword r7rsFunction make-time-result
@@ -1632,11 +1621,7 @@ syn keyword r7rsFunction mtqueue-num-waiting-readers
 syn keyword r7rsFunction mtqueue-room
 syn keyword r7rsFunction mtqueue?
 syn keyword r7rsFunction mutex-locker
-syn keyword r7rsFunction mutex-name
-syn keyword r7rsFunction mutex-specific
-syn keyword r7rsFunction mutex-state
 syn keyword r7rsFunction mutex-unlocker
-syn keyword r7rsFunction mutex?
 syn keyword r7rsFunction naive-factorize
 syn keyword r7rsFunction native-endian
 syn keyword r7rsFunction ndbm-clear-error
@@ -2006,7 +1991,6 @@ syn keyword r7rsFunction s8vector-xor
 syn keyword r7rsFunction s8vector=?
 syn keyword r7rsFunction samples$
 syn keyword r7rsFunction samples-from
-syn keyword r7rsFunction seconds->time
 syn keyword r7rsFunction select-kids
 syn keyword r7rsFunction selector-select
 syn keyword r7rsFunction sequence->kmp-stepper
@@ -2602,7 +2586,6 @@ syn keyword r7rsFunction take-right*
 syn keyword r7rsFunction take-until
 syn keyword r7rsFunction tanh
 syn keyword r7rsFunction temporary-directory
-syn keyword r7rsFunction terminated-thread-exception?
 syn keyword r7rsFunction test
 syn keyword r7rsFunction test-check
 syn keyword r7rsFunction test-end
@@ -2617,13 +2600,9 @@ syn keyword r7rsFunction test-section
 syn keyword r7rsFunction test-start
 syn keyword r7rsFunction test-summary-check
 syn keyword r7rsFunction textdomain
-syn keyword r7rsFunction thread-name
 syn keyword r7rsFunction thread-pool-results
 syn keyword r7rsFunction thread-pool-shut-down?
-syn keyword r7rsFunction thread-specific
 syn keyword r7rsFunction thread-state
-syn keyword r7rsFunction thread?
-syn keyword r7rsFunction time->seconds
 syn keyword r7rsFunction time-counter-value
 syn keyword r7rsFunction time-difference
 syn keyword r7rsFunction time-monotonic->date
@@ -2656,7 +2635,6 @@ syn keyword r7rsFunction time<?
 syn keyword r7rsFunction time=?
 syn keyword r7rsFunction time>=?
 syn keyword r7rsFunction time>?
-syn keyword r7rsFunction time?
 syn keyword r7rsFunction tls-ca-bundle-path
 syn keyword r7rsFunction topological-sort
 syn keyword r7rsFunction totient
@@ -2780,8 +2758,6 @@ syn keyword r7rsFunction uint16s
 syn keyword r7rsFunction uint32s
 syn keyword r7rsFunction uint64s
 syn keyword r7rsFunction uint8s
-syn keyword r7rsFunction uncaught-exception-reason
-syn keyword r7rsFunction uncaught-exception?
 syn keyword r7rsFunction undefined
 syn keyword r7rsFunction undefined?
 syn keyword r7rsFunction unify
@@ -2987,9 +2963,6 @@ syn keyword r7rsFunctionM cache-write!
 syn keyword r7rsFunctionM cgen-add!
 syn keyword r7rsFunctionM cise-register-macro!
 syn keyword r7rsFunctionM class-slot-set!
-syn keyword r7rsFunctionM condition-variable-broadcast!
-syn keyword r7rsFunctionM condition-variable-signal!
-syn keyword r7rsFunctionM condition-variable-specific-set!
 syn keyword r7rsFunctionM dbm-delete!
 syn keyword r7rsFunctionM dbm-put!
 syn keyword r7rsFunctionM declare-bundle!
@@ -3072,9 +3045,6 @@ syn keyword r7rsFunctionM mt-random-fill-f64vector!
 syn keyword r7rsFunctionM mt-random-fill-u32vector!
 syn keyword r7rsFunctionM mt-random-set-seed!
 syn keyword r7rsFunctionM mt-random-set-state!
-syn keyword r7rsFunctionM mutex-lock!
-syn keyword r7rsFunctionM mutex-specific-set!
-syn keyword r7rsFunctionM mutex-unlock!
 syn keyword r7rsFunctionM next-method
 syn keyword r7rsFunctionM parameter-observer-add!
 syn keyword r7rsFunctionM parameter-observer-delete!
@@ -3236,13 +3206,7 @@ syn keyword r7rsFunctionM sys-sigset-empty!
 syn keyword r7rsFunctionM sys-sigset-fill!
 syn keyword r7rsFunctionM terminate-all!
 syn keyword r7rsFunctionM thread-cont!
-syn keyword r7rsFunctionM thread-join!
-syn keyword r7rsFunctionM thread-sleep!
-syn keyword r7rsFunctionM thread-specific-set!
-syn keyword r7rsFunctionM thread-start!
 syn keyword r7rsFunctionM thread-stop!
-syn keyword r7rsFunctionM thread-terminate!
-syn keyword r7rsFunctionM thread-yield!
 syn keyword r7rsFunctionM time-counter-reset!
 syn keyword r7rsFunctionM time-counter-start!
 syn keyword r7rsFunctionM time-counter-stop!

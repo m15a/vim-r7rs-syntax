@@ -94,6 +94,8 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 * Support the following SRFIs:
   - SRFI 17
+  - SRFI 18
+  - SRFI 21
   - SRFI 25
   - SRFI 26
   - SRFI 27
