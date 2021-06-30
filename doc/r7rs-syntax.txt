@@ -72,6 +72,8 @@ CHANGELOG                                              *r7rs-syntax-changelog*
 
 Unreleased             * Support the following SRFIs:
                          - `SRFI 17`
+                         - `SRFI 18`
+                         - `SRFI 21`
                          - `SRFI 25`
                          - `SRFI 26`
                          - `SRFI 27`
