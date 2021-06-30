@@ -22,6 +22,11 @@ syn keyword r7rsFunction setter getter-with-setter
 syn cluster r7rsComments add=r7rsShebang
 syn match r7rsShebang /\%^#! .*$/
 
+" SRFI 25 {{{1
+syn keyword r7rsFunction array? make-array shape array array-rank array-start array-end array-ref
+syn keyword r7rsFunction share-array
+syn keyword r7rsFunctionM array-set!
+
 " SRFI 26 {{{1
 syn keyword r7rsSyntax cut cute
 syn keyword r7rsSyntaxA <> <...>
