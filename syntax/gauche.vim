@@ -449,7 +449,6 @@ syn keyword r7rsFunction args-fold
 syn keyword r7rsFunction arity
 syn keyword r7rsFunction arity-at-least-value
 syn keyword r7rsFunction arity-at-least?
-syn keyword r7rsFunction array
 syn keyword r7rsFunction array->list
 syn keyword r7rsFunction array->vector
 syn keyword r7rsFunction array-add-elements
@@ -458,7 +457,6 @@ syn keyword r7rsFunction array-copy
 syn keyword r7rsFunction array-div-elements
 syn keyword r7rsFunction array-div-left
 syn keyword r7rsFunction array-div-right
-syn keyword r7rsFunction array-end
 syn keyword r7rsFunction array-expt
 syn keyword r7rsFunction array-flip
 syn keyword r7rsFunction array-for-each-index
@@ -468,16 +466,12 @@ syn keyword r7rsFunction array-map
 syn keyword r7rsFunction array-mul
 syn keyword r7rsFunction array-mul-elements
 syn keyword r7rsFunction array-negate-elements
-syn keyword r7rsFunction array-rank
 syn keyword r7rsFunction array-reciprocate-elements
-syn keyword r7rsFunction array-ref
 syn keyword r7rsFunction array-rotate-90
 syn keyword r7rsFunction array-shape
 syn keyword r7rsFunction array-size
-syn keyword r7rsFunction array-start
 syn keyword r7rsFunction array-sub-elements
 syn keyword r7rsFunction array-transpose
-syn keyword r7rsFunction array?
 syn keyword r7rsFunction as-nodeset
 syn keyword r7rsFunction ash
 syn keyword r7rsFunction asinh
@@ -1484,7 +1478,6 @@ syn keyword r7rsFunction macroexpand
 syn keyword r7rsFunction macroexpand-1
 syn keyword r7rsFunction macroexpand-all
 syn keyword r7rsFunction make
-syn keyword r7rsFunction make-array
 syn keyword r7rsFunction make-bimap
 syn keyword r7rsFunction make-binary-heap
 syn keyword r7rsFunction make-blob
@@ -2032,9 +2025,7 @@ syn keyword r7rsFunction sha384-digest
 syn keyword r7rsFunction sha384-digest-string
 syn keyword r7rsFunction sha512-digest
 syn keyword r7rsFunction sha512-digest-string
-syn keyword r7rsFunction shape
 syn keyword r7rsFunction shape-for-each
-syn keyword r7rsFunction share-array
 syn keyword r7rsFunction shell-escape-string
 syn keyword r7rsFunction shell-tokenize-string
 syn keyword r7rsFunction show-cursor
@@ -2918,7 +2909,6 @@ syn keyword r7rsFunctionM array-mul-elements!
 syn keyword r7rsFunctionM array-negate-elements!
 syn keyword r7rsFunctionM array-reciprocate-elements!
 syn keyword r7rsFunctionM array-retabulate!
-syn keyword r7rsFunctionM array-set!
 syn keyword r7rsFunctionM array-sub-elements!
 syn keyword r7rsFunctionM assoc-set!
 syn keyword r7rsFunctionM assq-set!
