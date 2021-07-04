@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme
-" Last Change: 2021-06-30
+" Last Change: 2021-07-04
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -75,6 +75,22 @@ syn keyword r7rsFunction char-title-case? char-titlecase string-titlecase
 
 " SRFI 145 {{{1
 syn keyword r7rsSyntax assume
+
+" SRFI 152 {{{1
+
+syn keyword r7rsFunction string-null? string-every string-any string-tabulate
+syn keyword r7rsFunction string-unfold string-unfold-right reverse-list->string
+syn keyword r7rsFunction string-take string-take-right string-drop string-drop-right
+syn keyword r7rsFunction string-pad string-pad-right string-trim string-trim-right string-trim-both
+syn keyword r7rsFunction string-replace
+syn keyword r7rsFunction string-prefix-length string-suffix-length string-prefix? string-suffix?
+syn keyword r7rsFunction string-index string-index-right string-skip string-skip-right
+syn keyword r7rsFunction string-contains string-contains-right string-take-while
+syn keyword r7rsFunction string-take-while-right string-drop-while string-drop-while-right
+syn keyword r7rsFunction string-break string-span string-concatenate string-concatenate-reverse
+syn keyword r7rsFunction string-join
+syn keyword r7rsFunction string-fold string-fold-right string-count string-filter string-remove
+syn keyword r7rsFunction string-replicate string-segment string-split
 
 " Highlights {{{1
 
