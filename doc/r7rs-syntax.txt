@@ -78,6 +78,7 @@ Unreleased             * Add missing keywords for Gauche 0.9.10
                          - `SRFI 25`
                          - `SRFI 26`
                          - `SRFI 27`
+                         - `SRFI 152`
 0.2.1    2021-06-28    * Fix highlighting for `r7rsVariable`
                        * Fix highlighting for `@vector-comparator`
 0.2      2021-06-27    * Fix Gauche shebang to accept `<file-start>#!<newline>`
