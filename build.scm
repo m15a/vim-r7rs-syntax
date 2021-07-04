@@ -477,14 +477,16 @@
 
 (define-constant r7rs-keywords
   (list-ec [: file '("./syntax/r7rs.vim"
-                     "./syntax/r7rs-large.vim")]
+                     "./syntax/r7rs-large.vim"
+                     "./syntax/srfi.vim")]
            [:generator line (file->line-generator file)]
            [if (#/syn keyword/ line)]
            line))
 
 (define-constant r7rs-lispwords
   (list-ec [: file '("./ftplugin/r7rs.vim"
-                     "./ftplugin/r7rs-large.vim")]
+                     "./ftplugin/r7rs-large.vim"
+                     "./ftplugin/srfi.vim")]
            [:generator line (file->line-generator file)]
            [if (#/setl lispwords/ line)]
            line))
