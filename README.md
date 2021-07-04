@@ -92,6 +92,7 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
 
 ### Unreleased
 
+* Add missing keywords for Gauche 0.9.10
 * Support the following SRFIs:
   - SRFI 17
   - SRFI 18

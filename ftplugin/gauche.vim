@@ -1,6 +1,6 @@
 " Vim filetype plugin file
 " Language: Scheme (Gauche)
-" Last Change: 2021-06-27
+" Last Change: 2021-07-04
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -11,6 +11,9 @@ endif
 
 " lispwords {{{
 
+setl lispwords+=$let
+setl lispwords+=$let*
+setl lispwords+=$parameterize
 setl lispwords+=^
 setl lispwords+=add-load-path
 setl lispwords+=and-let1
@@ -31,6 +34,9 @@ setl lispwords+=dolist
 setl lispwords+=dotimes
 setl lispwords+=dynamic-lambda
 setl lispwords+=ecase
+setl lispwords+=either-guard
+setl lispwords+=either-let*
+setl lispwords+=either-let*-values
 setl lispwords+=fluid-let
 setl lispwords+=glet*
 setl lispwords+=glet1
@@ -46,12 +52,15 @@ setl lispwords+=match-let
 setl lispwords+=match-let*
 setl lispwords+=match-let1
 setl lispwords+=match-letrec
+setl lispwords+=maybe-let*
+setl lispwords+=maybe-let*-values
 setl lispwords+=rec
 setl lispwords+=rlet1
 setl lispwords+=rxmatch-case
 setl lispwords+=rxmatch-let
 setl lispwords+=shift
 setl lispwords+=ssax:make-parser
+setl lispwords+=string-append!
 setl lispwords+=syntax-errorf
 setl lispwords+=until
 setl lispwords+=unwind-protect

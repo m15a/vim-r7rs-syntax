@@ -1,4 +1,4 @@
-*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-06-30
+*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-07-04
 
                                                 *r7rs-syntax* *ft-r7rs-syntax*
 
@@ -70,7 +70,8 @@ local one takes precedence.
 ==============================================================================
 CHANGELOG                                              *r7rs-syntax-changelog*
 
-Unreleased             * Support the following SRFIs:
+Unreleased             * Add missing keywords for Gauche 0.9.10
+                       * Support the following SRFIs:
                          - `SRFI 17`
                          - `SRFI 18`
                          - `SRFI 21`
