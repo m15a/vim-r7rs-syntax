@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme
-" Last Change: 2021-07-07
+" Last Change: 2021-07-08
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -95,6 +95,10 @@ syn keyword r7rsFunction string-replicate string-segment string-split
 " SRFI 206 {{{1
 syn keyword r7rsSyntaxM define-auxiliary-syntax
 syn keyword r7rsVariable auxiliary-syntax-name
+
+" SRFI 213 {{{1
+syn keyword r7rsSyntaxM define-property
+syn keyword r7rsFunction capture-lookup
 
 " Highlights {{{1
 
