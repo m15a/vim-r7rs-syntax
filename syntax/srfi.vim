@@ -96,6 +96,9 @@ syn keyword r7rsFunction string-replicate string-segment string-split
 syn keyword r7rsSyntaxM define-auxiliary-syntax
 syn keyword r7rsVariable auxiliary-syntax-name
 
+" SRFI 212 {{{1
+syn keyword r7rsSyntaxM alias
+
 " SRFI 213 {{{1
 syn keyword r7rsSyntaxM define-property
 syn keyword r7rsFunction capture-lookup
