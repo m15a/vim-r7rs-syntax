@@ -101,6 +101,9 @@ in Gauche are not strict (e.g., `1/pi` in `math.const` module).
   - SRFI 26
   - SRFI 27
   - SRFI 152
+  - SRFI 206
+  - SRFI 212
+  - SRFI 213
 
 ### [0.2.1][v0.2.1] (2021-06-28)
 
