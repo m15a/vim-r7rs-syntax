@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme
-" Last Change: 2021-07-08
+" Last Change: 2021-07-10
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -102,6 +102,23 @@ syn keyword r7rsSyntaxM alias
 " SRFI 213 {{{1
 syn keyword r7rsSyntaxM define-property
 syn keyword r7rsFunction capture-lookup
+
+" SRFI 217 {{{1
+syn keyword r7rsFunction iset iset-unfold make-range-iset iset? iset-contains? iset-empty?
+syn keyword r7rsFunction iset-disjoint? iset-member iset-min iset-max
+syn keyword r7rsFunction iset-adjoin iset-delete iset-delete-all iset-search iset-delete-min
+syn keyword r7rsFunction iset-delete-max
+syn keyword r7rsFunctionM iset-adjoin! iset-delete! iset-delete-all! iset-search! iset-delete-min!
+syn keyword r7rsFunctionM iset-delete-max!
+syn keyword r7rsFunction iset-size iset-find iset-count iset-any? iset-every?
+syn keyword r7rsFunction iset-map iset-for-each iset-fold iset-fold-right iset-filter iset-remove
+syn keyword r7rsFunction iset-partition iset-copy iset->list list->iset
+syn keyword r7rsFunctionM iset-filter! iset-remove! iset-partition! list->iset!
+syn keyword r7rsFunction iset=? iset<? iset>? iset<=? iset>=?
+syn keyword r7rsFunction iset-union iset-intersection iset-difference iset-xor
+syn keyword r7rsFunctionM iset-union! iset-intersection! iset-difference! iset-xor!
+syn keyword r7rsFunction iset-open-interval iset-closed-interval iset-open-closed-interval
+syn keyword r7rsFunction iset-closed-open-interval isubset= isubset< isubset<= isubset> isubset>=
 
 " Highlights {{{1
 

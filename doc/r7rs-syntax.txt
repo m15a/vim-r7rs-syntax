@@ -1,4 +1,4 @@
-*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-07-08
+*r7rs-syntax.txt*          *vim-r7rs-syntax*           Last Change: 2021-07-09
 
                                                 *r7rs-syntax* *ft-r7rs-syntax*
 
@@ -82,6 +82,7 @@ Unreleased             * Add missing keywords for Gauche 0.9.10
                          - `SRFI 206`
                          - `SRFI 212`
                          - `SRFI 213`
+                         - `SRFI 217`
 0.2.1    2021-06-28    * Fix highlighting for `r7rsVariable`
                        * Fix highlighting for `@vector-comparator`
 0.2      2021-06-27    * Fix Gauche shebang to accept `<file-start>#!<newline>`
