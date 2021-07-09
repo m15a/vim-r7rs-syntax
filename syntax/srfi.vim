@@ -120,6 +120,10 @@ syn keyword r7rsFunctionM iset-union! iset-intersection! iset-difference! iset-x
 syn keyword r7rsFunction iset-open-interval iset-closed-interval iset-open-closed-interval
 syn keyword r7rsFunction iset-closed-open-interval isubset= isubset< isubset<= isubset> isubset>=
 
+" SRFI 221 {{{1
+syn keyword r7rsFunction gcompose-left gcompose-right accumulate-generated-values genumerate
+syn keyword r7rsFunction gchoice stream->generator generator->stream
+
 " Highlights {{{1
 
 hi def link r7rsShebang r7rsComment
