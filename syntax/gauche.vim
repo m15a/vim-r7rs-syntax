@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: Scheme (Gauche)
-" Last Change: 2021-07-04
+" Last Change: 2021-07-10
 " Author: Mitsuhiro Nakamura <m.nacamura@gmail.com>
 " URL: https://github.com/mnacamura/vim-r7rs-syntax
 " License: MIT
@@ -1398,7 +1398,6 @@ syn keyword r7rsFunction generate
 syn keyword r7rsFunction generation->either
 syn keyword r7rsFunction generation->maybe
 syn keyword r7rsFunction generator->bytevector
-syn keyword r7rsFunction generator->stream
 syn keyword r7rsFunction generator->uvector
 syn keyword r7rsFunction generator-fold-right
 syn keyword r7rsFunction generator-map
