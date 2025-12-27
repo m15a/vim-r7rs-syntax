@@ -64,7 +64,7 @@ syn region r7rsCommentDatum start=/{/ end=/}/ contained contains=r7rsCommentDatu
 " Move on when prefix before parens found
 syn match r7rsCommentDatum /\(['`]\|,@\?\|#\([[:alpha:]]\d\+\)\?\ze(\)/ contained nextgroup=r7rsCommentDatum
 
-syntax match r7rsCommentTodo /\c\(FIXME\|XXX\|TODO\|NOTE\|TBD\):\?/ contained
+syntax match r7rsCommentTodo /\(\<FIXME\>\|\<XXX\>\|\<TODO\>\|\<NOTE\>\|\<TBD\>\):\?/ contained
 
 " Directives (cf. R7RS, sec. 2.1 (p. 8) last paragraph) {{{2
 syn keyword r7rsDirective #!fold-case #!no-fold-case
